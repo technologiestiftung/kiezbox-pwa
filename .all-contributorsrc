@@ -1,5 +1,5 @@
 {
-  "projectName": "template-default",
+  "projectName": "kiezbox-pwa",
   "projectOwner": "technologiestiftung",
   "repoType": "github",
   "repoHost": "https://github.com",
@@ -10,6 +10,17 @@
   "commit": true,
   "commitConvention": "angular",
   "contributors": [
+    {
+      "login": "LuiseBrandenburger",
+      "name": "Luise Brandenburger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61413319?s=",
+      "profile": "https:/github.com/LuiseBrandenburger",
+      "contributions": [
+        "code",
+        "review",
+        "doc"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "skipCi": true
