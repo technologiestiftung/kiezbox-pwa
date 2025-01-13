@@ -1,114 +1,38 @@
-![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
+# sv
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
+## Creating a project
 
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-# {repo-template}
-
-## TODO (after you generated the repo)
-
-- [ ] Review the content of the README.md and adjust to your liking
-- [ ] Read the README.md till the end and adjust the content licensing,
-      logos, etc (I know you stopped at tbd...)
-- [ ] Adjust the file [.github/CODEOWNERS](./.github/CODEOWNERS)
-- [ ] Adjust the files under [.github/ISSUE_TEMPLATE](./.github/ISSUE_TEMPLATE)
-- [ ] If you use staging and main branches use this template for [.github/renovate.json](./.github/renovate.json)
-
-```json
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>technologiestiftung/renovate-config"],
-  "baseBranches": ["staging"]
-}
-```
-
-- [ ] Do you want to honor all kinds of contributions? Use [all-contributors](https://allcontributors.org/)
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-npx all-contributors-cli check
-npx all-contributors-cli add ff6347 doc
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
 ```
 
-You can use it on GitHub just by commenting on PRs and issues:
+## Developing
 
-```plain
-@all-contributors please add @ff6347 for infrastructure, tests and code
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-- [ ] Add your project description
-- [ ] Get fancy shields at https://shields.io
+## Building
 
-## Prerequisites
+To create a production version of your app:
 
-tbd...
+```bash
+npm run build
+```
 
-## Installation
+You can preview the production build with `npm run preview`.
 
-tbd...
-
-## Usage or Deployment
-
-tbd...
-
-## Development
-
-tbd...
-
-## Tests
-
-tbd...
-
-## Contributing
-
-Before you create a pull request, write an issue so we can discuss your changes.
-
-## Contributors
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Content Licensing
-
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
-
-Illustrations by {MARIA_MUSTERFRAU}, all rights reserved.
-
-## Credits
-
-<table>
-  <tr>
-    <td>
-      Made by  <a href="https://www.technologiestiftung-berlin.de/">
-        <br />
-        <br />
-        <img width="150" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg" />
-      </a>
-    </td>
-    <td>
-      Supported by <a href="https://www.berlin.de/">
-        <br />
-        <br />
-        <img width="150" src="https://logos.citylab-berlin.org/logo-berlin.svg" />
-      </a>
-    </td>
-  </tr>
-</table>
-
-## Related Projects
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
