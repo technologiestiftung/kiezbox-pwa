@@ -27,7 +27,7 @@
 
 ```bash
 npx all-contributors-cli check
-npx all-contributors-cli add luisebrandenburger doc
+npx all-contributors-cli add luisebrandenburger doc code doc
 ```
 
 You can use it on GitHub just by commenting on PRs and issues:
