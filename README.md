@@ -1,43 +1,10 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-# {repo-template}
-
-## TODO (after you generated the repo)
-
-- [ ] Review the content of the README.md and adjust to your liking
-- [ ] Read the README.md till the end and adjust the content licensing,
-      logos, etc (I know you stopped at tbd...)
-- [ ] Adjust the file [.github/CODEOWNERS](./.github/CODEOWNERS)
-- [ ] Adjust the files under [.github/ISSUE_TEMPLATE](./.github/ISSUE_TEMPLATE)
-- [ ] If you use staging and main branches use this template for [.github/renovate.json](./.github/renovate.json)
-
-```json
-{
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>technologiestiftung/renovate-config"],
-	"baseBranches": ["staging"]
-}
-```
-
-- [ ] Do you want to honor all kinds of contributions? Use [all-contributors](https://allcontributors.org/)
-
-```bash
-npx all-contributors-cli check
-npx all-contributors-cli add luisebrandenburger review
-```
-
-You can use it on GitHub just by commenting on PRs and issues:
-
-```plain
-@all-contributors please add @ff6347 for infrastructure, tests and code
-```
-
-- [ ] Add your project description
-- [ ] Get fancy shields at https://shields.io
 
 # Kiezbox Notfall App
 
@@ -49,8 +16,8 @@ Below are setup instructions for running the project locally and steps for deplo
 
 Ensure you have the following installed on your machine:
 
--   **Node.js** (v18 or higher)
--   **npm** (usually included with Node.js)
+- **Node.js** (v18 or higher)
+- **npm** (usually included with Node.js)
 
 tbd...
 
@@ -58,20 +25,20 @@ tbd...
 
 1. **Clone the Repository**
 
-  ```bash
-  git clone <your-repo-url>
-  cd <your-repo-name>
-  ```
+```bash
+git clone <your-repo-url>
+cd <your-repo-name>
+```
 
 2. **Install Dependencies**
 
-  Run the following command to install all necessary packages and add the .env:
+Run the following command to install all necessary packages and add the .env:
 
-  ```bash
-  npm install && npm run setup:env
-  ```
-  
-  Then update the content of the env files accordingly
+```bash
+npm install && npm run setup:env
+```
+
+Then update the content of the env files accordingly
 
 tbd...
 
