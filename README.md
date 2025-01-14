@@ -1,9 +1,7 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # {repo-template}
@@ -29,7 +27,7 @@
 
 ```bash
 npx all-contributors-cli check
-npx all-contributors-cli add ff6347 doc
+npx all-contributors-cli add luisebrandenburger doc
 ```
 
 You can use it on GitHub just by commenting on PRs and issues:
@@ -41,13 +39,49 @@ You can use it on GitHub just by commenting on PRs and issues:
 - [ ] Add your project description
 - [ ] Get fancy shields at https://shields.io
 
+# Kiezbox Notfall App
+
+The Kiezbox Emergency App is a progressive web app that was specially developed for the use on a BananaPi. It enables offline communication and supports SIP-based VoIP calls for contacting emergency services, even with a limited or no internet connection.
+
+Below are setup instructions for running the project locally and steps for deploying it.
+
 ## Prerequisites
+
+Ensure you have the following installed on your machine:
+
+-   **Node.js** (v18 or higher)
+-   **npm** (usually included with Node.js)
 
 tbd...
 
 ## Installation
 
+1. **Clone the Repository**
+
+  ```bash
+  git clone <your-repo-url>
+  cd <your-repo-name>
+  ```
+
+2. **Install Dependencies**
+
+  Run the following command to install all necessary packages and add the .env:
+
+  ```bash
+  npm install && npm run setup:env
+  ```
+  
+  Then update the content of the env files accordingly
+
 tbd...
+
+## Running the Project
+
+To start a local development server, use the following command:
+
+```bash
+npm run dev
+```
 
 ## Usage or Deployment
 
@@ -73,8 +107,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https:/github.com/LuiseBrandenburger"><img src="https://avatars.githubusercontent.com/u/61413319?s=?s=64" width="64px;" alt="Luise Brandenburger"/><br /><sub><b>Luise Brandenburger</b></sub></a><br /><a href="https://github.com/technologiestiftung/kiezbox-pwa/commits?author=LuiseBrandenburger" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
