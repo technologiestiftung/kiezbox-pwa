@@ -24,8 +24,8 @@ Ensure you have the following installed on your machine:
 1. **Clone the Repository**
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-name>
+git clone git@github.com:technologiestiftung/kiezbox-pwa.git
+cd kiezbox-pwa
 ```
 
 2. **Install Dependencies**
