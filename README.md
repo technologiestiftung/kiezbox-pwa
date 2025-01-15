@@ -8,7 +8,7 @@
 
 # Kiezbox Notfall App
 
-The Kiezbox Emergency App is a progressive web app that was specially developed for the use on a BananaPi. It enables offline communication and supports SIP-based VoIP calls for contacting emergency services, even with a limited or no internet connection.
+The Kiezbox Emergency App is a progressive web app (PWA) build with SvelteKit and SSG that is specially developed for the use on a BananaPi. It enables offline communication and supports SIP-based VoIP calls for contacting emergency services, even with a limited or no internet connection.
 
 Below are setup instructions for running the project locally and steps for deploying it.
 
@@ -18,8 +18,6 @@ Ensure you have the following installed on your machine:
 
 - **Node.js** (v18 or higher)
 - **npm** (usually included with Node.js)
-
-tbd...
 
 ## Installation
 
@@ -32,15 +30,11 @@ cd <your-repo-name>
 
 2. **Install Dependencies**
 
-Run the following command to install all necessary packages and add the .env:
+Run the following command to install all necessary packages:
 
 ```bash
-npm install && npm run setup:env
+npm install
 ```
-
-Then update the content of the env files accordingly
-
-tbd...
 
 ## Running the Project
 
@@ -48,6 +42,14 @@ To start a local development server, use the following command:
 
 ```bash
 npm run dev
+```
+
+## Building for Production
+
+To build the project run:
+
+```bash
+npm run build
 ```
 
 ## Usage or Deployment
