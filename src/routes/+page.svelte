@@ -3,7 +3,7 @@
 </script>
 
 <div class="page-root">
-	<h1>Send a Kiezbox Message</h1>
+	<h1>Kiezbox Test EmergencyCall</h1>
 
 	<EmergencyCall />
 </div>
