@@ -1,18 +1,21 @@
 <script lang="ts">
 	import { Web } from 'sip.js';
+	import { onMount } from 'svelte';
 
 	// State
 	let timer: string = $state('00:00:00');
 	let timerInterval: number | undefined = $state(undefined);
 	let isConnected = $state(false);
 	let isInCall = $state(false);
+	let simpleUser: Web.SimpleUser | undefined = $state(undefined);
 
 	// Configuration
 	const webSocketServer = 'wss://edge.sip.onsip.com';
 	const target = 'sip:echo@sipjs.onsip.com';
 	const displayName = 'Kiezbox Demo';
 
-	let audioElement: HTMLAudioElement;
+	// Elements
+	let remoteAudio: HTMLAudioElement;
 
 	const simpleUserDelegate = {
 		onCallCreated: (): void => {
@@ -20,7 +23,7 @@
 		},
 		onCallAnswered: (): void => {
 			console.log(`Call answered`);
-			// display timer for the call duration
+
 			const callStarted = new Date();
 			const updateTimer = () => {
 				const callDuration = new Date().getTime() - callStarted.getTime();
@@ -42,47 +45,30 @@
 		}
 	};
 
-	function getSimpleUserOptions() {
-		if (audioElement) {
-			return {
-				delegate: simpleUserDelegate,
-				media: {
-					remote: {
-						audio: audioElement
-					}
-				},
-				userAgentOptions: {
-					// logLevel: "debug",
-					displayName
+	onMount(() => {
+		simpleUser = new Web.SimpleUser(webSocketServer, {
+			delegate: simpleUserDelegate,
+			media: {
+				remote: {
+					audio: remoteAudio
 				}
-			};
-		}
-	}
+			},
+			userAgentOptions: {
+				displayName
+			}
+		});
+	});
 
-	// Construct a SimpleUser instance
-	// todo: everything has to be dependent on the audioElement, but the audioElement is not available yet, how can I fix this issue?
-	const simpleUser = new Web.SimpleUser(webSocketServer, getSimpleUserOptions());
-
-	// Options are not working, because the audioElement is not available yet
-	console.log('[EmergencyCall] simpleUserOptions::', getSimpleUserOptions());
-
-	// fix: this function can only run, of the component is mounted
 	function connect() {
-		if (audioElement && simpleUser) {
-			console.log('[EmergencyCall] getSimpleUserOptions()::', getSimpleUserOptions());
-
-			simpleUser.delegate = simpleUserDelegate;
-
+		if (remoteAudio && simpleUser) {
 			simpleUser
 				.connect()
 				.then(() => {
-					console.log(`[${simpleUser.id}] connected`);
+					console.log(`[${simpleUser?.id}] connected`);
 					isConnected = true;
-					// connectButton.disabled = true;
 				})
 				.catch((error: Error) => {
-					console.error(`[${simpleUser.id}] failed to connect`);
-					console.error(error);
+					console.error(`[${simpleUser?.id}] failed to connect.\n` + error);
 					alert('Failed to connect.\n' + error);
 				});
 		} else {
@@ -97,12 +83,11 @@
 					inviteWithoutSdp: false
 				})
 				.then(() => {
-					console.log(`[${simpleUser.id}] placed call`);
+					console.log(`[${simpleUser?.id}] placed call`);
 					isInCall = true;
 				})
 				.catch((error: Error) => {
-					console.error(`[${simpleUser.id}] failed to place call`);
-					console.error(error);
+					console.error(`[${simpleUser?.id}] failed to place call.\n` + error);
 					alert('Failed to place call.\n' + error);
 				});
 		} else {
@@ -115,15 +100,14 @@
 			simpleUser
 				.disconnect()
 				.then(() => {
-					console.log(`[${simpleUser.id}] disconnected`);
+					console.log(`[${simpleUser?.id}] disconnected`);
 
 					clearTimeout(timerInterval);
 					isConnected = false;
 					isInCall = false;
 				})
 				.catch((error: Error) => {
-					console.error(`[${simpleUser.id}] failed to disconnect`);
-					console.error(error);
+					console.error(`[${simpleUser?.id}] failed to disconnect.\n` + error);
 					alert('Failed to disconnect.\n' + error);
 				});
 		} else {
@@ -136,9 +120,10 @@
 	<p>
 		When the call is established, the remote audio is added to the following HTML5 audio element...
 	</p>
-	<audio bind:this={audioElement} id="audioElement" controls>
+	<audio bind:this={remoteAudio} id="audioElement" controls>
 		<p>Your browser doesn't support HTML5 audio.</p>
 	</audio>
+	<p id="timer">{timer}</p>
 
 	{#if !isConnected}
 		<span>is Not Connected</span>
@@ -151,7 +136,6 @@
 	{/if}
 
 	{#if isInCall}
-		<!-- <p id="timer">{timer}</p> -->
 		<span>is In Call</span>
 		<button onclick={hangup}>Auflegen</button>
 	{/if}
