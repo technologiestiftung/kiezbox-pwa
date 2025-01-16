@@ -1,20 +1,16 @@
-<script>
+<script lang="ts">
 	import EmergencyCall from '../components/EmergencyCall.svelte';
+	import Ticker from '../components/Ticker.svelte';
 </script>
 
-<div class="page-root">
-	<h1>Kiezbox Test EmergencyCall</h1>
+<div class="page-root mx-auto max-w-[800px] p-4">
+	<h1>Kiezbox Notfallapp</h1>
 
+	<h2>Aktuelle News</h2>
+	<Ticker />
+
+	<h1>EmergencyCall</h1>
 	<EmergencyCall />
 </div>
 
-<style>
-	.page-root {
-		max-width: 400px;
-		margin: 0 auto;
-		padding: 20px;
-		text-align: center;
-		display: flex;
-		flex-direction: column;
-	}
-</style>
+<style></style>

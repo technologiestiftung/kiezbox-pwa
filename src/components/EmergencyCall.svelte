@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button';
 	import { Web } from 'sip.js';
 	import { onMount } from 'svelte';
 
@@ -127,17 +128,17 @@
 
 	{#if !isConnected}
 		<span>is Not Connected</span>
-		<button onclick={connect}>Verbinden</button>
+		<Button onclick={connect}>Verbinden</Button>
 	{/if}
 
 	{#if isConnected && !isInCall}
 		<span>is Connected</span>
-		<button onclick={makeCall}>Anrufen</button>
+		<Button onclick={makeCall}>Anrufen</Button>
 	{/if}
 
 	{#if isInCall}
 		<span>is In Call</span>
-		<button onclick={hangup}>Auflegen</button>
+		<Button onclick={hangup}>Auflegen</Button>
 	{/if}
 </div>
 
@@ -146,13 +147,5 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-	}
-	button {
-		padding: 0.5rem 1rem;
-		background-color: #0263d3;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
 	}
 </style>
