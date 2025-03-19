@@ -20,7 +20,11 @@ const config = {
 			precompress: false,
 			strict: true
 		})
-	}
+	},
+	  vite: {
+    assetsInclude: ['**/*.geojson']
+  }
+	
 };
 
 export default config;
