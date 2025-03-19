@@ -1,12 +1,13 @@
 <!-- Map.svelte -->
 <script lang="ts">
+	import drinkingWaterData from '$lib/data/drinking-water.json';
+	import toiletsData from '$lib/data/toilets.json';
+	import waterPumpsData from '$lib/data/water-pumps.json';
 	import { MAPSTORE_CONTEXT_KEY, type MapStore } from '$lib/stores/mapStore';
 	import type { GeoJSON } from 'geojson';
 	import maplibregl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import { onMount } from 'svelte';
-	import trinkwasserData from '$lib/data/trinkwasser.json';
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 
 	const { width = '100%', height = '500px' } = $props();
 
@@ -49,46 +50,64 @@
 				]
 			},
 			center: [13.404954, 52.520008],
-			zoom: 6,
+			zoom: 12,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
 		});
 
-		map.on('load', () => {
-			// Add Trinkwasser (drinking water)
-			map.addSource('trinkwasser', {
+		map.on('load', async () => {
+			// Load and add images
+			const toiletImg = await map.loadImage('/icons/toilet.png');
+			const waterPumpImg = await map.loadImage('/icons/water-pump.png');
+			const drinkingWaterImg = await map.loadImage('/icons/drinking-water.png');
+
+			if (toiletImg) map.addImage('toilet-icon', toiletImg.data);
+			if (waterPumpImg) map.addImage('water-pump-icon', waterPumpImg.data);
+			if (drinkingWaterImg) map.addImage('drinking-water-icon', drinkingWaterImg.data);
+
+			// Add sources
+			map.addSource('drinkingWater', {
 				type: 'geojson',
-				data: trinkwasserData as GeoJSON
+				data: drinkingWaterData as unknown as GeoJSON
 			});
+			map.addSource('toilets', {
+				type: 'geojson',
+				data: toiletsData as unknown as GeoJSON
+			});
+			map.addSource('waterPumps', {
+				type: 'geojson',
+				data: waterPumpsData as unknown as GeoJSON
+			});
+
+			// Add layers using the loaded icons
 			map.addLayer({
-				id: 'trinkwasser-layer',
-				type: 'circle',
-				source: 'trinkwasser',
-				paint: {
-					'circle-radius': 5,
-					'circle-color': '#3388ff',
-					'circle-stroke-width': 1,
-					'circle-stroke-color': '#fff'
+				id: 'drink-water-layer',
+				type: 'symbol',
+				source: 'drinkingWater',
+				layout: {
+					'icon-image': 'drinking-water-icon',
+					'icon-size': 1
 				}
 			});
 
-			// Add popup on click
-			map.on('click', (e) => {
-				const features = map.queryRenderedFeatures(e.point, {
-					layers: ['trinkwasser-layer']
-				});
+			map.addLayer({
+				id: 'toilets-layer',
+				type: 'symbol',
+				source: 'toilets',
+				layout: {
+					'icon-image': 'toilet-icon',
+					'icon-size': 1
+				}
+			});
 
-				if (!features.length) return;
-
-				const feature = features[0];
-
-				new maplibregl.Popup()
-					.setLngLat(e.lngLat)
-					.setHTML(
-						`<h3>${feature.layer.id.split('-')[0]}</h3>
-                    <p>${feature.properties.name || 'No name'}</p>`
-					)
-					.addTo(map);
+			map.addLayer({
+				id: 'water-pumps-layer',
+				type: 'symbol',
+				source: 'waterPumps',
+				layout: {
+					'icon-image': 'water-pump-icon',
+					'icon-size': 1
+				}
 			});
 		});
 
@@ -100,7 +119,9 @@
 			}),
 			'bottom-right'
 		);
+
 		map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
+		map.addControl(new maplibregl.FullscreenControl(), 'bottom-right');
 
 		mapStore?.set(map);
 
