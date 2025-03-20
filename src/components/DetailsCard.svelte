@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import * as Card from '$lib/components/ui/card';
 	import { selectedPOI } from '$lib/stores/poiStore';
 
 	let content = $state({});
@@ -46,111 +47,43 @@
 </script>
 
 {#if $selectedPOI}
-	<div class="detailsCard-root">
-		<div class="detailsCard-header">
-			<h3>{getTitle()}</h3>
-			<button class="detailsCard-close-btn" onclick={() => selectedPOI.set(null)}>✖</button>
-		</div>
-		<div class="detailsCard-content">
-			<ul>
-				{#each Object.entries(content) as [key, value]}
-					<li>
-						<span>{key}:</span>
-						{#if typeof value === 'boolean'}
-							{value ? '✅' : '❌'}
-						{:else}
-							{value}
-						{/if}
-					</li>
-				{/each}
-			</ul>
-		</div>
-		<div class="detailsCard-arrow"></div>
+	<div class="DetailsCard-root absolute top-2 right-2 z-10 w-64">
+		<Card.Root>
+			<Card.Header>
+				<Card.Title
+					>{getTitle()}
+
+					<button
+						type="reset"
+						class="DetailsCard-close-button text-purple-dark m-0 cursor-pointer bg-transparent p-0"
+						onclick={() => selectedPOI.set(null)}>×</button
+					>
+				</Card.Title>
+			</Card.Header>
+
+			<Card.Content>
+				<ul>
+					{#each Object.entries(content) as [key, value]}
+						<li class="flex flex-col justify-between gap-2 px-4 py-2">
+							<p class="text-grey-mid font-bold">{key}</p>
+							{#if typeof value === 'boolean'}
+								<div class="flex justify-between">
+									<p>
+										{value ? 'Ja' : 'Nein'}
+									</p>
+									<p>
+										{value ? '✅' : '❌'}
+									</p>
+								</div>
+							{:else}
+								<p>
+									{value}
+								</p>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</Card.Content>
+		</Card.Root>
 	</div>
 {/if}
-
-<style>
-	.detailsCard-root {
-		position: absolute;
-		top: 50px;
-		left: 50px;
-		background-color: white;
-		border-radius: 8px;
-		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-		z-index: 10;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		box-sizing: border-box;
-	}
-
-	.detailsCard-root h3 {
-		margin: 0 !important;
-	}
-
-	.detailsCard-header {
-		overflow: hidden;
-		background-color: #f1f0f5;
-		display: flex;
-		gap: 8px;
-		padding: 8px 16px;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.detailsCard-content {
-		padding: 12px;
-		width: 100%;
-		text-align: left;
-		font-family: sans-serif;
-	}
-
-	.detailsCard-root h3 {
-		margin: 0 0 10px;
-		font-size: 14px;
-		color: #333;
-	}
-
-	.detailsCard-root ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		font-size: 12px;
-	}
-
-	.detailsCard-root ul li {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 4px;
-	}
-
-	.detailsCard-root ul li span {
-		font-weight: bold;
-		color: #444;
-	}
-
-	.detailsCard-arrow {
-		width: 0;
-		height: 0;
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-top: 10px solid white;
-		position: absolute;
-		bottom: -10px;
-		left: 50%;
-		transform: translateX(-50%);
-	}
-
-	.detailsCard-close-btn {
-		background: none;
-		border: none;
-		cursor: pointer;
-		font-size: 14px;
-		padding: 0;
-		color: #666;
-	}
-
-	.detailsCard-close-btn:hover {
-		color: #000;
-	}
-</style>

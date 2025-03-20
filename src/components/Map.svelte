@@ -11,7 +11,7 @@
 	import { getContext, onMount } from 'svelte';
 	import DetailsCard from './DetailsCard.svelte';
 
-	const { width = '100%', height = '500px' } = $props();
+	const { width = '100%', height = '536px' } = $props();
 
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let map: maplibregl.Map;
@@ -146,14 +146,8 @@
 	});
 </script>
 
-<div bind:this={mapContainer} style="width: {width}; height: {height};">
+<div class="Map-root relative" bind:this={mapContainer} style="width: {width}; height: {height};">
 	{#if $selectedPOI}
 		<DetailsCard />
 	{/if}
 </div>
-
-<style>
-	div {
-		position: relative;
-	}
-</style>
