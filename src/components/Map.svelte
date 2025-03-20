@@ -14,8 +14,9 @@
 	const { width = '100%', height = '536px' } = $props();
 
 	let mapContainer: HTMLDivElement | undefined = $state();
-	let map: maplibregl.Map;
+	let clickPoint = $state({ x: 0, y: 0 });
 
+	let map: maplibregl.Map;
 	let mapStore: MapStore = getContext(MAPSTORE_CONTEXT_KEY);
 
 	onMount(() => {
@@ -38,8 +39,6 @@
 						id: 'osm-layer',
 						type: 'raster',
 						source: 'osm',
-						minzoom: 0,
-						maxzoom: 19,
 						layout: {
 							visibility: 'visible'
 						},
@@ -127,6 +126,7 @@
 
 		map.on('click', (e) => {
 			const features = map.queryRenderedFeatures(e.point);
+			clickPoint = { x: e.point.x, y: e.point.y };
 
 			if (features.length === 0) {
 				selectedPOI.set(null);
@@ -136,6 +136,8 @@
 				properties: features[0].properties,
 				layer: features[0].layer
 			});
+
+			clickPoint = { x: e.point.x, y: e.point.y };
 		});
 
 		mapStore?.set(map);
@@ -148,6 +150,6 @@
 
 <div class="Map-root relative" bind:this={mapContainer} style="width: {width}; height: {height};">
 	{#if $selectedPOI}
-		<DetailsCard />
+		<DetailsCard {clickPoint} {mapContainer} />
 	{/if}
 </div>

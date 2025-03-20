@@ -1,8 +1,56 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import { selectedPOI } from '$lib/stores/poiStore';
+	import { onMount } from 'svelte';
+
+	const { clickPoint = { x: 0, y: 0 }, mapContainer } = $props();
+
+	let isAbovePOI = false;
+	let cardRef = $state<HTMLDivElement | null>(null);
+	let cardPosition = $state({ top: clickPoint.y, left: clickPoint.x });
 
 	let content = $state({});
+
+	function updateCardPosition() {
+		if (!cardRef || !mapContainer) return;
+		const mapRect = mapContainer.getBoundingClientRect();
+		const cardRect = cardRef.getBoundingClientRect();
+
+		let top = clickPoint.y - cardRect.height - 12;
+		let left = clickPoint.x - cardRect.width / 2;
+
+		if (top < 12) {
+			top = clickPoint.y + 15;
+		}
+		if (left < 12) {
+			left = 12;
+		}
+		if (left + cardRect.width > mapRect.width - 12) {
+			left = mapRect.width - cardRect.width - 12;
+		}
+		if (top + cardRect.height > mapRect.height - 12) {
+			top = mapRect.height - cardRect.height - 12;
+		}
+
+		cardPosition = { top, left };
+	}
+
+	$effect(() => {
+		if (cardRef && mapContainer) {
+			// Initial position
+			cardPosition = {
+				top: clickPoint.y - 150, // Initial guess at card height
+				left: clickPoint.x - 128 // Half of w-64 (256px/2 = 128px)
+			};
+			setTimeout(updateCardPosition, 0);
+		}
+	});
+
+	onMount(() => {
+		const handleResize = () => updateCardPosition();
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 
 	$effect(() => {
 		if ($selectedPOI) {
@@ -29,7 +77,6 @@
 		}
 	});
 
-	// Dynamic title based on selected POI type
 	let getTitle = () => {
 		if (!$selectedPOI) return '';
 
@@ -47,15 +94,18 @@
 </script>
 
 {#if $selectedPOI}
-	<div class="DetailsCard-root absolute top-2 right-2 z-10 w-64">
-		<Card.Root>
+	<div
+		class="DetailsCard-root absolute top-2 right-2 z-10 w-64"
+		style="top: {cardPosition.top}px; left: {cardPosition.left}px; transition: all 0.2s ease-out;"
+		bind:this={cardRef}
+	>
+		<Card.Root class="w-64">
 			<Card.Header>
 				<Card.Title
 					>{getTitle()}
 
 					<button
-						type="reset"
-						class="DetailsCard-close-button text-purple-dark m-0 cursor-pointer bg-transparent p-0"
+						class="text-purple-dark m-0 cursor-pointer bg-transparent p-0"
 						onclick={() => selectedPOI.set(null)}>×</button
 					>
 				</Card.Title>
@@ -85,5 +135,49 @@
 				</ul>
 			</Card.Content>
 		</Card.Root>
+		<div class={`card-pointer ${isAbovePOI ? 'card-pointer-bottom' : 'card-pointer-top'}`}></div>
 	</div>
 {/if}
+
+<style>
+	.card-container {
+		position: relative;
+	}
+	/* Triangle pointer styles */
+	.pointer {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-style: solid;
+	}
+	.pointer-bottom {
+		bottom: -10px;
+		left: 50%;
+		transform: translateX(-50%);
+		border-width: 10px 10px 0;
+		border-color: pink transparent transparent;
+	}
+
+	.pointer-top {
+		top: -10px;
+		left: 50%;
+		transform: translateX(-50%);
+		border-width: 0 10px 10px;
+		border-color: transparent transparent pink;
+	}
+	.pointer-left {
+		left: -10px;
+		top: 50%;
+		transform: translateY(-50%);
+		border-width: 10px 10px 10px 0;
+		border-color: transparent pink transparent transparent;
+	}
+
+	.pointer-right {
+		right: -10px;
+		top: 50%;
+		transform: translateY(-50%);
+		border-width: 10px 0 10px 10px;
+		border-color: transparent transparent transparent pink;
+	}
+</style>
