@@ -4,10 +4,12 @@
 	import toiletsData from '$lib/data/toilets.json';
 	import waterPumpsData from '$lib/data/water-pumps.json';
 	import { MAPSTORE_CONTEXT_KEY, type MapStore } from '$lib/stores/mapStore';
+	import { selectedPOI } from '$lib/stores/poiStore';
 	import type { GeoJSON } from 'geojson';
 	import maplibregl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { getContext, onMount } from 'svelte';
+	import DetailsCard from './DetailsCard.svelte';
 
 	const { width = '100%', height = '500px' } = $props();
 
@@ -123,6 +125,19 @@
 		map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 		map.addControl(new maplibregl.FullscreenControl(), 'bottom-right');
 
+		map.on('click', (e) => {
+			const features = map.queryRenderedFeatures(e.point);
+
+			if (features.length === 0) {
+				selectedPOI.set(null);
+				return;
+			}
+			selectedPOI.set({
+				properties: features[0].properties,
+				layer: features[0].layer
+			});
+		});
+
 		mapStore?.set(map);
 
 		return () => {
@@ -131,7 +146,11 @@
 	});
 </script>
 
-<div bind:this={mapContainer} style="width: {width}; height: {height};"></div>
+<div bind:this={mapContainer} style="width: {width}; height: {height};">
+	{#if $selectedPOI}
+		<DetailsCard />
+	{/if}
+</div>
 
 <style>
 	div {

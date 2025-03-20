@@ -1,1 +1,2 @@
-export * from './mapStore.js';
+export * from './mapStore';
+export * from './poiStore';
