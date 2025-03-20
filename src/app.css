@@ -1,70 +1,6 @@
 @import 'tailwindcss';
 
 @layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
-
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
-
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
-
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
-
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
-
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 210 40% 98%;
-
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 222.2 84% 4.9%;
-
-		--radius: 0.5rem;
-	}
-
-	.dark {
-		--background: 222.2 84% 4.9%;
-		--foreground: 210 40% 98%;
-
-		--card: 222.2 84% 4.9%;
-		--card-foreground: 210 40% 98%;
-
-		--popover: 222.2 84% 4.9%;
-		--popover-foreground: 210 40% 98%;
-
-		--primary: 210 40% 98%;
-		--primary-foreground: 222.2 47.4% 11.2%;
-
-		--secondary: 217.2 32.6% 17.5%;
-		--secondary-foreground: 210 40% 98%;
-
-		--muted: 217.2 32.6% 17.5%;
-		--muted-foreground: 215 20.2% 65.1%;
-
-		--accent: 217.2 32.6% 17.5%;
-		--accent-foreground: 210 40% 98%;
-
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 210 40% 98%;
-
-		--border: 217.2 32.6% 17.5%;
-		--input: 217.2 32.6% 17.5%;
-		--ring: 212.7 26.8% 83.9%;
-	}
-}
-
-@layer base {
 	* {
 		@apply border-border;
 	}
@@ -73,13 +9,11 @@
 	}
 }
 
-@variant dark (&:where(.dark, .dark *));
-
 @plugin "tailwindcss-animate";
 
 @theme {
+	/* can be used as classes */
 	--breakpoint-*: initial;
-	--breakpoint-tablet: 40rem;
 	--breakpoint-md: 46.5rem;
 	--breakpoint-lg: 60rem;
 
@@ -98,6 +32,8 @@
 	--color-icon-defi: var(--icon-defi);
 	--color-icon-wasserpumpen: var(--icon-wasserpumpen);
 
+	/* needed for shadcn */
+	--color-border: var(--border);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -114,7 +50,6 @@
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
 	--color-destructive-foreground: var(--destructive-foreground);
-	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 	--color-chart-1: var(--chart-1);
@@ -129,6 +64,7 @@
 
 @layer base {
 	:root {
+		/* kiezbox colors */
 		--body-black: #121019;
 		--grey-mid: #444;
 		--grey-light: #f6f6f6;
@@ -144,8 +80,11 @@
 		--icon-defi: #ca021d;
 		--icon-wasserpumpen: #e0ca00;
 
+		/* needed for shadcn */
 		--background: var(--color-neutral-50);
 		--foreground: var(--color-neutral-900);
+		--border: hsl(0 0% 89.8%);
+		--radius: 0.5rem;
 		--card: hsl(0 0% 100%);
 		--card-foreground: hsl(0 0% 3.9%);
 		--popover: hsl(0 0% 100%);
@@ -170,38 +109,13 @@
 		--chart-5: hsl(27 87% 67%);
 		--radius: 0.5rem;
 	}
-	.dark {
-		--background: var(--color-neutral-950);
-		--foreground: var(--color-neutral-100);
-		--card: hsl(0, 0%, 3.9%);
-		--card-foreground: hsl(0 0% 98%);
-		--popover: hsl(0 0% 3.9%);
-		--popover-foreground: hsl(0 0% 98%);
-		--primary: hsl(0 0% 98%);
-		--primary-foreground: hsl(0 0% 9%);
-		--secondary: hsl(0 0% 14.9%);
-		--secondary-foreground: hsl(0 0% 98%);
-		--muted: hsl(0 0% 14.9%);
-		--muted-foreground: hsl(0 0% 63.9%);
-		--accent: hsl(0 0% 14.9%);
-		--accent-foreground: hsl(0 0% 98%);
-		--destructive: hsl(0 62.8% 30.6%);
-		--destructive-foreground: hsl(0 0% 98%);
-		--border: hsl(0 0% 14.9%);
-		--input: hsl(0 0% 14.9%);
-		--ring: hsl(0 0% 83.1%);
-		--chart-1: hsl(220 70% 50%);
-		--chart-2: hsl(160 60% 45%);
-		--chart-3: hsl(30 80% 55%);
-		--chart-4: hsl(280 65% 60%);
-		--chart-5: hsl(340 75% 55%);
-	}
 }
 
 @layer components {
 	h1 {
 		color: var(--color-body-black, #121019);
 
+		/* h1 */
 		font-family: Arial;
 		font-size: 1.25rem;
 		font-weight: 700;
@@ -212,6 +126,7 @@
 	h2 {
 		color: var(--color-body-black, #121019);
 
+		/* h2 */
 		font-family: Arial;
 		font-size: 1.25rem;
 		font-style: normal;
@@ -222,6 +137,7 @@
 	h3 {
 		color: var(--color-body-black, #121019);
 
+		/* h3 */
 		font-family: Arial;
 		font-size: 1.5rem;
 		font-style: normal;
