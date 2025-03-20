@@ -1,21 +1,21 @@
-<script>
-	export let title = '';
-	export let textBodyOrList = '';
-	/**
-	 * @typedef {Object} LinkObject
-	 * @property {string} href - The URL the link points to.
-	 * @property {string} text - The display text for the link.
-	 * @property {string} [target] - Optional target attribute (e.g., '_blank').
-	 */
-
-	/**
-	 * @type {LinkObject[]}
-	 */
-	export let links = [];
+<script lang="ts">
+	let {
+		header,
+		textBodyOrList,
+		links
+	}: {
+		header: String;
+		textBodyOrList: String | String[];
+		links: {
+			href: string;
+			target?: string;
+			text: string;
+		}[];
+	} = $props();
 </script>
 
 <div class="infoBox-root w-[329px] flex-col justify-center space-y-2 self-stretch pt-[1.313rem]">
-	<h4 class="infoBox-title">{title}</h4>
+	<h4 class="infoBox-header">{header}</h4>
 	{#if Array.isArray(textBodyOrList)}
 		<ul class="body-text">
 			{#each textBodyOrList as item}
