@@ -1,0 +1,263 @@
+@import 'tailwindcss';
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+
+@plugin "tailwindcss-animate";
+
+@theme {
+	/* can be used as classes */
+	--breakpoint-*: initial;
+	--breakpoint-md: 46.5rem;
+	--breakpoint-lg: 60rem;
+
+	--color-body-black: var(--body-black);
+	--color-grey-mid: var(--grey-mid);
+	--color-grey-light: var(--grey-light);
+	--color-white: var(--white);
+	--color-purple-dark: var(--purple-dark);
+	--color-purple-mid: var(--purple-mid);
+	--color-purple-light: var(--purple-light);
+	--color-tsb-blau: var(--tsb-blau);
+	--color-notruf-rot: var(--notruf-rot);
+	--color-notruf-light: var(--notruf-light);
+	--color-icon-wc: var(--icon-wc);
+	--color-icon-trinkwasser: var(--icon-trinkwasser);
+	--color-icon-defi: var(--icon-defi);
+	--color-icon-wasserpumpen: var(--icon-wasserpumpen);
+
+	/* needed for shadcn */
+	--color-border: var(--border);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--radius-lg: var(--radius);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+	:root {
+		/* kiezbox colors */
+		--body-black: #121019;
+		--grey-mid: #444;
+		--grey-light: #f6f6f6;
+		--white: #fff;
+		--purple-dark: #5d508b;
+		--purple-mid: #7868b6;
+		--purple-light: #f1f0f5;
+		--tsb-blau: #1e3791;
+		--notruf-rot: #ca021d;
+		--notruf-light: #feecee;
+		--icon-wc: #00aa84;
+		--icon-trinkwasser: #5d508b;
+		--icon-defi: #ca021d;
+		--icon-wasserpumpen: #e0ca00;
+
+		/* needed for shadcn */
+		--background: var(--color-neutral-50);
+		--foreground: var(--color-neutral-900);
+		--border: hsl(0 0% 89.8%);
+		--radius: 0.5rem;
+		--card: hsl(0 0% 100%);
+		--card-foreground: hsl(0 0% 3.9%);
+		--popover: hsl(0 0% 100%);
+		--popover-foreground: hsl(0 0% 3.9%);
+		--primary: hsl(0 0% 9%);
+		--primary-foreground: hsl(0 0% 98%);
+		--secondary: hsl(0 0% 96.1%);
+		--secondary-foreground: hsl(0 0% 9%);
+		--muted: hsl(0 0% 96.1%);
+		--muted-foreground: hsl(0 0% 45.1%);
+		--accent: hsl(0 0% 96.1%);
+		--accent-foreground: hsl(0 0% 9%);
+		--destructive: hsl(0 84.2% 60.2%);
+		--destructive-foreground: hsl(0 0% 98%);
+		--border: hsl(0 0% 89.8%);
+		--input: hsl(0 0% 89.8%);
+		--ring: hsl(0 0% 3.9%);
+		--chart-1: hsl(12 76% 61%);
+		--chart-2: hsl(173 58% 39%);
+		--chart-3: hsl(197 37% 24%);
+		--chart-4: hsl(43 74% 66%);
+		--chart-5: hsl(27 87% 67%);
+		--radius: 0.5rem;
+	}
+}
+
+@layer components {
+	h1 {
+		color: var(--color-body-black, #121019);
+
+		/* h1 */
+		font-family: Arial;
+		font-size: 1.25rem;
+		font-weight: 700;
+		line-height: 1.5rem;
+		letter-spacing: 0.1rem;
+		text-transform: uppercase;
+	}
+	h2 {
+		color: var(--color-body-black, #121019);
+
+		/* h2 */
+		font-family: Arial;
+		font-size: 1.25rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 1.5rem; /* 120% */
+	}
+
+	h3 {
+		color: var(--color-body-black, #121019);
+
+		/* h3 */
+		font-family: Arial;
+		font-size: 1.5rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 1.5rem;
+	}
+
+	h4 {
+		color: var(--color-body-black, #121019);
+
+		/* h4 */
+		font-family: Arial;
+		font-size: 1.125rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 1.5rem;
+	}
+
+	p {
+		color: var(--color-body-black, #121019);
+
+		/* Body Text */
+		font-family: Arial;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+	}
+
+	.body-text {
+		color: var(--color-body-black, #121019);
+
+		/* Body Text */
+		font-family: Arial;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+	}
+
+	.body-text-bold {
+		color: var(--color-body-black, #121019);
+
+		/* Body Text Bold */
+		font-family: Arial;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 1.5rem;
+	}
+
+	.body-large {
+		color: var(--color-body-black, #121019);
+
+		/* Body Large */
+		font-family: Arial;
+		font-size: 1.125rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+	}
+
+	.body-large-bold {
+		color: var(--color-body-black, #121019);
+
+		/* Body Large Bold */
+		font-family: Arial;
+		font-size: 1.125rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 1.5rem;
+	}
+
+	.caption {
+		color: var(--color-body-black, #121019);
+
+		/* Caption */
+		font-family: Arial;
+		font-size: 0.875rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1rem;
+	}
+
+	.call-time {
+		color: var(--Body-Black, #121019);
+
+		/* Call Time */
+		font-family: Arial;
+		font-size: 4rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 4.75rem;
+	}
+}
+
+/* Animation keyframes can be added here if needed */
+@layer utilities {
+	.animate-accordion-down {
+		animation: accordion-down 0.2s ease-out;
+	}
+	.animate-accordion-up {
+		animation: accordion-up 0.2s ease-out;
+	}
+}
+
+@keyframes accordion-down {
+	from {
+		height: 0;
+	}
+	to {
+		height: var(--radix-accordion-content-height);
+	}
+}
+
+@keyframes accordion-up {
+	from {
+		height: var(--radix-accordion-content-height);
+	}
+	to {
+		height: 0;
+	}
+}
