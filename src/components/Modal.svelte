@@ -20,7 +20,7 @@
 	onclick={(e) => {
 		if (e.target === dialog) dialog.close();
 	}}
-	class="[&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
+	class="modal-root [&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
     fixed inset-0 m-auto flex h-[624px]
     w-[359px] flex-col rounded-md [&::backdrop]:backdrop-blur-sm"
 >
