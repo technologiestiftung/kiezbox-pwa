@@ -1,6 +1,19 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
+	import { loadTranslations } from '$lib/translations';
+
+	import type { LayoutLoad } from './$types';
+	import { browser } from '$app/environment';
+
+	export const load: LayoutLoad = async ({ url }) => {
+		const { pathname } = url;
+		const initLocale = 'de';
+
+		await loadTranslations(initLocale, pathname);
+
+		return { locale: initLocale, route: pathname };
+	};
 
 	// detect service worker update
 	async function detectSWUpdate() {

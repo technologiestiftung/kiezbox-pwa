@@ -1,15 +1,17 @@
 <script lang="ts">
-	let { header, children } = $props();
+	let { children }: { children: { header: string; body: string }[] } = $props();
 </script>
 
 <div
 	class="speechBubble-root relative mb-3 flex w-auto max-w-[329px] min-w-[200px] rounded-[1.5rem] border-4 border-black bg-white px-[1.5rem] py-[1.375rem] text-start shadow-xl"
 >
 	<!-- Main Bubble Content -->
-	<div class="speechBubble-content">
-		<span class="speechBubble-header font-bold text-black">{header}</span>
-		<p class="speechBubble-body text-black">{children}</p>
-	</div>
+	{#each children as child}
+		<div class="speechBubble-content">
+			<span class="speechBubble-header font-bold text-black">{child.header}</span>
+			<p class="speechBubble-body text-black">{child.body}</p>
+		</div>
+	{/each}
 
 	<!-- Tail using pseudo-elements -->
 	<div class="speechBubble-tail absolute -bottom-3 left-3">

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/button/button.svelte';
 	import EmergencyCallButton from './EmergencyCallButton.svelte';
-	let { isEmergency, onClick } = $props();
+	let { isEmergency, onClick, buttons }: { buttons: { isActive: boolean; onClick: () => void }[] } =
+		$props();
 </script>
 
 <div>
@@ -14,6 +15,8 @@
 				>Teste hier unseren Demonotruf, der auch funktioniert, wenn sonst nichts mehr funktioniert.</span
 			>
 		</div>
-		<EmergencyCallButton isActive={isEmergency} {onClick} />
+		{#each buttons as button}
+			<EmergencyCallButton isActive={button.isActive} onClick={button.onClick} />
+		{/each}
 	</div>
 </div>

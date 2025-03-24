@@ -1,11 +1,11 @@
 <script lang="ts">
 	let {
-		header,
+		title,
 		textBodyOrList,
 		links
 	}: {
-		header: String;
-		textBodyOrList: String | String[];
+		title: string;
+		textBodyOrList: string | string[];
 		links: {
 			href: string;
 			target?: string;
@@ -15,7 +15,7 @@
 </script>
 
 <div class="infoBox-root w-[329px] flex-col justify-center space-y-2 self-stretch pt-[1.313rem]">
-	<h4 class="infoBox-header">{header}</h4>
+	<h4 class="infoBox-title">{title}</h4>
 	{#if Array.isArray(textBodyOrList)}
 		<ul class="body-text">
 			{#each textBodyOrList as item}

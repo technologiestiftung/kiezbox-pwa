@@ -1,25 +1,23 @@
 <script lang="ts">
-	import * as Tabs from '$lib/components/ui/tabs';
-	import {
-		BaggageClaim,
-		EventIncident,
-		Fire,
-		Flood,
-		ThunderstormStrong
-	} from 'carbon-icons-svelte';
+	import type { TabItem } from '$lib/types'; // Adjust the import path as needed
+	import { Tabs } from 'bits-ui';
+	let { tabItems }: { tabItems: TabItem[] } = $props();
 </script>
 
-<Tabs.Root value="prevention" class="w-[343px]">
+<Tabs.Root value={tabItems[0]?.title || ''} class="w-[343px]">
 	<Tabs.List>
-		<Tabs.Trigger value="prevention"><BaggageClaim /></Tabs.Trigger>
-		<Tabs.Trigger value="fire"><Fire /></Tabs.Trigger>
-		<Tabs.Trigger value="flood"><Flood /></Tabs.Trigger>
-		<Tabs.Trigger value="storm"><ThunderstormStrong /></Tabs.Trigger>
-		<Tabs.Trigger value="cbrn"><EventIncident /></Tabs.Trigger>
+		{#each tabItems as tabItem}
+			<Tabs.Trigger value={tabItem.title}>
+				{#if tabItem.icon}
+					<tabItem.icon class="mr-2" />
+				{/if}
+			</Tabs.Trigger>
+		{/each}
 	</Tabs.List>
-	<Tabs.Content value="prevention">Make changes to your account here.</Tabs.Content>
-	<Tabs.Content value="fire">Make changes to your account here.</Tabs.Content>
-	<Tabs.Content value="flood">Make changes to your account here.</Tabs.Content>
-	<Tabs.Content value="storm">Make changes to your account here.</Tabs.Content>
-	<Tabs.Content value="cbrn">Change your password here.</Tabs.Content>
+	{#each tabItems as tabItem}
+		<Tabs.Content value={tabItem.title}>
+			<div>{tabItem.title}</div>
+			{tabItem.content}</Tabs.Content
+		>
+	{/each}
 </Tabs.Root>

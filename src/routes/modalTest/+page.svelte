@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { pushState } from '$app/navigation';
 	import Modal from '../../components/Modal.svelte';
+	import { t } from '$lib/translations';
 
 	const showModal = () => {
 		pushState('', {
@@ -14,9 +15,6 @@
 </script>
 
 <Modal close={closeModal}>
-	{#snippet header()}
-		{'2. Wer ruft an?'}
-	{/snippet}
 	{#snippet children()}
 		{'Nennen Sie Ihren Namen, Ihren Standort und Ihre Telefonnummer für Rückfragen!'}
 	{/snippet}
