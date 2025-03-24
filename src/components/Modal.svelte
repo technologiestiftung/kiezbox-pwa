@@ -1,5 +1,5 @@
 <script>
-	let { showModal = $bindable(), header, children, close = () => {} } = $props();
+	let { showModal = $bindable(), children, close = () => {} } = $props();
 
 	let dialog = $state(); // HTMLDialogElement
 
@@ -20,27 +20,19 @@
 	onclick={(e) => {
 		if (e.target === dialog) dialog.close();
 	}}
+	class="[&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
+    fixed inset-0 m-auto flex h-[624px]
+    w-[359px] flex-col rounded-md [&::backdrop]:backdrop-blur-sm"
 >
-	<div>
-		{@render header?.()}
-		<hr />
-		{@render children?.()}
-		<hr />
-		<!-- svelte-ignore a11y_autofocus -->
+	<div class="bg-purple-light h-12">
 		<button autofocus onclick={() => dialog.close()}>close modal</button>
+	</div>
+	<div class="h-full flex-grow px-4 pt-14">
+		{@render children?.()}
 	</div>
 </dialog>
 
 <style>
-	dialog {
-		max-width: 32em;
-		border-radius: 0.2em;
-		border: none;
-		padding: 0;
-	}
-	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.3);
-	}
 	dialog > div {
 		padding: 1em;
 	}
@@ -65,8 +57,5 @@
 		to {
 			opacity: 1;
 		}
-	}
-	button {
-		display: block;
 	}
 </style>
