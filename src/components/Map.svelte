@@ -1,5 +1,6 @@
 <!-- Map.svelte -->
 <script lang="ts">
+	import defiesData from '$lib/data/defibrillator.json';
 	import drinkingWaterData from '$lib/data/drinking-water.json';
 	import toiletsData from '$lib/data/toilets.json';
 	import waterPumpsData from '$lib/data/water-pumps.json';
@@ -61,10 +62,12 @@
 			const toiletImg = await map.loadImage('/icons/toilet.png');
 			const waterPumpImg = await map.loadImage('/icons/water-pump.png');
 			const drinkingWaterImg = await map.loadImage('/icons/drinking-water.png');
+			const defiesImg = await map.loadImage('/icons/defibrillator.png');
 
 			if (toiletImg) map.addImage('toilet-icon', toiletImg.data);
 			if (waterPumpImg) map.addImage('water-pump-icon', waterPumpImg.data);
 			if (drinkingWaterImg) map.addImage('drinking-water-icon', drinkingWaterImg.data);
+			if (defiesImg) map.addImage('defibrillator-icon', defiesImg.data);
 
 			// Add sources
 			map.addSource('drinkingWater', {
@@ -78,6 +81,10 @@
 			map.addSource('waterPumps', {
 				type: 'geojson',
 				data: waterPumpsData as unknown as GeoJSON
+			});
+			map.addSource('defies', {
+				type: 'geojson',
+				data: defiesData as unknown as GeoJSON
 			});
 
 			// Add layers using the loaded icons
@@ -107,6 +114,16 @@
 				source: 'waterPumps',
 				layout: {
 					'icon-image': 'water-pump-icon',
+					'icon-size': 1
+				}
+			});
+
+			map.addLayer({
+				id: 'defies-layer',
+				type: 'symbol',
+				source: 'defies',
+				layout: {
+					'icon-image': 'defibrillator-icon',
 					'icon-size': 1
 				}
 			});

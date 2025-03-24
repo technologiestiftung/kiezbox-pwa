@@ -72,6 +72,11 @@
 					Name: $selectedPOI.properties.bezeichnun
 				};
 			}
+			if ($selectedPOI.layer.id === 'defies-layer') {
+				content = {
+					Indoor: $selectedPOI.properties.indoor
+				};
+			}
 		}
 	});
 
@@ -84,7 +89,9 @@
 			case 'water-pumps-layer':
 				return 'Wasserpumpe';
 			case 'drink-water-layer':
-				return 'Trinkwasserbrunnen';
+				return 'Trinkwasser';
+			case 'defies-layer':
+				return 'Defibrillatoren';
 			default:
 				return 'Details';
 		}
