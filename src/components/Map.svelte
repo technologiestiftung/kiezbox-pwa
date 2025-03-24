@@ -138,8 +138,8 @@
 			'bottom-right'
 		);
 
-		map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
-		map.addControl(new maplibregl.FullscreenControl(), 'bottom-right');
+		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+		map.addControl(new maplibregl.FullscreenControl(), 'top-right');
 
 		map.on('click', (e) => {
 			const features = map.queryRenderedFeatures(e.point);
