@@ -5,10 +5,8 @@
 
 	const { clickPoint = { x: 0, y: 0 }, mapContainer } = $props();
 
-	let isAbovePOI = false;
 	let cardRef = $state<HTMLDivElement | null>(null);
 	let cardPosition = $state({ top: clickPoint.y, left: clickPoint.x });
-
 	let content = $state({});
 
 	function updateCardPosition() {
@@ -16,11 +14,11 @@
 		const mapRect = mapContainer.getBoundingClientRect();
 		const cardRect = cardRef.getBoundingClientRect();
 
-		let top = clickPoint.y - cardRect.height - 12;
+		let top = clickPoint.y - cardRect.height - 24;
 		let left = clickPoint.x - cardRect.width / 2;
 
 		if (top < 12) {
-			top = clickPoint.y + 15;
+			top = clickPoint.y + 24;
 		}
 		if (left < 12) {
 			left = 12;
@@ -39,7 +37,7 @@
 		if (cardRef && mapContainer) {
 			// Initial position
 			cardPosition = {
-				top: clickPoint.y - 150, // Initial guess at card height
+				top: clickPoint.y - 250, // Initial guess at card height
 				left: clickPoint.x - 128 // Half of w-64 (256px/2 = 128px)
 			};
 			setTimeout(updateCardPosition, 0);
@@ -103,7 +101,6 @@
 			<Card.Header>
 				<Card.Title
 					>{getTitle()}
-
 					<button
 						class="text-purple-dark m-0 cursor-pointer bg-transparent p-0"
 						onclick={() => selectedPOI.set(null)}>×</button
@@ -135,49 +132,5 @@
 				</ul>
 			</Card.Content>
 		</Card.Root>
-		<div class={`card-pointer ${isAbovePOI ? 'card-pointer-bottom' : 'card-pointer-top'}`}></div>
 	</div>
 {/if}
-
-<style>
-	.card-container {
-		position: relative;
-	}
-	/* Triangle pointer styles */
-	.pointer {
-		position: absolute;
-		width: 0;
-		height: 0;
-		border-style: solid;
-	}
-	.pointer-bottom {
-		bottom: -10px;
-		left: 50%;
-		transform: translateX(-50%);
-		border-width: 10px 10px 0;
-		border-color: pink transparent transparent;
-	}
-
-	.pointer-top {
-		top: -10px;
-		left: 50%;
-		transform: translateX(-50%);
-		border-width: 0 10px 10px;
-		border-color: transparent transparent pink;
-	}
-	.pointer-left {
-		left: -10px;
-		top: 50%;
-		transform: translateY(-50%);
-		border-width: 10px 10px 10px 0;
-		border-color: transparent pink transparent transparent;
-	}
-
-	.pointer-right {
-		right: -10px;
-		top: 50%;
-		transform: translateY(-50%);
-		border-width: 10px 0 10px 10px;
-		border-color: transparent transparent transparent pink;
-	}
-</style>
