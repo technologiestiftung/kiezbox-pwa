@@ -234,6 +234,10 @@
 		font-weight: 700;
 		line-height: 4.75rem;
 	}
+
+	.maplibregl-control-container .maplibregl-ctrl-bottom-right {
+		bottom: 64px !important;
+	}
 }
 
 /* Animation keyframes can be added here if needed */

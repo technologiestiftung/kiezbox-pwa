@@ -11,6 +11,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { getContext, onMount } from 'svelte';
 	import DetailsCard from './DetailsCard.svelte';
+	import Legend from './Legend.svelte';
 
 	const { width = '100%', height = '536px' } = $props();
 
@@ -169,4 +170,6 @@
 	{#if $selectedPOI}
 		<DetailsCard {clickPoint} {mapContainer} />
 	{/if}
+
+	<Legend />
 </div>
