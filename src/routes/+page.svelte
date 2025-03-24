@@ -7,6 +7,7 @@
 	import Ticker from '../components/Ticker.svelte';
 
 	import Modal from '../components/Modal.svelte';
+	import Header from '../components/Header.svelte';
 	let showModal = $state(false);
 
 	let isEmergency = $state(false);
@@ -17,7 +18,7 @@
 </script>
 
 <div class="page-root mx-auto max-w-[800px] p-8">
-	<h1>Kiezbox Notfallapp</h1>
+	<Header></Header>
 
 	<h2>Aktuelle News</h2>
 	<Ticker />
@@ -46,9 +47,6 @@
 
 	<button onclick={() => (showModal = true)}> show modal </button>
 	<Modal bind:showModal>
-		{#snippet header()}
-			{'2. Wer ruft an?'}
-		{/snippet}
 		{#snippet children()}
 			{'Nennen Sie Ihren Namen, Ihren Standort und Ihre Telefonnummer für Rückfragen!'}
 		{/snippet}
