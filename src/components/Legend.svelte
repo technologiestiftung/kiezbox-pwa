@@ -14,6 +14,11 @@
 		isOpen = !isOpen;
 	}
 
+	let defieIcon = '/icons/defie.svg';
+	let drinkingWaterIcon = '/icons/drinking-water.svg';
+	let toiletIcon = '/icons/toilet.svg';
+	let waterPumpIcon = '/icons/water-pump.svg';
+
 	function toggleLayer(layerId: string, isVisible: boolean) {
 		if (!mapState.map) return;
 		mapState.map.setLayoutProperty(layerId, 'visibility', isVisible ? 'visible' : 'none');
@@ -41,8 +46,8 @@
 			<AccordionContent>
 				<ul class="flex flex-col gap-6 px-6 pt-2">
 					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-2">
-							<div>Icon</div>
+						<div class="flex items-center gap-4">
+							<img src={drinkingWaterIcon} alt="Trinkwasser Icon" />
 							<label for="drinkingWater">Trinkwasser</label>
 						</div>
 						<Checkbox
@@ -54,8 +59,8 @@
 						/>
 					</li>
 					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-2">
-							<div>Icon</div>
+						<div class="flex items-center gap-4">
+							<img src={waterPumpIcon} alt="Wasserpumpe Icon" />
 							<label for="waterPump">Wasserpumpe</label>
 						</div>
 						<Checkbox
@@ -67,8 +72,8 @@
 						/>
 					</li>
 					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-2">
-							<div>Icon</div>
+						<div class="flex items-center gap-4">
+							<img src={toiletIcon} alt="Toiletten Icon" />
 							<label for="toilet">Öffentliche Toilette</label>
 						</div>
 						<Checkbox
@@ -80,8 +85,8 @@
 						/>
 					</li>
 					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-2">
-							<div>Icon</div>
+						<div class="flex items-center gap-4">
+							<img src={defieIcon} alt="Defibrillator Icon" />
 							<label for="defies">Defibrillatoren</label>
 						</div>
 						<Checkbox

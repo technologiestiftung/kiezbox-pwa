@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import { poiState } from '$lib/state/state.svelte';
+	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
+	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
 	import { onMount } from 'svelte';
 
 	const { clickPoint = { x: 0, y: 0 }, mapContainer } = $props();
@@ -36,6 +38,7 @@
 	$effect(() => {
 		if (cardRef && mapContainer) {
 			// Initial position
+			// todo: only display the card when the card position is calculated
 			cardPosition = {
 				top: clickPoint.y - 250, // Initial guess at card height
 				left: clickPoint.x - 128 // Half of w-64 (256px/2 = 128px)
@@ -45,7 +48,9 @@
 	});
 
 	onMount(() => {
-		const handleResize = () => updateCardPosition();
+		const handleResize = () => {
+			updateCardPosition();
+		};
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	});
@@ -101,10 +106,10 @@
 	}
 </script>
 
-{#if poiState}
+{#if poiState && cardPosition}
 	<div
 		class="DetailsCard-root absolute top-2 right-2 z-20 w-64"
-		style="top: {cardPosition.top}px; left: {cardPosition.left}px; transition: all 0.2s ease-out;"
+		style="top: {cardPosition.top}px; left: {cardPosition.left}px;"
 		bind:this={cardRef}
 	>
 		<Card.Root class="w-64">
@@ -129,7 +134,11 @@
 										{value ? 'Ja' : 'Nein'}
 									</p>
 									<p>
-										{value ? '✅' : '❌'}
+										{#if value}
+											<Checkmark fill="#00AA84" size={24}  />
+										{:else}
+											<CloseLarge fill="#E40422" size={24} />
+										{/if}
 									</p>
 								</div>
 							{:else}
