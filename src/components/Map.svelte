@@ -4,12 +4,12 @@
 	import drinkingWaterData from '$lib/data/drinking-water.json';
 	import toiletsData from '$lib/data/toilets.json';
 	import waterPumpsData from '$lib/data/water-pumps.json';
-	import { MAPSTORE_CONTEXT_KEY, type MapStore } from '$lib/stores/mapStore';
+	import { mapState, poiState } from '$lib/state/state.svelte';
 	import { selectedPOI } from '$lib/stores/poiStore';
 	import type { GeoJSON } from 'geojson';
 	import maplibregl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import { getContext, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import DetailsCard from './DetailsCard.svelte';
 	import Legend from './Legend.svelte';
 
@@ -19,7 +19,6 @@
 	let clickPoint = $state({ x: 0, y: 0 });
 
 	let map: maplibregl.Map;
-	let mapStore: MapStore = getContext(MAPSTORE_CONTEXT_KEY);
 
 	onMount(() => {
 		if (!mapContainer) return;
@@ -158,7 +157,7 @@
 			clickPoint = { x: e.point.x, y: e.point.y };
 		});
 
-		mapStore?.set(map);
+		mapState.map = map;
 
 		return () => {
 			map.remove();

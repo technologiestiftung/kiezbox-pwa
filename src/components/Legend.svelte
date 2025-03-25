@@ -6,6 +6,7 @@
 		AccordionTrigger
 	} from '$lib/components/ui/accordion';
 	import { Checkbox } from '$lib/components/ui/checkbox';
+	import { mapState } from '$lib/state/state.svelte';
 
 	let isOpen = $state(false);
 
@@ -13,12 +14,15 @@
 		isOpen = !isOpen;
 	}
 
-	// todo: toggle layer when checkbox is clicked
+	function toggleLayer(layerId: string, isVisible: boolean) {
+		if (!mapState.map) return;
+		mapState.map.setLayoutProperty(layerId, 'visibility', isVisible ? 'visible' : 'none');
+	}
 </script>
 
 <div class="Legend-root absolute right-0 bottom-0 left-0 z-10 flex w-full justify-center px-2">
 	<Accordion
-		class="border-purple-dark center w-full max-w-[29rem] overflow-hidden rounded-t-[4px] border-t-2 border-r-2 border-l-2 bg-white shadow-lg"
+		class="border-purple-dark center shadow-[0px_0px_16px_0px_rgba(0, 0, 0, 0.64)] w-full max-w-[29rem] overflow-hidden rounded-t-[4px] border-t-2 border-r-2 border-l-2 bg-white"
 	>
 		<AccordionItem value="legend">
 			<AccordionTrigger
@@ -41,28 +45,52 @@
 							<div>Icon</div>
 							<label for="drinkingWater">Trinkwasser</label>
 						</div>
-						<Checkbox id="drinkingWater" checked />
+						<Checkbox
+							id="drinkingWater"
+							checked
+							onCheckedChange={(v) => {
+								toggleLayer('drink-water-layer', v as boolean);
+							}}
+						/>
 					</li>
 					<li class="body-large flex items-center justify-between gap-2">
 						<div class="flex items-center gap-2">
 							<div>Icon</div>
 							<label for="waterPump">Wasserpumpe</label>
 						</div>
-						<Checkbox id="waterPump" checked />
+						<Checkbox
+							id="waterPump"
+							checked
+							onCheckedChange={(v) => {
+								toggleLayer('water-pumps-layer', v as boolean);
+							}}
+						/>
 					</li>
 					<li class="body-large flex items-center justify-between gap-2">
 						<div class="flex items-center gap-2">
 							<div>Icon</div>
 							<label for="toilet">Öffentliche Toilette</label>
 						</div>
-						<Checkbox id="toilet" checked />
+						<Checkbox
+							id="toilet"
+							checked
+							onCheckedChange={(v) => {
+								toggleLayer('toilets-layer', v as boolean);
+							}}
+						/>
 					</li>
 					<li class="body-large flex items-center justify-between gap-2">
 						<div class="flex items-center gap-2">
 							<div>Icon</div>
 							<label for="defies">Defibrillatoren</label>
 						</div>
-						<Checkbox id="defies" checked />
+						<Checkbox
+							id="defies"
+							checked
+							onCheckedChange={(v) => {
+								toggleLayer('defies-layer', v as boolean);
+							}}
+						/>
 					</li>
 				</ul>
 			</AccordionContent>

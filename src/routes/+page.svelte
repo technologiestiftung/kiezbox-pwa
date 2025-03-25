@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { createMapStore, MAPSTORE_CONTEXT_KEY } from '$lib/stores';
-	import { setContext } from 'svelte';
 	import EmergencyCall from '../components/EmergencyCall.svelte';
 	import Header from '../components/Header.svelte';
 	import InfoBox from '../components/InfoBox.svelte';
@@ -9,9 +7,6 @@
 	import Notruf from '../components/Notruf.svelte';
 	import SpeechBubble from '../components/SpeechBubble.svelte';
 	import TabView from '../components/TabView.svelte';
-
-	const mapStore = createMapStore();
-	setContext(MAPSTORE_CONTEXT_KEY, mapStore);
 
 	let showModal = $state(false);
 	let isEmergency = $state(false);
