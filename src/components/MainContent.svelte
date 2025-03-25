@@ -1,49 +1,45 @@
 <script lang="ts">
 	import type { TabItem } from '$lib/types';
 	import TabView from './TabView.svelte';
-	import { t } from '$lib/translations';
 	import {
 		BaggageClaim,
-		EventIncident,
 		Fire,
 		Flood,
-		ThunderstormStrong
+		ThunderstormStrong,
+		EventIncident
 	} from 'carbon-icons-svelte';
+	import { createPrecautionTabItems } from '$lib/utils/precautionUtils';
+	import { t } from '$lib/translations';
 
-	$: tabItems = [
-		{
-			title: $t('pm.personal_precautions.title'),
-			icon: BaggageClaim,
-			slug: '',
-			content: []
-		},
-		{
-			title: $t('pm.personal_precautions.title'),
-			icon: Fire,
-			slug: '',
-			content: []
-		},
-		{
-			title: $t('pm.personal_precautions.title'),
-			icon: Flood,
-			slug: '',
-			content: []
-		},
-		{
-			title: $t('pm.personal_precautions.title'),
-			icon: ThunderstormStrong,
-			slug: '',
-			content: []
-		},
-		{
-			title: $t('pm.personal_precautions.title'),
-			icon: EventIncident,
-			slug: '',
-			content: []
-		}
-	];
+	// Get the translations data
+
+	// Utility function to dynamically assign icons and hrefs
+	function getIcon(slug: string) {
+		const icons = {
+			personal_precautions: BaggageClaim,
+			fire: Fire,
+			flood: Flood,
+			storm: ThunderstormStrong,
+			cbrn: EventIncident
+		};
+		return icons[slug as keyof typeof icons];
+	}
+
+	// Define the precaution category slugs we want to display
+	const precautionSlugs = ['personal_precautions', 'fire', 'flood', 'storm', 'cbrn'];
+
+	// Create tab items dynamically from translations
+	const tabItems = createPrecautionTabItems($t, precautionSlugs).map((item) => ({
+		...item,
+		icon: getIcon(item.slug)
+	}));
+
+	console.log(tabItems);
 </script>
 
-<div>
+<div class="MainContent-root bg-purple-light flex w-full flex-col">
+	<div class="flex min-h-14 items-center justify-center">
+		<h2 class="text-purple-dark">{$t('content.precaution_infos.title')}</h2>
+	</div>
 	<TabView {tabItems}></TabView>
 </div>

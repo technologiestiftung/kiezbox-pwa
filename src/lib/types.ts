@@ -11,9 +11,11 @@ export interface TabItem {
 export interface InfoBoxItem {
 	title: string;
 	textBodyOrList: string | string[];
-	links: {
-		href: string;
-		target?: string;
-		text: string;
-	};
+	links: Link[];
+}
+
+export interface Link {
+	href?: string;
+	target?: string;
+	text: string;
 }

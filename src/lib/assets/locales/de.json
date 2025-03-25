@@ -55,122 +55,145 @@
 			"title": "Prävention und Maßnahmen",
 			"personal_precautions": {
 				"title": "Persönliche Vorsorge",
-				"food": {
+				"1": {
 					"title": "Essen und Trinken",
 					"text": "Wir empfehlen einen Vorrat an Lebensmitteln für mind. 3 Tage pro Person. Des weiteren sollten Sie mind. 1,5l Trinkwasser und 0,5l Wasser pro Tag zum Kochen und für Hygiene einplanen.",
-					"link": {
-						"text": "Vorratskalkulator des Bundes"
+					"links": {
+						"1": {
+							"text": "Vorratskalkulator des Bundes",
+							"href": ""
+						}
 					}
 				},
-				"baggage": {
+				"2": {
 					"title": "Notfallrucksack",
 					"text": "Planen Sie vor und packen Sie ein Notgepäck mit den wichtigsten Dingen. Ein Rucksack ist besser als ein Koffer, um die Hände im Notfall frei zu haben.",
-					"link": {
-						"text": "Packliste des BBK"
+					"links": {
+						"1": {
+							"text": "Packliste des BBK"
+						}
 					}
 				},
-				"medicine": {
+				"3": {
 					"title": "Hygiene und Medikamente",
 					"text": "Durch einen sparsamen Umgang mit Wasser und eine gut sortierte Hausapotheke kann gesundheitsfördernde Hygiene und Erste Hilfe selbstständig sichergestellt werden.",
-					"link_1": {
-						"text": "Infos zur Hausapotheke des BBK"
-					},
-					"link_2": {
-						"text": "Tipps zur Hygiene des BBK"
+					"links": {
+						"1": {
+							"text": "Infos zur Hausapotheke des BBK"
+						},
+						"2": {
+							"text": "Tipps zur Hygiene des BBK"
+						}
 					}
 				}
 			},
 			"fire": {
 				"title": "Feuer",
-				"precaution": {
+				"1": {
 					"title": "Vorsorge für den Brandfall",
 					"text": "Die Brandgefahr kann erheblich minimiert werden, indem sich richtig um Kerzen, brennbares Material, Rauchmelder und Löschgeräte gekümmert wird.",
-					"link": {
-						"text": "Detailinformationen"
+					"links": {
+						"1": {
+							"text": "Detailinformationen"
+						}
 					}
 				},
-				"action": {
+				"2": {
 					"title": "Was tun, wenn es brennt?",
 					"text": "Ersticken Sie wenn möglich as Feuer im Keim. Falls erfolglos: rufen Sie die 112 an! Löschen Sie nur, wenn keine Gefahr besteht oder bringen Sie sich in Sicherheit.",
-					"link": {
-						"text": "Detailinformationen"
+					"links": {
+						"1": {
+							"text": "Detailinformationen"
+						}
 					}
 				},
-				"aftermath": {
+				"3": {
 					"title": "Nach dem Brand",
 					"text": "Betreten Sie das Gebäude nur, wenn es von der Feuerwehr freigegeben wurde. Es könnte Einsturzgefahr bestehen. Machen Sie nach Freigabe eine Bestandsaufnahme und Fotografieren Sie Schäden als Beleg für die Versicherung."
 				}
 			},
 			"flood": {
 				"title": "Hochwasser",
-				"general": {
+				"1": {
 					"title": "Generell gilt:",
 					"text": "Achten Sie auf die Informationen Ihrer lokalen Gefahrenabwehrbehörden und unterstützen Sie die Einsatzkräfte vor Ort, indem Sie deren Anweisungen umsetzen und sich von gefährdeten oder bereits abgeriegelten Gebieten fernhalten."
 				},
-				"precaution": {
+				"2": {
 					"title": "Vorsorge für das Hochwasser",
 					"text": "Evakuieren Sie von Hilfebedürftige, Kinder und Haustiere. Und Informieren Sie sich über die Hochwasserzentrale der Länder über aktuelle Informationen.",
-					"link": {
-						"text": "Hochwasserzentrale"
+					"links": {
+						"1": {
+							"text": "Hochwasserzentrale"
+						}
 					}
 				},
-				"action": {
+				"3": {
 					"title": "Was tun bei Hochwasser?",
 					"text": "Der Keller oder die Tiefgarage können zur Lebensgefahr werden. Dabei herrschen im Haus und im Auto unterschiedliche Verhaltensregeln.",
-					"link": {
-						"text": "Verhaltensregeln"
+					"links": {
+						"1": {
+							"text": "Verhaltensregeln"
+						}
 					}
 				}
 			},
 			"storm": {
 				"title": "Unwetter",
-				"precaution": {
+				"1": {
 					"title": "Vorsorge bei Unwetter",
 					"text": "Bereiten Sie sich frühzeitig auf Unwetter vor, indem Sie genügen Lebensmittel, Wasser, Dokumententasche und Notfallkoffer bereit halten.",
-					"link": {
-						"text": "Mehr Infos zur Persönlichen Vorsorge"
+					"links": {
+						"1": {
+							"text": "Mehr Infos zur Persönlichen Vorsorge"
+						}
 					}
 				},
-				"action": {
+				"2": {
 					"title": "Was tun bei Unwetter?",
 					"text": "Gegenstände sichern, Fenster schließen, Metall vermeiden: je nach Aufenthaltsort herrschen unterschiedliche Verhaltensregeln. Al goldene Regel gilt jedoch: zu Hause bleiben.",
-					"link": {
-						"text": "Verhaltensregeln bei Unwetter"
+					"links": {
+						"1": {
+							"text": "Verhaltensregeln bei Unwetter"
+						}
 					}
 				},
-				"aftermath": {
+				"3": {
 					"title": "Nach dem Unwetter",
 					"text": "Unwetter können zu Dachschäden, Überflutungen, dem Austritt von Gefahrenstoffen führen und Personen verletzen. Je nach Art des Unwetters sind unterschiedliche Tipps zu beachten",
-					"link": {
-						"text": "Verhalten nach dem Unwetter"
+					"links": {
+						"1": {
+							"text": "Verhalten nach dem Unwetter"
+						}
 					}
 				}
 			},
 			"cbrn": {
 				"title": "CBRN-Gefahrenstoffe",
-				"substances": {
+				"1": {
 					"title": "Die unterschiedlichen Gefahrenstoffe",
 					"text": "Ein Laie kann in der Regel die Gefährlichkeit von chemischen (C), biologischen (B), radiologischen (R) und nuklearen (N) Gefahrenstoffe nicht erkennen.",
-					"link": {
-						"text": "Wirkung auf Haut und Körper"
+					"links": {
+						"1": {
+							"text": "Wirkung auf Haut und Körper"
+						}
 					}
 				},
-				"behaviour": {
+				"2": {
 					"title": "Verhalten bei Gefahrenstoff-Freisetzung",
 					"text": "Kontaktieren Sie die lokale Giftnotrufzentrale. Giftnotruf der Charité Universitätsmedizin Berlin: 030 192 40"
 				},
-				"behaviour_home": {
+				"3": {
 					"title": "Verhalten zu Hause",
-					"instructions": [
+					"list": [
 						"Bleiben Sie im Gebäude, schließen Sie Fenster und Türen",
 						"Schalten Sie Ventilatoren und Lüftungen aus",
 						"Vermeiden Sie unnötigen Sauerstoffverbrauch durch Kerzen oder Ähnliches.",
 						"Bei radioaktiven Stoffen: suchen Sie einen Kellerraum auf"
 					]
 				},
-				"behaviour_car": {
+				"4": {
 					"title": "Verhalten im Auto oder im Freien",
-					"instructions": [
+					"list": [
 						"Bewegen Sie sich möglichst quer zur Windrichtung",
 						"Atmen Sie möglichst durch einen Atemschutz, zumindest durch ein Taschentuch",
 						"Waschen Sie Hände, Gesicht und Haare, ebenso Nase und Ohren mit Wasser und Seife.",

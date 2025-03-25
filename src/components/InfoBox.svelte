@@ -1,37 +1,31 @@
 <script lang="ts">
-	let {
-		title,
-		textBodyOrList,
-		links
-	}: {
-		title: string;
-		textBodyOrList: string | string[];
-		links: {
-			href: string;
-			target?: string;
-			text: string;
-		}[];
-	} = $props();
+	import type { InfoBoxItem } from '$lib/types';
+
+	let { infoBoxItem }: { infoBoxItem: InfoBoxItem } = $props();
 </script>
 
-<div class="infoBox-root w-[329px] flex-col justify-center space-y-2 self-stretch pt-[1.313rem]">
-	<h4 class="infoBox-title">{title}</h4>
-	{#if Array.isArray(textBodyOrList)}
+<div
+	class="InfoBoxItem-root w-[329px] flex-col justify-center space-y-2 self-stretch pt-[1.313rem]"
+>
+	<h4 class="InfoBoxItem-title">{infoBoxItem.title}</h4>
+	{#if Array.isArray(infoBoxItem.textBodyOrList)}
 		<ul class="body-text">
-			{#each textBodyOrList as item}
+			{#each infoBoxItem.textBodyOrList as item}
 				<li>{item}</li>
 			{/each}
 		</ul>
 	{:else}
-		<p class="infoBox-body body-text">{textBodyOrList}</p>
+		<p class="InfoBoxItem-body body-text">{infoBoxItem.textBodyOrList}</p>
 	{/if}
-	{#each links as link}
-		<a
-			class="infoBox-link body-text text-purple-dark after:content-['_↗']"
-			href={link.href}
-			target={link.target || '_self'}>{link.text}</a
-		>
-	{/each}
+	<div class="flex flex-col">
+		{#each infoBoxItem.links as link}
+			<a
+				class="InfoBoxItem-link body-text text-purple-dark after:content-['_↗']"
+				href={link.href}
+				target={link.target || '_self'}>{link.text}</a
+			>
+		{/each}
+	</div>
 </div>
 
 <style>
