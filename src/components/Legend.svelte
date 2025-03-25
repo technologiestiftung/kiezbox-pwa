@@ -8,24 +8,46 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { mapState } from '$lib/state/state.svelte';
 
+	const LAYER_CONFIG = [
+		{
+			id: 'drinking-water-layer',
+			label: 'Trinkwasser',
+			icon: '/icons/drinking-water.svg',
+			alt: 'Trinkwasser Icon'
+		},
+		{
+			id: 'water-pumps-layer',
+			label: 'Wasserpumpe',
+			icon: '/icons/water-pump.svg',
+			alt: 'Wasserpumpe Icon'
+		},
+		{
+			id: 'toilets-layer',
+			label: 'Öffentliche Toilette',
+			icon: '/icons/toilet.svg',
+			alt: 'Toiletten Icon'
+		},
+		{
+			id: 'defies-layer',
+			label: 'Defibrillatoren',
+			icon: '/icons/defie.svg',
+			alt: 'Defibrillator Icon'
+		}
+	];
+
 	let isOpen = $state(false);
 
-	function toggleIsOpen() {
+	const toggleIsOpen = $derived(() => {
 		isOpen = !isOpen;
-	}
+	});
 
-	let defieIcon = '/icons/defie.svg';
-	let drinkingWaterIcon = '/icons/drinking-water.svg';
-	let toiletIcon = '/icons/toilet.svg';
-	let waterPumpIcon = '/icons/water-pump.svg';
-
-	function toggleLayer(layerId: string, isVisible: boolean) {
+	function toggleLayer(layerId: string, isVisible: boolean): void {
 		if (!mapState.map) return;
 		mapState.map.setLayoutProperty(layerId, 'visibility', isVisible ? 'visible' : 'none');
 	}
 </script>
 
-<div class="Legend-root absolute right-0 bottom-0 left-0 z-10 flex w-full justify-center px-2">
+<div class="legend-root absolute right-0 bottom-0 left-0 z-10 flex w-full justify-center px-2">
 	<Accordion
 		class="border-purple-dark center shadow-[0px_0px_16px_0px_rgba(0, 0, 0, 0.64)] w-full max-w-[29rem] overflow-hidden rounded-t-[4px] border-t-2 border-r-2 border-l-2 bg-white"
 	>
@@ -36,67 +58,24 @@
 				on:click={toggleIsOpen}
 			>
 				<p class="text-purple-dark body-large-bold text-center">
-					{#if isOpen}
-						Legende schließen
-					{:else}
-						Legende öffnen
-					{/if}
+					{isOpen ? 'Legende schließen' : 'Legende öffnen'}
 				</p>
 			</AccordionTrigger>
 			<AccordionContent>
 				<ul class="flex flex-col gap-6 px-6 pt-2">
-					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-4">
-							<img src={drinkingWaterIcon} alt="Trinkwasser Icon" />
-							<label for="drinkingWater">Trinkwasser</label>
-						</div>
-						<Checkbox
-							id="drinkingWater"
-							checked
-							onCheckedChange={(v) => {
-								toggleLayer('drinking-water-layer', v as boolean);
-							}}
-						/>
-					</li>
-					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-4">
-							<img src={waterPumpIcon} alt="Wasserpumpe Icon" />
-							<label for="waterPump">Wasserpumpe</label>
-						</div>
-						<Checkbox
-							id="waterPump"
-							checked
-							onCheckedChange={(v) => {
-								toggleLayer('water-pumps-layer', v as boolean);
-							}}
-						/>
-					</li>
-					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-4">
-							<img src={toiletIcon} alt="Toiletten Icon" />
-							<label for="toilet">Öffentliche Toilette</label>
-						</div>
-						<Checkbox
-							id="toilet"
-							checked
-							onCheckedChange={(v) => {
-								toggleLayer('toilets-layer', v as boolean);
-							}}
-						/>
-					</li>
-					<li class="body-large flex items-center justify-between gap-2">
-						<div class="flex items-center gap-4">
-							<img src={defieIcon} alt="Defibrillator Icon" />
-							<label for="defies">Defibrillatoren</label>
-						</div>
-						<Checkbox
-							id="defies"
-							checked
-							onCheckedChange={(v) => {
-								toggleLayer('defies-layer', v as boolean);
-							}}
-						/>
-					</li>
+					{#each LAYER_CONFIG as layer}
+						<li class="body-large flex items-center justify-between gap-2">
+							<div class="flex items-center gap-4">
+								<img src={layer.icon} alt={layer.alt} />
+								<label for={layer.id}>{layer.label}</label>
+							</div>
+							<Checkbox
+								id={layer.id}
+								checked
+								onCheckedChange={(v) => toggleLayer(layer.id, v as boolean)}
+							/>
+						</li>
+					{/each}
 				</ul>
 			</AccordionContent>
 		</AccordionItem>
