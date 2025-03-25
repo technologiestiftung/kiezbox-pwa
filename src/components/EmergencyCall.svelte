@@ -1,24 +1,55 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import EmergencyCallButton from './EmergencyCallButton.svelte';
-	let {
-		isEmergency,
-		buttons
-	}: { isEmergency: boolean; buttons: { isActive: boolean; onClick: () => void }[] } = $props();
+	let { activateCall, isCall } = $props();
+	import { t } from '$lib/translations';
+	import CallerScreen from './CallerScreen.svelte';
+
+	let buttonText = isCall
+		? $t('content.emergency_phone.emergency.offline.call_button')
+		: $t('content.emergency_phone.emergency.online.call_button');
 </script>
 
-<div>
-	<div
-		class={`notruf-root flex w-[375px] flex-col space-y-[1.65rem] p-[1.438rem] ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
-	>
-		<div class="notruf-container flex flex-col items-start">
-			<span class="body-large-bold">Für euch auch in der Krise da</span>
-			<span class="body-text"
-				>Teste hier unseren Demonotruf, der auch funktioniert, wenn sonst nichts mehr funktioniert.</span
-			>
+<div class="demoCall-root mp-8 flex h-full flex-grow flex-col justify-between space-y-8 py-6">
+	{#if !isCall}
+		<div class="">{$t('content.emergency_phone.emergency.offline.text')}</div>
+		<div class="">{$t('content.emergency_phone.default.questions.title')}</div>
+		<ul class="space-y-2 px-4">
+			<li>
+				{$t('content.emergency_phone.default.questions.1.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.2.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.3.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.4.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.5.text')}
+			</li>
+		</ul>
+	{:else}
+		<div class="space-y-2 px-4">
+			<div class="">{$t('content.emergency_phone.default.online.text')}</div>
 		</div>
-		{#each buttons as button}
-			<EmergencyCallButton isActive={isEmergency} onClick={button.onClick} />
-		{/each}
-	</div>
+		<ul class="space-y-2 px-4">
+			<li>
+				{$t('content.emergency_phone.default.questions.1.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.2.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.3.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.4.text')}
+			</li>
+			<li>
+				{$t('content.emergency_phone.default.questions.5.text')}
+			</li>
+		</ul>
+	{/if}
+	<CallerScreen {isCall} {activateCall} {buttonText} />
 </div>

@@ -38,7 +38,7 @@
 </script>
 
 <div class="MainContent-root bg-purple-light flex w-full flex-col">
-	<div class="flex min-h-14 items-center justify-center">
+	<div class="mt-8 flex min-h-14 items-center justify-center">
 		<h2 class="text-purple-dark">{$t('content.precaution_infos.title')}</h2>
 	</div>
 	<TabView {tabItems}></TabView>

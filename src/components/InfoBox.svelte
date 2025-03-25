@@ -4,9 +4,7 @@
 	let { infoBoxItem }: { infoBoxItem: InfoBoxItem } = $props();
 </script>
 
-<div
-	class="InfoBoxItem-root w-[329px] flex-col justify-center space-y-2 self-stretch pt-[1.313rem]"
->
+<div class="infoBoxItem-root flex-col justify-center space-y-2 self-stretch">
 	<h4 class="InfoBoxItem-title">{infoBoxItem.title}</h4>
 	{#if Array.isArray(infoBoxItem.textBodyOrList)}
 		<ul class="body-text">
@@ -15,12 +13,12 @@
 			{/each}
 		</ul>
 	{:else}
-		<p class="InfoBoxItem-body body-text">{infoBoxItem.textBodyOrList}</p>
+		<p class="infoBoxItem-body body-text">{infoBoxItem.textBodyOrList}</p>
 	{/if}
 	<div class="flex flex-col">
 		{#each infoBoxItem.links as link}
 			<a
-				class="InfoBoxItem-link body-text text-purple-dark after:content-['_↗']"
+				class="infoBoxItem-link body-text text-purple-dark after:content-['_↗']"
 				href={link.href}
 				target={link.target || '_self'}>{link.text}</a
 			>

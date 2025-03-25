@@ -1,4 +1,8 @@
 <script>
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { t } from '$lib/translations';
+	import { CloseOutline } from 'carbon-icons-svelte';
+
 	let { showModal = $bindable(), children, close = () => {} } = $props();
 
 	let dialog = $state(); // HTMLDialogElement
@@ -25,10 +29,18 @@
     fixed inset-0 m-auto flex h-[624px]
     w-[359px] flex-col rounded-xs [&::backdrop]:backdrop-blur-sm"
 	>
-		<div class="bg-purple-light h-12 p-2">
-			<button autofocus onclick={() => dialog.close()}>close modal</button>
+		<div class="bg-purple-light flex h-12 items-center justify-between">
+			<Button
+				variant="ghost"
+				class="text-body-black justfiy-center flex w-32 items-center space-x-2"
+				on:click={handleClose}
+			>
+				<CloseOutline class="text-body-black size-6" />
+				<span class="text-body-black">{$t('common.button.close')}</span>
+			</Button>
+			<!-- <button autofocus onclick={() => dialog.close()}>close modal</button> -->
 		</div>
-		<div class="h-full flex-grow px-4 pt-14">
+		<div class="h-full flex-grow overflow-auto px-4">
 			{@render children?.()}
 		</div>
 	</dialog>

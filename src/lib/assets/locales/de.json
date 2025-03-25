@@ -21,6 +21,7 @@
 					"text": "Sie sind nun verbunden mit dem Demonotruf der Berliner Feuerwehr. Die Feuerwehr wird Sie wie folgt durch das Gespräch leiten:"
 				},
 				"questions": {
+					"title": "Beachten Sie dabei die 5 W-Fragen:",
 					"1": {
 						"text": "Wo ist das Ereignis?",
 						"description": "Geben Sie den Ort des Ereignisses so genau wie möglich an (zum Beispiel Gemeindename oder Stadtteil, Straßenname, Hausnummer, etc.)"
@@ -45,9 +46,13 @@
 			},
 			"emergency": {
 				"phone_button": "Zu Notruf",
-				"call_button": {
-					"offline": "Notruf starten",
-					"online": "Notruf beenden"
+				"offline": {
+					"call_button": "Notruf starten",
+					"text": "Sie können nun einen Notruf zur Berliner Feuerwehr absenden. Bitte beachten Sie, dass es ich hier um einen echten Notruf handelt. Missbrauch ist strafbar!"
+				},
+				"online": {
+					"call_button": "Notruf beenden",
+					"text": "Sie werden nun verbunden mit der Berliner Feuerwehr, bitte beachten sie folgende Fragen:"
 				}
 			}
 		},
