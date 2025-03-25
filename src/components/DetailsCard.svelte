@@ -100,7 +100,7 @@
 
 {#if $selectedPOI}
 	<div
-		class="DetailsCard-root absolute top-2 right-2 z-10 w-64"
+		class="DetailsCard-root absolute top-2 right-2 z-20 w-64"
 		style="top: {cardPosition.top}px; left: {cardPosition.left}px; transition: all 0.2s ease-out;"
 		bind:this={cardRef}
 	>
