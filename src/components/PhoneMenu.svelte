@@ -7,10 +7,12 @@
 
 <div class={`notruf-root relative p-6 ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}>
 	<div class="notruf-container flex flex-col items-start">
-		<span class="body-large-bold">Für euch auch in der Krise da</span>
-		<span class="body-text"
-			>Teste hier unseren Demonotruf, der auch funktioniert, wenn sonst nichts mehr funktioniert.</span
-		>
+		<span class="body-large-bold">
+			{$t('content.emergency_phone.title')}
+		</span>
+		<span class="body-text">
+			{$t('content.emergency_phone.text')}
+		</span>
 	</div>
 </div>
 <div class={`sticky top-0 px-6 ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}>
