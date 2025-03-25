@@ -49,7 +49,7 @@
 							id="drinkingWater"
 							checked
 							onCheckedChange={(v) => {
-								toggleLayer('drink-water-layer', v as boolean);
+								toggleLayer('drinking-water-layer', v as boolean);
 							}}
 						/>
 					</li>

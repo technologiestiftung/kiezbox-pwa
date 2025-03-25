@@ -97,7 +97,7 @@
 				}
 			});
 			map.addLayer({
-				id: 'drink-water-layer',
+				id: 'drinking-water-layer',
 				type: 'symbol',
 				source: 'drinkingWater',
 				layout: {
@@ -105,7 +105,6 @@
 					'icon-size': 1
 				}
 			});
-
 			map.addLayer({
 				id: 'toilets-layer',
 				type: 'symbol',
@@ -115,17 +114,6 @@
 					'icon-size': 1
 				}
 			});
-
-			map.addLayer({
-				id: 'water-pumps-layer',
-				type: 'symbol',
-				source: 'waterPumps',
-				layout: {
-					'icon-image': 'water-pump-icon',
-					'icon-size': 1
-				}
-			});
-
 			map.addLayer({
 				id: 'defies-layer',
 				type: 'symbol',
