@@ -15,7 +15,7 @@
 	};
 </script>
 
-<div class="page-root mx-auto max-w-[800px] p-8">
+<div class="page-root mx-auto max-w-[800px]">
 	<Header></Header>
 
 	<h1>EmergencyCall</h1>
