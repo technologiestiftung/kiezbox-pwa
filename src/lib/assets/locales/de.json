@@ -1,0 +1,183 @@
+{
+	"common": {
+		"button": {
+			"close": "Schließen",
+			"mute": "Stummschalten",
+			"speaker": "Lautsprecher"
+		}
+	},
+	"content": {
+		"emergency_phone": {
+			"title": "Für euch auch in der Krise da",
+			"text": "Teste hier unseren Demonotruf, der auch funktioniert, wenn sonst nichts mehr funktioniert.",
+			"default": {
+				"phone_button": "Zur Notrufdemo",
+				"offline": {
+					"call_button": "Notrufdemo starten",
+					"text": "In einem Krisenfall können Sie hier einen Notruf absenden, wenn Sie bspw. wegen Stromausfall sonst keine Anrufe tätigen können.  Dieses wird dabei automatisch von der Berliner Feuerwehr eingeschalten. Mit unserem Demoanruf können Sie schon einmal die 5W-Fragen üben, die sie im Gespräch mit dem Notruf immer parat haben sollten."
+				},
+				"online": {
+					"call_button": "Notrufdemo beenden",
+					"text": "Sie sind nun verbunden mit dem Demonotruf der Berliner Feuerwehr. Die Feuerwehr wird Sie wie folgt durch das Gespräch leiten:"
+				},
+				"questions": {
+					"1": {
+						"text": "Wo ist das Ereignis?",
+						"description": "Geben Sie den Ort des Ereignisses so genau wie möglich an (zum Beispiel Gemeindename oder Stadtteil, Straßenname, Hausnummer, etc.)"
+					},
+					"2": {
+						"text": "Wer ruft an?",
+						"description": "Nennen Sie Ihren Namen, Ihren Standort und Ihre Telefonnummer für Rückfragen!"
+					},
+					"3": {
+						"text": "Was ist Geschehen?",
+						"description": "Beschreiben Sie knapp das Ereignis und das, was Sie konkret sehen (was ist geschehen? was ist zu sehen?), beispielsweise Verkehrsunfall, Absturz, Brand, Explosion, Einsturz, eingeklemmte Person!"
+					},
+					"4": {
+						"text": "Wie viele sind betroffen?",
+						"description": "Schätzen Sie die Zahl der betroffenen Personen, ihre Lage und die Verletzungen! Geben Sie bei Kindern auch das - gegebenenfalls geschätzte - Alter an!"
+					},
+					"5": {
+						"text": "Warten auf Rückfragen!",
+						"description": "Legen Sie nicht gleich auf, die Mitarbeiter der Integrierten Leitstelle benötigen von Ihnen vielleicht noch weitere Informationen!"
+					}
+				}
+			},
+			"emergency": {
+				"phone_button": "Zu Notruf",
+				"call_button": {
+					"offline": "Notruf starten",
+					"online": "Notruf beenden"
+				}
+			}
+		},
+		"precaution_infos": {
+			"title": "Prävention und Maßnahmen",
+			"personal_precautions": {
+				"title": "Persönliche Vorsorge",
+				"food": {
+					"title": "Essen und Trinken",
+					"text": "Wir empfehlen einen Vorrat an Lebensmitteln für mind. 3 Tage pro Person. Des weiteren sollten Sie mind. 1,5l Trinkwasser und 0,5l Wasser pro Tag zum Kochen und für Hygiene einplanen.",
+					"link": {
+						"text": "Vorratskalkulator des Bundes"
+					}
+				},
+				"baggage": {
+					"title": "Notfallrucksack",
+					"text": "Planen Sie vor und packen Sie ein Notgepäck mit den wichtigsten Dingen. Ein Rucksack ist besser als ein Koffer, um die Hände im Notfall frei zu haben.",
+					"link": {
+						"text": "Packliste des BBK"
+					}
+				},
+				"medicine": {
+					"title": "Hygiene und Medikamente",
+					"text": "Durch einen sparsamen Umgang mit Wasser und eine gut sortierte Hausapotheke kann gesundheitsfördernde Hygiene und Erste Hilfe selbstständig sichergestellt werden.",
+					"link_1": {
+						"text": "Infos zur Hausapotheke des BBK"
+					},
+					"link_2": {
+						"text": "Tipps zur Hygiene des BBK"
+					}
+				}
+			},
+			"fire": {
+				"title": "Feuer",
+				"precaution": {
+					"title": "Vorsorge für den Brandfall",
+					"text": "Die Brandgefahr kann erheblich minimiert werden, indem sich richtig um Kerzen, brennbares Material, Rauchmelder und Löschgeräte gekümmert wird.",
+					"link": {
+						"text": "Detailinformationen"
+					}
+				},
+				"action": {
+					"title": "Was tun, wenn es brennt?",
+					"text": "Ersticken Sie wenn möglich as Feuer im Keim. Falls erfolglos: rufen Sie die 112 an! Löschen Sie nur, wenn keine Gefahr besteht oder bringen Sie sich in Sicherheit.",
+					"link": {
+						"text": "Detailinformationen"
+					}
+				},
+				"aftermath": {
+					"title": "Nach dem Brand",
+					"text": "Betreten Sie das Gebäude nur, wenn es von der Feuerwehr freigegeben wurde. Es könnte Einsturzgefahr bestehen. Machen Sie nach Freigabe eine Bestandsaufnahme und Fotografieren Sie Schäden als Beleg für die Versicherung."
+				}
+			},
+			"flood": {
+				"title": "Hochwasser",
+				"general": {
+					"title": "Generell gilt:",
+					"text": "Achten Sie auf die Informationen Ihrer lokalen Gefahrenabwehrbehörden und unterstützen Sie die Einsatzkräfte vor Ort, indem Sie deren Anweisungen umsetzen und sich von gefährdeten oder bereits abgeriegelten Gebieten fernhalten."
+				},
+				"precaution": {
+					"title": "Vorsorge für das Hochwasser",
+					"text": "Evakuieren Sie von Hilfebedürftige, Kinder und Haustiere. Und Informieren Sie sich über die Hochwasserzentrale der Länder über aktuelle Informationen.",
+					"link": {
+						"text": "Hochwasserzentrale"
+					}
+				},
+				"action": {
+					"title": "Was tun bei Hochwasser?",
+					"text": "Der Keller oder die Tiefgarage können zur Lebensgefahr werden. Dabei herrschen im Haus und im Auto unterschiedliche Verhaltensregeln.",
+					"link": {
+						"text": "Verhaltensregeln"
+					}
+				}
+			},
+			"storm": {
+				"title": "Unwetter",
+				"precaution": {
+					"title": "Vorsorge bei Unwetter",
+					"text": "Bereiten Sie sich frühzeitig auf Unwetter vor, indem Sie genügen Lebensmittel, Wasser, Dokumententasche und Notfallkoffer bereit halten.",
+					"link": {
+						"text": "Mehr Infos zur Persönlichen Vorsorge"
+					}
+				},
+				"action": {
+					"title": "Was tun bei Unwetter?",
+					"text": "Gegenstände sichern, Fenster schließen, Metall vermeiden: je nach Aufenthaltsort herrschen unterschiedliche Verhaltensregeln. Al goldene Regel gilt jedoch: zu Hause bleiben.",
+					"link": {
+						"text": "Verhaltensregeln bei Unwetter"
+					}
+				},
+				"aftermath": {
+					"title": "Nach dem Unwetter",
+					"text": "Unwetter können zu Dachschäden, Überflutungen, dem Austritt von Gefahrenstoffen führen und Personen verletzen. Je nach Art des Unwetters sind unterschiedliche Tipps zu beachten",
+					"link": {
+						"text": "Verhalten nach dem Unwetter"
+					}
+				}
+			},
+			"cbrn": {
+				"title": "CBRN-Gefahrenstoffe",
+				"substances": {
+					"title": "Die unterschiedlichen Gefahrenstoffe",
+					"text": "Ein Laie kann in der Regel die Gefährlichkeit von chemischen (C), biologischen (B), radiologischen (R) und nuklearen (N) Gefahrenstoffe nicht erkennen.",
+					"link": {
+						"text": "Wirkung auf Haut und Körper"
+					}
+				},
+				"behaviour": {
+					"title": "Verhalten bei Gefahrenstoff-Freisetzung",
+					"text": "Kontaktieren Sie die lokale Giftnotrufzentrale. Giftnotruf der Charité Universitätsmedizin Berlin: 030 192 40"
+				},
+				"behaviour_home": {
+					"title": "Verhalten zu Hause",
+					"instructions": [
+						"Bleiben Sie im Gebäude, schließen Sie Fenster und Türen",
+						"Schalten Sie Ventilatoren und Lüftungen aus",
+						"Vermeiden Sie unnötigen Sauerstoffverbrauch durch Kerzen oder Ähnliches.",
+						"Bei radioaktiven Stoffen: suchen Sie einen Kellerraum auf"
+					]
+				},
+				"behaviour_car": {
+					"title": "Verhalten im Auto oder im Freien",
+					"instructions": [
+						"Bewegen Sie sich möglichst quer zur Windrichtung",
+						"Atmen Sie möglichst durch einen Atemschutz, zumindest durch ein Taschentuch",
+						"Waschen Sie Hände, Gesicht und Haare, ebenso Nase und Ohren mit Wasser und Seife.",
+						"Bei Biologischen Stoffen: desinfizieren Sie Ihre Hände zusätzlich"
+					]
+				}
+			}
+		}
+	}
+}
