@@ -87,7 +87,15 @@
 				data: defiesData as unknown as GeoJSON
 			});
 
-			// Add layers using the loaded icons
+			map.addLayer({
+				id: 'water-pumps-layer',
+				type: 'symbol',
+				source: 'waterPumps',
+				layout: {
+					'icon-image': 'water-pump-icon',
+					'icon-size': 1
+				}
+			});
 			map.addLayer({
 				id: 'drink-water-layer',
 				type: 'symbol',
