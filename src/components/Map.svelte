@@ -1,4 +1,3 @@
-<!-- Map.svelte -->
 <script lang="ts">
 	import defiesData from '$lib/data/defibrillator.json';
 	import drinkingWaterData from '$lib/data/drinking-water.json';
@@ -92,7 +91,7 @@
 				source: 'waterPumps',
 				layout: {
 					'icon-image': 'water-pump-icon',
-					'icon-size': 1
+					'icon-size': 0.4
 				}
 			});
 			map.addLayer({
@@ -101,7 +100,7 @@
 				source: 'drinkingWater',
 				layout: {
 					'icon-image': 'drinking-water-icon',
-					'icon-size': 1
+					'icon-size': 0.4
 				}
 			});
 			map.addLayer({
@@ -110,7 +109,7 @@
 				source: 'toilets',
 				layout: {
 					'icon-image': 'toilet-icon',
-					'icon-size': 1
+					'icon-size': 0.4
 				}
 			});
 			map.addLayer({
@@ -119,7 +118,7 @@
 				source: 'defies',
 				layout: {
 					'icon-image': 'defibrillator-icon',
-					'icon-size': 1
+					'icon-size': 0.4
 				}
 			});
 		});
@@ -132,7 +131,6 @@
 			}),
 			'bottom-right'
 		);
-
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 		map.addControl(new maplibregl.FullscreenControl(), 'top-right');
 
