@@ -5,7 +5,6 @@
 	import toiletsData from '$lib/data/toilets.json';
 	import waterPumpsData from '$lib/data/water-pumps.json';
 	import { mapState, poiState } from '$lib/state/state.svelte';
-	import { selectedPOI } from '$lib/stores/poiStore';
 	import type { GeoJSON } from 'geojson';
 	import maplibregl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
@@ -142,13 +141,13 @@
 			clickPoint = { x: e.point.x, y: e.point.y };
 
 			if (features.length === 0) {
-				selectedPOI.set(null);
+				poiState.layer = null;
+				poiState.properties = null;
 				return;
 			}
-			selectedPOI.set({
-				properties: features[0].properties,
-				layer: features[0].layer
-			});
+
+			poiState.properties = features[0].properties;
+			poiState.layer = features[0].layer;
 
 			clickPoint = { x: e.point.x, y: e.point.y };
 		});
@@ -162,7 +161,7 @@
 </script>
 
 <div class="Map-root relative" bind:this={mapContainer} style="width: {width}; height: {height};">
-	{#if $selectedPOI}
+	{#if poiState.layer || poiState.properties}
 		<DetailsCard {clickPoint} {mapContainer} />
 	{/if}
 

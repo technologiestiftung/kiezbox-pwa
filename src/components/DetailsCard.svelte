@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import { selectedPOI } from '$lib/stores/poiStore';
+	import { poiState } from '$lib/state/state.svelte';
 	import { onMount } from 'svelte';
 
 	const { clickPoint = { x: 0, y: 0 }, mapContainer } = $props();
@@ -51,44 +51,42 @@
 	});
 
 	$effect(() => {
-		if ($selectedPOI) {
-			if ($selectedPOI.layer.id === 'toilets-layer') {
+		if (poiState) {
+			if (poiState.layer.id === 'toilets-layer') {
 				content = {
-					Kostenfrei: $selectedPOI.properties.nutzungsentgelt === 0 ? true : false,
-					Barrierefrei: $selectedPOI.properties.barrierefrei === 'ja' ? true : false,
-					Wickeltisch: $selectedPOI.properties.wickeltisch === 'ja' ? true : false,
-					Pissoir: $selectedPOI.properties.kostenfreies_pissoir === 'ja' ? true : false
+					Kostenfrei: poiState.properties.nutzungsentgelt === 0 ? true : false,
+					Barrierefrei: poiState.properties.barrierefrei === 'ja' ? true : false,
+					Wickeltisch: poiState.properties.wickeltisch === 'ja' ? true : false,
+					Pissoir: poiState.properties.kostenfreies_pissoir === 'ja' ? true : false
 				};
 			}
-			if ($selectedPOI.layer.id === 'water-pumps-layer') {
+			if (poiState.layer.id === 'water-pumps-layer') {
 				content = {
-					Status: $selectedPOI.properties['pump:status'] === 'ok' ? 'funktioniert' : 'kaputt',
-					Trinkwasser: $selectedPOI.properties.drinking_water === 'yes' ? true : false,
-					Überprüft_am: $selectedPOI.properties.check_date
+					Status: poiState.properties['pump:status'] === 'ok' ? 'funktioniert' : 'kaputt',
+					Trinkwasser: poiState.properties.drinking_water === 'yes' ? true : false,
+					Überprüft_am: poiState.properties.check_date
 				};
 			}
-			if ($selectedPOI.layer.id === 'drink-water-layer') {
+			if (poiState.layer.id === 'drinking-water-layer') {
 				content = {
-					Name: $selectedPOI.properties.bezeichnun
+					Name: poiState.properties.bezeichnun
 				};
 			}
-			if ($selectedPOI.layer.id === 'defies-layer') {
+			if (poiState.layer.id === 'defies-layer') {
 				content = {
-					Indoor: $selectedPOI.properties.indoor
+					Indoor: poiState.properties.indoor
 				};
 			}
 		}
 	});
 
 	let getTitle = () => {
-		if (!$selectedPOI) return '';
-
-		switch ($selectedPOI.layer.id) {
+		switch (poiState.layer.id) {
 			case 'toilets-layer':
 				return 'Öffentliche Toilette';
 			case 'water-pumps-layer':
 				return 'Wasserpumpe';
-			case 'drink-water-layer':
+			case 'drinking-water-layer':
 				return 'Trinkwasser';
 			case 'defies-layer':
 				return 'Defibrillatoren';
@@ -96,9 +94,14 @@
 				return 'Details';
 		}
 	};
+
+	function resetPOIState() {
+		poiState.layer = null;
+		poiState.properties = null;
+	}
 </script>
 
-{#if $selectedPOI}
+{#if poiState}
 	<div
 		class="DetailsCard-root absolute top-2 right-2 z-20 w-64"
 		style="top: {cardPosition.top}px; left: {cardPosition.left}px; transition: all 0.2s ease-out;"
@@ -110,7 +113,7 @@
 					>{getTitle()}
 					<button
 						class="text-purple-dark m-0 cursor-pointer bg-transparent p-0"
-						onclick={() => selectedPOI.set(null)}>×</button
+						onclick={() => resetPOIState()}>×</button
 					>
 				</Card.Title>
 			</Card.Header>
