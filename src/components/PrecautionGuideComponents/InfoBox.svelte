@@ -9,7 +9,7 @@
 	{#if Array.isArray(infoBoxItem.textBodyOrList)}
 		<ul class="body-text">
 			{#each infoBoxItem.textBodyOrList as item}
-				<li>- {item}</li>
+				<li class="ml-4 list-disc">{item}</li>
 			{/each}
 		</ul>
 	{:else}

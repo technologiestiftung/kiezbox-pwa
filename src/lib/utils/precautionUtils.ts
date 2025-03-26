@@ -1,27 +1,69 @@
 import type { TabItem, InfoBoxItem, Link } from '$lib/types';
+import deLocaleFile from '$lib/assets/locales/de.json';
 
 /**
- * Helper function to check if a translation exists
- * @param t - Translation function
- * @param key - Translation key to check
- * @returns True if translation exists, false otherwise
+ * Type definition for the value of a nested object structure
  */
-const translationExists = (t: any, key: string): boolean => {
-	const value = t(key);
+type NestedObjectType =
+	| NestedObject
+	| string
+	| number
+	| boolean
+	| null
+	| undefined
+	| Array<string | number | boolean | null | undefined>;
 
-	return value !== key; // If value equals key, translation doesn't exist
+/**
+ * Type definition for a nested object structure
+ */
+type NestedObject = {
+	[key: string]: NestedObjectType;
+};
+
+/**
+ * Helper function to safely get a nested value from an object using a path string
+ * @param obj - The object to access
+ * @param path - Path to the property (e.g., 'content.precaution_infos.fire.title')
+ * @returns The value if found, undefined otherwise
+ */
+const getNestedValue = (obj: NestedObject, path: string): NestedObjectType => {
+	const keys = path.split('.');
+	let result: NestedObjectType = obj;
+
+	for (const key of keys) {
+		if (result && typeof result === 'object' && !Array.isArray(result) && key in result) {
+			result = result[key as keyof typeof result];
+		} else {
+			return undefined;
+		}
+	}
+
+	return result;
+};
+
+/**
+ * Helper function to check if a translation key exists in the JSON file
+ * @param key - Translation key to check (e.g., 'content.precaution_infos.fire.title')
+ * @returns True if key exists, false otherwise
+ */
+const keyExists = (key: string): boolean => {
+	return getNestedValue(deLocaleFile, key) !== undefined;
 };
 
 /**
  * Creates TabItem objects based on the provided slugs and translations
  *
- * @param t - Translation function
+ * @param t - Translation function (still used for actual text display)
  * @param slugs - Array of precaution category slugs (e.g., ['personal_precautions', 'fire', 'flood', 'storm', 'cbrn'])
  * @returns Array of TabItem objects
  */
-export const createPrecautionTabItems = (t: any, slugs: string[]): TabItem[] => {
+export const createPrecautionTabItems = (
+	t: (key: string) => string,
+	slugs: string[]
+): TabItem[] => {
 	return slugs.map((slug) => {
-		const title = t(`content.precaution_infos.${slug}.title`);
+		const titleKey = `content.precaution_infos.${slug}.title`;
+		const title = t(titleKey);
 		const content: InfoBoxItem[] = [];
 
 		// Process each section until we don't find anymore
@@ -29,25 +71,30 @@ export const createPrecautionTabItems = (t: any, slugs: string[]): TabItem[] => 
 			const section = sectionIndex.toString();
 			const sectionTitleKey = `content.precaution_infos.${slug}.${section}.title`;
 
-			// Check if this section exists
-			if (!translationExists(t, sectionTitleKey)) {
+			// Check if this section exists directly in the JSON
+			if (!keyExists(sectionTitleKey)) {
 				break; // No more sections, exit the loop
 			}
 
 			const sectionTitle = t(sectionTitleKey);
 			const textKey = `content.precaution_infos.${slug}.${section}.text`;
-			const text = translationExists(t, textKey) ? t(textKey) : '';
+			const text = keyExists(textKey) ? t(textKey) : '';
 
 			// Check for list content (array of strings)
 			const list: string[] = [];
+			const listPath = `content.precaution_infos.${slug}.${section}.list`;
+			// If list exists, it's an object with numeric keys
+			if (keyExists(listPath)) {
+				const listObj = getNestedValue(deLocaleFile, listPath);
 
-			// Try to access list items
-			for (let listIndex = 0; ; listIndex++) {
-				const listItemKey = `content.precaution_infos.${slug}.${section}.list.${listIndex}`;
-				if (!translationExists(t, listItemKey)) {
-					break; // No more list items
+				const listLength = Object.keys(listObj as object).length;
+
+				for (let listIndex = 1; listIndex <= listLength; listIndex++) {
+					const listItemKey = `${listPath}.${listIndex}`;
+					if (keyExists(listItemKey)) {
+						list.push(t(listItemKey));
+					}
 				}
-				list.push(t(listItemKey));
 			}
 
 			// Determine if we have text or list content
@@ -55,21 +102,30 @@ export const createPrecautionTabItems = (t: any, slugs: string[]): TabItem[] => 
 
 			// Get links if any
 			const links: Link[] = [];
+			const linksPath = `content.precaution_infos.${slug}.${section}.links`;
 
-			for (let linkIndex = 1; ; linkIndex++) {
-				const linkTextKey = `content.precaution_infos.${slug}.${section}.links.${linkIndex}.text`;
-				if (!translationExists(t, linkTextKey)) {
-					break; // No more links
+			if (keyExists(linksPath)) {
+				const linksObj = getNestedValue(deLocaleFile, linksPath);
+
+				const linkKeys = Object.keys(linksObj as object)
+					.map(Number)
+					.sort((a, b) => a - b);
+
+				for (const linkIndex of linkKeys) {
+					const linkTextKey = `${linksPath}.${linkIndex}.text`;
+					if (!keyExists(linkTextKey)) {
+						continue;
+					}
+
+					const linkText = t(linkTextKey);
+					const linkHrefKey = `${linksPath}.${linkIndex}.href`;
+					const href = keyExists(linkHrefKey) ? t(linkHrefKey) : '';
+
+					const linkTargetKey = `${linksPath}.${linkIndex}.target`;
+					const target = keyExists(linkTargetKey) ? t(linkTargetKey) : '';
+
+					links.push({ text: linkText, href, target });
 				}
-
-				const linkText = t(linkTextKey);
-				const linkHrefKey = `content.precaution_infos.${slug}.${section}.links.${linkIndex}.href`;
-				const href = translationExists(t, linkHrefKey) ? t(linkHrefKey) : undefined;
-
-				const linkTargetKey = `content.precaution_infos.${slug}.${section}.links.${linkIndex}.target`;
-				const target = translationExists(t, linkTargetKey) ? t(linkTargetKey) : undefined;
-
-				links.push({ text: linkText, href, target });
 			}
 
 			content.push({
@@ -84,5 +140,5 @@ export const createPrecautionTabItems = (t: any, slugs: string[]): TabItem[] => 
 			slug,
 			content
 		};
-	});
+	}) as TabItem[];
 };

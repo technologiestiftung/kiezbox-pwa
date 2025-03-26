@@ -12,19 +12,9 @@
 	</div>
 {/if}
 <ul class="space-y-2 px-4">
-	<li>
-		{$t('content.emergency_phone.default.questions.1.text')}
-	</li>
-	<li>
-		{$t('content.emergency_phone.default.questions.2.text')}
-	</li>
-	<li>
-		{$t('content.emergency_phone.default.questions.3.text')}
-	</li>
-	<li>
-		{$t('content.emergency_phone.default.questions.4.text')}
-	</li>
-	<li>
-		{$t('content.emergency_phone.default.questions.5.text')}
-	</li>
+	{#each { length: 5 }, i}
+		<li>
+			{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}
+		</li>
+	{/each}
 </ul>

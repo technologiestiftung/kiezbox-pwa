@@ -1,10 +1,10 @@
 <script lang="ts">
-	import PhoneMenu from './PhoneMenu.svelte';
+	import Dialer from './EmergencyCallComponents/Dialer.svelte';
 	import Modal from './Modal.svelte';
-	import DemoCallInfo from './DemoCallInfo.svelte';
-	import EmergencyCallInfo from './EmergencyCallInfo.svelte';
+	import DemoCallInfo from './EmergencyCallComponents/DemoCallInfo.svelte';
+	import EmergencyCallInfo from './EmergencyCallComponents/EmergencyCallInfo.svelte';
 	import { t } from '$lib/translations';
-	import CallerScreen from './CallerScreen.svelte';
+	import CallScreen from './EmergencyCallComponents/CallScreen.svelte';
 	let showModal = $state(true);
 
 	let isEmergency = $state(true);
@@ -39,16 +39,16 @@
 	};
 </script>
 
-<PhoneMenu {isEmergency} onClick={triggerInitCall}></PhoneMenu>
+<Dialer {isEmergency} onClick={triggerInitCall}></Dialer>
 <Modal bind:showModal>
 	{#snippet children()}
-		<div class="phone-root mp-8 flex flex-grow flex-col justify-between space-y-8 py-6">
+		<div class="phone-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
 			{#if isEmergency}
-				<DemoCallInfo {isCall} />
-			{:else}
 				<EmergencyCallInfo {isCall} />
+			{:else}
+				<DemoCallInfo {isCall} />
 			{/if}
-			<CallerScreen
+			<CallScreen
 				{isCall}
 				{activateCall}
 				{buttonText}

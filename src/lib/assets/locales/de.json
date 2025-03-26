@@ -14,32 +14,32 @@
 				"phone_button": "Zur Notrufdemo",
 				"offline": {
 					"call_button": "Notrufdemo starten",
-					"text": "In einem Krisenfall können Sie hier einen Notruf absenden, wenn Sie bspw. wegen Stromausfall sonst keine Anrufe tätigen können.  Dieses wird dabei automatisch von der Berliner Feuerwehr eingeschalten. Mit unserem Demoanruf können Sie schon einmal die 5W-Fragen üben, die sie im Gespräch mit dem Notruf immer parat haben sollten."
+					"text": "In einem Krisenfall können Sie hier einen Notruf absenden, wenn Sie bspw. wegen Stromausfall sonst keine Anrufe tätigen können.  Dieses wird dabei automatisch von der Berliner Feuerwehr eingeschalten. Mit unserem <strong>Demoanruf</strong> können Sie schon einmal die 5W-Fragen üben, die sie im Gespräch mit dem Notruf immer parat haben sollten."
 				},
 				"online": {
 					"call_button": "Notrufdemo beenden",
-					"text": "Sie sind nun verbunden mit dem Demonotruf der Berliner Feuerwehr. Die Feuerwehr wird Sie wie folgt durch das Gespräch leiten:"
+					"text": "Sie sind nun verbunden mit dem Demonotruf der Berliner Feuerwehr. Die Feuerwehr wird Sie wie folgt durch das Gespräch leiten:"
 				},
 				"questions": {
 					"title": "Beachten Sie dabei die 5 W-Fragen:",
 					"1": {
-						"text": "Wo ist das Ereignis?",
+						"text": "<strong>1. Wo</strong> ist das Ereignis?",
 						"description": "Geben Sie den Ort des Ereignisses so genau wie möglich an (zum Beispiel Gemeindename oder Stadtteil, Straßenname, Hausnummer, etc.)"
 					},
 					"2": {
-						"text": "Wer ruft an?",
+						"text": "<strong>2. Wer</strong> ruft an?",
 						"description": "Nennen Sie Ihren Namen, Ihren Standort und Ihre Telefonnummer für Rückfragen!"
 					},
 					"3": {
-						"text": "Was ist Geschehen?",
+						"text": "<strong>3. Was</strong> ist Geschehen?",
 						"description": "Beschreiben Sie knapp das Ereignis und das, was Sie konkret sehen (was ist geschehen? was ist zu sehen?), beispielsweise Verkehrsunfall, Absturz, Brand, Explosion, Einsturz, eingeklemmte Person!"
 					},
 					"4": {
-						"text": "Wie viele sind betroffen?",
+						"text": "<strong>4. Wie viele</strong> sind betroffen?",
 						"description": "Schätzen Sie die Zahl der betroffenen Personen, ihre Lage und die Verletzungen! Geben Sie bei Kindern auch das - gegebenenfalls geschätzte - Alter an!"
 					},
 					"5": {
-						"text": "Warten auf Rückfragen!",
+						"text": "<strong>5. Warten</strong> auf Rückfragen!",
 						"description": "Legen Sie nicht gleich auf, die Mitarbeiter der Integrierten Leitstelle benötigen von Ihnen vielleicht noch weitere Informationen!"
 					}
 				}
@@ -189,21 +189,21 @@
 				},
 				"3": {
 					"title": "Verhalten zu Hause",
-					"list": [
-						"Bleiben Sie im Gebäude, schließen Sie Fenster und Türen",
-						"Schalten Sie Ventilatoren und Lüftungen aus",
-						"Vermeiden Sie unnötigen Sauerstoffverbrauch durch Kerzen oder Ähnliches.",
-						"Bei radioaktiven Stoffen: suchen Sie einen Kellerraum auf"
-					]
+					"list": {
+						"1": "Bleiben Sie im Gebäude, schließen Sie Fenster und Türen",
+						"2": "Schalten Sie Ventilatoren und Lüftungen aus",
+						"3": "Vermeiden Sie unnötigen Sauerstoffverbrauch durch Kerzen oder Ähnliches.",
+						"4": "Bei radioaktiven Stoffen: suchen Sie einen Kellerraum auf"
+					}
 				},
 				"4": {
 					"title": "Verhalten im Auto oder im Freien",
-					"list": [
-						"Bewegen Sie sich möglichst quer zur Windrichtung",
-						"Atmen Sie möglichst durch einen Atemschutz, zumindest durch ein Taschentuch",
-						"Waschen Sie Hände, Gesicht und Haare, ebenso Nase und Ohren mit Wasser und Seife.",
-						"Bei Biologischen Stoffen: desinfizieren Sie Ihre Hände zusätzlich"
-					]
+					"list": {
+						"1": "Bewegen Sie sich möglichst quer zur Windrichtung",
+						"2": "Atmen Sie möglichst durch einen Atemschutz, zumindest durch ein Taschentuch",
+						"3": "Waschen Sie Hände, Gesicht und Haare, ebenso Nase und Ohren mit Wasser und Seife.",
+						"4": "Bei Biologischen Stoffen: desinfizieren Sie Ihre Hände zusätzlich"
+					}
 				}
 			}
 		}

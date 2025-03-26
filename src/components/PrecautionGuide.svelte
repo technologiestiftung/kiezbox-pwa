@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { TabItem } from '$lib/types';
-	import TabView from './TabView.svelte';
+	import TabView from './PrecautionGuideComponents/TabView.svelte';
 	import {
 		BaggageClaim,
 		Fire,

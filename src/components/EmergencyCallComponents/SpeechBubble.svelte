@@ -7,8 +7,8 @@
 >
 	<!-- Main Bubble Content -->
 	<div class="speechBubble-content">
-		<span class="speechBubble-header font-bold text-black">{header}</span>
-		<p class="speechBubble-body text-black">{children}</p>
+		<span class="speechBubble-header text-black">{@html header}</span>
+		<p class="speechBubble-body text-black">{@html children}</p>
 	</div>
 
 	<!-- Tail using pseudo-elements -->

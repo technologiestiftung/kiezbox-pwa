@@ -1,14 +1,14 @@
 <script lang="ts">
-	import Phone from '../components/Phone.svelte';
+	import EmergencyCall from '../components/EmergencyCall.svelte';
 	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
-	import MainContent from '../components/MainContent.svelte';
+	import PrecautionGuide from '../components/PrecautionGuide.svelte';
 </script>
 
-<div class="page-root mx-auto h-full w-[375px] scroll-auto">
+<div class="page-root mx-auto flex h-full max-w-[43.75rem] flex-col scroll-auto">
 	<Header></Header>
-	<Phone />
-	<MainContent></MainContent>
+	<EmergencyCall />
+	<PrecautionGuide></PrecautionGuide>
 	<Footer></Footer>
 </div>
 

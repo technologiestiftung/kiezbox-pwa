@@ -26,8 +26,7 @@
 			if (e.target === dialog) dialog.close();
 		}}
 		class="modal-root [&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
-    fixed inset-0 m-auto flex h-[624px]
-    w-[359px] flex-col rounded-xs [&::backdrop]:backdrop-blur-sm"
+    fixed inset-0 m-auto flex flex-col rounded md:h-[41.25rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
 	>
 		<div class="bg-purple-light flex h-12 items-center justify-between">
 			<Button
@@ -40,7 +39,7 @@
 			</Button>
 			<!-- <button autofocus onclick={() => dialog.close()}>close modal</button> -->
 		</div>
-		<div class="h-full flex-grow overflow-auto px-4">
+		<div class="md-[41.25rem] flex h-[calc(100%-3rem)] w-full flex-col overflow-auto px-4">
 			{@render children?.()}
 		</div>
 	</dialog>

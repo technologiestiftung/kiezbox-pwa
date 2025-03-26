@@ -20,7 +20,7 @@
 		<div>
 			<span class="call-time">00:00</span>
 		</div>
-		<div class="flex justify-center space-x-10">
+		<div class="flex justify-center space-x-18">
 			<Button variant="ghost" class="flex h-auto w-28 flex-col items-center" on:click={activateMic}>
 				{#if isMicrophone}
 					<MicrophoneOff class="size-6" />
