@@ -11,6 +11,7 @@
 	let isCall = $state(false);
 	let isMicrophone = $state(false);
 	let isSpeaker = $state(false);
+	let timer = $state(new Date());
 
 	const activateCall = () => {
 		isCall = !isCall;
@@ -43,11 +44,13 @@
 <Modal bind:showModal>
 	{#snippet children()}
 		<div class="phone-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
-			{#if isEmergency}
-				<EmergencyCallInfo {isCall} />
-			{:else}
-				<DemoCallInfo {isCall} />
-			{/if}
+			<div class="flex flex-col space-y-8">
+				{#if isEmergency}
+					<EmergencyCallInfo {isCall} />
+				{:else}
+					<DemoCallInfo {isCall} />
+				{/if}
+			</div>
 			<CallScreen
 				{isCall}
 				{activateCall}
@@ -57,6 +60,7 @@
 				{isSpeaker}
 				{activateMic}
 				{activateSpeaker}
+				{timer}
 			/>
 		</div>
 	{/snippet}

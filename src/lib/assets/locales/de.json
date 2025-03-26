@@ -1,9 +1,30 @@
 {
 	"common": {
+		"header": {
+			"title": "Infoportal"
+		},
 		"button": {
 			"close": "Schließen",
 			"mute": "Stummschalten",
+			"unmute": "Entstummen",
 			"speaker": "Lautsprecher"
+		},
+		"footer": {
+			"imprint": {
+				"text": "Impressum",
+				"href": "https://www.technologiestiftung-berlin.de/impressum/"
+			},
+			"privacy": {
+				"text": "Datenschutzerklärung",
+				"href": "https://www.technologiestiftung-berlin.de/datenschutz/"
+			},
+			"initiatve_by": "Eine Maßnahme von:",
+			"funded_by": "Gefördert von:",
+			"acknowledgement": "Illustration Key Visual: L. Hoff, aufsiemitgebrüll.de",
+			"copyright": {
+				"text": "© 2025 Technologiestiftung Berlin",
+				"href": "https://www.technologiestiftung-berlin.de"
+			}
 		}
 	},
 	"content": {

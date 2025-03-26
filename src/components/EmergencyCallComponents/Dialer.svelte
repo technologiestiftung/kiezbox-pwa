@@ -18,7 +18,11 @@
 			</span>
 		</div>
 	</div>
-	<div class="sticky top-0 flex justify-center px-6 md:w-[29rem]">
+</div>
+<div
+	class={`sticky top-0 z-10 flex justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
+>
+	<div class="w-full px-6 md:w-[29rem]">
 		<EmergencyCallButton
 			isActive={isEmergency}
 			{onClick}
@@ -26,3 +30,6 @@
 		/>
 	</div>
 </div>
+<div
+	class={`h-8 w-full shadow-[inset_0_-4px_6px_-5px_rgba(0,0,0,0.2)] ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
+></div>
