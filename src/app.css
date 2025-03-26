@@ -238,6 +238,38 @@
 	.maplibregl-control-container .maplibregl-ctrl-bottom-right {
 		bottom: 64px !important;
 	}
+
+	.maplibregl-control-container .maplibregl-ctrl-group button {
+    width: 32px !important;
+    height: 32px !important;
+	}
+
+	.maplibregl-control-container .maplibregl-ctrl, .maplibregl-ctrl-group {
+   border: 1px solid var(--color-purple-dark) !important;
+		background: var(--color-white) !important;
+    border-radius: 2px !important;
+		border-radius: 2px;
+	}
+
+	.maplibregl-ctrl button.maplibregl-ctrl-fullscreen .maplibregl-ctrl-icon {
+			background-image: url("/icons/map-controlls/fullscreen.svg") !important;
+	}
+
+	.maplibregl-ctrl button.maplibregl-ctrl-shrink .maplibregl-ctrl-icon {
+			background-image: url("/icons/map-controlls/minimize.svg") !important;
+	}
+
+	.maplibregl-ctrl button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon {
+			background-image: url("/icons/map-controlls/zoom-in.svg") !important;
+	}
+
+	.maplibregl-ctrl button.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon {
+			background-image: url("/icons/map-controlls/zoom-out.svg") !important;	
+	}
+
+	.maplibregl-ctrl button.maplibregl-ctrl-geolocate .maplibregl-ctrl-icon {
+			background-image: url("/icons/map-controlls/geolocate.svg") !important;	
+	}
 }
 
 /* Animation keyframes can be added here if needed */
