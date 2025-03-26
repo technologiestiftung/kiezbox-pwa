@@ -9,6 +9,9 @@
 	<Header></Header>
 	<EmergencyCall />
 	<PrecautionGuide></PrecautionGuide>
+	<div class="map-root flex h-[30.5rem] w-full items-center justify-center">
+		Placeholder for Map
+	</div>
 	<Footer></Footer>
 </div>
 

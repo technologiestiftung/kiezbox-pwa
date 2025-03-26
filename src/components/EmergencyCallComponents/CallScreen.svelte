@@ -24,7 +24,7 @@
 		}).format(date);
 </script>
 
-<div class="callerScreen-root flex flex-col items-center justify-center space-y-4">
+<div class="CallScreen-root flex flex-col items-center justify-center space-y-4">
 	{#if isCall}
 		<div>
 			<span class="call-time">{time(timer)}</span>

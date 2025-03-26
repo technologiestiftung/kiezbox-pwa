@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class={`notruf-root grid max-w-[43.75rem] justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
+	class={`Dialer-root grid max-w-[43.75rem] justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
 >
 	<div class=" relative flex justify-center p-6 md:w-[29rem]">
 		<div class="notruf-container flex flex-col items-start">

@@ -43,7 +43,7 @@
 <Dialer {isEmergency} onClick={triggerInitCall}></Dialer>
 <Modal bind:showModal>
 	{#snippet children()}
-		<div class="phone-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
+		<div class="EmergencyCall-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
 			<div class="flex flex-col space-y-8">
 				{#if isEmergency}
 					<EmergencyCallInfo {isCall} />

@@ -34,7 +34,7 @@
 	console.log(tabItems);
 </script>
 
-<div class="MainContent-root bg-purple-light flex w-full flex-col">
+<div class="PrecautionGuide-root bg-purple-light flex w-full flex-col">
 	<div class="flex min-h-14 items-center justify-center">
 		<h2 class="text-purple-dark">{$t('content.precaution_infos.title')}</h2>
 	</div>

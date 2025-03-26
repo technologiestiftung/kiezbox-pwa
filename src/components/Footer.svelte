@@ -5,7 +5,7 @@
 	import { t } from '$lib/translations';
 </script>
 
-<div class="bg-tsb-blau flex flex-col items-start justify-center space-y-6 p-6">
+<div class="Footer-root bg-tsb-blau flex flex-col items-start justify-center space-y-6 p-6">
 	<div class="flex flex-col space-y-2.5 md:hidden">
 		<span class="body-text-bold text-white"> {$t('common.footer.initiatve_by')}</span>
 		<figure class="">

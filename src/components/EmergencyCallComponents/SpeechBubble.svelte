@@ -3,16 +3,16 @@
 </script>
 
 <div
-	class="speechBubble-root relative mb-3 flex w-auto max-w-[329px] min-w-[200px] rounded-[1.5rem] border-4 border-black bg-white px-[1.5rem] py-[1.375rem] text-start shadow-xl"
+	class="SppechBubble-root relative mb-3 flex w-auto max-w-[329px] min-w-[200px] rounded-[1.5rem] border-4 border-black bg-white px-[1.5rem] py-[1.375rem] text-start shadow-xl"
 >
 	<!-- Main Bubble Content -->
-	<div class="speechBubble-content">
+	<div class="SpeechBubble-content">
 		<span class="speechBubble-header text-black">{@html header}</span>
 		<p class="speechBubble-body text-black">{@html children}</p>
 	</div>
 
 	<!-- Tail using pseudo-elements -->
-	<div class="speechBubble-tail absolute -bottom-3 left-3">
+	<div class="SpeechBubble-tail absolute -bottom-3 left-3">
 		<!-- Triangle with Border using Pseudo-Elements -->
 		<div class="relative h-0 w-0">
 			<!-- Outer Border Triangle -->
