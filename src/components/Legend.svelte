@@ -6,45 +6,14 @@
 		AccordionTrigger
 	} from '$lib/components/ui/accordion';
 	import { Checkbox } from '$lib/components/ui/checkbox';
-	import { mapState } from '$lib/state/state.svelte';
-
-	const LAYER_CONFIG = [
-		{
-			id: 'drinking-water-layer',
-			label: 'Trinkwasser',
-			icon: '/icons/drinking-water.svg',
-			alt: 'Trinkwasser Icon'
-		},
-		{
-			id: 'water-pumps-layer',
-			label: 'Wasserpumpe',
-			icon: '/icons/water-pump.svg',
-			alt: 'Wasserpumpe Icon'
-		},
-		{
-			id: 'toilets-layer',
-			label: 'Öffentliche Toilette',
-			icon: '/icons/toilet.svg',
-			alt: 'Toiletten Icon'
-		},
-		{
-			id: 'defies-layer',
-			label: 'Defibrillatoren',
-			icon: '/icons/defie.svg',
-			alt: 'Defibrillator Icon'
-		}
-	];
+	import { LAYER_CONFIG } from '$lib/config/layers';
+	import { layerState } from '$lib/state/layerState.svelte';
 
 	let isOpen = $state(false);
 
 	const toggleIsOpen = $derived(() => {
 		isOpen = !isOpen;
 	});
-
-	function toggleLayer(layerId: string, isVisible: boolean): void {
-		if (!mapState.map) return;
-		mapState.map.setLayoutProperty(layerId, 'visibility', isVisible ? 'visible' : 'none');
-	}
 </script>
 
 <div class="legend-root absolute right-0 bottom-0 left-0 z-10 flex w-full justify-center px-2">
@@ -71,8 +40,8 @@
 							</div>
 							<Checkbox
 								id={layer.id}
-								checked
-								onCheckedChange={(v) => toggleLayer(layer.id, v as boolean)}
+								checked={layerState.layerVisibility[layer.id] === 'visible'}
+								onCheckedChange={() => layerState.toggleLayerVisibility(layer.id)}
 							/>
 						</li>
 					{/each}
