@@ -3,6 +3,7 @@
 	import { poiState } from '$lib/state/state.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
+	import CloseOutline from 'carbon-icons-svelte/lib/CloseOutline.svelte';
 	import { onMount } from 'svelte';
 
 	const { clickPoint = { x: 0, y: 0 }, mapContainer } = $props();
@@ -16,7 +17,7 @@
 		const mapRect = mapContainer.getBoundingClientRect();
 		const cardRect = cardRef.getBoundingClientRect();
 
-		let top = clickPoint.y - cardRect.height - 24;
+		let top = clickPoint.y - cardRect.height - 32;
 		let left = clickPoint.x - cardRect.width / 2;
 
 		if (top < 12) {
@@ -28,8 +29,8 @@
 		if (left + cardRect.width > mapRect.width - 12) {
 			left = mapRect.width - cardRect.width - 12;
 		}
-		if (top + cardRect.height > mapRect.height - 12) {
-			top = mapRect.height - cardRect.height - 12;
+		if (top + cardRect.height > mapRect.height - 32) {
+			top = mapRect.height - cardRect.height - 32;
 		}
 
 		cardPosition = { top, left };
@@ -79,7 +80,16 @@
 			}
 			if (poiState.layer.id === 'defies-layer') {
 				content = {
-					Indoor: poiState.properties.indoor
+					Öffnungszeiten: poiState.properties.opening_hours || 'unbekannt',
+					Location:
+						poiState.properties['defibrillator:location'] ||
+						poiState.properties['defibrillator:location:de'] ||
+						'unbekannt',
+					Telefon: poiState.properties.phone || poiState.properties['contact:phone'] || 'unbekannt',
+					Operator:
+						poiState.properties.operator ||
+						poiState.properties['defibrillator:wikipedia'] ||
+						'unbekannt'
 				};
 			}
 		}
@@ -114,37 +124,35 @@
 	>
 		<Card.Root class="w-64">
 			<Card.Header>
-				<Card.Title
+				<Card.Title class="items-center"
 					>{getTitle()}
 					<button
 						class="text-purple-dark m-0 cursor-pointer bg-transparent p-0"
-						onclick={() => resetPOIState()}>×</button
+						onclick={() => resetPOIState()}
 					>
+						<CloseOutline fill="#5d508b" size={24} />
+					</button>
 				</Card.Title>
 			</Card.Header>
 
 			<Card.Content>
 				<ul>
 					{#each Object.entries(content) as [key, value]}
-						<li class="flex flex-col justify-between gap-2 px-4 py-2">
+						<li
+							class="flex justify-between gap-2 px-4 py-2"
+							style={`display: ${typeof value === 'boolean' ? 'flex' : 'block'}; flex-direction: ${typeof value === 'boolean' ? 'row' : 'column'}`}
+						>
 							<p class="text-grey-mid font-bold">{key}</p>
 							{#if typeof value === 'boolean'}
-								<div class="flex justify-between">
-									<p>
-										{value ? 'Ja' : 'Nein'}
-									</p>
-									<p>
-										{#if value}
-											<Checkmark fill="#00AA84" size={24}  />
-										{:else}
-											<CloseLarge fill="#E40422" size={24} />
-										{/if}
-									</p>
-								</div>
-							{:else}
 								<p>
-									{value}
+									{#if value}
+										<Checkmark fill="#00AA84" size={24} />
+									{:else}
+										<CloseLarge fill="#E40422" size={24} />
+									{/if}
 								</p>
+							{:else}
+								<p>{value}</p>
 							{/if}
 						</li>
 					{/each}
