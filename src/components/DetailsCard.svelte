@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
+	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { poiState } from '$lib/state/state.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
@@ -11,6 +12,31 @@
 	let cardRef = $state<HTMLDivElement | null>(null);
 	let cardPosition = $state({ top: clickPoint.y, left: clickPoint.x });
 	let content = $state({});
+	let activeLayer = $state(LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null);
+
+	onMount(() => {
+		const handleResize = () => {
+			updateCardPosition();
+		};
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
+
+	$effect(() => {
+		if (cardRef && mapContainer) {
+			cardPosition = {
+				top: clickPoint.y - 250,
+				left: clickPoint.x - 128
+			};
+			setTimeout(updateCardPosition, 0);
+		}
+	});
+
+	$effect(() => {
+		if (poiState && activeLayer) {
+			content = activeLayer.getContent ? activeLayer.getContent(poiState.properties) : {};
+		}
+	});
 
 	function updateCardPosition() {
 		if (!cardRef || !mapContainer) return;
@@ -36,83 +62,14 @@
 		cardPosition = { top, left };
 	}
 
-	$effect(() => {
-		if (cardRef && mapContainer) {
-			// Initial position
-			// todo: only display the card when the card position is calculated
-			cardPosition = {
-				top: clickPoint.y - 250, // Initial guess at card height
-				left: clickPoint.x - 128 // Half of w-64 (256px/2 = 128px)
-			};
-			setTimeout(updateCardPosition, 0);
-		}
-	});
-
-	onMount(() => {
-		const handleResize = () => {
-			updateCardPosition();
-		};
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
-	});
-
-	$effect(() => {
-		if (poiState) {
-			if (poiState.layer.id === 'toilets-layer') {
-				content = {
-					Kostenfrei: poiState.properties.nutzungsentgelt === 0 ? true : false,
-					Barrierefrei: poiState.properties.barrierefrei === 'ja' ? true : false,
-					Wickeltisch: poiState.properties.wickeltisch === 'ja' ? true : false,
-					Pissoir: poiState.properties.kostenfreies_pissoir === 'ja' ? true : false
-				};
-			}
-			if (poiState.layer.id === 'water-pumps-layer') {
-				content = {
-					Status: poiState.properties['pump:status'] === 'ok' ? 'funktioniert' : 'kaputt',
-					Trinkwasser: poiState.properties.drinking_water === 'yes' ? true : false,
-					Überprüft_am: poiState.properties.check_date
-				};
-			}
-			if (poiState.layer.id === 'drinking-water-layer') {
-				content = {
-					Name: poiState.properties.bezeichnun
-				};
-			}
-			if (poiState.layer.id === 'defies-layer') {
-				content = {
-					Öffnungszeiten: poiState.properties.opening_hours || 'unbekannt',
-					Location:
-						poiState.properties['defibrillator:location'] ||
-						poiState.properties['defibrillator:location:de'] ||
-						'unbekannt',
-					Telefon: poiState.properties.phone || poiState.properties['contact:phone'] || 'unbekannt',
-					Operator:
-						poiState.properties.operator ||
-						poiState.properties['defibrillator:wikipedia'] ||
-						'unbekannt'
-				};
-			}
-		}
-	});
-
-	let getTitle = () => {
-		switch (poiState.layer.id) {
-			case 'toilets-layer':
-				return 'Öffentliche Toilette';
-			case 'water-pumps-layer':
-				return 'Wasserpumpe';
-			case 'drinking-water-layer':
-				return 'Trinkwasser';
-			case 'defies-layer':
-				return 'Defibrillatoren';
-			default:
-				return 'Details';
-		}
-	};
+	function getTitle() {
+		return activeLayer?.label || 'Details';
+	}
 
 	function resetPOIState() {
 		poiState.layer = null;
 		poiState.properties = null;
+		activeLayer = null;
 	}
 </script>
 
