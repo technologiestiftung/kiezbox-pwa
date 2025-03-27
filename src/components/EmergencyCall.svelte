@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Dialer from './EmergencyCallComponents/Dialer.svelte';
+	import Dialer from './EmergencyCall/Dialer.svelte';
 	import Modal from './Modal.svelte';
-	import DemoCallInfo from './EmergencyCallComponents/DemoCallInfo.svelte';
-	import EmergencyCallInfo from './EmergencyCallComponents/EmergencyCallInfo.svelte';
+	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
+	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
 	import { t } from '$lib/translations';
-	import CallScreen from './EmergencyCallComponents/CallScreen.svelte';
+	import CallScreen from './EmergencyCall/CallScreen.svelte';
 	let showModal = $state(true);
 
 	let isEmergency = $state(true);
