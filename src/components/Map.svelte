@@ -22,24 +22,37 @@
 			style: {
 				version: 8,
 				sources: {
-					osm: {
+					// osm: {
+					// 	type: 'raster',
+					// 	tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+					// 	tileSize: 256,
+					// 	attribution: '© OpenStreetMap contributors'
+					// },
+					osmLocal: {
 						type: 'raster',
-						tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+						tiles: ['/tiles/{z}/{x}/{y}.png'],
 						tileSize: 256,
 						attribution: '© OpenStreetMap contributors'
 					}
-					// osmLocal: {
-					// 	type: 'raster',
-					// 	tiles: ['http://localhost:3000/tiles/{z}/{x}/{y}.png'],
-					// 	tileSize: 256,
-					// 	attribution: '© OpenStreetMap contributors'
-					// }
 				},
 				layers: [
+					// {
+					// 	id: 'osm-layer',
+					// 	type: 'raster',
+					// 	source: 'osm',
+					// 	layout: {
+					// 		visibility: 'visible'
+					// 	},
+					// 	paint: {
+					// 		'raster-saturation': -1,
+					// 		'raster-contrast': 0.2,
+					// 		'raster-opacity': 1
+					// 	}
+					// },
 					{
-						id: 'osm-layer',
+						id: 'osm-local-layer',
 						type: 'raster',
-						source: 'osm',
+						source: 'osmLocal',
 						layout: {
 							visibility: 'visible'
 						},
@@ -49,19 +62,6 @@
 							'raster-opacity': 1
 						}
 					}
-					// {
-					// 	id: 'osm-local-layer',
-					// 	type: 'raster',
-					// 	source: 'osmLocal',
-					// 	layout: {
-					// 		visibility: 'visible'
-					// 	},
-					// 	paint: {
-					// 		'raster-saturation': -1,
-					// 		'raster-contrast': 0.2,
-					// 		'raster-opacity': 1
-					// 	}
-					// }
 				]
 			},
 			center: [13.404954, 52.520008],
