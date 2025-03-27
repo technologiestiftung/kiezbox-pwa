@@ -2,6 +2,7 @@
 	import EmergencyCall from '../components/EmergencyCall.svelte';
 	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
+	import Map from '../components/Map.svelte';
 	import PrecautionGuide from '../components/PrecautionGuide.svelte';
 </script>
 
@@ -10,7 +11,7 @@
 	<EmergencyCall />
 	<PrecautionGuide></PrecautionGuide>
 	<div class="map-root flex h-[30.5rem] w-full items-center justify-center">
-		Placeholder for Map
+		<Map />
 	</div>
 	<Footer></Footer>
 </div>

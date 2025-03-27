@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TabView from './PrecautionGuideComponents/TabView.svelte';
+	import TabView from './PrecautionGuide/TabView.svelte';
 	import {
 		BaggageClaim,
 		Fire,

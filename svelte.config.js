@@ -23,7 +23,11 @@ const config = {
 		alias: {
 			'@/*': './path/to/lib/*'
 		}
-	}
+	},
+	  vite: {
+    assetsInclude: ['**/*.geojson']
+  }
+	
 };
 
 export default config;
