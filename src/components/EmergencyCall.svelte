@@ -4,7 +4,7 @@
 	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
 	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
 	import { t } from '$lib/translations';
-	import CallScreen from './EmergencyCallComponents/CallScreen.svelte';
+	import CallScreen from './EmergencyCall/CallScreen.svelte';
 	import { PUBLIC_WSS_SERVER, PUBLIC_SIP_TARGET } from '$env/static/public';
 	import { onMount, onDestroy } from 'svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
@@ -88,6 +88,8 @@
 			if (isEmergency) {
 				userAgent = await createUserAgent();
 			} else {
+				if (!remoteAudio) throw new Error('Audio is not available');
+
 				simpleUser = await createSimpleUser(simpleUserDelegate, remoteAudio, displayName);
 			}
 
