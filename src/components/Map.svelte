@@ -9,8 +9,6 @@
 	import DetailsCard from './DetailsCard.svelte';
 	import Legend from './Legend.svelte';
 
-	const { width = '100%', height = '536px' } = $props();
-
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let clickPoint = $state({ x: 0, y: 0 });
 
@@ -114,7 +112,7 @@
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 		map.addControl(new maplibregl.FullscreenControl(), 'top-right');
 
-		map.on('click', (e) => {
+		map.on('click', (e: maplibregl.MapMouseEvent) => {
 			if (poiState.layer && poiState.properties) {
 				poiState.layer = null;
 				poiState.properties = null;
@@ -144,10 +142,9 @@
 	});
 </script>
 
-<div class="Map-root relative" bind:this={mapContainer} style="width: {width}; height: {height};">
+<div class="Map-root relative h-full w-full" bind:this={mapContainer}>
 	{#if poiState.layer || poiState.properties}
 		<DetailsCard {clickPoint} {mapContainer} />
 	{/if}
-
 	<Legend />
 </div>
