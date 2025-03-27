@@ -5,8 +5,6 @@
 	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
 	import { t } from '$lib/translations';
 	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import { PUBLIC_WSS_SERVER, PUBLIC_SIP_TARGET } from '$env/static/public';
-	import { onMount, onDestroy } from 'svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { UserAgent, Web } from 'sip.js';
 	import { createUserAgent } from '$lib/utils/userAgentUtils';
@@ -29,18 +27,7 @@
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
 
 	// Emergency SIP configuration
-	const webSocketServer = PUBLIC_WSS_SERVER;
-	const target = PUBLIC_SIP_TARGET;
 	const displayName = 'Kiezbox Demo';
-
-	const config = {
-		uri: 'sip:luisebr@sip.linphone.org',
-		transportOptions: {
-			wsServers: ['wss://edge.sip.onsip.com']
-		}
-		// authorizationUser: '',
-		// password: ''
-	};
 
 	const simpleUserDelegate = {
 		onCallCreated: (): void => {
