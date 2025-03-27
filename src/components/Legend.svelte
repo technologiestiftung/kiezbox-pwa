@@ -16,9 +16,9 @@
 	});
 </script>
 
-<div class="legend-root absolute right-0 bottom-0 left-0 z-10 flex w-full justify-center px-2">
+<div class="legend-root absolute bottom-0 left-1/2 z-10 w-full max-w-[29rem] -translate-x-1/2 px-2">
 	<Accordion
-		class="border-purple-dark center shadow-[0px_0px_16px_0px_rgba(0, 0, 0, 0.64)] w-full max-w-[29rem] overflow-hidden rounded-t-[4px] border-t-2 border-r-2 border-l-2 bg-white"
+		class="legend-root border-purple-dark center shadow-[0px_0px_16px_0px_rgba(0, 0, 0, 0.64)]  w-full overflow-hidden rounded-t-[4px] border-t-2 border-r-2 border-l-2 bg-white"
 	>
 		<AccordionItem value="legend">
 			<AccordionTrigger
