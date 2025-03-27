@@ -1,7 +1,7 @@
 export interface LayerConfig {
   id: string;
   label: string;
-  icon: string;
+  icon?: string;
   alt: string;
   type: 'symbol' | 'raster';
   source: string;
@@ -22,7 +22,6 @@ export const BASE_LAYER_CONFIG: LayerConfig[] = [
     {
     id: 'osm-local-layer',
     label: 'OSM Local',
-    icon: '/path/to/osm-icon.svg',
     alt: 'OpenStreetMap Local',
     type: 'raster',
     source: 'osmLocal',
