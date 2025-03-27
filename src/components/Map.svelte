@@ -65,8 +65,8 @@
 				]
 			},
 			center: [13.404954, 52.520008],
-			zoom: 12,
-			maxZoom: 18,
+			zoom: 10,
+			maxZoom: 15,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
 		});
