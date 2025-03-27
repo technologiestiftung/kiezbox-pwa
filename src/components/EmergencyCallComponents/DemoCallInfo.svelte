@@ -1,10 +1,10 @@
 <script lang="ts">
-	let { isCall } = $props();
+	let { isInCall } = $props();
 	import { t } from '$lib/translations';
 	import SpeechBubble from './SpeechBubble.svelte';
 </script>
 
-{#if !isCall}
+{#if !isInCall}
 	<div class="">{@html $t('content.emergency_phone.default.offline.text')}</div>
 	<ul class="space-y-2 px-4">
 		{#each { length: 5 }, i}

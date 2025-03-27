@@ -5,7 +5,7 @@
 	import { t } from '$lib/translations';
 
 	let {
-		isCall,
+		isInCall,
 		isEmergency,
 		isMicrophone,
 		isSpeaker,
@@ -13,21 +13,26 @@
 		activateSpeaker,
 		activateCall,
 		buttonText,
-		timer
+		time,
+		remoteAudio = $bindable()
 	} = $props();
 
-	const time = (date: Date) =>
-		new Intl.DateTimeFormat('de-DE', {
-			second: '2-digit',
-			minute: '2-digit',
-			hour12: false
-		}).format(date);
+	const formatMilliseconds = (ms: number): string => {
+		const totalSeconds = Math.floor(ms / 1000);
+		const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+		const seconds = String(totalSeconds % 60).padStart(2, '0');
+		return `${minutes}:${seconds}`;
+	};
 </script>
 
 <div class="CallScreen-root flex flex-col items-center justify-center space-y-4">
-	{#if isCall}
+	<audio bind:this={remoteAudio} id="audioElement" controls class="hidden">
+		<p>Your browser doesn't support HTML5 audio.</p>
+	</audio>
+
+	{#if isInCall}
 		<div>
-			<span class="call-time">{time(timer)}</span>
+			<span class="call-time">{formatMilliseconds(time)}</span>
 		</div>
 		<div class="flex justify-center space-x-18">
 			<Button variant="ghost" class="flex h-auto w-28 flex-col items-center" on:click={activateMic}>

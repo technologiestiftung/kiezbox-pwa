@@ -1,9 +1,9 @@
 <script lang="ts">
-	let { isCall } = $props();
+	let { isInCall } = $props();
 	import { t } from '$lib/translations';
 </script>
 
-{#if !isCall}
+{#if !isInCall}
 	<div class="">{$t('content.emergency_phone.emergency.offline.text')}</div>
 	<div class="">{$t('content.emergency_phone.default.questions.title')}</div>
 {:else}
