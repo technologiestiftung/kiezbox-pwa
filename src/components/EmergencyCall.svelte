@@ -26,7 +26,7 @@
 	let isModal = $state(false);
 
 	// Elements
-	let remoteAudio: HTMLAudioElement;
+	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
 
 	// Emergency SIP configuration
 	const webSocketServer = PUBLIC_WSS_SERVER;

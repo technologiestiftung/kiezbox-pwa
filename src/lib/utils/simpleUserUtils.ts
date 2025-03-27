@@ -1,9 +1,8 @@
-import { PUBLIC_SIP_TARGET, PUBLIC_WSS_SERVER } from '$env/static/public';
 import { Inviter, Web } from 'sip.js';
 import { SimpleUser, type SimpleUserDelegate } from 'sip.js/lib/platform/web';
 
-const webSocketServer = PUBLIC_WSS_SERVER;
-const target = PUBLIC_SIP_TARGET;
+const webSocketServer = 'wss://edge.sip.onsip.com';
+const target = 'sip:echo@sipjs.onsip.com';
 
 export const createSimpleUser = async (
 	simpleUserDelegate: SimpleUserDelegate,
