@@ -125,12 +125,6 @@
 		map.addControl(new maplibregl.FullscreenControl(), 'top-right');
 
 		map.on('click', (e: maplibregl.MapMouseEvent) => {
-			if (poiState.layer && poiState.properties) {
-				poiState.layer = null;
-				poiState.properties = null;
-				return;
-			}
-
 			const features = map.queryRenderedFeatures(e.point);
 			clickPoint = { x: e.point.x, y: e.point.y };
 
@@ -140,8 +134,8 @@
 				return;
 			}
 
-			poiState.properties = features[0].properties;
 			poiState.layer = features[0].layer;
+			poiState.properties = features[0].properties;
 
 			clickPoint = { x: e.point.x, y: e.point.y };
 		});

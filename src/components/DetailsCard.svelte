@@ -12,7 +12,8 @@
 	let cardRef = $state<HTMLDivElement | null>(null);
 	let cardPosition = $state({ top: clickPoint.y, left: clickPoint.x });
 	let content = $state({});
-	let activeLayer = $state(LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null);
+	let title = $state('Details');
+	let activeLayer = $state<(typeof LAYER_CONFIG)[number] | null>(null);
 	let cardVisible = $state(false);
 
 	onMount(() => {
@@ -24,7 +25,11 @@
 	});
 
 	$effect(() => {
-		if (cardRef && mapContainer) {
+		activeLayer = LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null;
+	});
+
+	$effect(() => {
+		if (poiState.layer && cardRef && mapContainer) {
 			cardVisible = false;
 
 			cardPosition = {
@@ -36,13 +41,21 @@
 				updateCardPosition();
 				cardVisible = true;
 			}, 0);
+		} else {
+			cardVisible = false;
 		}
 	});
 
 	$effect(() => {
-		if (poiState && activeLayer) {
+		if (activeLayer && poiState.properties) {
 			content = activeLayer.getContent ? activeLayer.getContent(poiState.properties) : {};
+		} else {
+			content = {};
 		}
+	});
+
+	$effect(() => {
+		title = activeLayer?.label || 'Details';
 	});
 
 	function updateCardPosition() {
@@ -80,10 +93,6 @@
 		cardPosition = { top, left };
 	}
 
-	function getTitle() {
-		return activeLayer?.label || 'Details';
-	}
-
 	function resetPOIState() {
 		cardVisible = false;
 		poiState.layer = null;
@@ -105,7 +114,7 @@
 		<Card.Root class="w-64">
 			<Card.Header>
 				<Card.Title class="items-center"
-					>{getTitle()}
+					>{title}
 					<button
 						class="text-purple-dark m-0 cursor-pointer bg-transparent p-0"
 						onclick={() => resetPOIState()}
