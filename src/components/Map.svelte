@@ -22,13 +22,7 @@
 			style: {
 				version: 8,
 				sources: {
-					// osm: {
-					// 	type: 'raster',
-					// 	tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-					// 	tileSize: 256,
-					// 	attribution: '© OpenStreetMap contributors'
-					// },
-					osmLocal: {
+					basemap: {
 						type: 'raster',
 						tiles: ['/tiles/{z}/{x}/{y}.png'],
 						tileSize: 256,
@@ -36,23 +30,10 @@
 					}
 				},
 				layers: [
-					// {
-					// 	id: 'osm-layer',
-					// 	type: 'raster',
-					// 	source: 'osm',
-					// 	layout: {
-					// 		visibility: 'visible'
-					// 	},
-					// 	paint: {
-					// 		'raster-saturation': -1,
-					// 		'raster-contrast': 0.2,
-					// 		'raster-opacity': 1
-					// 	}
-					// },
 					{
-						id: 'osm-local-layer',
+						id: 'basemap-layer',
 						type: 'raster',
-						source: 'osmLocal',
+						source: 'basemap',
 						layout: {
 							visibility: 'visible'
 						},
@@ -66,6 +47,7 @@
 			},
 			center: [13.404954, 52.520008],
 			zoom: 10,
+			minZoom: 10,
 			maxZoom: 15,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
