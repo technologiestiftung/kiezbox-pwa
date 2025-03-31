@@ -99,6 +99,18 @@
 					layout: layer.layout
 				} as AddLayerObject);
 			});
+
+			const interactiveLayerIds = LAYER_CONFIG.map((layer) => layer.id);
+
+			if (interactiveLayerIds.length > 0) {
+				map.on('mouseenter', interactiveLayerIds, () => {
+					map.getCanvas().style.cursor = 'pointer';
+				});
+
+				map.on('mouseleave', interactiveLayerIds, () => {
+					map.getCanvas().style.cursor = '';
+				});
+			}
 		});
 
 		// Add controls
