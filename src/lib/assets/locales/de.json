@@ -25,6 +25,33 @@
 				"text": "© 2025 Technologiestiftung Berlin",
 				"href": "https://www.technologiestiftung-berlin.de"
 			}
+		},
+		"modes": {
+			"emergency": {
+				"title": "Notruf",
+				"description": "Hier können Sie einen Notruf absetzen."
+			},
+			"demo": {
+				"title": "Notrufdemo",
+				"description": "Hier können Sie die Notrufdemo starten."
+			}
+		},
+		"status": {
+			"online": "Online",
+			"offline": "Offline",
+			"error": "Fehler",
+			"connecting": "Verbinden...",
+			"connected": "Verbunden",
+			"disconnecting": "Trennen...",
+			"disconnected": "Getrennt",
+			"reconnecting": "Wiederverbinden...",
+			"reconnected": "Wieder verbunden",
+			"connection_failed": "Verbindung fehlgeschlagen",
+			"dialing": "Wählen...",
+			"call_active": "Anruf aktiv",
+			"ending_call": "Anruf beenden...",
+			"call_failed": "Anruf beendet",
+			"ready": "Bereit"
 		}
 	},
 	"content": {

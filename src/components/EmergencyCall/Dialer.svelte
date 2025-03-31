@@ -26,6 +26,7 @@
 <div class={`sticky top-0 z-10 flex justify-center`}>
 	<div class="w-full px-6 md:w-[29rem]">
 		<EmergencyCallButton
+			disabled={false}
 			isActive={isEmergency}
 			{onClick}
 			buttonText={$t('content.emergency_phone.default.phone_button')}
