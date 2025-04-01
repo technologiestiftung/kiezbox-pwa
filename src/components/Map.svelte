@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { SOURCES_CONFIG } from '$lib/config/sources';
-	import { LAYER_STYLE } from '$lib/config/styles-positron';
+	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
 	import alkisData from '$lib/data/alkis-land.json';
 	import { mapState, poiState } from '$lib/state/state.svelte';
 	import type { GeoJSON } from 'geojson';
