@@ -1,31 +1,16 @@
-import { writable, get } from 'svelte/store'; // Import writable and get
-import { UserAgent, Inviter, Session, Web, Invitation, SessionState } from 'sip.js';
-import { SimpleUser, type SimpleUserDelegate } from 'sip.js/lib/platform/web';
-
-// Import UserAgent service and config type
+import { writable, get, readable, type Readable } from 'svelte/store';
 import {
-	createUserAgent,
-	inviteUserAgent,
-	stopUserAgent,
-	terminateSession
-} from '$lib/utils/userAgentService';
-
-// --- Type Definitions ---
-export type CallMode = 'emergency' | 'demo';
-export type ConnectionStatus =
-	| 'disconnected'
-	| 'connecting'
-	| 'connected'
-	| 'disconnecting'
-	| 'failed';
-export type CallStatus = 'idle' | 'dialing' | 'active' | 'terminating' | 'failed';
-
-// Config interface for SimpleUser (can be defined here)
-export interface DemoConfig {
-	demoWSS: string;
-	demoDisplayName: string;
-	demoTarget: string;
-}
+	Invitation,
+	Inviter,
+	Registerer,
+	RegistererState,
+	Session,
+	SessionState,
+	UserAgent,
+	Web,
+	type UserAgentDelegate
+	// Add these imports for Logger
+} from 'sip.js';
 
 export interface KiezboxConfig {
 	kbServerAddress: string;
@@ -37,330 +22,560 @@ export interface KiezboxConfig {
 	kbisplayName: string;
 }
 
-// --- Reactive State (Svelte Stores) ---
-export const connectionStatus = writable<ConnectionStatus>('disconnected');
-export const callStatus = writable<CallStatus>('idle');
-export const activeMode = writable<CallMode | null>(null);
-export const errorMessage = writable<string | null>(null);
-export const activeCallDuration = writable<number>(0); // In milliseconds
-
-// Internal references (not stores, managed within the service)
-let activeSipInstance: UserAgent | SimpleUser | null = null;
-let activeUserAgentSession: Inviter | Session | null = null;
-let currentAudioElement: HTMLAudioElement | null = null;
-let callStartTime: number | null = null;
-let timerInterval: number | undefined = undefined;
-let currentDemoConfig: DemoConfig | null = null;
-let currentKiezboxConfig: KiezboxConfig | null = null;
-
-// --- SimpleUser Delegate Implementation (Updates stores) ---
-const simpleUserDelegateHandler: SimpleUserDelegate = {
-	onCallCreated: (): void => {
-		console.log(`[CallService] SimpleUser Call created (Dialing)`);
-		callStatus.set('dialing');
-		errorMessage.set(null);
-		resetTimer();
-	},
-	onCallAnswered: (): void => {
-		console.log(`[CallService] SimpleUser Call answered (Active)`);
-		callStatus.set('active');
-		startTimer();
-		// SimpleUser typically handles attaching audio via its config, but check if needed
-		if (activeSipInstance instanceof SimpleUser && currentAudioElement) {
-			// Ensure audio is attached if SimpleUser didn't do it
-			// Note: SimpleUser is supposed to handle this via media config
-		}
-	},
-	onCallHangup: (): void => {
-		console.log(`[CallService] SimpleUser Call hangup (Idle)`);
-		// Only update if state wasn't already reset by hangup() or cleanup()
-		if (get(callStatus) !== 'idle') {
-			callStatus.set('idle');
-			stopTimer(); // Keep final duration
-		}
-	},
-	onCallHold: (held: boolean): void => {
-		console.log(`[CallService] SimpleUser Call hold: ${held}`);
-	},
-	onServerConnect: () => {
-		console.log('[CallService] SimpleUser Connected to server');
-		// Only update if we were in the connecting state
-		if (get(connectionStatus) === 'connecting') {
-			connectionStatus.set('connected');
-		}
-	},
-	onServerDisconnect: (error?: Error) => {
-		console.warn('[CallService] SimpleUser Disconnected from server', error);
-		connectionStatus.set(error ? 'failed' : 'disconnected');
-		errorMessage.set(error ? `Connection Failed: ${error.message}` : null);
-		callStatus.set('idle');
-		stopTimer();
-		activeSipInstance = null;
-	}
-};
-
-// --- Timer Logic (Updates store) ---
-function startTimer() {
-	stopTimer();
-	callStartTime = Date.now();
-	activeCallDuration.set(0);
-	timerInterval = setInterval(() => {
-		if (callStartTime) {
-			activeCallDuration.set(Date.now() - callStartTime);
-		} else {
-			stopTimer();
-		}
-	}, 1000);
-	console.log('[CallService] Timer started');
+export interface CallServiceState {
+	callState: CallState;
+	registererState: RegistererState;
+	errorMessage: string | null;
+	callerId: string | null;
+	isMicrophoneMuted: boolean;
+	isSpeakerMuted: boolean;
+	callDuration: number;
+	remoteStream: MediaStream | null;
+	localHTMLAudioElement: HTMLAudioElement | null;
 }
 
-function stopTimer() {
-	if (timerInterval) {
-		clearInterval(timerInterval);
-		timerInterval = undefined;
-		console.log('[CallService] Timer stopped');
-	}
-	callStartTime = null;
-}
-function resetTimer() {
-	stopTimer();
-	activeCallDuration.set(0);
+export enum CallState {
+	DISCONNECTED = 'DISCONNECTED',
+	CONNECTED = 'CONNECTED',
+	CALLING = 'CALLING',
+	CALL_INCOMING = 'CALL_INCOMING',
+	CALL_ESTABLISHED = 'CALL_ESTABLISHED',
+	CALL_TERMINATED = 'CALL_TERMINATED'
 }
 
-// --- Core Service Functions (Update stores) ---
+// --- Factory Function ---
+export const createCallService = (config: KiezboxConfig) => {
+	let remoteAudioElement: HTMLAudioElement | null = null;
+	let userAgent: UserAgent | null = null;
+	let registerer: Registerer | null = null;
+	let activeSession: Session | Inviter | null = null;
+	let incomingInvitation: Invitation | null = null;
+	let callTimerInterval: ReturnType<typeof setInterval> | null = null;
+	let callStartTime: number | null = null;
 
-export async function initialize(
-	mode: CallMode,
-	audioElement: HTMLAudioElement,
-	config: DemoConfig | KiezboxConfig
-): Promise<void> {
-	const currentConnStatus = get(connectionStatus);
-	if (currentConnStatus !== 'disconnected' && currentConnStatus !== 'failed') {
-		console.warn(`[CallService] Already ${currentConnStatus}. Cleanup first or ignore.`);
-		return;
-	}
+	// --- Reactive State Store ---
+	const _state = writable<CallServiceState>({
+		callState: CallState.DISCONNECTED,
+		registererState: RegistererState.Initial,
+		errorMessage: null,
+		callerId: null,
+		isMicrophoneMuted: false,
+		isSpeakerMuted: false,
 
-	await cleanup(); // Ensure clean state
+		callDuration: 0,
+		remoteStream: null,
+		localHTMLAudioElement: null
+	});
 
-	console.log(`[CallService] Initializing for mode: ${mode}`);
-	activeMode.set(mode);
-	currentAudioElement = audioElement; // Store the reference
-	errorMessage.set(null);
-	connectionStatus.set('connecting');
-	activeSipInstance = null;
-	activeUserAgentSession = null;
+	// Publicly readable version of the state
+	const state: Readable<CallServiceState> = readable(get(_state), (set) => {
+		// Forward updates from the writable store
+		const unsubscribe = _state.subscribe(set);
+		return () => unsubscribe(); // Cleanup subscription
+	});
 
-	try {
-		if (mode === 'demo') {
-			currentDemoConfig = config as DemoConfig;
-			if (!currentAudioElement) throw new Error('Audio element required for SimpleUser.');
+	// --- Helper Functions (scoped within the factory) ---
 
-			const simpleUser = new Web.SimpleUser(currentDemoConfig.demoWSS, {
-				delegate: simpleUserDelegateHandler,
-				media: { remote: { audio: currentAudioElement } },
-				userAgentOptions: { displayName: currentDemoConfig.demoDisplayName, logLevel: 'debug' }
+	const setError = (message: string | null): void => {
+		_state.update((s) => ({ ...s, errorMessage: message }));
+		if (message) {
+			console.error(`[CallService] Error state set: ${message}`);
+		}
+	};
+
+	const clearError = (): void => {
+		if (get(_state).errorMessage) {
+			_state.update((s) => ({ ...s, errorMessage: null }));
+		}
+	};
+
+	const applySpeakerMute = (): void => {
+		if (remoteAudioElement) {
+			remoteAudioElement.muted = get(_state).isSpeakerMuted;
+		}
+	};
+
+	const getPeerConnection = (): RTCPeerConnection | undefined => {
+		// Type assertion needed as SDH type isn't specific enough in Session interface
+		const sdh = activeSession?.sessionDescriptionHandler as
+			| Web.SessionDescriptionHandler
+			| undefined;
+		return sdh?.peerConnection;
+	};
+
+	const stopCallTimer = (): void => {
+		if (callTimerInterval) {
+			clearInterval(callTimerInterval);
+			callTimerInterval = null;
+		}
+		callStartTime = null;
+		console.log('[CallService] Call timer stopped.');
+	};
+
+	const startCallTimer = (): void => {
+		stopCallTimer(); // Clear existing timer just in case
+		callStartTime = Date.now();
+		_state.update((s) => ({ ...s, callDuration: 0 }));
+		callTimerInterval = setInterval(() => {
+			if (callStartTime) {
+				_state.update((s) => ({ ...s, callDuration: Date.now() - callStartTime! }));
+			}
+		}, 1000);
+		console.log('[CallService] Call timer started.');
+	};
+
+	const cleanupSession = (session?: Session | Inviter | null): void => {
+		if (!userAgent) {
+			console.warn('[CallService] No UserAgent available for cleanup.');
+			return;
+		}
+		console.log('[CallService] Cleaning up session...');
+		console.log(`[CallService] Active session: ${activeSession?.id}`);
+		console.log(`[CallService] State: ${get(_state).callState}`);
+		console.log(`[CallService] Incoming invitation: ${incomingInvitation?.id}`);
+		if (!session && !activeSession) {
+			console.warn('[CallService] No session to clean up.');
+			return;
+		}
+
+		const sessionToClean = session || activeSession;
+		if (!sessionToClean) return;
+
+		console.log(`[CallService] Cleaning up session ${sessionToClean.id}...`);
+
+		if (sessionToClean.delegate) {
+			sessionToClean.delegate = undefined;
+		}
+
+		if (activeSession && activeSession.id === sessionToClean.id) {
+			activeSession = null;
+		}
+
+		stopCallTimer();
+
+		_state.update((s) => ({
+			...s,
+			callState: CallState.CALL_TERMINATED,
+			isCallActive: false,
+			isOutgoingCall: false,
+			remoteStream: null,
+			isMicrophoneMuted: false,
+			isSpeakerMuted: false
+		}));
+
+		if (remoteAudioElement) {
+			remoteAudioElement.srcObject = null;
+		}
+		console.log(`[CallService] Session ${sessionToClean.id} cleanup complete.`);
+	};
+
+	const cleanupUserAgent = async (): Promise<void> => {
+		console.log('[CallService] Cleaning up UserAgent...');
+		// Unregister
+		if (registerer && get(_state).registererState === RegistererState.Registered) {
+			try {
+				await registerer.unregister();
+				console.log('[CallService] Unregistered.');
+			} catch (e) {
+				console.error('[CallService] Error unregistering:', e);
+			} finally {
+				registerer = null;
+				_state.update((s) => ({ ...s, isRegistered: false }));
+			}
+		}
+		// Stop UserAgent
+		if (userAgent) {
+			const uaToStop = userAgent;
+			userAgent = null; // Clear ref
+			if (uaToStop.isConnected()) {
+				try {
+					await uaToStop.stop();
+					console.log('[CallService] UserAgent stopped.');
+				} catch (e) {
+					console.error('[CallService] Error stopping UA:', e);
+				}
+			}
+		}
+		// reset state
+		cleanupSession();
+		incomingInvitation = null;
+		_state.set({
+			callState: CallState.DISCONNECTED,
+			registererState: RegistererState.Initial,
+			callerId: null,
+			callDuration: 0,
+			isMicrophoneMuted: false,
+			isSpeakerMuted: false,
+			remoteStream: null,
+			localHTMLAudioElement: null,
+			errorMessage: get(_state).errorMessage // Keep last error
+		});
+		console.log('[CallService] UserAgent cleanup complete.');
+	};
+
+	const register = async () => {
+		try {
+			if (!userAgent) {
+				console.error('[CallService] Cannot register, UserAgent not available.');
+				setError('UserAgent not available for registration.');
+				return;
+			}
+			console.log('[CallService] Attempting registration...');
+			registerer = new Registerer(userAgent);
+			registerer.stateChange.addListener((newState: RegistererState) => {
+				console.log(`[CallService] Registerer state changed to ${newState}`);
+				_state.update((s) => ({ ...s, registererState: newState }));
 			});
-			activeSipInstance = simpleUser;
-			console.log('[CallService] Connecting SimpleUser...');
-			await simpleUser.connect();
-			// onServerConnect delegate updates status store
-		} else {
-			// emergency mode
-			currentKiezboxConfig = config as KiezboxConfig;
-			const userAgent = await createUserAgent(currentKiezboxConfig);
-			if (!userAgent) throw new Error('Failed to create UserAgent via service.');
-			activeSipInstance = userAgent;
 
-			userAgent.delegate = {
-				onConnect: () => {
-					console.log('[CallService] UserAgent Connected');
-					if (get(connectionStatus) === 'connecting') {
-						connectionStatus.set('connected');
-					}
-				},
-				onDisconnect: (error?: Error) => {
-					console.warn('[CallService] UserAgent Disconnected', error);
-					connectionStatus.set(error ? 'failed' : 'disconnected');
-					errorMessage.set(error ? `Connection Failed: ${error.message}` : null);
-					callStatus.set('idle');
-					stopTimer();
-					activeUserAgentSession = null;
-					activeSipInstance = null;
-				},
-				onInvite: (invitation: Invitation) => {
-					console.log(`[CallService] UserAgent Incoming Call... Rejecting.`);
-					invitation.reject().catch((e) => console.error('Error rejecting:', e));
+			await registerer.register();
+			console.log('[CallService] Registration request sent.');
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(`[CallService] Registration error: ${error.message}`);
+				setError(`Registration error: ${error.message}`);
+				_state.update((s) => ({ ...s, registererState: RegistererState.Terminated }));
+				registerer = null;
+			}
+		}
+	};
+
+	const userAgentDelegate: UserAgentDelegate = {
+		onConnect: () => {
+			console.log('[CallService] UserAgent Connected via WebSocket.');
+			_state.update((s) => ({ ...s, callState: CallState.CONNECTED }));
+			setError(null); // Clear connection errors
+			register(); // Attempt registration
+		},
+		onDisconnect: (error?: Error) => {
+			console.error(`[CallService] UserAgent Disconnected.`, error);
+			_state.update((s) => ({
+				...s,
+				callState: CallState.DISCONNECTED,
+				registererState: RegistererState.Terminated
+			}));
+			if (error) {
+				setError(`Disconnected: ${error.message}`);
+			} else {
+				console.log('[CallService] UserAgent disconnected gracefully.');
+			}
+			cleanupSession(); // Call ends on disconnect
+		},
+		onInvite: (invitation: Invitation) => {
+			console.log(`[CallService] Incoming INVITE from ${invitation.remoteIdentity.uri.toString()}`);
+			if (activeSession) {
+				console.warn('[CallService] Rejecting invite - busy.');
+				invitation.reject({ statusCode: 486 });
+				return;
+			}
+			incomingInvitation = invitation;
+			_state.update((s) => ({
+				...s,
+				callState: CallState.CALL_INCOMING,
+				callerId: invitation.remoteIdentity.displayName || invitation.remoteIdentity.uri.toString()
+			}));
+			setupSession(invitation); // Setup delegates for incoming call
+		}
+	};
+
+	const setupSession = (session: Session | Invitation | Inviter) => {
+		if (activeSession && activeSession !== session) {
+			console.warn(
+				`[CallService] Warning: Setting up new session ${session.id} while ${activeSession.id} exists.`
+			);
+			cleanupSession(); // Cleanup old one first
+		}
+		console.log(`[CallService] Setting up session delegates for ${session.id}`);
+
+		if (session instanceof Session) {
+			activeSession = session;
+			_state.update((s) => ({ ...s, isMicrophoneMuted: false, isSpeakerMuted: false }));
+			applySpeakerMute();
+		}
+
+		session.stateChange.addListener((newState: SessionState) => {
+			console.log(`[CallService] Session state changed to ${newState}`);
+			if (newState === SessionState.Established) {
+				_state.update((s) => ({ ...s, callState: CallState.CALL_ESTABLISHED }));
+				startCallTimer(); // Start call timer on established
+
+				const sessionDescriptionHandler = session.sessionDescriptionHandler;
+
+				if (
+					!sessionDescriptionHandler ||
+					!(sessionDescriptionHandler instanceof Web.SessionDescriptionHandler)
+				) {
+					throw new Error('Invalid session description handler.');
+				}
+
+				if (remoteAudioElement) {
+					assignStream(sessionDescriptionHandler.remoteMediaStream, remoteAudioElement);
+				}
+				console.log(`[CallService] Call established. Call duration: ${get(_state).callDuration}`);
+			} else if (newState === SessionState.Terminated) {
+				cleanupSession(session); // Cleanup on termination
+			} else if (newState === SessionState.Terminating) {
+				_state.update((s) => ({ ...s, callState: CallState.CALL_TERMINATED }));
+				console.log(`[CallService] Session is terminating.`);
+			}
+		});
+	};
+
+	const assignStream = (stream: MediaStream, element: HTMLMediaElement | null) => {
+		if (!element) {
+			console.error('HTMLMediaElement is not defined.');
+			return;
+		}
+		// Set element source.
+		element.autoplay = true;
+		element.srcObject = stream;
+
+		// Load and start playback of media.
+		element.play().catch((error: Error) => {
+			console.error('Failed to play media');
+			console.error(error);
+		});
+
+		stream.onaddtrack = (): void => {
+			element.load();
+			element.play().catch((error: Error) => {
+				console.error('Failed to play remote media on add track');
+				console.error(error);
+			});
+		};
+
+		stream.onremovetrack = (): void => {
+			element.load();
+			element.play().catch((error: Error) => {
+				console.error('Failed to play remote media on remove track');
+				console.error(error);
+			});
+		};
+	};
+
+	const setAudioElement = (element: HTMLAudioElement): void => {
+		remoteAudioElement = element;
+		console.log('[CallService] Audio element set.');
+		applySpeakerMute(); // Apply current mute state if already set
+	};
+
+	const createUserAgent = async (): Promise<void> => {
+		if (userAgent && get(_state).callState !== CallState.DISCONNECTED) {
+			console.warn('[CallService] Already connected.');
+			return;
+		}
+		clearError();
+
+		try {
+			console.log('[CallService] Creating UserAgent...');
+			const kbWSS = `wss://${config.kbServerAddress}:${config.kbWSSPort}${config.kbWSSPath}`;
+			const kbURI = `sip:${config.kbSIPUsername}@${config.kbDomain}`;
+			const uri = UserAgent.makeURI(kbURI);
+			if (!uri) throw new Error(`Failed to create URI from ${kbURI}`);
+
+			userAgent = new UserAgent({
+				uri: uri,
+				transportOptions: { server: kbWSS, connectionTimeout: 10, keepAliveInterval: 30 },
+				logLevel: 'debug',
+				authorizationUsername: config.kbSIPUsername,
+				authorizationPassword: config.kbSIPPassword,
+				displayName: config.kbisplayName,
+				delegate: userAgentDelegate
+			});
+
+			console.log('[CallService] Starting UserAgent connection...');
+			await userAgent.start();
+			console.log('[CallService] UserAgent start() called.');
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(`[CallService] Error creating/starting UserAgent: ${error.message}`);
+				console.error('[CallService] Error creating/starting UserAgent:', error);
+				setError(`Failed to connect: ${error.message || error}`);
+				await cleanupUserAgent(); // Cleanup on failure
+			}
+		}
+	};
+
+	const makeCall = async (targetUriString: string): Promise<void> => {
+		if (!userAgent || get(_state).registererState !== RegistererState.Registered) {
+			setError('Cannot make call: Not connected or registered.');
+			return;
+		}
+		if (activeSession) {
+			setError('Cannot make call: Already busy.');
+			return;
+		}
+		clearError();
+
+		try {
+			const target = UserAgent.makeURI(targetUriString);
+			if (!target) throw new Error(`Invalid target URI: ${targetUriString}`);
+
+			console.log(`[CallService] Creating Inviter for target: ${targetUriString}`);
+			// Pass SDH options directly to invite
+			const inviterOptions = {
+				sessionDescriptionHandlerOptions: {
+					constraints: { audio: true, video: false }
 				}
 			};
+			const inviter = new Inviter(userAgent, target);
 
-			if (userAgent.isConnected()) {
-				connectionStatus.set('connected');
+			setupSession(inviter); // Setup delegates
+			activeSession = inviter; // Mark as active session attempt
+			_state.update((s) => ({ ...s, callState: CallState.CALLING }));
+
+			console.log(`[CallService] Sending INVITE to ${targetUriString}`);
+			await inviter.invite(inviterOptions); // Pass options here
+			console.log(`[CallService] INVITE sent for session ${inviter.id}`);
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(`[CallService] Error making call: ${error.message}`);
+				setError(`Failed to make call: ${error.message || error}`);
+				cleanupSession(); // Cleanup failed call attempt
 			}
 		}
-		console.log(`[CallService] Init sequence complete. Status: ${get(connectionStatus)}`);
-	} catch (error: any) {
-		console.error(`[CallService] Initialization failed for mode ${mode}:`, error);
-		errorMessage.set(`Initialization failed: ${error?.message || 'Unknown error'}`);
-		connectionStatus.set('failed');
-		await cleanup(); // Ensure full cleanup on init failure
-	}
-}
+	};
 
-export async function makeCall(target?: string): Promise<void> {
-	if (get(connectionStatus) !== 'connected') {
-		errorMessage.set('Cannot make call: Not connected.');
-		console.error(`[CallService] ${get(errorMessage)}`);
-		return;
-	}
-	if (get(callStatus) !== 'idle') {
-		errorMessage.set('Cannot make call: Already in a call or dialing.');
-		console.error(`[CallService] ${get(errorMessage)}`);
-		return;
-	}
+	const answerCall = async (): Promise<void> => {
+		if (!incomingInvitation) {
+			setError('No incoming call to answer.');
+			return;
+		}
+		if (activeSession) {
+			setError('Cannot answer: Already in another call.');
+			return;
+		}
+		clearError();
+		console.log('[CallService] Accepting incoming call...');
+		try {
+			const invitationToAccept = incomingInvitation;
+			incomingInvitation = null;
 
-	const mode = get(activeMode);
-	console.log(`[CallService] Attempting call in mode: ${mode}`);
-	callStatus.set('dialing');
-	errorMessage.set(null);
-	resetTimer();
-
-	try {
-		if (mode === 'demo' && activeSipInstance instanceof SimpleUser && currentDemoConfig) {
-			console.log(`[CallService] Calling SimpleUser target: ${currentDemoConfig.demoTarget}`);
-			await activeSipInstance.call(currentDemoConfig.demoTarget);
-			// Delegate handles further state updates
-		} else if (mode === 'emergency' && activeSipInstance instanceof UserAgent) {
-			if (!target) throw new Error('Target URI required for emergency call.');
-			console.log(`[CallService] Calling UserAgent target: ${target}`);
-			const session = await inviteUserAgent(activeSipInstance, target);
-			if (!session) throw new Error('Failed to initiate call via UserAgent service.');
-
-			activeUserAgentSession = session;
-
-			// Manual audio handling for UserAgent session established state
-			session.stateChange.addListener((newState: SessionState) => {
-				console.log(`[CallService] UA Session ${session.id} State: ${newState}`);
-				if (activeUserAgentSession !== session) return; // Ignore events from old sessions
-
-				switch (newState) {
-					case SessionState.Establishing:
-						callStatus.set('dialing');
-						break;
-					case SessionState.Established:
-						callStatus.set('active');
-						startTimer();
-						break;
-					case SessionState.Terminating:
-						if (get(callStatus) !== 'idle') {
-							callStatus.set('terminating');
-						}
-						break;
-					case SessionState.Terminated:
-						if (get(callStatus) !== 'idle') {
-							callStatus.set('idle');
-							stopTimer();
-						}
-						if (activeUserAgentSession === session) {
-							activeUserAgentSession = null;
-						}
-						break;
+			const acceptOptions = {
+				sessionDescriptionHandlerOptions: {
+					constraints: { audio: true, video: false }
 				}
-			});
-		} else {
-			throw new Error(
-				`Invalid state for making call: Mode=${mode}, InstanceType=${activeSipInstance?.constructor.name}`
-			);
+			};
+			_state.update((s) => ({ ...s, callState: CallState.CALL_INCOMING, callerId: null })); // Update UI state
+
+			// Calling accept transitions the Invitation to a Session
+			// and triggers SessionDelegate state changes.
+			await invitationToAccept.accept(acceptOptions);
+			console.log('[CallService] Incoming call accepted request sent.');
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(`[CallService] Error accepting call: ${error.message}`);
+				setError(`Failed to answer call: ${error.message || error}`);
+				cleanupSession(); // Cleanup if accept fails
+				_state.update((s) => ({ ...s, isIncomingCall: false, callerId: null }));
+			}
 		}
-		console.log('[CallService] Call initiation process started.');
-	} catch (error: any) {
-		console.error('[CallService] Failed to make call:', error);
-		errorMessage.set(`Call failed: ${error?.message || 'Unknown error'}`);
-		callStatus.set('failed');
-		activeUserAgentSession = null;
-		stopTimer();
-	}
-}
+	};
 
-export async function hangup(): Promise<void> {
-	const currentCallStatus = get(callStatus);
-	if (currentCallStatus !== 'dialing' && currentCallStatus !== 'active') {
-		console.warn(
-			`[CallService] No active or dialing call to hangup (State: ${currentCallStatus}).`
-		);
-		return;
-	}
+	const hangupOrReject = async (): Promise<void> => {
+		clearError();
 
-	console.log('[CallService] Attempting to hangup call...');
-	callStatus.set('terminating'); // Indicate user intent
-	errorMessage.set(null);
-	stopTimer(); // Stop timer on hangup attempt
+		if (incomingInvitation) {
+			console.log('[CallService] Rejecting incoming call...');
+			try {
+				await incomingInvitation.reject();
+				console.log('[CallService] Incoming call rejected.');
+			} catch (error: unknown) {
+				if (error instanceof Error) {
+					console.error(`[CallService] Error rejecting call: ${error.message}`);
+					setError(`Failed to reject call: ${error.message || error}`);
+				} else {
+					console.error('[CallService] Error rejecting call:', error);
+					setError(`Failed to reject call: ${error}`);
+				}
+			} finally {
+				incomingInvitation = null;
+				_state.update((s) => ({ ...s, callState: CallState.CALL_TERMINATED, callerId: null }));
+			}
+		} else if (activeSession) {
+			console.log(`[CallService] Hanging up active call (Session ID: ${activeSession.id})...`);
+			const sessionToTerminate = activeSession;
+			const state = sessionToTerminate.state;
+			activeSession = null;
 
-	try {
-		const mode = get(activeMode);
-		if (mode === 'demo' && activeSipInstance instanceof SimpleUser) {
-			if (activeSipInstance.isConnected() || currentCallStatus === 'dialing') {
-				await activeSipInstance.hangup();
+			try {
+				if (state === SessionState.Terminated || state === SessionState.Terminating) {
+					console.log('[CallService] Session already terminated/terminating.');
+				} else if (state === SessionState.Initial && sessionToTerminate instanceof Inviter) {
+					await sessionToTerminate.cancel();
+					console.log('[CallService] Outgoing call cancelled.');
+				} else {
+					await sessionToTerminate.bye();
+					console.log('[CallService] BYE sent/confirmed.');
+				}
+			} catch (error: unknown) {
+				if (error instanceof Error) {
+					console.error(`[CallService] Error during hangup/cancel: ${error.message}`);
+					setError(`Failed to hangup/cancel: ${error.message || error}`);
+				} else {
+					console.error('[CallService] Error during hangup/cancel:', error);
+					setError(`Failed to hangup/cancel: ${error}`);
+				}
+			} finally {
+				cleanupSession(sessionToTerminate);
+			}
+		} else {
+			console.warn('[CallService] No active call or incoming invitation to hangup/reject.');
+		}
+	};
+
+	const toggleMicrophoneMute = (): void => {
+		if (!activeSession || get(_state).callState !== CallState.CALL_ESTABLISHED) {
+			// Check isCallActive too
+			console.warn('[CallService] Cannot toggle mute: No established call.');
+			return;
+		}
+		const newState = !get(_state).isMicrophoneMuted;
+		try {
+			const pc = getPeerConnection();
+			if (pc) {
+				pc.getSenders().forEach((sender) => {
+					if (sender.track?.kind === 'audio') {
+						sender.track.enabled = !newState; // true = not muted
+					}
+				});
+				_state.update((s) => ({ ...s, isMicrophoneMuted: newState }));
+				console.log(`[CallService] Microphone muted: ${newState}`);
 			} else {
-				console.warn('[CallService] SimpleUser had no active call to hangup.');
-				callStatus.set('idle'); // Revert if nothing hung up
+				console.warn('[CallService] PeerConnection not available to toggle mute.');
 			}
-			// Delegate onCallHangup should set final state
-		} else if (mode === 'emergency' && activeUserAgentSession) {
-			await terminateSession(activeUserAgentSession);
-			// Session state listener 'Terminated' should set final state
-		} else {
-			console.warn('[CallService] Cannot hangup: No active instance/session for mode.', mode);
-			callStatus.set('idle'); // Revert if nothing to hangup
+		} catch (error) {
+			console.error('[CallService] Error toggling microphone mute:', error);
+			setError('Failed to toggle microphone mute.');
 		}
-		console.log('[CallService] Hangup initiated.');
-	} catch (error: any) {
-		console.error('[CallService] Failed to hangup:', error);
-		errorMessage.set(`Hangup failed: ${error?.message || 'Unknown error'}`);
-		callStatus.set(currentCallStatus); // Revert status if hangup command fails
-	}
-	// Final state ('idle') should be set by listeners/delegates
-}
+	};
 
-export async function cleanup(): Promise<void> {
-	console.log('[CallService] Cleanup requested...');
+	const toggleSpeakerMute = (): void => {
+		const newState = !get(_state).isSpeakerMuted;
+		_state.update((s) => ({ ...s, isSpeakerMuted: newState }));
+		applySpeakerMute(); // Applies mute to the element
+		console.log(`[CallService] Speaker muted: ${newState}`);
+	};
 
-	if (get(callStatus) === 'dialing' || get(callStatus) === 'active') {
-		console.log('[CallService] Hanging up active call before cleanup...');
-		await hangup();
-	}
-
-	connectionStatus.set('disconnecting');
-	stopTimer();
-
-	try {
-		const instance = activeSipInstance; // Local ref before resetting
-		if (instance instanceof SimpleUser) {
-			if (instance.isConnected()) {
-				await instance.disconnect();
-			}
-		} else if (instance instanceof UserAgent) {
-			await stopUserAgent(instance);
+	const disconnect = async (): Promise<void> => {
+		console.log('[CallService] Disconnecting...');
+		if (activeSession || incomingInvitation) {
+			await hangupOrReject(); // End calls first
 		}
-	} catch (error: any) {
-		console.error('[CallService] Error during disconnect/stop:', error);
-	} finally {
-		console.log('[CallService] Resetting all state.');
-		connectionStatus.set('disconnected');
-		callStatus.set('idle');
-		errorMessage.set(null);
-		activeCallDuration.set(0);
-		activeSipInstance = null;
-		activeUserAgentSession = null;
-		activeMode.set(null);
-		currentAudioElement = null;
-		currentDemoConfig = null;
-		currentKiezboxConfig = null;
-		console.log('[CallService] Cleanup finished.');
-	}
-}
+		await cleanupUserAgent(); // Unregister, stop UA, reset state
+		console.log('[CallService] Disconnected.');
+	};
 
-// Function to explicitly set the audio element reference
-export function setAudioElement(element: HTMLAudioElement): void {
-	console.log('[CallService] Setting audio element reference.');
-	currentAudioElement = element;
-}
+	return {
+		state,
+		setAudioElement,
+		createUserAgent,
+		makeCall,
+		answerCall,
+		hangupOrReject,
+		toggleMicrophoneMute,
+		toggleSpeakerMute,
+		disconnect
+	};
+};
+
+export type CallServiceApi = ReturnType<typeof createCallService>;
