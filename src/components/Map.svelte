@@ -29,7 +29,7 @@
 						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
 						attribution: '© OpenStreetMap contributors',
 						minzoom: 10,
-						maxzoom: 14
+						maxzoom: 13
 					},
 					alkisLand: {
 						type: 'geojson',
