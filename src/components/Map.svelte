@@ -28,16 +28,14 @@
 						type: 'vector',
 						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
 						attribution: '© OpenStreetMap contributors',
-						minzoom: 10,
 						maxzoom: 13
-					}
+					},
 				},
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},
 			center: [13.404954, 52.520008],
-			zoom: 11,
-			minZoom: 11,
+			zoom: 10,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
 		});
