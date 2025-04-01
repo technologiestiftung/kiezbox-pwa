@@ -258,6 +258,7 @@
 				{isSpeakerMuted}
 				canCall={true}
 				canHangup={true}
+				{errorMessage}
 				bind:remoteAudio
 			/>
 		</div>

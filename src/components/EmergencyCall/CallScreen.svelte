@@ -16,6 +16,7 @@
 		activateCall,
 		buttonText,
 		buttonDisabled,
+		errorMessage,
 		time,
 		remoteAudio = $bindable()
 	} = $props();
@@ -29,9 +30,7 @@
 </script>
 
 <div class="CallScreen-root flex flex-col items-center justify-center space-y-4">
-	<audio bind:this={remoteAudio} id="audioElement" controls class="block">
-		<p>Your browser doesn't support HTML5 audio.</p>
-	</audio>
+	<audio bind:this={remoteAudio} id="audioElement" controls class="hidden"> </audio>
 
 	{#if isInCall}
 		<div>
@@ -59,6 +58,11 @@
 				{/if}
 				<span>{$t('common.button.speaker')}</span>
 			</Button>
+		</div>
+	{/if}
+	{#if errorMessage}
+		<div class="text-red-500">
+			<span>{$t(errorMessage)}</span>
 		</div>
 	{/if}
 	<EmergencyCallButton
