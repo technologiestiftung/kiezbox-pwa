@@ -103,12 +103,12 @@ export const LAYER_CONFIG: LayerConfig[] = [
 		},
 		getContent: (properties) => ({
 			Öffnungszeiten: properties.opening_hours || 'unbekannt',
-			Location:
+			Standort:
 				properties['defibrillator:location'] ||
 				properties['defibrillator:location:de'] ||
 				'unbekannt',
 			Telefon: properties.phone || properties['contact:phone'] || 'unbekannt',
-			Operator: properties.operator || properties['defibrillator:wikipedia'] || 'unbekannt'
+			Betreiber: properties.operator || properties['defibrillator:wikipedia'] || 'unbekannt'
 		})
 	}
 ];
