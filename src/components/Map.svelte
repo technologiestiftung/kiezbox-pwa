@@ -1,8 +1,7 @@
 <script lang="ts">
+	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { SOURCES_CONFIG } from '$lib/config/sources';
-	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
-	import alkisData from '$lib/data/alkis-land.json';
 	import { mapState, poiState } from '$lib/state/state.svelte';
 	import type { GeoJSON } from 'geojson';
 	import maplibregl, { type AddLayerObject } from 'maplibre-gl';
@@ -10,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import DetailsCard from './DetailsCard.svelte';
 	import Legend from './Legend.svelte';
+
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let clickPoint = $state({ x: 0, y: 0 });
 
@@ -30,14 +30,8 @@
 						attribution: '© OpenStreetMap contributors',
 						minzoom: 10,
 						maxzoom: 13
-					},
-					alkisLand: {
-						type: 'geojson',
-						data: alkisData as unknown as GeoJSON
 					}
 				},
-				// todo: fix types
-				// @ts-ignore
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},

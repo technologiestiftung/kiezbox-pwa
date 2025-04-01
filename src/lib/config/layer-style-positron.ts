@@ -1,4 +1,6 @@
-export const LAYER_STYLE = [
+import type { LayerSpecification } from 'maplibre-gl';
+
+export const LAYER_STYLE: LayerSpecification[] = [
 	{
 		id: 'background',
 		type: 'background',
@@ -42,13 +44,7 @@ export const LAYER_STYLE = [
 		layout: { visibility: 'visible' },
 		paint: {
 			'fill-color': 'hsl(0, 0%, 98%)',
-			'fill-opacity': {
-				base: 1,
-				stops: [
-					[0, 1],
-					[8, 0.5]
-				]
-			}
+			'fill-opacity': ['interpolate', ['linear'], ['zoom'], 0, 1, 8, 0.5]
 		}
 	},
 	{
@@ -61,13 +57,7 @@ export const LAYER_STYLE = [
 		layout: { visibility: 'visible' },
 		paint: {
 			'fill-color': 'rgb(234, 234, 230)',
-			'fill-opacity': {
-				base: 0.6,
-				stops: [
-					[8, 0.8],
-					[9, 0.6]
-				]
-			}
+			'fill-opacity': ['interpolate', ['exponential', 0.6], ['zoom'], 8, 0.8, 9, 0.6]
 		}
 	},
 	{
@@ -80,13 +70,7 @@ export const LAYER_STYLE = [
 		layout: { visibility: 'visible' },
 		paint: {
 			'fill-color': 'rgb(220,224,220)',
-			'fill-opacity': {
-				base: 1,
-				stops: [
-					[8, 0],
-					[12, 1]
-				]
-			}
+			'fill-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0, 12, 1]
 		}
 	},
 	{
@@ -151,14 +135,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'rgb(213, 213, 213)',
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[5.8, 0],
-					[6, 3],
-					[20, 40]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 5.8, 0, 6, 3, 20, 40]
 		}
 	},
 	{
@@ -180,14 +157,7 @@ export const LAYER_STYLE = [
 		},
 		paint: {
 			'line-color': 'rgb(234,234,234)',
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[4, 2],
-					[6, 1.3],
-					[20, 30]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3, 20, 30]
 		}
 	},
 	{
@@ -206,13 +176,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'hsl(0, 0%, 88%)',
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.55,
-				stops: [
-					[13, 1.8],
-					[20, 20]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.55], ['zoom'], 13, 1.8, 20, 20]
 		}
 	},
 	{
@@ -231,13 +195,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'hsl(0, 0%, 88%)',
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.5,
-				stops: [
-					[11, 6],
-					[17, 55]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.5], ['zoom'], 11, 6, 17, 55]
 		}
 	},
 	{
@@ -251,13 +209,7 @@ export const LAYER_STYLE = [
 		layout: { visibility: 'visible' },
 		paint: {
 			'fill-color': 'rgba(255, 255, 255, 1)',
-			'fill-opacity': {
-				base: 1,
-				stops: [
-					[13, 0],
-					[14, 1]
-				]
-			}
+			'fill-opacity': ['interpolate', ['linear'], ['zoom'], 13, 0, 14, 1]
 		}
 	},
 	{
@@ -276,13 +228,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'rgba(255, 255, 255, 1)',
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.5,
-				stops: [
-					[11, 4],
-					[17, 50]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.5], ['zoom'], 11, 4, 17, 50]
 		}
 	},
 	{
@@ -305,13 +251,7 @@ export const LAYER_STYLE = [
 		layout: { 'line-cap': 'round', 'line-join': 'round' },
 		paint: {
 			'line-color': 'rgb(242,243,240)',
-			'line-width': {
-				base: 1.2,
-				stops: [
-					[15, 1],
-					[17, 4]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.2], ['zoom'], 15, 1, 17, 4]
 		}
 	},
 	{
@@ -329,13 +269,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'rgb(234, 234, 234)',
 			'line-opacity': 0.9,
-			'line-width': {
-				base: 1.2,
-				stops: [
-					[13, 1],
-					[20, 10]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.2], ['zoom'], 13, 1, 20, 10]
 		}
 	},
 	{
@@ -354,13 +288,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'hsl(0, 0%, 88%)',
 			'line-opacity': 0.9,
-			'line-width': {
-				base: 1.55,
-				stops: [
-					[13, 1.8],
-					[20, 20]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.55], ['zoom'], 13, 1.8, 20, 20]
 		}
 	},
 	{
@@ -383,13 +311,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': 'rgb(213, 213, 213)',
 			'line-dasharray': [12, 0],
-			'line-width': {
-				base: 1.3,
-				stops: [
-					[10, 3],
-					[20, 23]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 10, 3, 20, 23]
 		}
 	},
 	{
@@ -411,13 +333,7 @@ export const LAYER_STYLE = [
 		},
 		paint: {
 			'line-color': '#fff',
-			'line-width': {
-				base: 1.3,
-				stops: [
-					[10, 2],
-					[20, 20]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 10, 2, 20, 20]
 		}
 	},
 	{
@@ -437,7 +353,7 @@ export const LAYER_STYLE = [
 			'line-join': 'round',
 			visibility: 'visible'
 		},
-		paint: { 'line-color': 'hsla(0, 0%, 85%, 0.69)', 'line-width': 2 }
+		paint: { 'line-color': 'hsla(0, 0%, 85%, 0.69)', 'line-width': 2 } // No base/stops here
 	},
 	{
 		id: 'highway_motorway_casing',
@@ -460,14 +376,7 @@ export const LAYER_STYLE = [
 			'line-color': 'rgb(213, 213, 213)',
 			'line-dasharray': [2, 0],
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[5.8, 0],
-					[6, 3],
-					[20, 40]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 5.8, 0, 6, 3, 20, 40]
 		}
 	},
 	{
@@ -488,21 +397,8 @@ export const LAYER_STYLE = [
 			visibility: 'visible'
 		},
 		paint: {
-			'line-color': {
-				base: 1,
-				stops: [
-					[5.8, 'hsla(0, 0%, 85%, 0.53)'],
-					[6, '#fff']
-				]
-			},
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[4, 2],
-					[6, 1.3],
-					[20, 30]
-				]
-			}
+			'line-color': ['interpolate', ['linear'], ['zoom'], 5.8, 'hsla(0, 0%, 85%, 0.53)', 6, '#fff'],
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3, 20, 30]
 		}
 	},
 	{
@@ -520,13 +416,7 @@ export const LAYER_STYLE = [
 		},
 		paint: {
 			'line-color': 'hsla(0, 0%, 85%, 0.53)',
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[4, 2],
-					[6, 1.3]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3]
 		}
 	},
 	{
@@ -608,13 +498,7 @@ export const LAYER_STYLE = [
 		layout: { 'line-join': 'round', visibility: 'visible' },
 		paint: {
 			'line-color': '#dddddd',
-			'line-width': {
-				base: 1.3,
-				stops: [
-					[16, 3],
-					[20, 7]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 16, 3, 20, 7]
 		}
 	},
 	{
@@ -633,13 +517,7 @@ export const LAYER_STYLE = [
 		paint: {
 			'line-color': '#fafafa',
 			'line-dasharray': [3, 3],
-			'line-width': {
-				base: 1.3,
-				stops: [
-					[16, 2],
-					[20, 6]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 16, 2, 20, 6]
 		}
 	},
 	{
@@ -663,14 +541,7 @@ export const LAYER_STYLE = [
 			'line-color': 'rgb(213, 213, 213)',
 			'line-dasharray': [2, 0],
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[5.8, 0],
-					[6, 5],
-					[20, 45]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 5.8, 0, 6, 5, 20, 45]
 		}
 	},
 	{
@@ -691,21 +562,8 @@ export const LAYER_STYLE = [
 			visibility: 'visible'
 		},
 		paint: {
-			'line-color': {
-				base: 1,
-				stops: [
-					[5.8, 'hsla(0, 0%, 85%, 0.53)'],
-					[6, '#fff']
-				]
-			},
-			'line-width': {
-				base: 1.4,
-				stops: [
-					[4, 2],
-					[6, 1.3],
-					[20, 30]
-				]
-			}
+			'line-color': ['interpolate', ['linear'], ['zoom'], 5.8, 'hsla(0, 0%, 85%, 0.53)', 6, '#fff'],
+			'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3, 20, 30]
 		}
 	},
 	{
@@ -774,16 +632,10 @@ export const LAYER_STYLE = [
 		},
 		paint: {
 			'line-blur': 0.4,
-			'line-color': 'rgb(230, 204, 207)',
+			'line-color': 'rgb(93 80 139)',
 			'line-dasharray': [2, 2],
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.3,
-				stops: [
-					[3, 1],
-					[22, 15]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 3, 1, 22, 15]
 		}
 	},
 	{
@@ -796,22 +648,10 @@ export const LAYER_STYLE = [
 		filter: ['all', ['==', 'admin_level', 2], ['!has', 'claimed_by']],
 		layout: { 'line-cap': 'round', 'line-join': 'round' },
 		paint: {
-			'line-blur': {
-				base: 1,
-				stops: [
-					[0, 0.4],
-					[22, 4]
-				]
-			},
-			'line-color': 'rgb(230, 204, 207)',
+			'line-blur': ['interpolate', ['linear'], ['zoom'], 0, 0.4, 22, 4],
+			'line-color': 'rgb(93 80 139)',
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.1,
-				stops: [
-					[3, 1],
-					[22, 20]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.1], ['zoom'], 3, 1, 22, 20]
 		}
 	},
 	{
@@ -824,22 +664,10 @@ export const LAYER_STYLE = [
 		filter: ['==', 'admin_level', 2],
 		layout: { 'line-cap': 'round', 'line-join': 'round' },
 		paint: {
-			'line-blur': {
-				base: 1,
-				stops: [
-					[0, 0.4],
-					[22, 4]
-				]
-			},
-			'line-color': 'rgb(230, 204, 207)',
+			'line-blur': ['interpolate', ['linear'], ['zoom'], 0, 0.4, 22, 4],
+			'line-color': 'rgb(93 80 139)',
 			'line-opacity': 1,
-			'line-width': {
-				base: 1.1,
-				stops: [
-					[3, 1],
-					[22, 20]
-				]
-			}
+			'line-width': ['interpolate', ['exponential', 1.1], ['zoom'], 3, 1, 22, 20]
 		}
 	},
 	{
@@ -932,21 +760,21 @@ export const LAYER_STYLE = [
 		maxzoom: 15,
 		filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'town']],
 		layout: {
-			'icon-image': {
-				base: 1,
-				stops: [
-					[0, 'circle-11'],
-					[8, '']
-				]
-			},
+			'icon-image': [
+				'step',
+				['zoom'],
+				'circle-11', // value before first stop
+				8,
+				'' // at zoom 8, change to ''
+			],
 			'icon-size': 0.4,
-			'text-anchor': {
-				base: 1,
-				stops: [
-					[0, 'left'],
-					[8, 'center']
-				]
-			},
+			'text-anchor': [
+				'step',
+				['zoom'],
+				'left', // value before first stop
+				8,
+				'center' // at zoom 8, change to 'center'
+			],
 			'text-field': '{name:latin}\n{name:nonlatin}',
 			'text-font': ['Metropolis Regular'],
 			'text-justify': 'left',
@@ -976,21 +804,9 @@ export const LAYER_STYLE = [
 			['all', ['!=', 'capital', 2], ['==', 'class', 'city'], ['>', 'rank', 3]]
 		],
 		layout: {
-			'icon-image': {
-				base: 1,
-				stops: [
-					[0, 'circle-11'],
-					[8, '']
-				]
-			},
+			'icon-image': ['step', ['zoom'], 'circle-11', 8, ''],
 			'icon-size': 0.4,
-			'text-anchor': {
-				base: 1,
-				stops: [
-					[0, 'left'],
-					[8, 'center']
-				]
-			},
+			'text-anchor': ['step', ['zoom'], 'left', 8, 'center'],
 			'text-field': '{name:latin}\n{name:nonlatin}',
 			'text-font': ['Metropolis Regular'],
 			'text-justify': 'left',
@@ -1020,21 +836,9 @@ export const LAYER_STYLE = [
 			['all', ['==', 'capital', 2], ['==', 'class', 'city']]
 		],
 		layout: {
-			'icon-image': {
-				base: 1,
-				stops: [
-					[0, 'star-11'],
-					[8, '']
-				]
-			},
+			'icon-image': ['step', ['zoom'], 'star-11', 8, ''],
 			'icon-size': 1,
-			'text-anchor': {
-				base: 1,
-				stops: [
-					[0, 'left'],
-					[8, 'center']
-				]
-			},
+			'text-anchor': ['step', ['zoom'], 'left', 8, 'center'],
 			'text-field': '{name:latin}\n{name:nonlatin}',
 			'text-font': ['Metropolis Regular'],
 			'text-justify': 'left',
@@ -1064,21 +868,9 @@ export const LAYER_STYLE = [
 			['all', ['!=', 'capital', 2], ['<=', 'rank', 3], ['==', 'class', 'city']]
 		],
 		layout: {
-			'icon-image': {
-				base: 1,
-				stops: [
-					[0, 'circle-11'],
-					[8, '']
-				]
-			},
+			'icon-image': ['step', ['zoom'], 'circle-11', 8, ''],
 			'icon-size': 0.4,
-			'text-anchor': {
-				base: 1,
-				stops: [
-					[0, 'left'],
-					[8, 'center']
-				]
-			},
+			'text-anchor': ['step', ['zoom'], 'left', 8, 'center'],
 			'text-field': '{name:latin}\n{name:nonlatin}',
 			'text-font': ['Metropolis Regular'],
 			'text-justify': 'left',
@@ -1128,24 +920,20 @@ export const LAYER_STYLE = [
 		layout: {
 			'text-field': '{name:latin}',
 			'text-font': ['Metropolis Light Italic'],
-			'text-size': {
-				base: 1,
-				stops: [
-					[0, 9],
-					[6, 11]
-				]
-			},
+			'text-size': ['interpolate', ['linear'], ['zoom'], 0, 9, 6, 11],
 			'text-transform': 'uppercase',
 			visibility: 'visible'
 		},
 		paint: {
-			'text-color': {
-				base: 1,
-				stops: [
-					[3, 'rgb(157,169,177)'],
-					[4, 'rgb(153, 153, 153)']
-				]
-			},
+			'text-color': [
+				'interpolate',
+				['linear'],
+				['zoom'],
+				3,
+				'rgb(157,169,177)',
+				4,
+				'rgb(153, 153, 153)'
+			],
 			'text-halo-color': 'rgba(236,236,234,0.7)',
 			'text-halo-width': 1.4
 		}
@@ -1167,24 +955,20 @@ export const LAYER_STYLE = [
 		layout: {
 			'text-field': '{name:latin}',
 			'text-font': ['Metropolis Regular'],
-			'text-size': {
-				base: 1,
-				stops: [
-					[0, 10],
-					[6, 12]
-				]
-			},
+			'text-size': ['interpolate', ['linear'], ['zoom'], 0, 10, 6, 12],
 			'text-transform': 'uppercase',
 			visibility: 'visible'
 		},
 		paint: {
-			'text-color': {
-				base: 1,
-				stops: [
-					[3, 'rgb(157,169,177)'],
-					[4, 'rgb(153, 153, 153)']
-				]
-			},
+			'text-color': [
+				'interpolate',
+				['linear'],
+				['zoom'],
+				3,
+				'rgb(157,169,177)',
+				4,
+				'rgb(153, 153, 153)'
+			],
 			'text-halo-color': 'rgba(236,236,234,0.7)',
 			'text-halo-width': 1.4
 		}
@@ -1207,25 +991,20 @@ export const LAYER_STYLE = [
 			'text-anchor': 'center',
 			'text-field': '{name:latin}',
 			'text-font': ['Metropolis Regular'],
-			'text-size': {
-				base: 1.4,
-				stops: [
-					[0, 10],
-					[3, 12],
-					[4, 14]
-				]
-			},
+			'text-size': ['interpolate', ['exponential', 1.4], ['zoom'], 0, 10, 3, 12, 4, 14],
 			'text-transform': 'uppercase',
 			visibility: 'visible'
 		},
 		paint: {
-			'text-color': {
-				base: 1,
-				stops: [
-					[3, 'rgb(157,169,177)'],
-					[4, 'rgb(153, 153, 153)']
-				]
-			},
+			'text-color': [
+				'interpolate',
+				['linear'],
+				['zoom'],
+				3,
+				'rgb(157,169,177)',
+				4,
+				'rgb(153, 153, 153)'
+			],
 			'text-halo-color': 'rgba(236,236,234,0.7)',
 			'text-halo-width': 1.4
 		}
