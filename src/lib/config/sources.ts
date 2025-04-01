@@ -16,25 +16,6 @@ export interface SourceConfig {
 	data?: GeoJSON;
 }
 
-export const BASE_SOURCES_CONFIG: SourceConfig[] = [
-	{
-		id: 'osm',
-		type: 'raster',
-		tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-		tileSize: 256,
-		attribution: '© OpenStreetMap contributors',
-		maxzoom: 18
-	},
-	{
-		id: 'osmLocal',
-		type: 'raster',
-		tiles: ['/tiles/{z}/{x}/{y}.png'],
-		tileSize: 256,
-		attribution: '© OpenStreetMap contributors',
-		maxzoom: 15
-	}
-];
-
 export const SOURCES_CONFIG: SourceConfig[] = [
 	{
 		id: 'drinkingWater',

@@ -17,39 +17,6 @@ export interface LayerConfig {
 	getContent?: (properties: Record<string, any>) => Record<string, string | boolean | null>;
 }
 
-export const BASE_LAYER_CONFIG: LayerConfig[] = [
-	{
-		id: 'osm-layer',
-		label: 'OSM Layer',
-		alt: 'OpenStreetMap',
-		type: 'raster',
-		source: 'osm',
-		layout: {
-			visibility: 'visible'
-		},
-		paint: {
-			'raster-saturation': -1,
-			'raster-contrast': 0.2,
-			'raster-opacity': 1
-		}
-	},
-	{
-		id: 'osm-local-layer',
-		label: 'OSM Local',
-		alt: 'OpenStreetMap Local',
-		type: 'raster',
-		source: 'osmLocal',
-		layout: {
-			visibility: 'visible'
-		},
-		paint: {
-			'raster-saturation': -1,
-			'raster-contrast': 0.2,
-			'raster-opacity': 1
-		}
-	}
-];
-
 export const LAYER_CONFIG: LayerConfig[] = [
 	{
 		id: 'water-pumps-layer',
