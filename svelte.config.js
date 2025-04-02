@@ -24,10 +24,9 @@ const config = {
 			'@/*': './path/to/lib/*'
 		}
 	},
-	  vite: {
-    assetsInclude: ['**/*.geojson']
-  }
-	
+	vite: {
+		assetsInclude: ['**/*.geojson']
+	}
 };
 
 export default config;

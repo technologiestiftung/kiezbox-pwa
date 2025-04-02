@@ -6,7 +6,7 @@
 	import PrecautionGuide from '../components/PrecautionGuide.svelte';
 </script>
 
-<div class="page-root mx-auto flex h-full max-w-[43.75rem] flex-col scroll-auto">
+<div class="page-root mx-auto flex h-full max-w-[43.75rem] flex-col scroll-auto bg-white">
 	<Header></Header>
 	<EmergencyCall />
 	<PrecautionGuide></PrecautionGuide>
