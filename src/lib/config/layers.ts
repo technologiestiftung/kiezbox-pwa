@@ -17,41 +17,7 @@ export interface LayerConfig {
 	getContent?: (properties: Record<string, any>) => Record<string, string | boolean | null>;
 }
 
-export const BASE_LAYER_CONFIG: LayerConfig[] = [
-	{
-		id: 'osm-local-layer',
-		label: 'OSM Local',
-		alt: 'OpenStreetMap Local',
-		type: 'raster',
-		source: 'osmLocal',
-		layout: {
-			visibility: 'visible'
-		},
-		paint: {
-			'raster-saturation': -1,
-			'raster-contrast': 0.2,
-			'raster-opacity': 1
-		}
-	}
-];
-
 export const LAYER_CONFIG: LayerConfig[] = [
-	{
-		id: 'drinking-water-layer',
-		label: 'Trinkwasser',
-		icon: '/icons/drinking-water.svg',
-		alt: 'Trinkwasser Icon',
-		type: 'symbol',
-		source: 'drinkingWater',
-		layout: {
-			visibility: 'visible',
-			'icon-image': 'drinking-water-icon',
-			'icon-size': 0.3
-		},
-		getContent: (properties) => ({
-			Name: properties.bezeichnun
-		})
-	},
 	{
 		id: 'water-pumps-layer',
 		label: 'Wasserpumpe',
@@ -68,6 +34,22 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			Status: properties['pump:status'] === 'ok' ? 'funktioniert' : 'kaputt',
 			Trinkwasser: properties.drinking_water === 'yes',
 			Überprüft_am: properties.check_date
+		})
+	},
+	{
+		id: 'drinking-water-layer',
+		label: 'Trinkwasser',
+		icon: '/icons/drinking-water.svg',
+		alt: 'Trinkwasser Icon',
+		type: 'symbol',
+		source: 'drinkingWater',
+		layout: {
+			visibility: 'visible',
+			'icon-image': 'drinking-water-icon',
+			'icon-size': 0.3
+		},
+		getContent: (properties) => ({
+			Name: properties.bezeichnun
 		})
 	},
 	{
@@ -103,12 +85,12 @@ export const LAYER_CONFIG: LayerConfig[] = [
 		},
 		getContent: (properties) => ({
 			Öffnungszeiten: properties.opening_hours || 'unbekannt',
-			Standort:
+			Location:
 				properties['defibrillator:location'] ||
 				properties['defibrillator:location:de'] ||
 				'unbekannt',
 			Telefon: properties.phone || properties['contact:phone'] || 'unbekannt',
-			Betreiber: properties.operator || properties['defibrillator:wikipedia'] || 'unbekannt'
+			Operator: properties.operator || properties['defibrillator:wikipedia'] || 'unbekannt'
 		})
 	}
 ];
