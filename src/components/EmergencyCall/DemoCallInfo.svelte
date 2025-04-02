@@ -1,7 +1,7 @@
 <script lang="ts">
-	let { isInCall } = $props();
 	import { t } from '$lib/translations';
 	import SpeechBubble from './SpeechBubble.svelte';
+	let { isInCall } = $props();
 </script>
 
 {#if !isInCall}

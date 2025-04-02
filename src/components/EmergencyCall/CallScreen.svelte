@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Microphone, MicrophoneOff, VolumeMute, VolumeUp } from 'carbon-icons-svelte';
-	import EmergencyCallButton from './EmergencyCallButton.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { t } from '$lib/translations';
+	import { Microphone, MicrophoneOff, VolumeMute, VolumeUp } from 'carbon-icons-svelte';
+	import EmergencyCallButton from './EmergencyCallButton.svelte';
 
 	let {
 		isInCall,

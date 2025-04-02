@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
+	import { t } from '$lib/translations';
 	import EmergencyCallButton from './EmergencyCallButton.svelte';
 	let { isEmergency, onClick } = $props();
-	import { t } from '$lib/translations';
 </script>
 
 <div

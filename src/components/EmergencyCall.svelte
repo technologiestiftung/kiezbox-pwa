@@ -1,16 +1,15 @@
 <script lang="ts">
-	import Dialer from './EmergencyCall/Dialer.svelte';
-	import Modal from './Modal.svelte';
-	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
-	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
-	import { t } from '$lib/translations';
-	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
 	import { browser } from '$app/environment';
-	import { onDestroy } from 'svelte';
-	import { RegistererState } from 'sip.js';
+	import { t } from '$lib/translations';
+	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
 	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import { RegistererState } from 'sip.js';
+	import { onDestroy } from 'svelte';
+	import CallScreen from './EmergencyCall/CallScreen.svelte';
+	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
+	import Dialer from './EmergencyCall/Dialer.svelte';
+	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
+	import Modal from './Modal.svelte';
 
 	let isEmergency = $state(true);
 	let isModal = $state(false);
@@ -18,14 +17,13 @@
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
 
 	let callServiceApi = $state<CallServiceApi | null>(null);
-	let callServiceState = $state<CallServiceState | null>(null); // Store reactive state
+	let callServiceState = $state<CallServiceState | null>(null);
 	let unsubscribeState: (() => void) | null = null;
 
 	// Non-reactive flag to prevent re-initialization
 	let initialized = false;
 
 	// states
-
 	const callState = $derived(callServiceState?.callState ?? false);
 	const registererState = $derived(callServiceState?.registererState ?? false);
 	const callerId = $derived(callServiceState?.callerId ?? null);
@@ -35,8 +33,7 @@
 	const isSpeakerMuted = $derived(callServiceState?.isSpeakerMuted ?? false);
 	const errorMessage = $derived(callServiceState?.errorMessage ?? null);
 
-	// Elements
-
+	// elements
 	const kiezboxConfig: KiezboxConfig = {
 		kbServerAddress: 'emergency.ds-apps.tsb-berlin.de',
 		kbWSSPort: 8089,
@@ -66,7 +63,7 @@
 			}
 
 			console.log('[$effect] Initializing CallService API...');
-			initialized = true; // Mark as initialized to prevent re-runs
+			initialized = true;
 
 			// Call the factory function
 			const serviceApi = createCallService(kiezboxConfig);
@@ -77,7 +74,7 @@
 				callServiceState = newState;
 			});
 
-			callServiceApi = serviceApi; // Assign the API object
+			callServiceApi = serviceApi;
 		} catch (error) {
 			console.error('Initialization error:', error);
 			return;
@@ -135,7 +132,6 @@
 				}
 			}, 100);
 
-			// Ensure cleanup happens if promise is abandoned
 			setTimeout(() => {
 				cleanup();
 				reject(new Error('Registration timed out.'));
@@ -144,7 +140,7 @@
 	};
 
 	const handleCallAction = async () => {
-		if (!callServiceApi) return; // Check if API object exists
+		if (!callServiceApi) return;
 
 		if (registererState !== RegistererState.Registered) {
 			console.warn('Not registered, attempting to connect...');
@@ -165,7 +161,6 @@
 
 		console.log('[$effect] Call action triggered');
 		console.log('[$effect] Call state:', callState);
-
 		console.log('[$effect] Registerer state:', registererState);
 
 		// Use the API object to call actions
