@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { SOURCES_CONFIG } from '$lib/config/sources';
 	import { mapState, poiState } from '$lib/state/state.svelte';
@@ -16,57 +17,25 @@
 
 	onMount(() => {
 		if (!mapContainer) return;
+		const baseUrl = window.location.origin;
 
 		map = new maplibregl.Map({
 			container: mapContainer,
 			style: {
 				version: 8,
 				sources: {
-					osm: {
-						type: 'raster',
-						tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-						tileSize: 256,
-						attribution: '© OpenStreetMap contributors'
-					}
-					// osmLocal: {
-					// 	type: 'raster',
-					// 	tiles: ['http://localhost:3000/tiles/{z}/{x}/{y}.png'],
-					// 	tileSize: 256,
-					// 	attribution: '© OpenStreetMap contributors'
-					// }
+					openmaptiles: {
+						type: 'vector',
+						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
+						attribution: '© OpenStreetMap contributors',
+						maxzoom: 13
+					},
 				},
-				layers: [
-					{
-						id: 'osm-layer',
-						type: 'raster',
-						source: 'osm',
-						layout: {
-							visibility: 'visible'
-						},
-						paint: {
-							'raster-saturation': -1,
-							'raster-contrast': 0.2,
-							'raster-opacity': 1
-						}
-					}
-					// {
-					// 	id: 'osm-local-layer',
-					// 	type: 'raster',
-					// 	source: 'osmLocal',
-					// 	layout: {
-					// 		visibility: 'visible'
-					// 	},
-					// 	paint: {
-					// 		'raster-saturation': -1,
-					// 		'raster-contrast': 0.2,
-					// 		'raster-opacity': 1
-					// 	}
-					// }
-				]
+				layers: LAYER_STYLE,
+				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},
 			center: [13.404954, 52.520008],
-			zoom: 12,
-			maxZoom: 18,
+			zoom: 10,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
 		});
