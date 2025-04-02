@@ -29,7 +29,7 @@
 						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
 						attribution: '© OpenStreetMap contributors',
 						maxzoom: 13
-					},
+					}
 				},
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'

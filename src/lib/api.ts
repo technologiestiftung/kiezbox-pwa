@@ -1,11 +1,11 @@
-import { PUBLIC_GO_API_BASE_URL } from '$env/static/public';
+import { PUBLIC_KB_SERVER_ADDRESS } from '$env/static/public';
 
 const isCrossOrgin =
 	typeof window !== 'undefined' &&
-	window.location.origin !== new URL(PUBLIC_GO_API_BASE_URL).origin;
+	window.location.origin !== new URL(PUBLIC_KB_SERVER_ADDRESS).origin;
 
 export async function apiFetch(resource: string, options: RequestInit = {}) {
-	const url = `${PUBLIC_GO_API_BASE_URL}${resource}`; // e.g., resource = '/status'
+	const url = `${PUBLIC_KB_SERVER_ADDRESS}${resource}`; // e.g., resource = '/status'
 
 	const fetchOptions: RequestInit = {
 		...options,
