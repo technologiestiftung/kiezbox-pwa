@@ -1,4 +1,4 @@
-import { writable, get, readable, type Readable } from 'svelte/store';
+import { PUBLIC_LOG_LEVEL } from '$env/static/public';
 import {
 	Invitation,
 	Inviter,
@@ -9,10 +9,12 @@ import {
 	UserAgent,
 	Web,
 	type InviterInviteOptions,
+	type LogLevel,
 	type UserAgentDelegate
 	// Add these imports for Logger
 } from 'sip.js';
 import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
+import { get, readable, writable, type Readable } from 'svelte/store';
 import { assignStream, CallState, type CallServiceState, type KiezboxConfig } from './callUtils';
 
 export const createCallService = (config: KiezboxConfig) => {
@@ -270,7 +272,7 @@ export const createCallService = (config: KiezboxConfig) => {
 			userAgent = new UserAgent({
 				uri: uri,
 				transportOptions: { server: kbWSS, connectionTimeout: 100, keepAliveInterval: 300 },
-				logLevel: 'debug',
+				logLevel: (PUBLIC_LOG_LEVEL as LogLevel) || 'error',
 				authorizationUsername: config.kbSIPUsername,
 				authorizationPassword: config.kbSIPPassword,
 				displayName: config.kbDisplayName,
