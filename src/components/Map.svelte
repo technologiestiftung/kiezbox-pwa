@@ -29,7 +29,7 @@
 						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
 						attribution: '© OpenStreetMap contributors',
 						maxzoom: 13
-					},
+					}
 				},
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
@@ -68,6 +68,18 @@
 					layout: layer.layout
 				} as AddLayerObject);
 			});
+
+			const interactiveLayerIds = LAYER_CONFIG.map((layer) => layer.id);
+
+			if (interactiveLayerIds.length > 0) {
+				map.on('mouseenter', interactiveLayerIds, () => {
+					map.getCanvas().style.cursor = 'pointer';
+				});
+
+				map.on('mouseleave', interactiveLayerIds, () => {
+					map.getCanvas().style.cursor = '';
+				});
+			}
 		});
 
 		// Add controls
@@ -82,12 +94,6 @@
 		map.addControl(new maplibregl.FullscreenControl(), 'top-right');
 
 		map.on('click', (e: maplibregl.MapMouseEvent) => {
-			if (poiState.layer && poiState.properties) {
-				poiState.layer = null;
-				poiState.properties = null;
-				return;
-			}
-
 			const features = map.queryRenderedFeatures(e.point);
 			clickPoint = { x: e.point.x, y: e.point.y };
 
@@ -97,10 +103,17 @@
 				return;
 			}
 
-			poiState.properties = features[0].properties;
-			poiState.layer = features[0].layer;
+			const foundLayer = LAYER_CONFIG.find((layer) => layer.id === features[0].layer.id);
 
-			clickPoint = { x: e.point.x, y: e.point.y };
+			if (foundLayer) {
+				poiState.layer = features[0].layer;
+				poiState.properties = features[0].properties;
+				clickPoint = { x: e.point.x, y: e.point.y };
+			} else {
+				poiState.layer = null;
+				poiState.properties = null;
+				return;
+			}
 		});
 
 		mapState.map = map;

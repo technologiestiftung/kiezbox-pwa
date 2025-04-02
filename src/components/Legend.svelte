@@ -22,7 +22,7 @@
 	>
 		<AccordionItem value="legend">
 			<AccordionTrigger
-				class="text-purple-dark flex w-full justify-center gap-3 px-2 py-3"
+				class="text-purple-dark flex w-full cursor-pointer justify-center gap-3 px-2 py-3"
 				style={isOpen ? 'background-color: #F1F0F5' : ''}
 				on:click={toggleIsOpen}
 			>
@@ -39,6 +39,7 @@
 								<label for={layer.id}>{layer.label}</label>
 							</div>
 							<Checkbox
+								class="cursor-pointer"
 								id={layer.id}
 								checked={layerState.layerVisibility[layer.id] === 'visible'}
 								onCheckedChange={() => layerState.toggleLayerVisibility(layer.id)}
