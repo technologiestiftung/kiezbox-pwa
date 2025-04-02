@@ -37,6 +37,7 @@
 			}
 		},
 		"status": {
+			"calling": "Anruf wird aufgebaut...",
 			"online": "Online",
 			"offline": "Offline",
 			"error": "Fehler",
@@ -47,10 +48,15 @@
 			"reconnecting": "Wiederverbinden...",
 			"reconnected": "Wieder verbunden",
 			"connection_failed": "Verbindung fehlgeschlagen",
-			"dialing": "Wählen...",
-			"call_active": "Anruf aktiv",
+			"dialing": "...",
+			"call_established": "Anruf aktiv",
 			"ending_call": "Anruf beenden...",
-			"call_failed": "Anruf beendet",
+			"call_failed": "Anruf fehlgeschlagen",
+			"call_ended": "Anruf beendet",
+			"call_timeout": "Anrufzeitüberschreitung",
+			"call_terminated": "Anruf abgebrochen",
+			"call_not_answered": "Anruf nicht beantwortet",
+			"call_rejected": "Anruf abgelehnt",
 			"ready": "Bereit"
 		}
 	},
@@ -94,9 +100,17 @@
 			},
 			"emergency": {
 				"phone_button": "Zu Notruf",
+				"default": {
+					"caller_id": "ID: ",
+					"call_state": "Status: "
+				},
 				"offline": {
 					"call_button": "Notruf starten",
 					"text": "Sie können nun einen Notruf zur Berliner Feuerwehr absenden. Bitte beachten Sie, dass es ich hier um einen echten Notruf handelt. Missbrauch ist strafbar!"
+				},
+				"connecting": {
+					"call_button": "Notruf wird aufgebaut",
+					"text": "Sie werden nun verbunden mit der Berliner Feuerwehr, bitte beachten sie folgende Fragen:"
 				},
 				"online": {
 					"call_button": "Notruf beenden",

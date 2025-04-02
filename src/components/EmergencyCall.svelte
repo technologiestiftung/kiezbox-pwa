@@ -6,16 +6,11 @@
 	import { t } from '$lib/translations';
 	import CallScreen from './EmergencyCall/CallScreen.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import {
-		CallState,
-		createCallService,
-		type CallServiceApi,
-		type CallServiceState,
-		type KiezboxConfig
-	} from '$lib/utils/callService';
+	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
 	import { browser } from '$app/environment';
 	import { onDestroy } from 'svelte';
 	import { RegistererState } from 'sip.js';
+	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
 
 	let isEmergency = $state(true);
 	let isModal = $state(false);
@@ -200,11 +195,35 @@
 		console.log('Mode changed to:', isEmergency ? 'Emergency' : 'Demo');
 	};
 
+	// Helper function to get emergency call button text based on call state
+	const status = (callState: CallState | false) => {
+		switch (callState) {
+			case CallState.CALL_ESTABLISHED:
+				return $t('common.status.call_established');
+			case CallState.CALLING:
+				return $t('common.status.calling');
+			case CallState.CALL_FAILED:
+				return $t('common.status.call_failed');
+			case CallState.CALL_REJECTED:
+				return $t('common.status.call_rejected');
+			case CallState.CALL_TERMINATED:
+				return $t('common.status.call_terminated');
+			case CallState.DISCONNECTED:
+				return $t('common.status.disconnected');
+			case CallState.CONNECTED:
+				return $t('common.status.connected');
+			default:
+				return $t('common.status.disconnected');
+		}
+	};
+
+	const statusText = $derived(status(callState));
+
 	// Determine button text and disabled states based on service state
 	const callButtonText = $derived(
 		isEmergency
 			? callState === CallState.CALLING
-				? 'Calling...'
+				? $t('content.emergency_phone.emergency.connecting.call_button')
 				: $t('content.emergency_phone.emergency.offline.call_button')
 			: $t('content.emergency_phone.default.offline.call_button')
 	);
@@ -225,13 +244,6 @@
 	);
 </script>
 
-<Button variant="default" class="w-32" on:click={() => changeState()}>
-	{isEmergency
-		? callState === CallState.CALLING
-			? 'Calling...'
-			: $t('content.emergency_phone.emergency.offline.call_button')
-		: $t('content.emergency_phone.default.offline.call_button')}
-</Button>
 <Dialer {isEmergency} onClick={openCaller}></Dialer>
 
 <Modal close={closeCaller} {isModal}>
@@ -244,6 +256,20 @@
 					<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 				{/if}
 			</div>
+			{#if callerId}
+				<div class="flex flex-col items-center justify-center">
+					<span class="body-text text-center">
+						{$t('content.emergency_phone.emergency.default.caller_id') + callerId}
+					</span>
+				</div>
+			{/if}
+			{#if callState}
+				<div class="flex flex-col items-center justify-center">
+					<span class="body-text text-center">
+						{$t('content.emergency_phone.emergency.default.call_state') + callState}
+					</span>
+				</div>
+			{/if}
 
 			<CallScreen
 				isInCall={callState === CallState.CALL_ESTABLISHED}

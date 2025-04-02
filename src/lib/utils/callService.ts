@@ -12,38 +12,8 @@ import {
 	type UserAgentDelegate
 	// Add these imports for Logger
 } from 'sip.js';
-import type { IncomingResponse } from 'sip.js/lib/core';
-
-export interface KiezboxConfig {
-	kbServerAddress: string;
-	kbWSSPort: number;
-	kbWSSPath: string;
-	kbDomain: string;
-	kbSIPUsername: string;
-	kbSIPPassword: string;
-	kbisplayName: string;
-}
-
-export interface CallServiceState {
-	callState: CallState;
-	registererState: RegistererState;
-	errorMessage: string | null;
-	callerId: string | null;
-	isMicrophoneMuted: boolean;
-	isSpeakerMuted: boolean;
-	callDuration: number;
-	remoteStream: MediaStream | null;
-	localHTMLAudioElement: HTMLAudioElement | null;
-}
-
-export enum CallState {
-	DISCONNECTED = 'DISCONNECTED',
-	CONNECTED = 'CONNECTED',
-	CALLING = 'CALLING',
-	CALL_INCOMING = 'CALL_INCOMING',
-	CALL_ESTABLISHED = 'CALL_ESTABLISHED',
-	CALL_TERMINATED = 'CALL_TERMINATED'
-}
+import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
+import { assignStream, CallState, type CallServiceState, type KiezboxConfig } from './callUtils';
 
 export const createCallService = (config: KiezboxConfig) => {
 	let remoteAudioElement: HTMLAudioElement | null = null;
@@ -167,11 +137,7 @@ export const createCallService = (config: KiezboxConfig) => {
 					}
 				}
 			} catch (error: unknown) {
-				if (error instanceof Error) {
-					setError(`Failed to unregister: ${error.message}`);
-				} else {
-					setError(`Failed to unregister: ${error}`);
-				}
+				setError(`Failed to unregister: ${error}`);
 			} finally {
 				registerer = null;
 				// reset state
@@ -219,6 +185,7 @@ export const createCallService = (config: KiezboxConfig) => {
 			setError(null); // Clear connection errors
 			register(); // Attempt registration
 		},
+
 		onDisconnect: (error: Error) => {
 			_state.update((s) => ({
 				...s,
@@ -270,7 +237,7 @@ export const createCallService = (config: KiezboxConfig) => {
 				}
 
 				if (remoteAudioElement) {
-					assignStream(sessionDescriptionHandler.remoteMediaStream, remoteAudioElement);
+					assignStream(sessionDescriptionHandler.remoteMediaStream, remoteAudioElement, setError);
 				}
 			} else if (newState === SessionState.Terminated) {
 				cleanupSession(session);
@@ -280,36 +247,6 @@ export const createCallService = (config: KiezboxConfig) => {
 				console.log('[CallService] Session terminating...');
 			}
 		});
-	};
-
-	const assignStream = (stream: MediaStream, element: HTMLMediaElement | null) => {
-		if (!element) {
-			setError('No audio element available to assign stream.');
-			return;
-		}
-		// Set element source.
-		element.autoplay = true;
-		element.srcObject = stream;
-
-		// Load and start playback of media.
-		element.play().catch((error: Error) => {
-			setError(`Failed to play remote media: ${error.message}`);
-		});
-
-		stream.onaddtrack = (): void => {
-			element.load();
-			element.play().catch((error: Error) => {
-				setError(`Failed to play remote media on add track: ${error.message}`);
-			});
-		};
-
-		stream.onremovetrack = (): void => {
-			element.load();
-			element.play().catch((error: Error) => {
-				console.error('Failed to play remote media on remove track');
-				console.error(error);
-			});
-		};
 	};
 
 	const setAudioElement = (element: HTMLAudioElement): void => {
@@ -331,7 +268,7 @@ export const createCallService = (config: KiezboxConfig) => {
 
 			userAgent = new UserAgent({
 				uri: uri,
-				transportOptions: { server: kbWSS, connectionTimeout: 10, keepAliveInterval: 30 },
+				transportOptions: { server: kbWSS, connectionTimeout: 100, keepAliveInterval: 300 },
 				logLevel: 'debug',
 				authorizationUsername: config.kbSIPUsername,
 				authorizationPassword: config.kbSIPPassword,
@@ -344,6 +281,26 @@ export const createCallService = (config: KiezboxConfig) => {
 				setError(`Failed to connect: ${error.message || error}`);
 				await cleanupUserAgent(); // Cleanup on failure
 			}
+		}
+	};
+
+	const outgoingRequestDelegate: OutgoingRequestDelegate = {
+		onAccept: () => {
+			_state.update((s) => ({ ...s, callState: CallState.CALL_ESTABLISHED }));
+			startCallTimer(); // Start call timer on established
+		},
+		onReject: () => {
+			_state.update((s) => ({ ...s, callState: CallState.CALL_REJECTED }));
+			cleanupSession(); // Cleanup on reject
+		},
+		onRedirect: (response: IncomingResponse) => {
+			setError(`Call redirected: ${response.message}`);
+			_state.update((s) => ({ ...s, callState: CallState.CALL_REDIRECTED }));
+			cleanupSession(); // Cleanup on redirect
+		},
+		onTrying: () => {
+			_state.update((s) => ({ ...s, callState: CallState.CALLING }));
+			console.log('[CallService] Call is trying...');
 		}
 	};
 
@@ -365,32 +322,13 @@ export const createCallService = (config: KiezboxConfig) => {
 				sessionDescriptionHandlerOptions: {
 					constraints: { audio: true, video: false }
 				},
-				requestDelegate: {
-					onAccept: () => {
-						_state.update((s) => ({ ...s, callState: CallState.CALL_ESTABLISHED }));
-						startCallTimer(); // Start call timer on established
-					},
-					onReject: () => {
-						_state.update((s) => ({ ...s, callState: CallState.CALL_TERMINATED }));
-						setError('Call rejected.');
-						cleanupSession(); // Cleanup on reject
-					},
-					onRedirect: (response: IncomingResponse) => {
-						setError(`Call redirected: ${response.message}`);
-						_state.update((s) => ({ ...s, callState: CallState.CALL_TERMINATED }));
-						cleanupSession(); // Cleanup on redirect
-					},
-					onTrying: () => {
-						_state.update((s) => ({ ...s, callState: CallState.CALLING }));
-						console.log('[CallService] Call is trying...');
-					}
-				}
+				requestDelegate: outgoingRequestDelegate
 			};
 			const inviter = new Inviter(userAgent, target);
-			setupSession(inviter); // Setup delegates
+			setupSession(inviter);
 			activeSession = inviter;
 			_state.update((s) => ({ ...s, callState: CallState.CALLING }));
-			await inviter.invite(inviterOptions); // Pass options here
+			await inviter.invite(inviterOptions);
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				setError(`Failed to make call: ${error.message || error}`);
@@ -412,9 +350,9 @@ export const createCallService = (config: KiezboxConfig) => {
 		}
 		clearError();
 		try {
-			const invitationToAccept = incomingInvitation;
+			const invitationToAccept: Invitation = incomingInvitation;
 			incomingInvitation = null;
-
+			setupSession(invitationToAccept);
 			const acceptOptions = {
 				sessionDescriptionHandlerOptions: {
 					constraints: { audio: true, video: false }

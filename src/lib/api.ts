@@ -30,7 +30,6 @@ export async function apiFetch(resource: string, options: RequestInit = {}) {
 			return null;
 		}
 
-		// Assuming JSON response, adjust if needed
 		return await response.json();
 	} catch (error) {
 		console.error('Fetch failed:', error);
