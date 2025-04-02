@@ -1,10 +1,9 @@
 <script lang="ts">
-	import '../app.css';
-	import { onMount } from 'svelte';
 	import { loadTranslations } from '$lib/translations';
+	import { onMount } from 'svelte';
+	import '../app.css';
 
 	import type { LayoutLoad } from './$types';
-	import { browser } from '$app/environment';
 
 	export const load: LayoutLoad = async ({ url }) => {
 		const { pathname } = url;
@@ -35,4 +34,6 @@
 	onMount(() => detectSWUpdate());
 </script>
 
-<slot />
+<div class="bg-grey-light h-full w-full">
+	<slot />
+</div>
