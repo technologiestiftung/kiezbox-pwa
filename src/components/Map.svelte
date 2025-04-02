@@ -29,7 +29,7 @@
 						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
 						attribution: '© OpenStreetMap contributors',
 						maxzoom: 13
-					},
+					}
 				},
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
@@ -102,11 +102,20 @@
 				poiState.properties = null;
 				return;
 			}
-
-			poiState.layer = features[0].layer;
-			poiState.properties = features[0].properties;
-
-			clickPoint = { x: e.point.x, y: e.point.y };
+			if (
+				features[0].layer.id === 'defies-layer' ||
+				features[0].layer.id === 'drinking-water-layer' ||
+				features[0].layer.id === 'toilets-layer' ||
+				features[0].layer.id === 'water-pumps-layer'
+			) {
+				poiState.layer = features[0].layer;
+				poiState.properties = features[0].properties;
+				clickPoint = { x: e.point.x, y: e.point.y };
+			} else {
+				poiState.layer = null;
+				poiState.properties = null;
+				return;
+			}
 		});
 
 		mapState.map = map;
