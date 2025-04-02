@@ -102,9 +102,9 @@
 				poiState.properties = null;
 				return;
 			}
-			
+
 			const foundLayer = LAYER_CONFIG.find((layer) => layer.id === features[0].layer.id);
-			
+
 			if (foundLayer) {
 				poiState.layer = features[0].layer;
 				poiState.properties = features[0].properties;
@@ -114,7 +114,6 @@
 				poiState.properties = null;
 				return;
 			}
-
 		});
 
 		mapState.map = map;
