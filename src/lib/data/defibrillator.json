@@ -1,2708 +1,1772 @@
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5397677,
-          52.3962913
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12681951352,
-        "@osm_version": 4,
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "neben der Rezeption"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3853399,
-          52.5316464
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12690469166,
-        "@osm_version": 1,
-        "level": "0",
-        "indoor": "yes",
-        "operator": "EWDE",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Rezeption"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.1384278,
-          52.3716874
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12649523920,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2047935,
-          52.5475208
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12661280401,
-        "@osm_version": 1,
-        "phone": "01789318904",
-        "access": "yes",
-        "indoor": "no",
-        "operator": "Sanitätskollektiv Berlin",
-        "emergency": "defibrillator",
-        "defibrillator:location": "AED/Defibrillator an Lutherplatz"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3118122,
-          52.582851
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12040436880,
-        "@osm_version": 1,
-        "access": "permit",
-        "indoor": "yes",
-        "operator": "Jumphouse Berlin",
-        "emergency": "defibrillator",
-        "defibrillator:location": "vom Eingang rechts hinter Tresenwand, bei Autorenn-Automaten"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3418764,
-          52.5069036
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 7526624527,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3440653,
-          52.4391775
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11551897398,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "operator": "PIN Mail",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo 8:00-12:00,13:00-16:00; Tu-Fr 8:00-12:00,13:00-18:00; Sa 8:00-13:00",
-        "defibrillator:location": "In der Postfiliale. Nur während der Öffnungszeiten.",
-        "defibrillator:location:en": "Inside the post office. Opening times only."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3160351,
-          52.3670426
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342619319,
-        "@osm_version": 4,
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3260666,
-          52.3864687
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342599469,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4511037,
-          52.4626362
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 3976564561,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2016-01-29"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.579719,
-          52.4425062
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11417940969,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2023-12-14"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5182087,
-          52.3921449
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8574579651,
-        "@osm_version": 3,
-        "access": "fixme",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location:de": "Hinter dem Haupteingang rechts"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3075697,
-          52.5095173
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12603397801,
-        "@osm_version": 1,
-        "access": "customers",
-        "indoor": "yes",
-        "operator": "Dr. Katharina Birkner",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Arztpraxis mit AED"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.1013757,
-          52.3903353
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10654460933,
-        "@osm_version": 1,
-        "access": "customers",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3689954,
-          52.5248125
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8574595440,
-        "@osm_version": 4,
-        "fixme": "location:defibrillator",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Erdgeschoss / Ground floor Inside public toilets, by the toilet payment gates"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3884353,
-          52.5237315
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9866199417,
-        "@osm_version": 2,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "EG, rechts der Toiletten, neben :-) Treppenhaus"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3406384,
-          52.5060085
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 7526624526,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5342505,
-          52.4992692
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11804233504,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "wheelchair": "limited",
-        "opening_hours": "\"wenn der Tierpark offen ist\"",
-        "defibrillator:location": "im Eingangsbereich von außen gesehen links"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2408751,
-          52.5357652
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10284313158,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "description": "Notfallrucksack mit AED"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3351209,
-          52.5081265
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 7526624525,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.7241733,
-          52.5634387
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11564615069,
-        "@osm_version": 1,
-        "phone": "",
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Sparkasse",
-        "emergency": "defibrillator",
-        "opening_hours": "",
-        "defibrillator:location:pl": "Im Vorraum neben dem Kontoauszugsdrucker"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4914654,
-          52.5186073
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11042341070,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3078275,
-          52.3570609
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342616439,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4457492,
-          52.5061862
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6925743241,
-        "@osm_version": 3,
-        "level": "2",
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4077466,
-          52.5115003
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6340610924,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "description": "Inside the main door at the hotel reception. On the wall opposite the reception desk",
-        "opening_hours": "24/7"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3080305,
-          52.3551499
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342593327,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5081498,
-          52.3673972
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10958607474,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "survey:date": "2023-06-06"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3692503,
-          52.5298796
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12061635857,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "employees",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "AEB is behind the door on the right at the front desk"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4195829,
-          52.5118512
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4322751089,
-        "@osm_version": 8,
-        "level": "1",
-        "indoor": "yes",
-        "operator": "Johanniter-Unfall-Hilfe e.V.",
-        "emergency": "defibrillator",
-        "description": "Im Ausbildungszentrum der Johanniter, rechts an Eingangstür",
-        "opening_hours": "Mo-Fr 08:00-16:00"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.1156579,
-          52.3577669
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9654508635,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4524258,
-          52.5292347
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12570638190,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Kasse zone"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.197459,
-          52.5077597
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12145853003,
-        "@osm_version": 1,
-        "access": "private",
-        "indoor": "yes",
-        "operator": "DLRG Landesverband Berlin",
-        "emergency": "defibrillator",
-        "defibrillator:location": "AED an der DLRG Zentralstation"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2851136,
-          52.6727796
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11148673772,
-        "@osm_version": 4,
-        "access": "permissive",
-        "indoor": "yes",
-        "operator": "Stadt/ Feuerwehr Hohen Neuendorf",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Zugang, nur wenn Personal/ Einsatzkräfte auf der Wache sind ! Befindet sich auf Einsatzfahrzeugen."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4283952,
-          52.5613274
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12507101501,
-        "@osm_version": 1,
-        "phone": "030 4799000",
-        "access": "customers",
-        "indoor": "yes",
-        "operator": "Kurt-Tucholsky-Oberschule",
-        "emergency": "defibrillator",
-        "defibrillator:location": "1. Stock Haus B (B210) (Neben dem Leherzimmer)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3114516,
-          52.5187767
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9450134439,
-        "@osm_version": 1,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3063416,
-          52.3568152
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342616437,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2761028,
-          52.4431153
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12526013513,
-        "@osm_version": 1,
-        "access": "customers",
-        "indoor": "yes",
-        "operator": "Mühlenau Grundschule",
-        "emergency": "defibrillator",
-        "defibrillator:location": "AED beim Sekretariat, Erdgeschoss Hauptgebäude"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5561191,
-          52.5469476
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10650205688,
-        "@osm_version": 2,
-        "name": "AED",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo-Fr 7:00-21:30; Sa 10:00-14:00;  Su 8:00-16:00",
-        "defibrillator:location": "im Foyer (rechts zur Schwimmhalle / Kegelbahn)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3815524,
-          52.5075404
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 5377655655,
-        "@osm_version": 3,
-        "access": "permissive",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "description": "in der Wachzentrale im Erdgeschoss sowie an Standorten im Haus verteilt",
-        "defibrillator": "manual",
-        "defibrillator:location": "in der Wachzentrale im Erdgeschoss sowie an Standorten im Haus verteilt"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5287702,
-          52.43274
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11405418670,
-        "@osm_version": 2,
-        "access": "customers",
-        "indoor": "yes",
-        "operator": "Humboldt-Universität zu Berlin",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Centrally in lobby.",
-        "defibrillator:location:de": "Mittig in der Halle."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4283952,
-          52.5613274
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11753747102,
-        "@osm_version": 1,
-        "access": "permit",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Im Eingangsbereich"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2924004,
-          52.432187
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4322749888,
-        "@osm_version": 8,
-        "level": "1",
-        "phone": "+49 30 816901 0",
-        "access": "permissive",
-        "indoor": "yes",
-        "addr:city": "Berlin",
-        "emergency": "defibrillator",
-        "addr:street": "Berner Straße",
-        "addr:postcode": "12205",
-        "opening_hours": "24/7",
-        "addr:housenumber": "2-3"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3761231,
-          52.5109181
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2727739375,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "aed:note": "ask at the reception",
-        "emergency": "defibrillator",
-        "aed:note:de": "an der Reception fragen"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4424047,
-          52.4682116
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10017742631,
-        "@osm_version": 1,
-        "ref": "1067",
-        "indoor": "yes",
-        "operator": "Björn Steiger Stiftung",
-        "emergency": "defibrillator",
-        "operator:wikidata": "Q879521",
-        "operator:wikipedia": "de:Björn Steiger Stiftung",
-        "defibrillator:location": "Neuköllner Tor - Eingang/Info Real-Markt"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5293219,
-          52.5048081
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4379242149,
-        "@osm_version": 3,
-        "note:de": "Herrentoilette",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3779332,
-          52.5075603
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8574601300,
-        "@osm_version": 4,
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "\"Während regulären Bürozeiten\"",
-        "defibrillator:location": "Am Empfang, vom Eingang gesehen rechts an der Wand"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4353165,
-          52.4814842
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 5354777238,
-        "@osm_version": 4,
-        "level": "0;3;4",
-        "phone": "+49 30 902390",
-        "access": "permissive",
-        "indoor": "yes",
-        "source": "BVV Neukölln, Drucksache - 1555/XIX (https://www.berlin.de/ba-neukoelln/politik-und-verwaltung/bezirksverordnetenversammlung/online/vo020.asp?VOLFDNR=5174)",
-        "emergency": "defibrillator",
-        "description": "3 Geräte: (1) Erdgeschoss: Neben Pförtnerloge (Lichthof, Treppenhaus zw. Alt- und Neubau); (2) 3. OG: Flurbereich Vorraum BVV-Saal; (3) 4. OG: Treppenhaus zur Kantine (im Bereich des Kantinenaufzugs)",
-        "defibrillator": "manual",
-        "opening_hours": "Mo-Fr 06:00-20:00",
-        "defibrillator:location": "3 Geräte: (1) Erdgeschoss: Neben Pförtnerloge (Lichthof, Treppenhaus zw. Alt- und Neubau); (2) 3. OG: Flurbereich Vorraum BVV-Saal; (3) 4. OG: Treppenhaus zur Kantine (im Bereich des Kantinenaufzugs)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3382229,
-          52.5001157
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8442481871,
-        "@osm_version": 2,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "24/7"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4964085,
-          52.5353123
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12184049218,
-        "@osm_version": 1,
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo-Sa 07:00-20:00"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4038749,
-          52.5697871
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 7176856789,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3876723,
-          52.45399
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6111745358,
-        "@osm_version": 4,
-        "level": "1",
-        "access": "permissive",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "wheelchair": "yes",
-        "opening_hours": "Mo-Fr 08:00-15:30",
-        "defibrillator:location": "Neben Empfang Bosch Software Innovations GmbH"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5832195,
-          52.6665449
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12373696303,
-        "@osm_version": 1,
-        "ref": "3652",
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Björn Steiger Stiftung",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo-Fr 07:00-20:00 & Sa 08:00-20:00",
-        "operator:wikidata": "Q879521",
-        "operator:wikipedia": "de:Björn Steiger Stiftung",
-        "defibrillator:location": "toom Baumarkt Bernau - an der Hauptinfo bei der DHL-Annahme"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3093502,
-          52.3624557
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342593326,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3784227,
-          52.5078651
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11281727843,
-        "@osm_version": 1,
-        "access": "permissive",
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3765406,
-          52.5064283
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11379798222,
-        "@osm_version": 1,
-        "level": "4",
-        "access": "private",
-        "indoor": "yes",
-        "operator": "BMUV",
-        "emergency": "defibrillator",
-        "defibrillator:location": "4th Floor"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3890003,
-          52.5497568
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4317555807,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3469448,
-          52.5039825
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12365520987,
-        "@osm_version": 2,
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "In der Lobby, linke Ecke vom Eingang Richtung Straße"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.1271162,
-          52.3926913
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11524474901,
-        "@osm_version": 2,
-        "level": "0",
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Universität Potsdam",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3768119,
-          52.4985174
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12116966081,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "operator": "Deutsches Technikmuseum",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Im Eingangsbereich gegenüber des Ticketschalters"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4188252,
-          52.5246787
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10162337485,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.7129763,
-          52.3931873
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 1909973019,
-        "@osm_version": 9,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5103609,
-          52.3678605
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10958655610,
-        "@osm_version": 2,
-        "level": "1",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "mapillary": "161896773380826"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5315391,
-          52.4481219
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12192579303,
-        "@osm_version": 1,
-        "level": "1",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "im Foyer der Kreativgrundschule"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.6053844,
-          52.5383227
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8524720586,
-        "@osm_version": 2,
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Direkt beim Eingang von Real"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3750243,
-          52.5047743
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8442519311,
-        "@osm_version": 1,
-        "emergency": "defibrillator",
-        "opening_hours": "24/7"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2660278,
-          52.38834
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9859852986,
-        "@osm_version": 1,
-        "ref": "1975",
-        "indoor": "yes",
-        "operator": "Björn Steiger Stiftung",
-        "emergency": "defibrillator",
-        "operator:wikidata": "Q879521",
-        "operator:wikipedia": "de:Björn Steiger Stiftung",
-        "defibrillator:location": "Pflanzen Kölle - im Infobereich neben Unterlagenschränke"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3757807,
-          52.5185524
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9708836851,
-        "@osm_version": 1,
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "08:00-21:45; Dec 24 off; Dec 31 08:00-13:00",
-        "defibrillator:location": "next to lift down from dome"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.534102,
-          52.4321776
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12595216301,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2025-02-17",
-        "defibrillator:location:de": "Neben dem Haupteingang zum Altbau des Geographischen Instituts."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.314601,
-          52.3740183
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12412684701,
-        "@osm_version": 1,
-        "level": "2",
-        "access": "permit",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2024-12-11",
-        "defibrillator:location:de": "Bürogebäude"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2697139,
-          52.5013454
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 3118803961,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3460873,
-          52.5231368
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 491555229,
-        "@osm_version": 18,
-        "name": "Ameron Hotel Abion Spreebogen Berlin",
-        "sauna": "yes",
-        "indoor": "yes",
-        "tourism": "hotel",
-        "wikidata": "Q111388250",
-        "addr:city": "Berlin",
-        "emergency": "defibrillator",
-        "check_date": "2024-06-10",
-        "wheelchair": "yes",
-        "addr:street": "Alt-Moabit",
-        "addr:suburb": "Moabit",
-        "addr:country": "DE",
-        "addr:postcode": "10559",
-        "contact:email": "info@abion-berlin.de",
-        "contact:phone": "+49 30 399200",
-        "contact:website": "http://www.abion-hotel.de/",
-        "internet_access": "wlan",
-        "addr:housenumber": "99",
-        "opening_hours:bar": "12:00-01:00",
-        "wikimedia_commons": "File:Ameron Hotel Abion Spreebogen Berlin.jpg",
-        "toilets:wheelchair": "yes",
-        "defibrillator:location": "an der Rezeption",
-        "internet_access:access": "customers",
-        "wheelchair:description": "WC ist abgeschlossen!",
-        "opening_hours:breakfast": "Mo- Fr 06:30-10:00; Sa, Su, Ph 06:30-11:00"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.6641182,
-          52.5015884
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9860157248,
-        "@osm_version": 1,
-        "ref": "1973",
-        "indoor": "yes",
-        "operator": "Björn Steiger Stiftung",
-        "emergency": "defibrillator",
-        "operator:wikidata": "Q879521",
-        "operator:wikipedia": "de:Björn Steiger Stiftung",
-        "defibrillator:location": "Pflanzen Kölle - Eingangsbereich - links neben der Info, neben dem Feuerlöscher"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4233695,
-          52.5577376
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12507077801,
-        "@osm_version": 1,
-        "phone": "030 4799000",
-        "access": "customers",
-        "indoor": "yes",
-        "operator": "Kurt-Tucholsky-Oberschule ",
-        "emergency": "defibrillator",
-        "defibrillator:location": "A106 / N2 (Neben dem Sekretariat)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.1056472,
-          52.3800418
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10091517460,
-        "@osm_version": 1,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2793697,
-          52.5331571
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9899942268,
-        "@osm_version": 1,
-        "ref": "1617",
-        "indoor": "yes",
-        "operator": "Björn Steiger Stiftung",
-        "emergency": "defibrillator",
-        "operator:wikidata": "Q879521",
-        "operator:wikipedia": "de:Björn Steiger Stiftung",
-        "defibrillator:location": "SNP - Eingang links, gegenüber Empfang (6.OG)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4132708,
-          52.5214408
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11033298146,
-        "@osm_version": 1,
-        "access": "private",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "In der Polizeiwache",
-        "defibrillator:location:en": "Inside the police station"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3065615,
-          52.3614509
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342605592,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3863942,
-          52.5181517
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10011671969,
-        "@osm_version": 5,
-        "level": "3",
-        "access": "no",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Neben Raum 3.33, links der Hauptaufzüge",
-        "defibrillator:location:en": "Next to room 3.33, left from the main elevators"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3267479,
-          52.5122732
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 1645508411,
-        "@osm_version": 11,
-        "level": "0",
-        "indoor": "yes",
-        "aed:note": "EG Foyer neben dem Infopoint",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Direkt neben dem Info-Tresen.\n\nNext to the info point."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3857178,
-          52.5310951
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12416091661,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "permit",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo-Fr 08:00-16:30",
-        "defibrillator:location": "Empfangshalle, an einer Säule vor der Treppe in einem Kasten."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4356071,
-          52.4790002
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8992818364,
-        "@osm_version": 2,
-        "fixme": "opening_hours",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "description": "Defi im Stadt und Land-Büro",
-        "contact:phone": "+49 30 68920",
-        "defibrillator:location": "Defi im Stadt und Land-Büro"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3129559,
-          52.352877
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342619320,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2797397,
-          52.670282
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10934446150,
-        "@osm_version": 1,
-        "operator": "e.v. Kirchgemeinde Hohen Neuendorf",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Im Mittelraum"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5140748,
-          52.5341153
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11403953666,
-        "@osm_version": 1,
-        "level": "1",
-        "access": "permissive",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Obergeschoss zwischen Restaurant und Rundgang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3204855,
-          52.4417621
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2497873244,
-        "@osm_version": 6,
-        "note": "entrance hall",
-        "level": "0",
-        "note:de": "Eingangshalle",
-        "emergency": "defibrillator",
-        "defibrillator:location": "An der Wand gegenüber den Eingangstüren"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2821223,
-          52.6729039
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11148690307,
-        "@osm_version": 2,
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Stadt Hohen Neuendorf",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Nur bei geöffneter Stadthalle! Befindet sich in der Eingangshalle."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5321493,
-          52.5077401
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10603810650,
-        "@osm_version": 2,
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2023-02-02",
-        "defibrillator:location": "Vorraum der Toiletten"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3219818,
-          52.5197033
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8494683564,
-        "@osm_version": 1,
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Technische Universität Berlin",
-        "emergency": "defibrillator",
-        "wheelchair": "yes",
-        "opening_hours": "Mo-Fr 06:00-18:00",
-        "emergency:phone": "+49 30 31423333",
-        "defibrillator:location": "Im Eingangsbereich links neben dem Aufzug.",
-        "defibrillator:location:en": "In the entrance area to the left of the lift."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3239145,
-          52.4606167
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11083526497,
-        "@osm_version": 1,
-        "level": "2",
-        "indoor": "yes",
-        "operator": "Globetrotter",
-        "emergency": "defibrillator",
-        "check_date": "2023-08-02",
-        "opening_hours": "Mo-Fr 11:00-19:00; Sa 10:00-19:00; PH off",
-        "defibrillator:location": "Im 2ten Obergeschoss der Globetrotter-Filiale, zwischen Servicepoint und Reiseapotheke"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3886513,
-          52.5491338
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11264822422,
-        "@osm_version": 1,
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Eingangsbereich Sanifair-WC-Anlage"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.7005872,
-          52.4771878
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10118194985,
-        "@osm_version": 2,
-        "level": "0",
-        "phone": "+49 30 64827360",
-        "access": "permissive",
-        "indoor": "yes",
-        "operator": "Arztpraxis Weikert",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo 08:00-15:00; Tu 13:00-18:00; We,Fr 08:00-13:00; Th 11:00-17:00",
-        "defibrillator:location": "Arztpraxis Weikert"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3887529,
-          52.5183362
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 5599026976,
-        "@osm_version": 3,
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "rechts neben dem Eingang, im Dussmann"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3572284,
-          52.4815177
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12486983514,
-        "@osm_version": 2,
-        "level": "0",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo-Fr 06:00-22:00; Sa, Su, Ph off",
-        "defibrillator:location": "am Empfang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3389879,
-          52.5095766
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12468824812,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Toiletteneingang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4166447,
-          52.5183852
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4322751090,
-        "@osm_version": 5,
-        "foot": "yes",
-        "horse": "no",
-        "level": "2",
-        "indoor": "yes",
-        "bicycle": "no",
-        "emergency": "defibrillator",
-        "description": "Vor den Toiletten im Foodcourt hinter Subway",
-        "motor_vehicle": "no",
-        "opening_hours": "Mo-Sa 10:00-21:00"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4162598,
-          52.5237123
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10792476841,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Rechts der Rezeption in der Raumecke",
-        "defibrillator:location:en": "To the right of reception in a room niche"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.324841,
-          52.5103344
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10914516746,
-        "@osm_version": 1,
-        "ref": "GPI 4931",
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Erdgeschoss beim Pförtner",
-        "defibrillator:location:en": "Ground floor beneath the doorman"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5566741,
-          52.3400809
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11288250770,
-        "@osm_version": 1,
-        "phone": "",
-        "access": "customers",
-        "indoor": "yes",
-        "operator": "Amazon VZ Berlin-Brandenburg GmbH",
-        "emergency": "defibrillator",
-        "opening_hours": "",
-        "defibrillator:location:pl": "Amazon VZ Berlin-Brandenburg GmbH"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3298302,
-          52.4294244
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10295652154,
-        "@osm_version": 1,
-        "level": "1",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Neben den Rolltreppen im 1. Stock"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.7174733,
-          52.3957328
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 5968273725,
-        "@osm_version": 4,
-        "ref": "1145",
-        "indoor": "yes",
-        "operator": "Björn Steiger Stiftung",
-        "emergency": "defibrillator",
-        "operator:wikidata": "Q879521",
-        "operator:wikipedia": "de:Björn Steiger Stiftung",
-        "defibrillator:location": "Müggelpark Einkaufscenter - Höhe Dänisches Bettenlager"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5316231,
-          52.4310458
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10742476120,
-        "@osm_version": 4,
-        "level": "0",
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2023-12-14",
-        "wheelchair": "limited",
-        "opening_hours": "Mo-Fr 08:00-20:00, PH off",
-        "defibrillator:location": "Im Eingangsbereich, rechts neben dem Eingang zur Biblioithek"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4589507,
-          52.4735122
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2570308839,
-        "@osm_version": 8,
-        "note": "reception desk",
-        "indoor": "yes",
-        "note:de": "Rezeption",
-        "emergency": "defibrillator",
-        "opening_hours": "24/7"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2810933,
-          52.6735455
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11148689348,
-        "@osm_version": 2,
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Stadt Hohen Neuendorf",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo 8-12, 13:30-16; Tu 8-12, 13:30-18; We closed; Th 8-12, 13:30-17; Fr 8-12; Sa closed; Su closed",
-        "defibrillator:location": "Öffnungszeiten beachten!!! \nRathaus Neubau über Haupteingang (Drehtür) betreten. Auf der linken Seite befindet sich die AED-Aufbewahrungsbox."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4564737,
-          52.5290211
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8521021768,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.1111568,
-          52.4523397
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11982892216,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Neben der Eingangstür."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3803521,
-          52.5159761
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2727737860,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "aed:note": "at the reception",
-        "operator": "Adlon",
-        "emergency": "defibrillator",
-        "aed:note:de": "an der Rezeption"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5260459,
-          52.4554783
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2935731146,
-        "@osm_version": 5,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "im Ergeschoss bei den Treppen"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5086361,
-          52.3669483
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10958607501,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "mapillary": "1350198935558839",
-        "defibrillator:location": "Hängt an der Wand bei den Gepäckbändern."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.7241899,
-          52.5634403
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11564378371,
-        "@osm_version": 1,
-        "phone": "",
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Sparkasse ",
-        "emergency": "defibrillator",
-        "opening_hours": "",
-        "defibrillator:location:pl": "Sparkasse "
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3834344,
-          52.5067417
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11173810073,
-        "@osm_version": 2,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Im Eingangsbereich der Dauerausstellung Topographie des Terrors."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2407118,
-          52.5350458
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10284313157,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "description": "Notfallrucksack mit AED"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3130042,
-          52.3672424
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342599125,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3236058,
-          52.5164804
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 3588304157,
-        "@osm_version": 3,
-        "level": "1",
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3940508,
-          52.52032
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4322751092,
-        "@osm_version": 4,
-        "horse": "no",
-        "indoor": "yes",
-        "bicycle": "no",
-        "emergency": "defibrillator",
-        "motor_vehicle": "no"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4249968,
-          52.5412161
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8446079400,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Im Eingangsbereich"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3405725,
-          52.4969278
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 7036255089,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3393021,
-          52.5094506
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 7526624524,
-        "@osm_version": 5,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Vorraum der Toiletten (von der Terrasse aus kommend ganz links hinten)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2473866,
-          52.535053
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10284313167,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Notfallrucksack mit AED"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3065562,
-          52.3562386
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342605983,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5236858,
-          52.4924195
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11907137732,
-        "@osm_version": 4,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "In der Lobby neben den Toiletten"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.521365,
-          52.4974095
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12156224044,
-        "@osm_version": 2,
-        "fixme": "opening hours",
-        "level": "1",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2024-09-03",
-        "opening_hours": "Mo-Tu 10:00-18:00; We 08:30-15:00; Th-Fr 07:30-13:00; PH off",
-        "defibrillator:location": "im Wartebereich vom Bürgeramt, rechts neben der Glastür"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3878449,
-          52.5201239
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12118156996,
-        "@osm_version": 1,
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "addr:floor": "0",
-        "defibrillator:location": "In der DB Information"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.301183,
-          52.3550734
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342599126,
-        "@osm_version": 5,
-        "access": "private",
-        "indoor": "yes",
-        "operator": "DRK",
-        "emergency": "defibrillator",
-        "defibrillator:location": "im Vorraum rechts an der Wand."
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3318552,
-          52.4505249
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10560449468,
-        "@osm_version": 1,
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3680716,
-          52.5242098
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11263917794,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "wheelchair": "yes",
-        "opening_hours": "24/7",
-        "defibrillator:location": "Meininger Hotel, Erdgeschoss, Rückwand des Rezeptionstresen"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.7241713,
-          52.5634289
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 11564239969,
-        "@osm_version": 1,
-        "phone": "",
-        "access": "yes",
-        "indoor": "yes",
-        "operator": "Sparkasse",
-        "emergency": "defibrillator",
-        "opening_hours": "",
-        "defibrillator:location:pl": "Sparkasse"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3669645,
-          52.5236346
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2727736208,
-        "@osm_version": 5,
-        "indoor": "yes",
-        "aed:note": "ask at the reception",
-        "addr:city": "Berlin",
-        "emergency": "defibrillator",
-        "addr:street": "Katharina-Paulus-Straße",
-        "addr:suburb": "Moabit",
-        "aed:note:de": "an der Reception fragen",
-        "addr:country": "DE",
-        "addr:postcode": "10557",
-        "addr:housenumber": "5"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.2968037,
-          52.3564057
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 6342616438,
-        "@osm_version": 3,
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.4795648,
-          52.5159029
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12208731481,
-        "@osm_version": 1,
-        "level": "0",
-        "access": "yes",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "opening_hours": "Mo-Th 06:00-22:30; Fr 06:00-21:00",
-        "defibrillator:location": "AED befindet sich an der Information im EG"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3746421,
-          52.507197
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10968258905,
-        "@osm_version": 1,
-        "level": "1",
-        "phone": "+49 30 74077-0",
-        "access": "permissive",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "wheelchair": "yes",
-        "description": "in der Wachzentrale im Erdgeschoss sowie an Standorten im Haus verteilt",
-        "defibrillator": "manual",
-        "opening_hours": "24/7",
-        "defibrillator:location": "Am Empfang, vom Eingang gesehen links an der Wand"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3518776,
-          52.3387984
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 4723193198,
-        "@osm_version": 4,
-        "access": "private",
-        "emergency": "defibrillator",
-        "defibrillator:location:de": "im Schlossbüro"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.382551,
-          52.5253238
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 9881290277,
-        "@osm_version": 2,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Hochparterre neben dem Aufzug"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5267573,
-          52.4572254
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 2935238533,
-        "@osm_version": 3,
-        "name": "Defibrillator",
-        "note:de": "Neben den Toiletten",
-        "emergency": "defibrillator",
-        "opening_hours": "on work days"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3961051,
-          52.4993703
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 8894375303,
-        "@osm_version": 1,
-        "fixme": "defibrillator:location",
-        "level": "0",
-        "indoor": "yes",
-        "emergency": "defibrillator"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.5290498,
-          52.5051706
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10603810649,
-        "@osm_version": 3,
-        "level": "0",
-        "access": "customers",
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "check_date": "2024-04-08",
-        "wheelchair": "limited",
-        "opening_hours": "Mo-Fr 10:00-17:30; Sa 10:00-18:00; Su 09:00-18:00",
-        "defibrillator:location": "links der Kassen"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3507861,
-          52.4849556
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 5203710565,
-        "@osm_version": 3,
-        "indoor": "yes",
-        "emergency": "defibrillator",
-        "defibrillator:location": "bei Badeaufsicht"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.3261791,
-          52.5135449
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 10562121577,
-        "@osm_version": 2,
-        "ref": "GPI 4930",
-        "level": "0",
-        "indoor": "yes",
-        "operator": "TU Berlin",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Erdgeschoss neben dem Pförtner"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          13.445623,
-          52.5062121
-        ]
-      },
-      "properties": {
-        "@osm_type": "node",
-        "@osm_id": 12066228636,
-        "@osm_version": 2,
-        "level": "2",
-        "emergency": "defibrillator",
-        "defibrillator:location": "Im Gang zu den Toiletten an der Wand."
-      }
-    }
-  ]
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5397677, 52.3962913]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12681951352,
+				"@osm_version": 4,
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "neben der Rezeption"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3853399, 52.5316464]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12690469166,
+				"@osm_version": 1,
+				"level": "0",
+				"indoor": "yes",
+				"operator": "EWDE",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Rezeption"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2047935, 52.5475208]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12661280401,
+				"@osm_version": 1,
+				"phone": "01789318904",
+				"access": "yes",
+				"indoor": "no",
+				"operator": "Sanitätskollektiv Berlin",
+				"emergency": "defibrillator",
+				"defibrillator:location": "AED/Defibrillator an Lutherplatz"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3118122, 52.582851]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12040436880,
+				"@osm_version": 1,
+				"access": "permit",
+				"indoor": "yes",
+				"operator": "Jumphouse Berlin",
+				"emergency": "defibrillator",
+				"defibrillator:location": "vom Eingang rechts hinter Tresenwand, bei Autorenn-Automaten"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3418764, 52.5069036]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 7526624527,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3440653, 52.4391775]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11551897398,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"operator": "PIN Mail",
+				"emergency": "defibrillator",
+				"opening_hours": "Mo 8:00-12:00,13:00-16:00; Tu-Fr 8:00-12:00,13:00-18:00; Sa 8:00-13:00",
+				"defibrillator:location": "In der Postfiliale. Nur während der Öffnungszeiten.",
+				"defibrillator:location:en": "Inside the post office. Opening times only."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4511037, 52.4626362]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 3976564561,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2016-01-29"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.579719, 52.4425062]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11417940969,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2023-12-14"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3075697, 52.5095173]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12603397801,
+				"@osm_version": 1,
+				"access": "customers",
+				"indoor": "yes",
+				"operator": "Dr. Katharina Birkner",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Arztpraxis mit AED"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3689954, 52.5248125]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8574595440,
+				"@osm_version": 4,
+				"fixme": "location:defibrillator",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Erdgeschoss / Ground floor Inside public toilets, by the toilet payment gates"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3884353, 52.5237315]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 9866199417,
+				"@osm_version": 2,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "EG, rechts der Toiletten, neben :-) Treppenhaus"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3406384, 52.5060085]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 7526624526,
+				"@osm_version": 3,
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5342505, 52.4992692]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11804233504,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"wheelchair": "limited",
+				"opening_hours": "\"wenn der Tierpark offen ist\"",
+				"defibrillator:location": "im Eingangsbereich von außen gesehen links"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2408751, 52.5357652]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10284313158,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"description": "Notfallrucksack mit AED"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3351209, 52.5081265]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 7526624525,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4914654, 52.5186073]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11042341070,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4457492, 52.5061862]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 6925743241,
+				"@osm_version": 3,
+				"level": "2",
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4077466, 52.5115003]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 6340610924,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"description": "Inside the main door at the hotel reception. On the wall opposite the reception desk",
+				"opening_hours": "24/7"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3692503, 52.5298796]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12061635857,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "employees",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "AEB is behind the door on the right at the front desk"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4195829, 52.5118512]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 4322751089,
+				"@osm_version": 8,
+				"level": "1",
+				"indoor": "yes",
+				"operator": "Johanniter-Unfall-Hilfe e.V.",
+				"emergency": "defibrillator",
+				"description": "Im Ausbildungszentrum der Johanniter, rechts an Eingangstür",
+				"opening_hours": "Mo-Fr 08:00-16:00"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4524258, 52.5292347]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12570638190,
+				"@osm_version": 3,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Kasse zone"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.197459, 52.5077597]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12145853003,
+				"@osm_version": 1,
+				"access": "private",
+				"indoor": "yes",
+				"operator": "DLRG Landesverband Berlin",
+				"emergency": "defibrillator",
+				"defibrillator:location": "AED an der DLRG Zentralstation"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4283952, 52.5613274]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12507101501,
+				"@osm_version": 1,
+				"phone": "030 4799000",
+				"access": "customers",
+				"indoor": "yes",
+				"operator": "Kurt-Tucholsky-Oberschule",
+				"emergency": "defibrillator",
+				"defibrillator:location": "1. Stock Haus B (B210) (Neben dem Leherzimmer)"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3114516, 52.5187767]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 9450134439,
+				"@osm_version": 1,
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2761028, 52.4431153]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12526013513,
+				"@osm_version": 1,
+				"access": "customers",
+				"indoor": "yes",
+				"operator": "Mühlenau Grundschule",
+				"emergency": "defibrillator",
+				"defibrillator:location": "AED beim Sekretariat, Erdgeschoss Hauptgebäude"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5561191, 52.5469476]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10650205688,
+				"@osm_version": 2,
+				"name": "AED",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "Mo-Fr 7:00-21:30; Sa 10:00-14:00;  Su 8:00-16:00",
+				"defibrillator:location": "im Foyer (rechts zur Schwimmhalle / Kegelbahn)"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3815524, 52.5075404]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 5377655655,
+				"@osm_version": 3,
+				"access": "permissive",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"description": "in der Wachzentrale im Erdgeschoss sowie an Standorten im Haus verteilt",
+				"defibrillator": "manual",
+				"defibrillator:location": "in der Wachzentrale im Erdgeschoss sowie an Standorten im Haus verteilt"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5287702, 52.43274]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11405418670,
+				"@osm_version": 2,
+				"access": "customers",
+				"indoor": "yes",
+				"operator": "Humboldt-Universität zu Berlin",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Centrally in lobby.",
+				"defibrillator:location:de": "Mittig in der Halle."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4283952, 52.5613274]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11753747102,
+				"@osm_version": 1,
+				"access": "permit",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Im Eingangsbereich"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2924004, 52.432187]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 4322749888,
+				"@osm_version": 8,
+				"level": "1",
+				"phone": "+49 30 816901 0",
+				"access": "permissive",
+				"indoor": "yes",
+				"addr:city": "Berlin",
+				"emergency": "defibrillator",
+				"addr:street": "Berner Straße",
+				"addr:postcode": "12205",
+				"opening_hours": "24/7",
+				"addr:housenumber": "2-3"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3761231, 52.5109181]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2727739375,
+				"@osm_version": 3,
+				"indoor": "yes",
+				"aed:note": "ask at the reception",
+				"emergency": "defibrillator",
+				"aed:note:de": "an der Reception fragen"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4424047, 52.4682116]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10017742631,
+				"@osm_version": 1,
+				"ref": "1067",
+				"indoor": "yes",
+				"operator": "Björn Steiger Stiftung",
+				"emergency": "defibrillator",
+				"operator:wikidata": "Q879521",
+				"operator:wikipedia": "de:Björn Steiger Stiftung",
+				"defibrillator:location": "Neuköllner Tor - Eingang/Info Real-Markt"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5293219, 52.5048081]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 4379242149,
+				"@osm_version": 3,
+				"note:de": "Herrentoilette",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3779332, 52.5075603]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8574601300,
+				"@osm_version": 4,
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "\"Während regulären Bürozeiten\"",
+				"defibrillator:location": "Am Empfang, vom Eingang gesehen rechts an der Wand"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4353165, 52.4814842]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 5354777238,
+				"@osm_version": 4,
+				"level": "0;3;4",
+				"phone": "+49 30 902390",
+				"access": "permissive",
+				"indoor": "yes",
+				"source": "BVV Neukölln, Drucksache - 1555/XIX (https://www.berlin.de/ba-neukoelln/politik-und-verwaltung/bezirksverordnetenversammlung/online/vo020.asp?VOLFDNR=5174)",
+				"emergency": "defibrillator",
+				"description": "3 Geräte: (1) Erdgeschoss: Neben Pförtnerloge (Lichthof, Treppenhaus zw. Alt- und Neubau); (2) 3. OG: Flurbereich Vorraum BVV-Saal; (3) 4. OG: Treppenhaus zur Kantine (im Bereich des Kantinenaufzugs)",
+				"defibrillator": "manual",
+				"opening_hours": "Mo-Fr 06:00-20:00",
+				"defibrillator:location": "3 Geräte: (1) Erdgeschoss: Neben Pförtnerloge (Lichthof, Treppenhaus zw. Alt- und Neubau); (2) 3. OG: Flurbereich Vorraum BVV-Saal; (3) 4. OG: Treppenhaus zur Kantine (im Bereich des Kantinenaufzugs)"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3382229, 52.5001157]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8442481871,
+				"@osm_version": 2,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "24/7"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4964085, 52.5353123]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12184049218,
+				"@osm_version": 1,
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "Mo-Sa 07:00-20:00"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4038749, 52.5697871]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 7176856789,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3876723, 52.45399]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 6111745358,
+				"@osm_version": 4,
+				"level": "1",
+				"access": "permissive",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"wheelchair": "yes",
+				"opening_hours": "Mo-Fr 08:00-15:30",
+				"defibrillator:location": "Neben Empfang Bosch Software Innovations GmbH"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3784227, 52.5078651]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11281727843,
+				"@osm_version": 1,
+				"access": "permissive",
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3765406, 52.5064283]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11379798222,
+				"@osm_version": 1,
+				"level": "4",
+				"access": "private",
+				"indoor": "yes",
+				"operator": "BMUV",
+				"emergency": "defibrillator",
+				"defibrillator:location": "4th Floor"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3890003, 52.5497568]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 4317555807,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3469448, 52.5039825]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12365520987,
+				"@osm_version": 2,
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "In der Lobby, linke Ecke vom Eingang Richtung Straße"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.1271162, 52.3926913]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11524474901,
+				"@osm_version": 2,
+				"level": "0",
+				"access": "yes",
+				"indoor": "yes",
+				"operator": "Universität Potsdam",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3768119, 52.4985174]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12116966081,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"operator": "Deutsches Technikmuseum",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Im Eingangsbereich gegenüber des Ticketschalters"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4188252, 52.5246787]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10162337485,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.7129763, 52.3931873]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 1909973019,
+				"@osm_version": 9,
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5315391, 52.4481219]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12192579303,
+				"@osm_version": 1,
+				"level": "1",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "im Foyer der Kreativgrundschule"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.6053844, 52.5383227]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8524720586,
+				"@osm_version": 2,
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Direkt beim Eingang von Real"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3750243, 52.5047743]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8442519311,
+				"@osm_version": 1,
+				"emergency": "defibrillator",
+				"opening_hours": "24/7"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3757807, 52.5185524]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 9708836851,
+				"@osm_version": 1,
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "08:00-21:45; Dec 24 off; Dec 31 08:00-13:00",
+				"defibrillator:location": "next to lift down from dome"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.534102, 52.4321776]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12595216301,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2025-02-17",
+				"defibrillator:location:de": "Neben dem Haupteingang zum Altbau des Geographischen Instituts."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2697139, 52.5013454]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 3118803961,
+				"@osm_version": 3,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3460873, 52.5231368]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 491555229,
+				"@osm_version": 18,
+				"name": "Ameron Hotel Abion Spreebogen Berlin",
+				"sauna": "yes",
+				"indoor": "yes",
+				"tourism": "hotel",
+				"wikidata": "Q111388250",
+				"addr:city": "Berlin",
+				"emergency": "defibrillator",
+				"check_date": "2024-06-10",
+				"wheelchair": "yes",
+				"addr:street": "Alt-Moabit",
+				"addr:suburb": "Moabit",
+				"addr:country": "DE",
+				"addr:postcode": "10559",
+				"contact:email": "info@abion-berlin.de",
+				"contact:phone": "+49 30 399200",
+				"contact:website": "http://www.abion-hotel.de/",
+				"internet_access": "wlan",
+				"addr:housenumber": "99",
+				"opening_hours:bar": "12:00-01:00",
+				"wikimedia_commons": "File:Ameron Hotel Abion Spreebogen Berlin.jpg",
+				"toilets:wheelchair": "yes",
+				"defibrillator:location": "an der Rezeption",
+				"internet_access:access": "customers",
+				"wheelchair:description": "WC ist abgeschlossen!",
+				"opening_hours:breakfast": "Mo- Fr 06:30-10:00; Sa, Su, Ph 06:30-11:00"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4233695, 52.5577376]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12507077801,
+				"@osm_version": 1,
+				"phone": "030 4799000",
+				"access": "customers",
+				"indoor": "yes",
+				"operator": "Kurt-Tucholsky-Oberschule ",
+				"emergency": "defibrillator",
+				"defibrillator:location": "A106 / N2 (Neben dem Sekretariat)"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.1056472, 52.3800418]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10091517460,
+				"@osm_version": 1,
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2793697, 52.5331571]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 9899942268,
+				"@osm_version": 1,
+				"ref": "1617",
+				"indoor": "yes",
+				"operator": "Björn Steiger Stiftung",
+				"emergency": "defibrillator",
+				"operator:wikidata": "Q879521",
+				"operator:wikipedia": "de:Björn Steiger Stiftung",
+				"defibrillator:location": "SNP - Eingang links, gegenüber Empfang (6.OG)"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4132708, 52.5214408]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11033298146,
+				"@osm_version": 1,
+				"access": "private",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "In der Polizeiwache",
+				"defibrillator:location:en": "Inside the police station"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3863942, 52.5181517]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10011671969,
+				"@osm_version": 5,
+				"level": "3",
+				"access": "no",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Neben Raum 3.33, links der Hauptaufzüge",
+				"defibrillator:location:en": "Next to room 3.33, left from the main elevators"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3267479, 52.5122732]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 1645508411,
+				"@osm_version": 11,
+				"level": "0",
+				"indoor": "yes",
+				"aed:note": "EG Foyer neben dem Infopoint",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Direkt neben dem Info-Tresen.\n\nNext to the info point."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3857178, 52.5310951]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12416091661,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "permit",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "Mo-Fr 08:00-16:30",
+				"defibrillator:location": "Empfangshalle, an einer Säule vor der Treppe in einem Kasten."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4356071, 52.4790002]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8992818364,
+				"@osm_version": 2,
+				"fixme": "opening_hours",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"description": "Defi im Stadt und Land-Büro",
+				"contact:phone": "+49 30 68920",
+				"defibrillator:location": "Defi im Stadt und Land-Büro"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5140748, 52.5341153]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11403953666,
+				"@osm_version": 1,
+				"level": "1",
+				"access": "permissive",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Obergeschoss zwischen Restaurant und Rundgang"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3204855, 52.4417621]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2497873244,
+				"@osm_version": 6,
+				"note": "entrance hall",
+				"level": "0",
+				"note:de": "Eingangshalle",
+				"emergency": "defibrillator",
+				"defibrillator:location": "An der Wand gegenüber den Eingangstüren"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5321493, 52.5077401]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10603810650,
+				"@osm_version": 2,
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2023-02-02",
+				"defibrillator:location": "Vorraum der Toiletten"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3219818, 52.5197033]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8494683564,
+				"@osm_version": 1,
+				"access": "yes",
+				"indoor": "yes",
+				"operator": "Technische Universität Berlin",
+				"emergency": "defibrillator",
+				"wheelchair": "yes",
+				"opening_hours": "Mo-Fr 06:00-18:00",
+				"emergency:phone": "+49 30 31423333",
+				"defibrillator:location": "Im Eingangsbereich links neben dem Aufzug.",
+				"defibrillator:location:en": "In the entrance area to the left of the lift."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3239145, 52.4606167]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11083526497,
+				"@osm_version": 1,
+				"level": "2",
+				"indoor": "yes",
+				"operator": "Globetrotter",
+				"emergency": "defibrillator",
+				"check_date": "2023-08-02",
+				"opening_hours": "Mo-Fr 11:00-19:00; Sa 10:00-19:00; PH off",
+				"defibrillator:location": "Im 2ten Obergeschoss der Globetrotter-Filiale, zwischen Servicepoint und Reiseapotheke"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3886513, 52.5491338]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11264822422,
+				"@osm_version": 1,
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Eingangsbereich Sanifair-WC-Anlage"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3887529, 52.5183362]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 5599026976,
+				"@osm_version": 3,
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "rechts neben dem Eingang, im Dussmann"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3572284, 52.4815177]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12486983514,
+				"@osm_version": 2,
+				"level": "0",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "Mo-Fr 06:00-22:00; Sa, Su, Ph off",
+				"defibrillator:location": "am Empfang"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3389879, 52.5095766]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12468824812,
+				"@osm_version": 3,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Toiletteneingang"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4166447, 52.5183852]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 4322751090,
+				"@osm_version": 5,
+				"foot": "yes",
+				"horse": "no",
+				"level": "2",
+				"indoor": "yes",
+				"bicycle": "no",
+				"emergency": "defibrillator",
+				"description": "Vor den Toiletten im Foodcourt hinter Subway",
+				"motor_vehicle": "no",
+				"opening_hours": "Mo-Sa 10:00-21:00"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4162598, 52.5237123]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10792476841,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Rechts der Rezeption in der Raumecke",
+				"defibrillator:location:en": "To the right of reception in a room niche"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.324841, 52.5103344]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10914516746,
+				"@osm_version": 1,
+				"ref": "GPI 4931",
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Erdgeschoss beim Pförtner",
+				"defibrillator:location:en": "Ground floor beneath the doorman"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3298302, 52.4294244]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10295652154,
+				"@osm_version": 1,
+				"level": "1",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Neben den Rolltreppen im 1. Stock"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.7174733, 52.3957328]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 5968273725,
+				"@osm_version": 4,
+				"ref": "1145",
+				"indoor": "yes",
+				"operator": "Björn Steiger Stiftung",
+				"emergency": "defibrillator",
+				"operator:wikidata": "Q879521",
+				"operator:wikipedia": "de:Björn Steiger Stiftung",
+				"defibrillator:location": "Müggelpark Einkaufscenter - Höhe Dänisches Bettenlager"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5316231, 52.4310458]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10742476120,
+				"@osm_version": 4,
+				"level": "0",
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2023-12-14",
+				"wheelchair": "limited",
+				"opening_hours": "Mo-Fr 08:00-20:00, PH off",
+				"defibrillator:location": "Im Eingangsbereich, rechts neben dem Eingang zur Biblioithek"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4589507, 52.4735122]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2570308839,
+				"@osm_version": 8,
+				"note": "reception desk",
+				"indoor": "yes",
+				"note:de": "Rezeption",
+				"emergency": "defibrillator",
+				"opening_hours": "24/7"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4564737, 52.5290211]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8521021768,
+				"@osm_version": 3,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.1111568, 52.4523397]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11982892216,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Neben der Eingangstür."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3803521, 52.5159761]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2727737860,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"aed:note": "at the reception",
+				"operator": "Adlon",
+				"emergency": "defibrillator",
+				"aed:note:de": "an der Rezeption"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5260459, 52.4554783]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2935731146,
+				"@osm_version": 5,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "im Ergeschoss bei den Treppen"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3834344, 52.5067417]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11173810073,
+				"@osm_version": 2,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Im Eingangsbereich der Dauerausstellung Topographie des Terrors."
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2407118, 52.5350458]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10284313157,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"description": "Notfallrucksack mit AED"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3236058, 52.5164804]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 3588304157,
+				"@osm_version": 3,
+				"level": "1",
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3940508, 52.52032]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 4322751092,
+				"@osm_version": 4,
+				"horse": "no",
+				"indoor": "yes",
+				"bicycle": "no",
+				"emergency": "defibrillator",
+				"motor_vehicle": "no"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4249968, 52.5412161]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8446079400,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Im Eingangsbereich"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3405725, 52.4969278]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 7036255089,
+				"@osm_version": 3,
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3393021, 52.5094506]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 7526624524,
+				"@osm_version": 5,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Vorraum der Toiletten (von der Terrasse aus kommend ganz links hinten)"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.2473866, 52.535053]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10284313167,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Notfallrucksack mit AED"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5236858, 52.4924195]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11907137732,
+				"@osm_version": 4,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "In der Lobby neben den Toiletten"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.521365, 52.4974095]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12156224044,
+				"@osm_version": 2,
+				"fixme": "opening hours",
+				"level": "1",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2024-09-03",
+				"opening_hours": "Mo-Tu 10:00-18:00; We 08:30-15:00; Th-Fr 07:30-13:00; PH off",
+				"defibrillator:location": "im Wartebereich vom Bürgeramt, rechts neben der Glastür"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3878449, 52.5201239]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12118156996,
+				"@osm_version": 1,
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"addr:floor": "0",
+				"defibrillator:location": "In der DB Information"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3318552, 52.4505249]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10560449468,
+				"@osm_version": 1,
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3680716, 52.5242098]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 11263917794,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"wheelchair": "yes",
+				"opening_hours": "24/7",
+				"defibrillator:location": "Meininger Hotel, Erdgeschoss, Rückwand des Rezeptionstresen"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3669645, 52.5236346]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2727736208,
+				"@osm_version": 5,
+				"indoor": "yes",
+				"aed:note": "ask at the reception",
+				"addr:city": "Berlin",
+				"emergency": "defibrillator",
+				"addr:street": "Katharina-Paulus-Straße",
+				"addr:suburb": "Moabit",
+				"aed:note:de": "an der Reception fragen",
+				"addr:country": "DE",
+				"addr:postcode": "10557",
+				"addr:housenumber": "5"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.4795648, 52.5159029]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12208731481,
+				"@osm_version": 1,
+				"level": "0",
+				"access": "yes",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"opening_hours": "Mo-Th 06:00-22:30; Fr 06:00-21:00",
+				"defibrillator:location": "AED befindet sich an der Information im EG"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3746421, 52.507197]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10968258905,
+				"@osm_version": 1,
+				"level": "1",
+				"phone": "+49 30 74077-0",
+				"access": "permissive",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"wheelchair": "yes",
+				"description": "in der Wachzentrale im Erdgeschoss sowie an Standorten im Haus verteilt",
+				"defibrillator": "manual",
+				"opening_hours": "24/7",
+				"defibrillator:location": "Am Empfang, vom Eingang gesehen links an der Wand"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.382551, 52.5253238]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 9881290277,
+				"@osm_version": 2,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Hochparterre neben dem Aufzug"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5267573, 52.4572254]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 2935238533,
+				"@osm_version": 3,
+				"name": "Defibrillator",
+				"note:de": "Neben den Toiletten",
+				"emergency": "defibrillator",
+				"opening_hours": "on work days"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3961051, 52.4993703]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 8894375303,
+				"@osm_version": 1,
+				"fixme": "defibrillator:location",
+				"level": "0",
+				"indoor": "yes",
+				"emergency": "defibrillator"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.5290498, 52.5051706]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10603810649,
+				"@osm_version": 3,
+				"level": "0",
+				"access": "customers",
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"check_date": "2024-04-08",
+				"wheelchair": "limited",
+				"opening_hours": "Mo-Fr 10:00-17:30; Sa 10:00-18:00; Su 09:00-18:00",
+				"defibrillator:location": "links der Kassen"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3507861, 52.4849556]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 5203710565,
+				"@osm_version": 3,
+				"indoor": "yes",
+				"emergency": "defibrillator",
+				"defibrillator:location": "bei Badeaufsicht"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.3261791, 52.5135449]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 10562121577,
+				"@osm_version": 2,
+				"ref": "GPI 4930",
+				"level": "0",
+				"indoor": "yes",
+				"operator": "TU Berlin",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Erdgeschoss neben dem Pförtner"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [13.445623, 52.5062121]
+			},
+			"properties": {
+				"@osm_type": "node",
+				"@osm_id": 12066228636,
+				"@osm_version": 2,
+				"level": "2",
+				"emergency": "defibrillator",
+				"defibrillator:location": "Im Gang zu den Toiletten an der Wand."
+			}
+		}
+	]
 }
