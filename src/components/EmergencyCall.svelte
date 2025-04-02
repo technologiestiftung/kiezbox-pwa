@@ -10,6 +10,17 @@
 	import Dialer from './EmergencyCall/Dialer.svelte';
 	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
 	import Modal from './Modal.svelte';
+	import { toast } from 'svelte-sonner';
+	import {
+		PUBLIC_KB_DISPLAY_NAME,
+		PUBLIC_KB_DOMAIN,
+		PUBLIC_KB_SERVER_ADDRESS,
+		PUBLIC_KB_SIP_PASSWORD,
+		PUBLIC_KB_SIP_USERNAME,
+		PUBLIC_KB_TARGET_URI,
+		PUBLIC_KB_WSS_PATH,
+		PUBLIC_KB_WSS_PORT
+	} from '$env/static/public';
 
 	let isEmergency = $state(true);
 	let isModal = $state(false);
@@ -35,13 +46,14 @@
 
 	// elements
 	const kiezboxConfig: KiezboxConfig = {
-		kbServerAddress: 'emergency.ds-apps.tsb-berlin.de',
-		kbWSSPort: 8089,
-		kbWSSPath: '/ws',
-		kbDomain: 'emergency.ds-apps.tsb-berlin.de',
-		kbSIPUsername: 'User1',
-		kbSIPPassword: '1234',
-		kbisplayName: 'Kiezbox Emergency'
+		kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
+		kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
+		kbWSSPath: PUBLIC_KB_WSS_PATH,
+		kbDomain: PUBLIC_KB_DOMAIN,
+		kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
+		kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
+		kbDisplayName: PUBLIC_KB_DISPLAY_NAME,
+		kbTargetUri: PUBLIC_KB_TARGET_URI
 	};
 
 	const initialize = async () => {
@@ -164,12 +176,12 @@
 		console.log('[$effect] Registerer state:', registererState);
 
 		// Use the API object to call actions
-		if (callState === CallState.CALLING) {
+		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
 		} else if (callState === CallState.CALL_ESTABLISHED) {
 			await callServiceApi.hangupOrReject();
 		} else if (registererState === RegistererState.Registered) {
-			const targetUri = `sip:200@kb-t-71-01`;
+			const targetUri = `${kiezboxConfig.kbTargetUri}`;
 			await callServiceApi.makeCall(targetUri);
 		} else {
 			console.warn('Not registered, attempting to connect...');
@@ -203,44 +215,61 @@
 				return $t('common.status.call_rejected');
 			case CallState.CALL_TERMINATED:
 				return $t('common.status.call_terminated');
-			case CallState.DISCONNECTED:
-				return $t('common.status.disconnected');
 			case CallState.CONNECTED:
 				return $t('common.status.connected');
 			default:
-				return $t('common.status.disconnected');
+				return $t('common.status.online');
+		}
+	};
+
+	const buttonText = (callState: CallState | false) => {
+		switch (callState) {
+			case CallState.CALL_ESTABLISHED:
+				return $t('content.emergency_phone.active');
+			case CallState.CALLING:
+				return $t('content.emergency_phone.calling');
+			case CallState.CALL_FAILED:
+				return $t('content.emergency_phone.failed');
+			case CallState.CALL_INCOMING:
+				return $t('content.emergency_phone.incoming');
+			default:
+				return $t('content.emergency_phone.call');
 		}
 	};
 
 	const statusText = $derived(status(callState));
 
 	// Determine button text and disabled states based on service state
-	const callButtonText = $derived(
-		isEmergency
-			? callState === CallState.CALLING
-				? $t('content.emergency_phone.emergency.connecting.call_button')
-				: $t('content.emergency_phone.emergency.offline.call_button')
-			: $t('content.emergency_phone.default.offline.call_button')
-	);
+	const callButtonText = $derived(buttonText(callState));
 
-	$inspect(
-		{
-			callState,
-			time,
-			isMicrophoneMuted,
-			isSpeakerMuted,
-			errorMessage,
-			callerId
-		},
-		{
-			name: 'EmergencyCall',
-			enabled: true
+	$effect(() => {
+		if (!callState || !initialized) return;
+		toast.success(statusText);
+	});
+
+	const handleKeydown = (event: KeyboardEvent) => {
+		// Check for Ctrl+Shift+E to toggle emergency mode
+		if (event.ctrlKey && event.shiftKey && event.key === 'E') {
+			event.preventDefault();
+			changeState();
 		}
-	);
+	};
 </script>
 
-<Dialer {isEmergency} onClick={openCaller}></Dialer>
+<svelte:window on:keydown={handleKeydown} />
 
+<button
+	class="fixed right-0 bottom-0 size-24 cursor-default opacity-0"
+	onclick={() => {
+		changeState();
+		toast.success(isEmergency ? 'Switched to Emergency Mode' : 'Switched to Demo Mode');
+	}}
+	aria-hidden="true"
+>
+	<span class="sr-only">Toggle emergency mode</span>
+</button>
+
+<Dialer {isEmergency} onClick={openCaller}></Dialer>
 <Modal close={closeCaller} {isModal}>
 	{#snippet children()}
 		<div class="EmergencyCall-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
@@ -251,20 +280,6 @@
 					<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 				{/if}
 			</div>
-			{#if callerId}
-				<div class="flex flex-col items-center justify-center">
-					<span class="body-text text-center">
-						{$t('content.emergency_phone.emergency.default.caller_id') + callerId}
-					</span>
-				</div>
-			{/if}
-			{#if callState}
-				<div class="flex flex-col items-center justify-center">
-					<span class="body-text text-center">
-						{$t('content.emergency_phone.emergency.default.call_state') + callState}
-					</span>
-				</div>
-			{/if}
 
 			<CallScreen
 				isInCall={callState === CallState.CALL_ESTABLISHED}

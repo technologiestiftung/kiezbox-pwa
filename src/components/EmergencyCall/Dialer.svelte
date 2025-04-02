@@ -28,7 +28,7 @@
 			disabled={false}
 			isActive={isEmergency}
 			{onClick}
-			buttonText={$t('content.emergency_phone.default.phone_button')}
+			buttonText={$t('content.emergency_phone.emergency.phone_button')}
 		/>
 	</div>
 </div>

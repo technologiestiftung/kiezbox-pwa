@@ -1,5 +1,6 @@
 <script>
 	import Button from '$lib/components/ui/button/button.svelte';
+	import { Toaster } from '$lib/components/ui/sonner';
 	import { t } from '$lib/translations';
 	import { CloseOutline } from 'carbon-icons-svelte';
 
@@ -32,11 +33,13 @@
 			<CloseOutline class="text-body-black size-6" />
 			<span class="text-body-black">{$t('common.button.close')}</span>
 		</Button>
-		<!-- <button autofocus onclick={() => dialog.close()}>close modal</button> -->
 	</div>
-	<div class="md-[41.25rem] flex h-[calc(100%-3rem)] w-full flex-col overflow-auto px-4">
+	<div
+		class="md-[41.25rem] text-body-black flex h-[calc(100%-3rem)] w-full flex-col overflow-auto bg-white px-4"
+	>
 		{@render children?.()}
 	</div>
+	<Toaster></Toaster>
 </dialog>
 
 <style>

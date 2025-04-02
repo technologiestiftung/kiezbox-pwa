@@ -7,7 +7,8 @@ export interface KiezboxConfig {
 	kbDomain: string;
 	kbSIPUsername: string;
 	kbSIPPassword: string;
-	kbisplayName: string;
+	kbDisplayName: string;
+	kbTargetUri: string;
 }
 
 export interface CallServiceState {
@@ -49,7 +50,9 @@ export const assignStream = (
 
 	// Load and start playback of media.
 	element.play().catch((error: Error) => {
-		setError(`Failed to play remote media: ${error.message}`);
+		// setError(`Failed to play remote media: ${error.message}`);
+		console.error('Failed to play remote media');
+		console.error(error);
 	});
 
 	stream.onaddtrack = (): void => {

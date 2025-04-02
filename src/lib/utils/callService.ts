@@ -201,6 +201,7 @@ export const createCallService = (config: KiezboxConfig) => {
 				setError('Call rejected: Already in another call.');
 				return;
 			}
+			console.log('[CallService] Incoming call:', invitation);
 			incomingInvitation = invitation;
 			_state.update((s) => ({
 				...s,
@@ -272,7 +273,7 @@ export const createCallService = (config: KiezboxConfig) => {
 				logLevel: 'debug',
 				authorizationUsername: config.kbSIPUsername,
 				authorizationPassword: config.kbSIPPassword,
-				displayName: config.kbisplayName,
+				displayName: config.kbDisplayName,
 				delegate: userAgentDelegate
 			});
 			await userAgent.start();
@@ -340,12 +341,13 @@ export const createCallService = (config: KiezboxConfig) => {
 	};
 
 	const answerCall = async (): Promise<void> => {
+		console.log(
+			'[CallService] Answering call...',
+			`Incoming call from: ${incomingInvitation?.remoteIdentity.displayName || ''}`
+		);
+		console.log('[CallService] Incoming call:', incomingInvitation);
 		if (!incomingInvitation) {
 			setError('No incoming call to answer.');
-			return;
-		}
-		if (activeSession) {
-			setError('Cannot answer: Already in another call.');
 			return;
 		}
 		clearError();
