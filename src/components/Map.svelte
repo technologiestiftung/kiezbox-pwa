@@ -102,12 +102,10 @@
 				poiState.properties = null;
 				return;
 			}
-			if (
-				features[0].layer.id === 'defies-layer' ||
-				features[0].layer.id === 'drinking-water-layer' ||
-				features[0].layer.id === 'toilets-layer' ||
-				features[0].layer.id === 'water-pumps-layer'
-			) {
+			
+			const foundLayer = LAYER_CONFIG.find((layer) => layer.id === features[0].layer.id);
+			
+			if (foundLayer) {
 				poiState.layer = features[0].layer;
 				poiState.properties = features[0].properties;
 				clickPoint = { x: e.point.x, y: e.point.y };
@@ -116,6 +114,7 @@
 				poiState.properties = null;
 				return;
 			}
+
 		});
 
 		mapState.map = map;
