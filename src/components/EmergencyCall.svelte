@@ -1,16 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { t } from '$lib/translations';
-	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
-	import { RegistererState } from 'sip.js';
-	import { onDestroy } from 'svelte';
-	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
-	import Dialer from './EmergencyCall/Dialer.svelte';
-	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
-	import Modal from './Modal.svelte';
-	import { toast } from 'svelte-sonner';
 	import {
 		PUBLIC_KB_DISPLAY_NAME,
 		PUBLIC_KB_DOMAIN,
@@ -21,8 +10,20 @@
 		PUBLIC_KB_WSS_PATH,
 		PUBLIC_KB_WSS_PORT
 	} from '$env/static/public';
+	import { apiFetch } from '$lib/api';
+	import { t } from '$lib/translations';
+	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
+	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import { RegistererState } from 'sip.js';
+	import { getContext, onDestroy, setContext } from 'svelte';
+	import { toast } from 'svelte-sonner';
+	import CallScreen from './EmergencyCall/CallScreen.svelte';
+	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
+	import Dialer from './EmergencyCall/Dialer.svelte';
+	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
+	import Modal from './Modal.svelte';
 
-	let isEmergency = $state(true);
+	const isEmergency = getContext('isEmergency');
 	let isModal = $state(false);
 
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
@@ -76,6 +77,10 @@
 
 			console.log('[$effect] Initializing CallService API...');
 			initialized = true;
+
+			// TODO: Fetch the Kiezbox server config from the API
+			const kiezboxServerConfig = await apiFetch('/kiezbox-server-config');
+			setContext('kiezbox_server_config', kiezboxServerConfig);
 
 			// Call the factory function
 			const serviceApi = createCallService(kiezboxConfig);
@@ -198,7 +203,6 @@
 	};
 
 	const changeState = () => {
-		isEmergency = !isEmergency;
 		console.log('Mode changed to:', isEmergency ? 'Emergency' : 'Demo');
 	};
 

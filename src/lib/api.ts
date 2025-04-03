@@ -1,11 +1,10 @@
-import { PUBLIC_KB_SERVER_ADDRESS } from '$env/static/public';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 const isCrossOrgin =
-	typeof window !== 'undefined' &&
-	window.location.origin !== new URL(PUBLIC_KB_SERVER_ADDRESS).origin;
+	typeof window !== 'undefined' && window.location.origin !== new URL(PUBLIC_API_URL).origin;
 
-export async function apiFetch(resource: string, options: RequestInit = {}) {
-	const url = `${PUBLIC_KB_SERVER_ADDRESS}${resource}`; // e.g., resource = '/status'
+export const apiFetch = async (resource: string, options: RequestInit = {}): Promise<any> => {
+	const url = `${PUBLIC_API_URL}${resource}`; // e.g., resource = '/status'
 
 	const fetchOptions: RequestInit = {
 		...options,
@@ -35,4 +34,4 @@ export async function apiFetch(resource: string, options: RequestInit = {}) {
 		console.error('Fetch failed:', error);
 		throw error; // Re-throw for the caller to handle
 	}
-}
+};
