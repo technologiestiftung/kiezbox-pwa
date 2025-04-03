@@ -1,5 +1,18 @@
 <script lang="ts">
+	import { loadTranslations } from '$lib/translations';
 	import { onMount } from 'svelte';
+	import '../app.css';
+
+	import type { LayoutLoad } from './$types';
+
+	export const load: LayoutLoad = async ({ url }) => {
+		const { pathname } = url;
+		const initLocale = 'de';
+
+		await loadTranslations(initLocale, pathname);
+
+		return { locale: initLocale, route: pathname };
+	};
 
 	// detect service worker update
 	async function detectSWUpdate() {
@@ -21,4 +34,6 @@
 	onMount(() => detectSWUpdate());
 </script>
 
-<slot />
+<div class="bg-grey-light h-full w-full">
+	<slot />
+</div>

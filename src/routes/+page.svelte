@@ -1,48 +1,19 @@
-<script>
-	let message = '';
-
-	const sendMessage = () => {
-		if (message.trim() !== '') {
-			console.log('Message sent:', message);
-			message = '';
-		}
-	};
+<script lang="ts">
+	import EmergencyCall from '../components/EmergencyCall.svelte';
+	import Footer from '../components/Footer.svelte';
+	import Header from '../components/Header.svelte';
+	import Map from '../components/Map.svelte';
+	import PrecautionGuide from '../components/PrecautionGuide.svelte';
 </script>
 
-<div class="form-container">
-	<h1>Send a Kiezbox Message</h1>
-
-	<input type="text" bind:value={message} placeholder="Enter your message" />
-
-	<button on:click={sendMessage} disabled={message.trim() === ''}> Send Message </button>
+<div class="page-root mx-auto flex h-full max-w-[43.75rem] flex-col scroll-auto bg-white">
+	<Header></Header>
+	<EmergencyCall />
+	<PrecautionGuide></PrecautionGuide>
+	<div class="map-root flex h-[30.5rem] w-full items-center justify-center">
+		<Map />
+	</div>
+	<Footer></Footer>
 </div>
 
-<style>
-	.form-container {
-		max-width: 400px;
-		margin: 0 auto;
-		padding: 20px;
-		text-align: center;
-	}
-
-	input[type='text'] {
-		width: 80%;
-		padding: 10px;
-		font-size: 16px;
-		margin-bottom: 10px;
-	}
-
-	button {
-		padding: 10px 20px;
-		font-size: 16px;
-		cursor: pointer;
-		background-color: #007bff;
-		color: white;
-		border: none;
-		border-radius: 4px;
-	}
-
-	button:disabled {
-		background-color: #cccccc;
-	}
-</style>
+<style></style>
