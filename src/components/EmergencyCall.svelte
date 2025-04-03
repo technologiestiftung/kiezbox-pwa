@@ -1,16 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { t } from '$lib/translations';
-	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
-	import { RegistererState } from 'sip.js';
-	import { onDestroy } from 'svelte';
-	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
-	import Dialer from './EmergencyCall/Dialer.svelte';
-	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
-	import Modal from './Modal.svelte';
-	import { toast } from 'svelte-sonner';
 	import {
 		PUBLIC_KB_DISPLAY_NAME,
 		PUBLIC_KB_DOMAIN,
@@ -21,6 +10,17 @@
 		PUBLIC_KB_WSS_PATH,
 		PUBLIC_KB_WSS_PORT
 	} from '$env/static/public';
+	import { t } from '$lib/translations';
+	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
+	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import { RegistererState } from 'sip.js';
+	import { onDestroy } from 'svelte';
+	import { toast } from 'svelte-sonner';
+	import CallScreen from './EmergencyCall/CallScreen.svelte';
+	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
+	import Dialer from './EmergencyCall/Dialer.svelte';
+	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
+	import Modal from './Modal.svelte';
 
 	let isEmergency = $state(true);
 	let isModal = $state(false);
@@ -58,17 +58,14 @@
 
 	const initialize = async () => {
 		try {
-			// Check if the browser supports the required features
 			if (!browser) {
 				throw new Error('Browser not supported');
 			}
 
-			// Check if remoteAudio is defined
 			if (!remoteAudio) {
 				throw new Error('Remote audio element not defined');
 			}
 
-			// Check if the CallService API is already initialized
 			if (callServiceApi && initialized) {
 				console.log('[$effect] CallService API already initialized');
 				return;
@@ -77,11 +74,9 @@
 			console.log('[$effect] Initializing CallService API...');
 			initialized = true;
 
-			// Call the factory function
 			const serviceApi = createCallService(kiezboxConfig);
 			serviceApi.setAudioElement(remoteAudio); // Pass the audio element
 
-			// Subscribe to the state store returned by the API
 			unsubscribeState = serviceApi.state.subscribe((newState) => {
 				callServiceState = newState;
 			});
@@ -93,7 +88,6 @@
 		}
 	};
 
-	// Clean up on component destruction
 	onDestroy(() => {
 		console.log('[onDestroy] Disconnecting CallService API...');
 		if (unsubscribeState) {
@@ -101,7 +95,6 @@
 			unsubscribeState = null;
 		}
 
-		// Call disconnect on the stored API object if it exists
 		if (callServiceApi) {
 			callServiceApi.disconnect().finally(() => {
 				callServiceApi = null;
@@ -113,7 +106,7 @@
 
 	const openCaller = async () => {
 		isModal = true;
-		await initialize(); // Initialize the service when the modal opens
+		await initialize();
 	};
 
 	const closeCaller = async () => {
@@ -121,7 +114,6 @@
 			callServiceApi &&
 			(callState === CallState.CALLING || callState === CallState.CALL_ESTABLISHED)
 		) {
-			// Use the API object
 			await callServiceApi.hangupOrReject();
 		}
 		isModal = false;
@@ -133,7 +125,6 @@
 			let checkInterval: ReturnType<typeof setInterval>;
 			let cleanup = () => clearInterval(checkInterval);
 
-			// Use interval to check registration state
 			checkInterval = setInterval(() => {
 				if (registererState === RegistererState.Registered) {
 					cleanup();
@@ -175,7 +166,6 @@
 		console.log('[$effect] Call state:', callState);
 		console.log('[$effect] Registerer state:', registererState);
 
-		// Use the API object to call actions
 		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
 		} else if (callState === CallState.CALL_ESTABLISHED) {
@@ -202,7 +192,6 @@
 		console.log('Mode changed to:', isEmergency ? 'Emergency' : 'Demo');
 	};
 
-	// Helper function to get emergency call button text based on call state
 	const status = (callState: CallState | false) => {
 		switch (callState) {
 			case CallState.CALL_ESTABLISHED:
@@ -268,35 +257,34 @@
 >
 	<span class="sr-only">Toggle emergency mode</span>
 </button>
-
 <Dialer {isEmergency} onClick={openCaller}></Dialer>
 <Modal close={closeCaller} {isModal}>
 	{#snippet children()}
-		<div class="EmergencyCall-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
-			<div class="flex flex-col space-y-8">
-				{#if isEmergency}
-					<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
-				{:else}
-					<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
-				{/if}
-			</div>
+		<div class="EmergencyCall-root relative flex h-full w-full flex-col justify-between">
+			{#if isEmergency}
+				<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
+			{:else}
+				<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
+			{/if}
 
-			<CallScreen
-				isInCall={callState === CallState.CALL_ESTABLISHED}
-				activateCall={handleCallAction}
-				buttonText={callButtonText}
-				{isEmergency}
-				{activateMic}
-				{activateSpeaker}
-				{time}
-				buttonDisabled={false}
-				{isMicrophoneMuted}
-				{isSpeakerMuted}
-				canCall={true}
-				canHangup={true}
-				{errorMessage}
-				bind:remoteAudio
-			/>
+			<div class="mt-auto pt-4">
+				<CallScreen
+					isInCall={callState === CallState.CALL_ESTABLISHED}
+					activateCall={handleCallAction}
+					buttonText={callButtonText}
+					{isEmergency}
+					{activateMic}
+					{activateSpeaker}
+					{time}
+					buttonDisabled={false}
+					{isMicrophoneMuted}
+					{isSpeakerMuted}
+					canCall={true}
+					canHangup={true}
+					{errorMessage}
+					bind:remoteAudio
+				/>
+			</div>
 		</div>
 	{/snippet}
 </Modal>

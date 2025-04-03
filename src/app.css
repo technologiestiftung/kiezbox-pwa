@@ -20,6 +20,7 @@
 	--color-body-black: var(--body-black);
 	--color-black: var(--black);
 	--color-grey-mid: var(--grey-mid);
+	--color-grey-accent: var(--grey-accent);
 	--color-grey-light: var(--grey-light);
 	--color-black: var(var(--black));
 	--color-white: var(--white);
@@ -70,6 +71,7 @@
 		--black: #121019;
 		--body-black: #121019;
 		--grey-mid: #444;
+		--grey-accent: #cacaca;
 		--grey-light: #f6f6f6;
 		--white: #fff;
 		--purple-dark: #5d508b;

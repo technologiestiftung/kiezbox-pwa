@@ -29,7 +29,9 @@
 	};
 </script>
 
-<div class="CallScreen-root flex flex-col items-center justify-center space-y-4">
+<div
+	class="CallScreen-root sticky bottom-0 z-10 flex w-full flex-col items-center justify-center space-y-4 bg-white py-4"
+>
 	<audio bind:this={remoteAudio} id="audioElement" controls class="hidden"> </audio>
 
 	{#if isInCall}
