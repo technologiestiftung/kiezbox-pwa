@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class={`SppechBubble-root relative mb-3 flex w-auto max-w-[329px] min-w-[200px] rounded-[1.5rem] border-4 bg-white px-[1.5rem] py-[1.375rem] text-start shadow-xl transition-colors duration-500 ${borderColor} ${borderTopColor}`}
+	class={`SpeechBubble-root relative mb-3 flex w-auto max-w-[329px] min-w-[200px] rounded-[1.5rem] border-4 bg-white px-[1.5rem] py-[1.375rem] text-start shadow-xl transition-colors duration-500 ${borderColor} ${borderTopColor}`}
 >
 	<div class="SpeechBubble-content">
 		<span class="speechBubble-header text-black">{@html header}</span>
