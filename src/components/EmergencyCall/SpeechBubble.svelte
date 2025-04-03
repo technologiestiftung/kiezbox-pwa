@@ -6,7 +6,9 @@
 	class="SppechBubble-root relative mb-3 flex w-auto max-w-[329px] min-w-[200px] rounded-[1.5rem] border-4 border-black bg-white px-[1.5rem] py-[1.375rem] text-start shadow-xl"
 >
 	<div class="SpeechBubble-content">
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<span class="speechBubble-header text-black">{@html header}</span>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<p class="speechBubble-body text-black">{@html children}</p>
 	</div>
 

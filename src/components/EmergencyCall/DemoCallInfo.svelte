@@ -12,9 +12,12 @@
 
 {#if !isInCall}
 	<div class="p-4">
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html $t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-2 list-disc space-y-1 pl-5">
+			<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 			{#each { length: BUBBLE_COUNT } as _, i}
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<li>{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
 			{/each}
 		</ul>
@@ -29,6 +32,7 @@
 		role="region"
 		aria-live="polite"
 	>
+		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 		{#each { length: BUBBLE_COUNT } as _, i}
 			<div bind:this={bubbleElements[i]} class="flex w-full justify-center">
 				<div class="w-full max-w-lg">

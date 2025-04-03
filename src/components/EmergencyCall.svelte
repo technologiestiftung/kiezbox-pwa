@@ -1,16 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { t } from '$lib/translations';
-	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
-	import { RegistererState } from 'sip.js';
-	import { onDestroy } from 'svelte';
-	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
-	import Dialer from './EmergencyCall/Dialer.svelte';
-	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
-	import Modal from './Modal.svelte';
-	import { toast } from 'svelte-sonner';
 	import {
 		PUBLIC_KB_DISPLAY_NAME,
 		PUBLIC_KB_DOMAIN,
@@ -21,6 +10,17 @@
 		PUBLIC_KB_WSS_PATH,
 		PUBLIC_KB_WSS_PORT
 	} from '$env/static/public';
+	import { t } from '$lib/translations';
+	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
+	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import { RegistererState } from 'sip.js';
+	import { onDestroy } from 'svelte';
+	import { toast } from 'svelte-sonner';
+	import CallScreen from './EmergencyCall/CallScreen.svelte';
+	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
+	import Dialer from './EmergencyCall/Dialer.svelte';
+	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
+	import Modal from './Modal.svelte';
 
 	let isEmergency = $state(true);
 	let isModal = $state(false);
@@ -37,7 +37,6 @@
 	// states
 	const callState = $derived(callServiceState?.callState ?? false);
 	const registererState = $derived(callServiceState?.registererState ?? false);
-	const callerId = $derived(callServiceState?.callerId ?? null);
 
 	const time = $derived(callServiceState?.callDuration ?? 0);
 	const isMicrophoneMuted = $derived(callServiceState?.isMicrophoneMuted ?? false);
@@ -87,9 +86,12 @@
 			});
 
 			callServiceApi = serviceApi;
-		} catch (error) {
-			console.error('Initialization error:', error);
-			return;
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				toast.error('Failed to initialize CallService API: ' + error.message);
+			} else {
+				toast.error('Failed to initialize CallService API: ' + String(error));
+			}
 		}
 	};
 
@@ -117,6 +119,11 @@
 	};
 
 	const closeCaller = async () => {
+		console.log('[$effect] Closing caller modal');
+		console.log('[$effect] Call dis:', isCloseDisabled());
+
+		if (isCloseDisabled()) return;
+
 		if (
 			callServiceApi &&
 			(callState === CallState.CALLING || callState === CallState.CALL_ESTABLISHED)
@@ -178,7 +185,7 @@
 		// Use the API object to call actions
 		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
-		} else if (callState === CallState.CALL_ESTABLISHED) {
+		} else if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
 			await callServiceApi.hangupOrReject();
 		} else if (registererState === RegistererState.Registered) {
 			const targetUri = `${kiezboxConfig.kbTargetUri}`;
@@ -217,10 +224,20 @@
 				return $t('common.status.call_terminated');
 			case CallState.CONNECTED:
 				return $t('common.status.connected');
+			case CallState.INITIALIZED:
+				return $t('common.status.online');
 			default:
 				return $t('common.status.online');
 		}
 	};
+
+	const isCloseDisabled = $derived(() => {
+		if (callState === CallState.CALL_ESTABLISHED) return true;
+		if (callState === CallState.CALLING) return true;
+		if (callState === CallState.CALL_INCOMING) return true;
+		if (callState === CallState.CALL_REDIRECTED) return true;
+		return false;
+	});
 
 	const buttonText = (callState: CallState | false) => {
 		switch (callState) {
@@ -270,7 +287,7 @@
 </button>
 
 <Dialer {isEmergency} onClick={openCaller}></Dialer>
-<Modal close={closeCaller} {isModal}>
+<Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
 		<div class="EmergencyCall-root flex w-full flex-grow flex-col justify-between space-y-8 py-6">
 			<div class="flex flex-col space-y-8">
@@ -289,11 +306,9 @@
 				{activateMic}
 				{activateSpeaker}
 				{time}
-				buttonDisabled={false}
 				{isMicrophoneMuted}
 				{isSpeakerMuted}
 				canCall={true}
-				canHangup={true}
 				{errorMessage}
 				bind:remoteAudio
 			/>

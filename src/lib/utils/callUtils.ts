@@ -24,6 +24,7 @@ export interface CallServiceState {
 }
 
 export enum CallState {
+	INITIALIZED = 'INITIALIZED',
 	DISCONNECTED = 'DISCONNECTED',
 	CONNECTED = 'CONNECTED',
 	CALLING = 'CALLING',
