@@ -15,6 +15,9 @@
 	let title = $state('Details');
 	let activeLayer = $state<(typeof LAYER_CONFIG)[number] | null>(null);
 	let cardVisible = $state(false);
+	let tipPosition = $state('top');
+
+	let tipGeom = $state({ x: 0, y: 0 });
 
 	onMount(() => {
 		const handleResize = () => {
@@ -68,17 +71,21 @@
 
 		let left = clickPoint.x + iconSize + 8;
 		let top = clickPoint.y - cardRect.height / 2;
+		tipPosition = 'left';
 
 		if (left + cardRect.width > mapRect.width - 12) {
 			left = clickPoint.x - cardRect.width - 8;
+			tipPosition = 'right';
 		}
 
 		if (left < 12) {
 			left = Math.max(12, clickPoint.x - cardRect.width / 2);
 			top = clickPoint.y - cardRect.height - iconSize - 8;
+			tipPosition = 'bottom';
 
 			if (top < 12) {
 				top = clickPoint.y + iconSize + 8;
+				tipPosition = 'top';
 			}
 		}
 
@@ -111,6 +118,39 @@
 			: 'hidden'}; transition: opacity 0.15s ease-in-out;"
 		bind:this={cardRef}
 	>
+		<!-- <div
+			class="card-tip card-tip-{tipPosition} card-tip-top"
+			style="transform: translateX({tipGeom.x}%); transform: translateY({tipGeom.y}%);"
+		> -->
+		<div class="card-tip card-tip-{tipPosition}">
+			<svg
+				width="18"
+				height="17"
+				viewBox="0 0 18 17"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M8.14344 2.35963C8.53219 1.71435 9.46781 1.71435 9.85657 2.35963L16.7091 13.734C17.1106 14.4005 16.6306 15.25 15.8525 15.25H2.14751C1.36941 15.25 0.889414 14.4005 1.29094 13.734L8.14344 2.35963Z"
+					fill="#F1F0F5"
+				/>
+				<path
+					d="M8.14344 2.35963C8.53219 1.71435 9.46781 1.71435 9.85657 2.35963L16.7091 13.734"
+					stroke="#5D508B"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+				<path
+					d="M1.29094 13.734L8.14344 2.35963"
+					stroke="#5D508B"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</div>
+
 		<Card.Root class="w-64">
 			<Card.Header>
 				<Card.Title class="items-center"
@@ -150,3 +190,45 @@
 		</Card.Root>
 	</div>
 {/if}
+
+<style>
+	/* Card tip base properties */
+	.card-tip {
+		position: absolute;
+		width: 0;
+		height: 0;
+		z-index: 1;
+	}
+
+	/* Arrow pointing down (placed at top of card) */
+	.card-tip-top {
+		top: -12.5px;
+		/* left dynamisch X ACHSE */
+		left: 10px;
+	}
+	.card-tip-bottom {
+		bottom: -12.5px;
+		transform: rotate(180deg);
+
+		left: 30px;
+	}
+	.card-tip-bottom svg path,
+	.card-tip-left svg path,
+	.card-tip-right svg path {
+		fill: #fff;
+	}
+	.card-tip-left {
+		left: -12.5px;
+		transform: rotate(-90deg);
+
+		/* top dynamisch Y ACHSE */
+		top: 70px;
+	}
+	.card-tip-right {
+		right: -12.5px;
+		transform: rotate(90deg);
+
+		/* top dynamisch Y ACHSE */
+		top: 40px;
+	}
+</style>
