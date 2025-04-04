@@ -17,7 +17,7 @@
 	let cardVisible = $state(false);
 	let tipPosition = $state('top');
 
-	let tipGeom = $state({ x: 0, y: 0 });
+	let tipGeom = $state({ left: 0, top: 0 });
 
 	onMount(() => {
 		const handleResize = () => {
@@ -203,6 +203,7 @@
 	/* Arrow pointing down (placed at top of card) */
 	.card-tip-top {
 		top: -12.5px;
+
 		/* left dynamisch X ACHSE */
 		left: 10px;
 	}
@@ -210,6 +211,7 @@
 		bottom: -12.5px;
 		transform: rotate(180deg);
 
+		/* left dynamisch X ACHSE */
 		left: 30px;
 	}
 	.card-tip-bottom svg path,
