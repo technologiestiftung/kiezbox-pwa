@@ -5,14 +5,13 @@
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
 	import CloseOutline from 'carbon-icons-svelte/lib/CloseOutline.svelte';
-	import maplibregl from 'maplibre-gl';
 	import { onMount } from 'svelte';
 
-	let cardRef: HTMLDivElement;
+	let cardRef: HTMLDivElement | undefined = $state();
+
 	let content = $state({});
 	let title = $state('Details');
 	let activeLayer = $state<(typeof LAYER_CONFIG)[number] | null>(null);
-	let popup: maplibregl.Popup;
 
 	$effect(() => {
 		activeLayer = LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null;
@@ -30,51 +29,15 @@
 		title = activeLayer?.label || 'Details';
 	});
 
-	const map = mapState.map;
-	let markerHeight = 16,
-		markerRadius = 16,
-		linearOffset = 16;
-	let popupOffsets: maplibregl.Offset = {
-		top: [0, 0],
-		'top-left': [0, 0],
-		'top-right': [0, 0],
-		bottom: [0, -markerHeight],
-		'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-		'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-		left: [markerRadius, (markerHeight - markerRadius) * -1],
-		right: [-markerRadius, (markerHeight - markerRadius) * -1]
-	};
-
 	onMount(() => {
-		if (!map) return;
-
-		const LAYER_IDS = LAYER_CONFIG.map((layer) => layer.id);
-
-		map.on('click', LAYER_IDS, (e: maplibregl.MapMouseEvent) => {
-			const features = map.queryRenderedFeatures(e.point);
-			const coordinates = features[0].geometry.coordinates.slice();
-
-			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-			}
-
-			popup = new maplibregl.Popup({
-				offset: popupOffsets,
-				className: 'kb-popup',
-				closeButton: true
-			})
-				.setLngLat(coordinates)
-				.setDOMContent(cardRef)
-				.setMaxWidth('256px')
-				.addTo(map);
-		});
+		if (!cardRef) return;
+		mapState.cardRef = cardRef;
 	});
 
-	function resetPOIState() {
-		poiState.layer = null;
-		poiState.properties = null;
-		activeLayer = null;
-		popup.remove();
+	function handlePopupClose() {
+		if (mapState.popup) {
+			mapState.popup.remove();
+		}
 	}
 </script>
 
@@ -85,7 +48,7 @@
 				>{title}
 				<button
 					class="text-purple-dark m-0 cursor-pointer bg-transparent p-0"
-					onclick={() => resetPOIState()}
+					onclick={() => handlePopupClose()}
 				>
 					<CloseOutline fill="#5d508b" size={24} />
 				</button>

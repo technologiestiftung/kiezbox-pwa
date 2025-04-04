@@ -280,9 +280,6 @@
 		box-shadow: none !important;
 		padding: 0 !important;
 	}
-	.maplibregl-popup-close-button {
-		display: none !important;
-	}
 }
 
 /* Animation keyframes can be added here if needed */
