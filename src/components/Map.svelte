@@ -8,7 +8,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { onMount } from 'svelte';
 	import Legend from './Legend.svelte';
-	import TooltipCard from './TooltipCard.svelte';
+	import PopupCard from './PopupCard.svelte';
 
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let map: maplibregl.Map;
@@ -134,6 +134,6 @@
 </script>
 
 <div class="Map-root relative h-full w-full" bind:this={mapContainer}>
-	<TooltipCard />
+	<PopupCard />
 	<Legend />
 </div>
