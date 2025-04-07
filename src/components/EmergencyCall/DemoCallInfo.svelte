@@ -183,7 +183,7 @@
 		onscroll={handleScroll}
 		onwheel={handleScroll}
 		ontouchmove={handleScroll}
-		class="flex h-[calc(100vh-250px)] w-full flex-1 flex-col items-center gap-10 overflow-y-auto scroll-smooth p-4 pb-32"
+		class="flex h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center gap-10 overflow-y-auto scroll-smooth p-4 pb-32"
 		aria-label="Scrolling question bubbles"
 	>
 		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->

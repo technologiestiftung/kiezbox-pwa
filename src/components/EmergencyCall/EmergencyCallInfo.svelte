@@ -9,7 +9,7 @@
 		<div class="">{$t('content.emergency_phone.default.questions.title')}</div>
 	</div>
 	<div
-		class="flex max-h-[calc(100vh-250px)] w-full flex-1 flex-col items-center overflow-y-auto scroll-smooth p-4 pb-32"
+		class="flex max-h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center scroll-smooth p-4 pb-32"
 	>
 		<ul class="w-full space-y-2 px-4">
 			{#each { length: 5 }, i}
@@ -24,7 +24,7 @@
 		<div class="">{$t('content.emergency_phone.default.online.text')}</div>
 	</div>
 	<div
-		class="flex max-h-[calc(100vh-250px)] w-full flex-1 flex-col items-center overflow-y-auto scroll-smooth p-4 pb-32"
+		class="flex max-h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center scroll-smooth p-4 pb-32"
 	>
 		<ul class="w-full space-y-2 px-4">
 			{#each { length: 5 }, i}
