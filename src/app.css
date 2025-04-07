@@ -280,6 +280,11 @@
 		box-shadow: none !important;
 		padding: 0 !important;
 	}
+
+	/* Popup tip */
+	.maplibregl-popup-tip {
+		display: none !important;
+	}
 }
 
 /* Animation keyframes can be added here if needed */
