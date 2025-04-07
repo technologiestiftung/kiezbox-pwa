@@ -240,7 +240,9 @@
 			case CallState.CALL_INCOMING:
 				return $t('content.emergency_phone.incoming');
 			default:
-				return $t('content.emergency_phone.call');
+				return isEmergency
+					? $t('content.emergency_phone.call')
+					: $t('content.emergency_phone.callDemo');
 		}
 	};
 
