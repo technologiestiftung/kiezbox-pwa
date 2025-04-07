@@ -7,7 +7,6 @@
 	let {
 		isInCall,
 		canCall,
-		canHangup,
 		isEmergency,
 		isMicrophoneMuted,
 		isSpeakerMuted,
@@ -15,7 +14,6 @@
 		activateSpeaker,
 		activateCall,
 		buttonText,
-		buttonDisabled,
 		errorMessage,
 		time,
 		remoteAudio = $bindable()

@@ -37,7 +37,6 @@
 	// states
 	const callState = $derived(callServiceState?.callState ?? false);
 	const registererState = $derived(callServiceState?.registererState ?? false);
-	const callerId = $derived(callServiceState?.callerId ?? null);
 
 	const time = $derived(callServiceState?.callDuration ?? 0);
 	const isMicrophoneMuted = $derived(callServiceState?.isMicrophoneMuted ?? false);
@@ -82,9 +81,12 @@
 			});
 
 			callServiceApi = serviceApi;
-		} catch (error) {
-			console.error('Initialization error:', error);
-			return;
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				toast.error('Failed to initialize CallService API: ' + error.message);
+			} else {
+				toast.error('Failed to initialize CallService API: ' + String(error));
+			}
 		}
 	};
 
@@ -110,6 +112,11 @@
 	};
 
 	const closeCaller = async () => {
+		console.log('[$effect] Closing caller modal');
+		console.log('[$effect] Call dis:', isCloseDisabled());
+
+		if (isCloseDisabled()) return;
+
 		if (
 			callServiceApi &&
 			(callState === CallState.CALLING || callState === CallState.CALL_ESTABLISHED)
@@ -168,7 +175,7 @@
 
 		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
-		} else if (callState === CallState.CALL_ESTABLISHED) {
+		} else if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
 			await callServiceApi.hangupOrReject();
 		} else if (registererState === RegistererState.Registered) {
 			const targetUri = `${kiezboxConfig.kbTargetUri}`;
@@ -206,10 +213,20 @@
 				return $t('common.status.call_terminated');
 			case CallState.CONNECTED:
 				return $t('common.status.connected');
+			case CallState.INITIALIZED:
+				return $t('common.status.online');
 			default:
 				return $t('common.status.online');
 		}
 	};
+
+	const isCloseDisabled = $derived(() => {
+		if (callState === CallState.CALL_ESTABLISHED) return true;
+		if (callState === CallState.CALLING) return true;
+		if (callState === CallState.CALL_INCOMING) return true;
+		if (callState === CallState.CALL_REDIRECTED) return true;
+		return false;
+	});
 
 	const buttonText = (callState: CallState | false) => {
 		switch (callState) {
@@ -258,7 +275,7 @@
 	<span class="sr-only">Toggle emergency mode</span>
 </button>
 <Dialer {isEmergency} onClick={openCaller}></Dialer>
-<Modal close={closeCaller} {isModal}>
+<Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
 		<div class="EmergencyCall-root relative flex h-full w-full flex-col justify-between">
 			{#if isEmergency}
@@ -267,24 +284,20 @@
 				<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 			{/if}
 
-			<div class="mt-auto pt-4">
-				<CallScreen
-					isInCall={callState === CallState.CALL_ESTABLISHED}
-					activateCall={handleCallAction}
-					buttonText={callButtonText}
-					{isEmergency}
-					{activateMic}
-					{activateSpeaker}
-					{time}
-					buttonDisabled={false}
-					{isMicrophoneMuted}
-					{isSpeakerMuted}
-					canCall={true}
-					canHangup={true}
-					{errorMessage}
-					bind:remoteAudio
-				/>
-			</div>
+			<CallScreen
+				isInCall={callState === CallState.CALL_ESTABLISHED}
+				activateCall={handleCallAction}
+				buttonText={callButtonText}
+				{isEmergency}
+				{activateMic}
+				{activateSpeaker}
+				{time}
+				{isMicrophoneMuted}
+				{isSpeakerMuted}
+				canCall={true}
+				{errorMessage}
+				bind:remoteAudio
+			/>
 		</div>
 	{/snippet}
 </Modal>

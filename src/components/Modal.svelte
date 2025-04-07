@@ -4,7 +4,7 @@
 	import { t } from '$lib/translations';
 	import { CloseOutline } from 'carbon-icons-svelte';
 
-	let { children, isModal, close } = $props();
+	let { children, isModal, close, disabled } = $props();
 
 	$effect(() => {
 		if (isModal) dialog?.showModal();
@@ -14,7 +14,7 @@
 	let dialog = $state();
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+<!-- eslint-disable-next-line svelte/valid-compile -->
 <dialog
 	bind:this={dialog}
 	onclose={close}
@@ -29,6 +29,7 @@
 			variant="ghost"
 			class="text-body-black justfiy-center flex w-32 items-center space-x-2"
 			on:click={close}
+			{disabled}
 		>
 			<CloseOutline class="text-body-black size-6" />
 			<span class="text-body-black">{$t('common.button.close')}</span>
