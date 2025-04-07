@@ -8,7 +8,6 @@ export interface KiezboxConfig {
 	kbSIPUsername: string;
 	kbSIPPassword: string;
 	kbDisplayName: string;
-	kbTargetUri: string;
 }
 
 export interface CallServiceState {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import {
+		PUBLIC_KB_DEMO_TARGET_URI,
 		PUBLIC_KB_DISPLAY_NAME,
 		PUBLIC_KB_DOMAIN,
 		PUBLIC_KB_SERVER_ADDRESS,
@@ -51,8 +52,7 @@
 		kbDomain: PUBLIC_KB_DOMAIN,
 		kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
 		kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
-		kbDisplayName: PUBLIC_KB_DISPLAY_NAME,
-		kbTargetUri: PUBLIC_KB_TARGET_URI
+		kbDisplayName: PUBLIC_KB_DISPLAY_NAME
 	};
 
 	const initialize = async () => {
@@ -172,13 +172,14 @@
 		console.log('[$effect] Call action triggered');
 		console.log('[$effect] Call state:', callState);
 		console.log('[$effect] Registerer state:', registererState);
+		console.log('[$effect] isEmergency:', isEmergency);
 
 		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
 		} else if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
 			await callServiceApi.hangupOrReject();
 		} else if (registererState === RegistererState.Registered) {
-			const targetUri = `${kiezboxConfig.kbTargetUri}`;
+			const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
 			await callServiceApi.makeCall(targetUri);
 		} else {
 			console.warn('Not registered, attempting to connect...');
