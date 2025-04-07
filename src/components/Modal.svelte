@@ -31,15 +31,15 @@
 	class="modal-root [&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
     fixed inset-0 m-auto h-[calc(100vh-6rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
 >
-	<div class="bg-purple-light sticky flex h-12 items-center justify-between">
+	<div class="bg-purple-light sticky flex h-12 items-center justify-end">
 		<Button
 			variant="ghost"
-			class="text-body-black justfiy-center flex w-32 items-center space-x-2"
+			class="text-body-black justfiy-center flex w-32 cursor-pointer items-center space-x-2"
 			on:click={close}
 			{disabled}
 		>
-			<CloseOutline class="text-body-black size-6" />
 			<span class="text-body-black">{$t('common.button.close')}</span>
+			<CloseOutline class="text-body-black size-6" />
 		</Button>
 	</div>
 	<div

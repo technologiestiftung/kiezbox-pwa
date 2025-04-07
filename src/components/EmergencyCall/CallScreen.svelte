@@ -37,7 +37,11 @@
 			<span class="call-time">{formatMilliseconds(time)}</span>
 		</div>
 		<div class="mb-4 flex w-full justify-around">
-			<Button variant="ghost" class="flex h-auto w-28 flex-col items-center" on:click={activateMic}>
+			<Button
+				variant="ghost"
+				class="flex h-auto w-28 cursor-pointer flex-col items-center"
+				on:click={activateMic}
+			>
 				{#if !isMicrophoneMuted}
 					<Microphone class="size-6" />
 					<span>{$t('common.button.mute')}</span>
@@ -48,7 +52,7 @@
 			</Button>
 			<Button
 				variant="ghost"
-				class="flex h-auto w-28 flex-col items-center"
+				class="flex h-auto w-28 cursor-pointer flex-col items-center"
 				on:click={activateSpeaker}
 			>
 				{#if !isSpeakerMuted}
