@@ -1,7 +1,24 @@
 <script lang="ts">
 	import { t } from '$lib/translations';
+	import { onMount } from 'svelte';
 	import EmergencyCallButton from './EmergencyCallButton.svelte';
 	let { isEmergency, onClick } = $props();
+
+const observer = new IntersectionObserver( 
+  ([e]) => e.target.classList.toggle('isSticky', e.intersectionRatio < 1),
+  {threshold: [1]}
+);
+
+onMount(() => {
+  const stickyElm = document.querySelector('.Dialer-button');
+  console.log('Sticky element:', stickyElm);
+  if (stickyElm) {
+	observer.observe(stickyElm);
+  } else {
+	console.log('Sticky element found and observer attached');
+  }
+});
+
 </script>
 
 <div
@@ -22,8 +39,8 @@
 	></div>
 </div>
 
-<div class={`sticky top-0 z-10 flex justify-center`}>
-	<div class="w-full px-6 md:w-[29rem]">
+<div class={`Dialer-button sticky -top-1 z-10 flex justify-center group`}>
+	<div class="w-full px-6 md:w-[29rem] group-[.isSticky]:w-full group-[.isSticky]:p-0 transition-[width] ease-out duration-200">
 		<EmergencyCallButton
 			disabled={false}
 			isActive={isEmergency}
@@ -35,3 +52,4 @@
 <div
 	class={`h-8 w-full shadow-[inset_0_-4px_6px_-5px_rgba(0,0,0,0.2)] ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
 ></div>
+

@@ -69,7 +69,8 @@
 			"active": "Notruf beenden",
 			"rejected": "Anruf abgelehnt",
 			"incoming": "Eingehender Anruf...",
-			"call": "Notrufdemo starten",
+			"call": "Notruf starten",
+			"callDemo": "Notrufdemo starten",
 			"failed": "Anruf fehlgeschlagen",
 			"calling": "Anruf wird aufgebaut...",
 			"default": {
