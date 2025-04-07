@@ -36,7 +36,7 @@
 		<div>
 			<span class="call-time">{formatMilliseconds(time)}</span>
 		</div>
-		<div class="flex justify-center space-x-18">
+		<div class="mb-4 flex w-full justify-around">
 			<Button variant="ghost" class="flex h-auto w-28 flex-col items-center" on:click={activateMic}>
 				{#if !isMicrophoneMuted}
 					<Microphone class="size-6" />

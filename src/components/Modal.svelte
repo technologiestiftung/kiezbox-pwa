@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { t } from '$lib/translations';
@@ -7,14 +7,21 @@
 	let { children, isModal, close, disabled } = $props();
 
 	$effect(() => {
-		if (isModal) dialog?.showModal();
-		else dialog?.close();
+		if (isModal) {
+			dialog?.showModal();
+			document.body.style.overflow = 'hidden'; // ⛔ Prevent background scroll
+		} else {
+			dialog?.close();
+			document.body.style.overflow = ''; // ✅ Restore scroll
+		}
 	});
-
-	let dialog = $state();
+	let dialog: HTMLDialogElement | undefined = $state();
+	let contentContainer: HTMLElement | undefined = $state();
 </script>
 
 <!-- eslint-disable-next-line svelte/valid-compile -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <dialog
 	bind:this={dialog}
 	onclose={close}
@@ -36,7 +43,8 @@
 		</Button>
 	</div>
 	<div
-		class="text-body-black top-12 flex h-[calc(100vh-9rem)] w-full flex-col overflow-auto bg-white px-4 md:h-[42rem]"
+		bind:this={contentContainer}
+		class="text-body-black top-12 flex h-[calc(100vh-9rem)] w-full flex-col overflow-auto overscroll-contain bg-white px-4 md:h-[42rem]"
 	>
 		{@render children?.()}
 	</div>

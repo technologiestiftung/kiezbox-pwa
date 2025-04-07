@@ -9,6 +9,7 @@
 	const RESUME_DELAY = 5000;
 
 	let scrollContainerElement: HTMLDivElement | undefined = $state();
+	let rootElement: HTMLDivElement | undefined = $state();
 	let bubbleElements: Array<HTMLDivElement | undefined> = $state(
 		new Array(BUBBLE_COUNT).fill(undefined)
 	);
@@ -24,8 +25,42 @@
 	let isProgrammaticScroll = false;
 	let programmaticScrollTimeout: number | null = null;
 
+	let prevIsInCall = $state(isInCall);
+
+	// Setup animation when component transitions from !isInCall to isInCall
+	$effect(() => {
+		if (isInCall && !prevIsInCall) {
+			// Clean up any existing observers/timers
+			visibilityObservers.forEach((observer) => observer.disconnect());
+			startAnimationObserver?.disconnect();
+			if (animationLoopId !== null) clearTimeout(animationLoopId);
+			if (resumeTimerId !== null) clearTimeout(resumeTimerId);
+			if (programmaticScrollTimeout !== null) clearTimeout(programmaticScrollTimeout);
+
+			// Reset animation state
+			animationHasStarted = false;
+			currentBubbleIndex = 0;
+			userInteracted = false;
+
+			// Wait a bit for the DOM to update
+			setTimeout(() => {
+				if (scrollContainerElement && rootElement) {
+					setupVisibilityObservers();
+					setupStartAnimationObserver();
+					// Start animation immediately when transition occurs
+					animationHasStarted = true;
+					scrollToNextBubble();
+				}
+			}, 200);
+		}
+
+		// Update previous state
+		prevIsInCall = isInCall;
+	});
+
 	onMount(() => {
-		if (!scrollContainerElement) return;
+		if (!isInCall) return;
+		if (!scrollContainerElement || !rootElement) return;
 
 		let initialSetupTimer: number | null = null;
 
@@ -33,6 +68,8 @@
 			initialSetupTimer = null;
 			setupVisibilityObservers();
 			setupStartAnimationObserver();
+			animationHasStarted = true;
+			scrollToNextBubble();
 		}, 200);
 
 		return () => {
@@ -72,29 +109,27 @@
 	};
 
 	const setupStartAnimationObserver = () => {
-		if (!scrollContainerElement || !bubbleElements[0]) {
+		if (!rootElement || !isInCall) {
 			return;
 		}
 		startAnimationObserver?.disconnect();
 		startAnimationObserver = new IntersectionObserver(
 			(entries) => {
 				const entry = entries[0];
-				if (entry.isIntersecting && !animationHasStarted && !userInteracted) {
+				if (entry.isIntersecting && !animationHasStarted && !userInteracted && isInCall) {
 					animationHasStarted = true;
 					scrollToNextBubble();
-					startAnimationObserver?.unobserve(bubbleElements[0]!);
 				}
 			},
 			{
-				root: scrollContainerElement,
 				threshold: 0.1
 			}
 		);
-		startAnimationObserver.observe(bubbleElements[0]);
+		startAnimationObserver.observe(rootElement);
 	};
 
 	const scrollToNextBubble = () => {
-		if (!animationHasStarted || !scrollContainerElement) {
+		if (!animationHasStarted || !scrollContainerElement || !isInCall) {
 			return;
 		}
 		if (userInteracted) {
@@ -137,16 +172,12 @@
 	};
 
 	const handleScroll = (event: Event) => {
-		if (isProgrammaticScroll) {
+		if (!isInCall || isProgrammaticScroll) {
 			return;
 		}
 		if (event.isTrusted) {
 			if (animationLoopId !== null || resumeTimerId !== null) {
 				userInteracted = true;
-				if (animationLoopId !== null) {
-					clearTimeout(animationLoopId);
-					animationLoopId = null;
-				}
 				if (resumeTimerId !== null) {
 					clearTimeout(resumeTimerId);
 					resumeTimerId = null;
@@ -165,7 +196,7 @@
 </script>
 
 {#if !isInCall}
-	<div class="DemoCallInfo-root sticky top-0 z-10 w-full bg-white p-4">
+	<div class="DemoCallInfoInactive-root sticky top-0 z-10 w-full bg-white p-4">
 		{@html $t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-8 w-full space-y-2 px-4">
 			{#each { length: BUBBLE_COUNT } as _, i}
@@ -175,7 +206,10 @@
 		</ul>
 	</div>
 {:else}
-	<div class="DemoCallInfo-root sticky top-0 z-10 w-full bg-white p-4">
+	<div
+		bind:this={rootElement}
+		class="DemoCallInfoActive-root sticky top-0 z-10 w-full bg-white p-4"
+	>
 		<div class="">{$t('content.emergency_phone.default.online.text')}</div>
 	</div>
 	<div
@@ -183,14 +217,14 @@
 		onscroll={handleScroll}
 		onwheel={handleScroll}
 		ontouchmove={handleScroll}
-		class="flex h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center gap-10 overflow-y-auto scroll-smooth p-4 pb-32"
+		class="scroll-fade flex h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center gap-10 overflow-y-auto scroll-smooth p-4 pb-32"
 		aria-label="Scrolling question bubbles"
 	>
 		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 		{#each { length: BUBBLE_COUNT } as _, i}
 			<div
 				bind:this={bubbleElements[i]}
-				class="flex w-full justify-center"
+				class={`flex w-full justify-center ${i == 0 ? 'pt-10' : ''}`}
 				role="group"
 				aria-label={`Question ${i + 1}`}
 			>
@@ -203,3 +237,14 @@
 		{/each}
 	</div>
 {/if}
+
+<style>
+	.scroll-fade {
+		-webkit-mask-image: linear-gradient(180deg, transparent, black 20%, black 80%, transparent);
+		mask-image: linear-gradient(180deg, transparent, black 20%, black 80%, transparent);
+		-webkit-mask-size: 100% 100%;
+		mask-size: 100% 100%;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+	}
+</style>
