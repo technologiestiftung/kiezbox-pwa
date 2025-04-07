@@ -7,7 +7,6 @@
 	let {
 		isInCall,
 		canCall,
-		canHangup,
 		isEmergency,
 		isMicrophoneMuted,
 		isSpeakerMuted,
@@ -15,7 +14,6 @@
 		activateSpeaker,
 		activateCall,
 		buttonText,
-		buttonDisabled,
 		errorMessage,
 		time,
 		remoteAudio = $bindable()
@@ -29,15 +27,21 @@
 	};
 </script>
 
-<div class="CallScreen-root flex flex-col items-center justify-center space-y-4">
+<div
+	class="CallScreen-root sticky bottom-0 z-10 flex w-full flex-col items-center justify-center bg-white py-4"
+>
 	<audio bind:this={remoteAudio} id="audioElement" controls class="hidden"> </audio>
 
 	{#if isInCall}
 		<div>
 			<span class="call-time">{formatMilliseconds(time)}</span>
 		</div>
-		<div class="flex justify-center space-x-18">
-			<Button variant="ghost" class="flex h-auto w-28 flex-col items-center" on:click={activateMic}>
+		<div class="mb-4 flex w-full justify-around">
+			<Button
+				variant="ghost"
+				class="flex h-auto w-28 cursor-pointer flex-col items-center"
+				on:click={activateMic}
+			>
 				{#if !isMicrophoneMuted}
 					<Microphone class="size-6" />
 					<span>{$t('common.button.mute')}</span>
@@ -48,7 +52,7 @@
 			</Button>
 			<Button
 				variant="ghost"
-				class="flex h-auto w-28 flex-col items-center"
+				class="flex h-auto w-28 cursor-pointer flex-col items-center"
 				on:click={activateSpeaker}
 			>
 				{#if !isSpeakerMuted}

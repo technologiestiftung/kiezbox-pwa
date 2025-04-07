@@ -27,7 +27,7 @@ export const createCallService = (config: KiezboxConfig) => {
 	let callStartTime: number | null = null;
 
 	const _state = writable<CallServiceState>({
-		callState: CallState.DISCONNECTED,
+		callState: CallState.INITIALIZED,
 		registererState: RegistererState.Initial,
 		errorMessage: null,
 		callerId: null,
@@ -134,7 +134,7 @@ export const createCallService = (config: KiezboxConfig) => {
 				if (userAgent) {
 					const uaToStop = userAgent;
 					userAgent = null; // Clear ref
-					if (uaToStop.isConnected()) {
+					if (uaToStop?.isConnected()) {
 						await uaToStop.stop();
 					}
 				}
@@ -245,7 +245,6 @@ export const createCallService = (config: KiezboxConfig) => {
 			} else if (newState === SessionState.Terminated) {
 				cleanupSession(session);
 			} else if (newState === SessionState.Terminating) {
-				setError('Call is terminating...');
 				_state.update((s) => ({ ...s, callState: CallState.CALL_TERMINATED }));
 				console.log('[CallService] Session terminating...');
 			}
@@ -396,14 +395,23 @@ export const createCallService = (config: KiezboxConfig) => {
 			try {
 				if (state === SessionState.Terminated || state === SessionState.Terminating) {
 					return;
-				} else if (state === SessionState.Initial && sessionToTerminate instanceof Inviter) {
+				} else if (
+					(state === SessionState.Initial || state === SessionState.Establishing) &&
+					sessionToTerminate instanceof Inviter
+				) {
 					await sessionToTerminate.cancel();
 				} else {
 					await sessionToTerminate.bye();
 				}
 			} catch (error: unknown) {
+				console.log(state);
+				console.log(sessionToTerminate instanceof Inviter, 'inviter');
+				console.log(sessionToTerminate.state, 'state');
+				console.log(sessionToTerminate, 'session');
+				console.log(sessionToTerminate instanceof Session, 'session');
+				console.log(sessionToTerminate instanceof Invitation, 'invitation');
 				if (error instanceof Error) {
-					setError(`Failed to hangup/cancel: ${error.message || error}`);
+					setError(`Failed to hangup/cancel: ${error.message}`);
 				} else {
 					setError(`Failed to hangup/cancel: ${error}`);
 				}

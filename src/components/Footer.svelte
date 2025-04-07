@@ -1,7 +1,8 @@
 <script lang="ts">
-	import logo from '$lib/assets/logo.svg';
-	import logo_sponsor from '$lib/assets/logo-sponsor.svg';
 	import logo_complete from '$lib/assets/logo-complete.svg';
+	import logo_sponsor from '$lib/assets/logo-sponsor.svg';
+	import logo from '$lib/assets/logo.svg';
+	import ts_berlin_logo from '$lib/assets/ts-berlin-logo.svg';
 	import { t } from '$lib/translations';
 </script>
 
@@ -24,11 +25,28 @@
 			<img alt="logo_complete" src={logo_complete} />
 		</figure>
 	</div>
-	<div class="flex w-full flex-col justify-between space-y-6 md:flex-row md:space-y-0">
-		<div class="flex flex-col space-y-2.5 md:order-2">
+
+	<div
+		class="flex w-full flex-col items-center justify-between space-y-6 space-x-6 md:flex-row md:space-y-0"
+	>
+		<div class="hidden flex-col space-y-2.5 md:flex">
+			<span class="body-text-bold text-white"> {$t('common.footer.created_by')} </span>
+			<a
+				href={$t('common.footer.imprint.href')}
+				class="text-white underline"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<figure class="">
+					<img alt="ts_berlin_logo" class="w-48 fill-white text-white" src={ts_berlin_logo} />
+				</figure>
+			</a>
+		</div>
+		<div class="flex flex-col space-y-2.5 text-end md:order-2">
+			<div></div>
 			<a
 				href={$t('common.footer.privacy.href')}
-				class="body-text-bold text-white underline"
+				class="text-white underline"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -36,20 +54,13 @@
 			</a>
 			<a
 				href={$t('common.footer.imprint.href')}
-				class="body-text-bold text-white underline"
+				class="text-white underline"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
 				{$t('common.footer.imprint.text')}
 			</a>
-		</div>
-		<div class="flex flex-col space-y-2.5">
 			<span class="caption text-white"> {$t('common.footer.acknowledgement')}</span>
-			<span class="body-text text-white">
-				<a href={$t('common.footer.copyright.href')} target="_blank" rel="noopener noreferrer">
-					{$t('common.footer.copyright.text')}
-				</a>
-			</span>
 		</div>
 	</div>
 </div>

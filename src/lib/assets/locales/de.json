@@ -19,6 +19,7 @@
 				"href": "https://www.technologiestiftung-berlin.de/datenschutz/"
 			},
 			"initiatve_by": "Eine Maßnahme von:",
+			"created_by": "Umgesetzt von:",
 			"funded_by": "Gefördert von:",
 			"acknowledgement": "Illustration Key Visual: L. Hoff, aufsiemitgebrüll.de",
 			"copyright": {
@@ -72,6 +73,7 @@
 			"failed": "Anruf fehlgeschlagen",
 			"calling": "Anruf wird aufgebaut...",
 			"default": {
+				"phone_button": "Zur Notrufdemo",
 				"incoming_call": "Eingehender Anruf",
 				"offline": {
 					"text": "In einem Krisenfall können Sie hier einen Notruf absenden, wenn Sie bspw. wegen Stromausfall sonst keine Anrufe tätigen können.  Dieses wird dabei automatisch von der Berliner Feuerwehr eingeschalten. Mit unserem <strong>Demoanruf</strong> können Sie schon einmal die 5W-Fragen üben, die sie im Gespräch mit dem Notruf immer parat haben sollten."
@@ -104,7 +106,7 @@
 				}
 			},
 			"emergency": {
-				"phone_button": "Zu Notruf",
+				"phone_button": "Zum Notruf",
 				"default": {
 					"caller_id": "ID: ",
 					"call_state": "Status: "

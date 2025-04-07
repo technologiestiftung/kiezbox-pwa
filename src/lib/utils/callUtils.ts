@@ -8,7 +8,6 @@ export interface KiezboxConfig {
 	kbSIPUsername: string;
 	kbSIPPassword: string;
 	kbDisplayName: string;
-	kbTargetUri: string;
 }
 
 export interface CallServiceState {
@@ -24,6 +23,7 @@ export interface CallServiceState {
 }
 
 export enum CallState {
+	INITIALIZED = 'INITIALIZED',
 	DISCONNECTED = 'DISCONNECTED',
 	CONNECTED = 'CONNECTED',
 	CALLING = 'CALLING',

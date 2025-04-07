@@ -20,6 +20,7 @@
 	--color-body-black: var(--body-black);
 	--color-black: var(--black);
 	--color-grey-mid: var(--grey-mid);
+	--color-grey-accent: var(--grey-accent);
 	--color-grey-light: var(--grey-light);
 	--color-black: var(var(--black));
 	--color-white: var(--white);
@@ -70,6 +71,7 @@
 		--black: #121019;
 		--body-black: #121019;
 		--grey-mid: #444;
+		--grey-accent: #cacaca;
 		--grey-light: #f6f6f6;
 		--white: #fff;
 		--purple-dark: #5d508b;
@@ -218,7 +220,7 @@
 
 		/* Caption */
 		font-family: Arial;
-		font-size: 0.875rem;
+		font-size: 0.675rem;
 		font-style: normal;
 		font-weight: 400;
 		line-height: 1rem;
@@ -229,9 +231,9 @@
 
 		/* Call Time */
 		font-family: Arial;
-		font-size: 4rem;
+		font-size: 3rem;
 		font-style: normal;
-		font-weight: 700;
+		font-weight: 600;
 		line-height: 4.75rem;
 	}
 
