@@ -1,20 +1,15 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import {
-		PUBLIC_KB_DEMO_TARGET_URI,
-		PUBLIC_KB_DISPLAY_NAME,
-		PUBLIC_KB_DOMAIN,
-		PUBLIC_KB_SERVER_ADDRESS,
-		PUBLIC_KB_SIP_PASSWORD,
-		PUBLIC_KB_SIP_USERNAME,
-		PUBLIC_KB_TARGET_URI,
-		PUBLIC_KB_WSS_PATH,
-		PUBLIC_KB_WSS_PORT
-	} from '$env/static/public';
+	import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
 	import { apiFetch } from '$lib/api';
 	import { t } from '$lib/translations';
 	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import {
+		CallState,
+		type CallServiceState,
+		type KiezboxConfig,
+		type Mode
+	} from '$lib/utils/callUtils';
 	import { RegistererState } from 'sip.js';
 	import { getContext, onDestroy, setContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
@@ -24,11 +19,25 @@
 	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
 	import Modal from './Modal.svelte';
 
-	const isEmergency = getContext('isEmergency');
 	let isModal = $state(false);
 
-	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
+	let mode = getContext<Mode>('mode');
 
+	// Use $state for the context value instead of a writable store
+	let kiezboxConfig: KiezboxConfig = $state<KiezboxConfig>({
+		kbServerAddress: '',
+		kbWSSPort: 0,
+		kbWSSPath: '',
+		kbDomain: '',
+		kbSIPUsername: '',
+		kbSIPPassword: '',
+		kbDisplayName: '',
+		createdAt: new Date(),
+		updatedAt: new Date()
+	});
+	setContext('config', kiezboxConfig);
+
+	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
 	let callServiceApi = $state<CallServiceApi | null>(null);
 	let callServiceState = $state<CallServiceState | null>(null);
 	let unsubscribeState: (() => void) | null = null;
@@ -40,23 +49,13 @@
 	const callState = $derived(callServiceState?.callState ?? false);
 	const registererState = $derived(callServiceState?.registererState ?? false);
 
+	let isEmergency = $derived(mode?.isEmergency);
 	const time = $derived(callServiceState?.callDuration ?? 0);
 	const isMicrophoneMuted = $derived(callServiceState?.isMicrophoneMuted ?? false);
 	const isSpeakerMuted = $derived(callServiceState?.isSpeakerMuted ?? false);
 	const errorMessage = $derived(callServiceState?.errorMessage ?? null);
 
-	// elements
-	const kiezboxConfig: KiezboxConfig = {
-		kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
-		kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
-		kbWSSPath: PUBLIC_KB_WSS_PATH,
-		kbDomain: PUBLIC_KB_DOMAIN,
-		kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
-		kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
-		kbDisplayName: PUBLIC_KB_DISPLAY_NAME
-	};
-
-	const initialize = async () => {
+	const initialize = async (forceRefresh = false) => {
 		try {
 			if (!browser) {
 				throw new Error('Browser not supported');
@@ -66,28 +65,86 @@
 				throw new Error('Remote audio element not defined');
 			}
 
-			if (callServiceApi && initialized) {
+			if (Date.now() - (kiezboxConfig.createdAt?.getTime() ?? 0) > 10000) {
+				console.log('[$effect] Kiezbox config is outdated, refreshing...');
+				forceRefresh = true;
+			} else {
+				console.log('[$effect] Kiezbox config is up to date');
+			}
+
+			if (!forceRefresh && callServiceApi && initialized) {
+				try {
+					const response = await apiFetch('/validateSession', {
+						method: 'POST',
+						body: JSON.stringify(kiezboxConfig),
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						signal: AbortSignal.timeout(5000)
+					});
+
+					if (!response.sessionState) {
+						forceRefresh = true;
+						console.log('[$effect] Session state is invalid, refreshing...');
+					} else {
+						console.log('[$effect] Session state is valid, no refresh needed');
+						return;
+					}
+				} catch (error) {}
+
 				console.log('[$effect] CallService API already initialized');
 				return;
 			}
 
-			console.log('[$effect] Initializing CallService API...');
-			initialized = true;
+			// If force refresh requested, clean up existing connection
+			if (forceRefresh && callServiceApi && initialized) {
+				console.log('[$effect] Force refresh requested, disconnecting existing service');
+				await callServiceApi.disconnect();
+				initialized = false;
+			}
 
-			// TODO: Fetch the Kiezbox server config from the API
-			const kiezboxServerConfig = await apiFetch('/kiezbox-server-config');
-			setContext('kiezbox_server_config', kiezboxServerConfig);
+			console.log('[$effect] Initializing CallService API...');
+
+			// Fetch the Kiezbox server config from the API
+			const session = await apiFetch('/session');
+			console.log('[$effect] Kiezbox server config:', session);
+
+			// Update the state variable directly (will update the context)
+			kiezboxConfig.kbDisplayName = session.config.kbDisplayName;
+			kiezboxConfig.kbDomain = session.config.kbDomain;
+			kiezboxConfig.kbServerAddress = session.config.kbServerAddress;
+			kiezboxConfig.kbSIPUsername = session.config.kbSIPUsername;
+			kiezboxConfig.kbSIPPassword = session.config.kbSIPPassword;
+			kiezboxConfig.kbWSSPort = session.config.kbWSSPort;
+			kiezboxConfig.kbWSSPath = session.config.kbWSSPath;
+			kiezboxConfig.createdAt = session.config.createdAt;
+			kiezboxConfig.updatedAt = session.config.updatedAt;
 
 			// Call the factory function
+			if (!kiezboxConfig) {
+				throw new Error('Kiezbox server config is not defined');
+			}
+
 			const serviceApi = createCallService(kiezboxConfig);
-			serviceApi.setAudioElement(remoteAudio); // Pass the audio element
+			serviceApi.setAudioElement(remoteAudio);
 
 			unsubscribeState = serviceApi.state.subscribe((newState) => {
 				callServiceState = newState;
+				if (
+					newState.errorMessage &&
+					(newState.errorMessage.includes('authentication') ||
+						newState.errorMessage.includes('registration failed') ||
+						newState.errorMessage.includes('forbidden'))
+				) {
+					console.warn('[$state] Potential config issue detected:', newState.errorMessage);
+					forceRefresh = true;
+				}
 			});
 
 			callServiceApi = serviceApi;
+			initialized = true;
 		} catch (error: unknown) {
+			console.log('[$effect] Error initializing CallService API:', error);
 			if (error instanceof Error) {
 				toast.error('Failed to initialize CallService API: ' + error.message);
 			} else {
@@ -114,7 +171,6 @@
 
 	const openCaller = async () => {
 		isModal = true;
-		await initialize();
 	};
 
 	const closeCaller = async () => {
@@ -156,6 +212,8 @@
 	};
 
 	const handleCallAction = async () => {
+		await initialize();
+
 		if (!callServiceApi) return;
 
 		if (registererState !== RegistererState.Registered) {
@@ -268,6 +326,7 @@
 			changeState();
 		}
 	};
+	$inspect(mode, isEmergency);
 </script>
 
 <svelte:window on:keydown={handleKeydown} />

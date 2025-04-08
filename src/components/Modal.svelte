@@ -1,22 +1,31 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { t } from '$lib/translations';
 	import { CloseOutline } from 'carbon-icons-svelte';
 
 	let { children, isModal, close, disabled } = $props();
+	let dialog = $state<HTMLDialogElement | undefined>(undefined);
+	let contentContainer: HTMLElement | undefined = $state();
+
+	// Track previous modal state to detect changes
+	let prevModalState = $state(isModal);
 
 	$effect(() => {
-		if (isModal) {
-			dialog?.showModal();
-			document.body.style.overflow = 'hidden'; // ⛔ Prevent background scroll
-		} else {
-			dialog?.close();
-			document.body.style.overflow = ''; // ✅ Restore scroll
+		if (!browser) return;
+
+		if (isModal !== prevModalState) {
+			if (isModal) {
+				dialog?.showModal();
+				document.body.style.overflow = 'hidden';
+			} else {
+				dialog?.close();
+				document.body.style.overflow = '';
+			}
+			prevModalState = isModal;
 		}
 	});
-	let dialog: HTMLDialogElement | undefined = $state();
-	let contentContainer: HTMLElement | undefined = $state();
 </script>
 
 <!-- eslint-disable-next-line svelte/valid-compile -->

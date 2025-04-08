@@ -1,18 +1,21 @@
 <script lang="ts">
 	import { apiFetch } from '$lib/api';
 	import { loadTranslations } from '$lib/translations';
+	import type { Mode } from '$lib/utils/callUtils';
 	import { onMount, setContext } from 'svelte';
 	import '../app.css';
 	import type { LayoutLoad } from './$types';
 
 	type State = 'idle' | 'pending' | 'success' | 'error';
+	let { children } = $props();
 	let apiStatus = $state<State>('idle');
-	let emergencyStatus = $state(false);
+	let mode: Mode = $state({ status: 0, isEmergency: false });
+	setContext('mode', mode);
 	let lastPingTime = $state<Date | null>(null);
 	let error = $state(null);
 
 	const PING_INTERVAL_MS = 10000; // 10 seconds
-	const PING_API_ENDPOINT = '/ping';
+	const PING_API_ENDPOINT = '/mode';
 
 	export const load: LayoutLoad = async ({ url }) => {
 		const { pathname } = url;
@@ -30,16 +33,10 @@
 			try {
 				const response = await apiFetch(PING_API_ENDPOINT);
 
-				if (!response.ok) {
-					throw new Error(`API ping failed: ${response.status} ${response.statusText}`);
-				}
-
-				apiStatus = 'success';
 				lastPingTime = new Date();
 				// TODO: Set emergency status based on the response
-				emergencyStatus = response.status === 200;
-				setContext('emergency_status', emergencyStatus);
-				console.log('API ping successful at', lastPingTime);
+				mode.status = response.mode;
+				mode.isEmergency = response.mode === 2;
 			} catch (error: unknown) {
 				apiStatus = 'error';
 				if (error instanceof Error) {
@@ -73,10 +70,9 @@
 			});
 		});
 	}
-
 	onMount(() => detectSWUpdate());
 </script>
 
 <div class="bg-grey-light h-full w-full">
-	<slot />
+	{@render children?.()}
 </div>

@@ -8,6 +8,8 @@ export interface KiezboxConfig {
 	kbSIPUsername: string;
 	kbSIPPassword: string;
 	kbDisplayName: string;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 export interface CallServiceState {
@@ -70,3 +72,8 @@ export const assignStream = (
 		});
 	};
 };
+
+export interface Mode {
+	status: number;
+	isEmergency: boolean;
+}
