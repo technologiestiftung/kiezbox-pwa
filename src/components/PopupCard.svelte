@@ -35,30 +35,30 @@
 		topLeft: {
 			containerClass: 'absolute',
 			outerArrowClass:
-				'border-purple-dark translate-1/2  absolute -top-[6px] -left-[6px] h-0 w-0 border-b-[12px] border-r-[12px] border-b-transparent border-r-transparent border-t-[12px] border-l-[12px]',
+				'border-purple-dark translate-1/2  absolute -top-[1px] -left-[1px] h-0 w-0 border-b-[6px] border-r-[6px] border-b-transparent border-r-transparent border-t-[9px] border-l-[9px]',
 			innerArrowClass:
-				'absolute -top-[2px] translate-1/2  -left-[2px] h-0 w-0  border-t-[10px] border-b-[10px] border-r-[10px] border-l-[10px] border-b-transparent border-r-transparent border-t-purple-light border-l-purple-light '
+				'absolute top-[2px] translate-1/2  left-[2px] h-0 w-0  border-t-[8px] border-b-[5px] border-r-[5px] border-l-[8px] border-b-transparent border-r-transparent border-t-purple-light border-l-purple-light '
 		},
 		topRight: {
 			containerClass: 'absolute',
 			outerArrowClass:
-				'border-purple-dark -translate-x-1/2 translate-y-1/2  absolute -top-[6px] -right-[6px] h-0 w-0 border-b-[12px] border-l-[12px] border-b-transparent border-l-transparent border-t-[12px] border-r-[12px]',
+				'border-purple-dark -translate-x-1/2 translate-y-1/2  absolute -top-[1px] -right-[1px] h-0 w-0 border-b-[6px] border-l-[6px] border-b-transparent border-l-transparent border-t-[9px] border-r-[9px]',
 			innerArrowClass:
-				'absolute -top-[2px] -translate-x-1/2 translate-y-1/2 -right-[2px] h-0 w-0 border-b-[10px] border-l-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-l-transparent border-t-purple-light border-r-purple-light'
+				'absolute top-[2px] -translate-x-1/2 translate-y-1/2 right-[2px] h-0 w-0 border-b-[5px] border-l-[5px] border-r-[8px] border-t-[8px] border-b-transparent border-l-transparent border-t-purple-light border-r-purple-light'
 		},
 		bottomLeft: {
 			containerClass: 'absolute',
 			outerArrowClass:
-				'border-purple-dark  translate-x-1/2 -translate-y-1/2  absolute -bottom-[6px] -left-[6px] h-0 w-0 border-t-[12px] border-r-[12px] border-t-transparent border-r-transparent border-b-[12px] border-l-[12px]',
+				'border-purple-dark  translate-x-1/2 -translate-y-1/2  absolute -bottom-[1px] -left-[1px] h-0 w-0 border-t-[6px] border-r-[6px] border-t-transparent border-r-transparent border-b-[9px] border-l-[9px]',
 			innerArrowClass:
-				'translate-x-1/2 -translate-y-1/2  absolute -bottom-[2px] -left-[2px] h-0 w-0 border-t-[10px] border-l-[10px] border-r-[10px] border-t-transparent border-b-[10px] border-r-transparent border-b-white border-l-white'
+				'translate-x-1/2 -translate-y-1/2  absolute bottom-[2px] left-[2px] h-0 w-0 border-t-[5px] border-l-[8px] border-r-[5px] border-t-transparent border-b-[8px] border-r-transparent border-b-white border-l-white'
 		},
 		bottomRight: {
 			containerClass: 'absolute',
 			outerArrowClass:
-				'border-purple-dark -translate-1/2  absolute  -bottom-[6px] -right-[6px] h-0 w-0 border-t-[12px] border-l-[12px] border-t-transparent border-l-transparent border-b-[12px] border-r-[12px] ',
+				'border-purple-dark -translate-1/2  absolute  -bottom-[1px] -right-[1px] h-0 w-0 border-t-[6px] border-l-[6px] border-t-transparent border-l-transparent border-b-[9px] border-r-[9px] ',
 			innerArrowClass:
-				'-translate-1/2  absolute  -bottom-[2px] -right-[2px] h-0 w-0 border-t-[10px] border-l-[10px] border-r-[10px] border-t-transparent  border-b-[10px]  border-b-[10px] border-l-transparent border-b-white border-r-white'
+				'-translate-1/2  absolute  bottom-[2px] right-[2px] h-0 w-0 border-t-[5px] border-l-[5px] border-r-[8px] border-t-transparent  border-b-[8px] border-l-transparent border-b-white border-r-white'
 		}
 	};
 
@@ -115,7 +115,7 @@
 			}
 		} else if (dy > 0) {
 			arrowDirection = 'top';
-			const relativeX = Math.max(0, Math.min(cardWidth, featureX - cardLeft));
+			const relativeX = Math.max(0, Math.min(cardWidth, featureX - cardLeft + margin));
 			arrowPosition = {
 				left: `${relativeX}px`,
 				top: '0',
@@ -123,7 +123,7 @@
 			};
 		} else {
 			arrowDirection = 'bottom';
-			const relativeX = Math.max(0, Math.min(cardWidth, featureX - cardLeft));
+			const relativeX = Math.max(0, Math.min(cardWidth, featureX - cardLeft + margin));
 			arrowPosition = {
 				left: `${relativeX}px`,
 				top: '100%',
