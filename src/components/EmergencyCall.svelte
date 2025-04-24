@@ -1,17 +1,22 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
+	import {
+		PUBLIC_KB_DEMO_TARGET_URI,
+		PUBLIC_KB_DISPLAY_NAME,
+		PUBLIC_KB_DOMAIN,
+		PUBLIC_KB_SERVER_ADDRESS,
+		PUBLIC_KB_SIP_PASSWORD,
+		PUBLIC_KB_SIP_USERNAME,
+		PUBLIC_KB_TARGET_URI,
+		PUBLIC_KB_WSS_PATH,
+		PUBLIC_KB_WSS_PORT
+	} from '$env/static/public';
 	import { apiFetch } from '$lib/api';
 	import { t } from '$lib/translations';
 	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import {
-		CallState,
-		type CallServiceState,
-		type KiezboxConfig,
-		type Mode
-	} from '$lib/utils/callUtils';
+	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
 	import { RegistererState } from 'sip.js';
-	import { getContext, onDestroy, setContext } from 'svelte';
+	import { onDestroy, setContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
 	import CallScreen from './EmergencyCall/CallScreen.svelte';
 	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
@@ -21,7 +26,10 @@
 
 	let isModal = $state(false);
 
-	let mode = getContext<Mode>('mode');
+	// let mode = getContext<Mode>('mode');
+	let mode = $state({
+		isEmergency: true
+	});
 
 	// Use $state for the context value instead of a writable store
 	let kiezboxConfig: KiezboxConfig = $state<KiezboxConfig>({
@@ -106,7 +114,20 @@
 			console.log('[$effect] Initializing CallService API...');
 
 			// Fetch the Kiezbox server config from the API
-			const session = await apiFetch('/session');
+			// const session = await apiFetch('/session');
+			const session = {
+				config: {
+					kbDisplayName: PUBLIC_KB_DISPLAY_NAME,
+					kbDomain: PUBLIC_KB_DOMAIN,
+					kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
+					kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
+					kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
+					kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
+					kbWSSPath: PUBLIC_KB_WSS_PATH,
+					createdAt: new Date(),
+					updatedAt: new Date()
+				}
+			};
 			console.log('[$effect] Kiezbox server config:', session);
 
 			// Update the state variable directly (will update the context)
@@ -144,11 +165,10 @@
 			callServiceApi = serviceApi;
 			initialized = true;
 		} catch (error: unknown) {
-			console.log('[$effect] Error initializing CallService API:', error);
 			if (error instanceof Error) {
-				toast.error('Failed to initialize CallService API: ' + error.message);
+				toast.error(error.message);
 			} else {
-				toast.error('Failed to initialize CallService API: ' + String(error));
+				toast.error(String(error));
 			}
 		}
 	};
@@ -222,21 +242,11 @@
 
 			try {
 				await waitForRegistration();
-				console.log('Successfully registered.');
 			} catch (error: unknown) {
-				if (error instanceof Error) {
-					console.error('Registration failed:', error.message);
-				} else {
-					console.error('Registration failed:', error);
-				}
+				toast.error(String(error));
 				return;
 			}
 		}
-
-		console.log('[$effect] Call action triggered');
-		console.log('[$effect] Call state:', callState);
-		console.log('[$effect] Registerer state:', registererState);
-		console.log('[$effect] isEmergency:', isEmergency);
 
 		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
@@ -319,6 +329,11 @@
 		toast.success(statusText);
 	});
 
+	$effect(() => {
+		if (!errorMessage) return;
+		toast.error(errorMessage);
+	});
+
 	const handleKeydown = (event: KeyboardEvent) => {
 		// Check for Ctrl+Shift+E to toggle emergency mode
 		if (event.ctrlKey && event.shiftKey && event.key === 'E') {
@@ -342,6 +357,7 @@
 	<span class="sr-only">Toggle emergency mode</span>
 </button>
 <Dialer {isEmergency} onClick={openCaller}></Dialer>
+
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
 		<div class="EmergencyCall-root relative flex h-full w-full flex-col justify-between">
@@ -350,7 +366,6 @@
 			{:else}
 				<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 			{/if}
-
 			<CallScreen
 				isInCall={callState === CallState.CALL_ESTABLISHED}
 				activateCall={handleCallAction}
