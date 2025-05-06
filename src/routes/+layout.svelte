@@ -31,7 +31,12 @@
 			apiStatus = 'pending';
 			error = null;
 			try {
-				const response = await apiFetch(PING_API_ENDPOINT);
+				/*
+				 * Fetch the mode from the API.
+				 * The API should return a JSON object with a "mode" property.
+				 */
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				const response = (await apiFetch(PING_API_ENDPOINT)) as any;
 
 				lastPingTime = new Date();
 				// TODO: Set emergency status based on the response
@@ -40,9 +45,9 @@
 			} catch (error: unknown) {
 				apiStatus = 'error';
 				if (error instanceof Error) {
-					error = error.message;
+					console.error('Error fetching mode:', error);
 				} else {
-					error = 'Unknown error occurred';
+					console.error('Error fetching mode:', error);
 				}
 			}
 		};

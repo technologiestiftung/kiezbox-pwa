@@ -1,22 +1,17 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import {
-		PUBLIC_KB_DEMO_TARGET_URI,
-		PUBLIC_KB_DISPLAY_NAME,
-		PUBLIC_KB_DOMAIN,
-		PUBLIC_KB_SERVER_ADDRESS,
-		PUBLIC_KB_SIP_PASSWORD,
-		PUBLIC_KB_SIP_USERNAME,
-		PUBLIC_KB_TARGET_URI,
-		PUBLIC_KB_WSS_PATH,
-		PUBLIC_KB_WSS_PORT
-	} from '$env/static/public';
+	import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
 	import { apiFetch } from '$lib/api';
 	import { t } from '$lib/translations';
 	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import {
+		CallState,
+		type CallServiceState,
+		type KiezboxConfig,
+		type Mode
+	} from '$lib/utils/callUtils';
 	import { RegistererState } from 'sip.js';
-	import { onDestroy, setContext } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { toast } from 'svelte-sonner';
 	import CallScreen from './EmergencyCall/CallScreen.svelte';
 	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
@@ -43,7 +38,6 @@
 		createdAt: new Date(),
 		updatedAt: new Date()
 	});
-	setContext('config', kiezboxConfig);
 
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
 	let callServiceApi = $state<CallServiceApi | null>(null);
@@ -91,12 +85,17 @@
 						signal: AbortSignal.timeout(5000)
 					});
 
-					if (!response.sessionState) {
-						forceRefresh = true;
-						console.log('[$effect] Session state is invalid, refreshing...');
+					if (typeof response === 'object' && response !== null && 'sessionState' in response) {
+						if (!response.sessionState) {
+							forceRefresh = true;
+							console.log('[$effect] Session state is invalid, refreshing...');
+						} else {
+							console.log('[$effect] Session state is valid, no refresh needed');
+							return;
+						}
 					} else {
-						console.log('[$effect] Session state is valid, no refresh needed');
-						return;
+						forceRefresh = true;
+						console.log('[$effect] Invalid response format, refreshing...');
 					}
 				} catch (error) {}
 
@@ -114,20 +113,21 @@
 			console.log('[$effect] Initializing CallService API...');
 
 			// Fetch the Kiezbox server config from the API
-			// const session = await apiFetch('/session');
-			const session = {
-				config: {
-					kbDisplayName: PUBLIC_KB_DISPLAY_NAME,
-					kbDomain: PUBLIC_KB_DOMAIN,
-					kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
-					kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
-					kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
-					kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
-					kbWSSPath: PUBLIC_KB_WSS_PATH,
-					createdAt: new Date(),
-					updatedAt: new Date()
-				}
-			};
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			const session = (await apiFetch('/session')) as any;
+			// const session = {
+			// 	config: {
+			// 		kbDisplayName: PUBLIC_KB_DISPLAY_NAME,
+			// 		kbDomain: PUBLIC_KB_DOMAIN,
+			// 		kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
+			// 		kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
+			// 		kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
+			// 		kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
+			// 		kbWSSPath: PUBLIC_KB_WSS_PATH,
+			// 		createdAt: new Date(),
+			// 		updatedAt: new Date()
+			// 	}
+			// };
 			console.log('[$effect] Kiezbox server config:', session);
 
 			// Update the state variable directly (will update the context)

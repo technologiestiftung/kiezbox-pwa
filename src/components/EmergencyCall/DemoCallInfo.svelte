@@ -197,8 +197,11 @@
 
 {#if !isInCall}
 	<div class="DemoCallInfoInactive-root sticky top-0 z-10 w-full bg-white p-4">
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html $t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-8 w-full space-y-2 px-4">
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+			{@html $t('content.emergency_phone.default.offline.text')}
 			{#each { length: BUBBLE_COUNT } as _, i}
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<li>{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
