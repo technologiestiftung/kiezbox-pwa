@@ -4,14 +4,9 @@
 	import { apiFetch } from '$lib/api';
 	import { t } from '$lib/translations';
 	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import {
-		CallState,
-		type CallServiceState,
-		type KiezboxConfig,
-		type Mode
-	} from '$lib/utils/callUtils';
+	import { CallState, type CallServiceState, type Mode } from '$lib/utils/callUtils';
 	import { RegistererState } from 'sip.js';
-	import { onDestroy } from 'svelte';
+	import { getContext, onDestroy, setContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
 	import CallScreen from './EmergencyCall/CallScreen.svelte';
 	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
@@ -21,22 +16,12 @@
 
 	let isModal = $state(false);
 
-	// let mode = getContext<Mode>('mode');
-	let mode = $state({
-		isEmergency: true
-	});
-
-	// Use $state for the context value instead of a writable store
-	let kiezboxConfig: KiezboxConfig = $state<KiezboxConfig>({
-		kbServerAddress: '',
-		kbWSSPort: 0,
-		kbWSSPath: '',
-		kbDomain: '',
-		kbSIPUsername: '',
-		kbSIPPassword: '',
-		kbDisplayName: '',
-		createdAt: new Date(),
-		updatedAt: new Date()
+	let mode = getContext<Mode>('mode');
+	let SIPConfig = getContext<SIPConfig>('SIPconfig');
+	let SIPUser: SIPUser = $state({
+		username: '',
+		password: '',
+		timestamp: 0
 	});
 
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
@@ -67,42 +52,6 @@
 				throw new Error('Remote audio element not defined');
 			}
 
-			if (Date.now() - (kiezboxConfig.createdAt?.getTime() ?? 0) > 10000) {
-				console.log('[$effect] Kiezbox config is outdated, refreshing...');
-				forceRefresh = true;
-			} else {
-				console.log('[$effect] Kiezbox config is up to date');
-			}
-
-			if (!forceRefresh && callServiceApi && initialized) {
-				try {
-					const response = await apiFetch('/validateSession', {
-						method: 'POST',
-						body: JSON.stringify(kiezboxConfig),
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						signal: AbortSignal.timeout(5000)
-					});
-
-					if (typeof response === 'object' && response !== null && 'sessionState' in response) {
-						if (!response.sessionState) {
-							forceRefresh = true;
-							console.log('[$effect] Session state is invalid, refreshing...');
-						} else {
-							console.log('[$effect] Session state is valid, no refresh needed');
-							return;
-						}
-					} else {
-						forceRefresh = true;
-						console.log('[$effect] Invalid response format, refreshing...');
-					}
-				} catch (error) {}
-
-				console.log('[$effect] CallService API already initialized');
-				return;
-			}
-
 			// If force refresh requested, clean up existing connection
 			if (forceRefresh && callServiceApi && initialized) {
 				console.log('[$effect] Force refresh requested, disconnecting existing service');
@@ -112,41 +61,37 @@
 
 			console.log('[$effect] Initializing CallService API...');
 
-			// Fetch the Kiezbox server config from the API
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const session = (await apiFetch('/session')) as any;
-			// const session = {
-			// 	config: {
-			// 		kbDisplayName: PUBLIC_KB_DISPLAY_NAME,
-			// 		kbDomain: PUBLIC_KB_DOMAIN,
-			// 		kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
-			// 		kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
-			// 		kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
-			// 		kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
-			// 		kbWSSPath: PUBLIC_KB_WSS_PATH,
-			// 		createdAt: new Date(),
-			// 		updatedAt: new Date()
-			// 	}
-			// };
-			console.log('[$effect] Kiezbox server config:', session);
+			let session: any;
+			try {
+				session = (await apiFetch('/session')) as any;
+				if (!session) throw new Error('Empty session from GET');
+			} catch {
+				// fallback to POST
+				session = (await apiFetch('/session', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' }
+				})) as any;
+				if (!session) throw new Error('Empty session from POST');
+			}
 
-			// Update the state variable directly (will update the context)
-			kiezboxConfig.kbDisplayName = session.config.kbDisplayName;
-			kiezboxConfig.kbDomain = session.config.kbDomain;
-			kiezboxConfig.kbServerAddress = session.config.kbServerAddress;
-			kiezboxConfig.kbSIPUsername = session.config.kbSIPUsername;
-			kiezboxConfig.kbSIPPassword = session.config.kbSIPPassword;
-			kiezboxConfig.kbWSSPort = session.config.kbWSSPort;
-			kiezboxConfig.kbWSSPath = session.config.kbWSSPath;
-			kiezboxConfig.createdAt = session.config.createdAt;
-			kiezboxConfig.updatedAt = session.config.updatedAt;
+			const newUser = {
+				username: SIPConfig.kbUserPrefix + session.extension.toString().padStart(4, '0'),
+				password: session.password,
+				timestamp: session.timestamp,
+				displayName: session.extension
+			};
+			SIPUser = newUser;
+			console.log('[$effect] session:', session);
+			console.log('[$effect] SIPUser:', SIPUser);
 
+			console.log('[$effect] Kiezbox server config:', SIPUser);
+			console.log('[$effect] SIPConfig:', SIPConfig);
 			// Call the factory function
-			if (!kiezboxConfig) {
+			if (!SIPConfig) {
 				throw new Error('Kiezbox server config is not defined');
 			}
 
-			const serviceApi = createCallService(kiezboxConfig);
+			const serviceApi = createCallService(SIPConfig);
 			serviceApi.setAudioElement(remoteAudio);
 
 			unsubscribeState = serviceApi.state.subscribe((newState) => {
@@ -233,12 +178,12 @@
 
 	const handleCallAction = async () => {
 		await initialize();
-
+		console.log(SIPUser, 'SIPUser');
 		if (!callServiceApi) return;
 
 		if (registererState !== RegistererState.Registered) {
 			console.warn('Not registered, attempting to connect...');
-			await callServiceApi.createUserAgent();
+			await callServiceApi.createUserAgent(SIPUser);
 
 			try {
 				await waitForRegistration();
@@ -257,7 +202,7 @@
 			await callServiceApi.makeCall(targetUri);
 		} else {
 			console.warn('Not registered, attempting to connect...');
-			await callServiceApi.createUserAgent();
+			await callServiceApi.createUserAgent(SIPUser);
 		}
 	};
 
@@ -321,7 +266,6 @@
 
 	const statusText = $derived(status(callState));
 
-	// Determine button text and disabled states based on service state
 	const callButtonText = $derived(buttonText(callState));
 
 	$effect(() => {

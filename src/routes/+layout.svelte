@@ -6,16 +6,25 @@
 	import '../app.css';
 	import type { LayoutLoad } from './$types';
 
-	type State = 'idle' | 'pending' | 'success' | 'error';
 	let { children } = $props();
 	let apiStatus = $state<State>('idle');
 	let mode: Mode = $state({ status: 0, isEmergency: false });
+	let SIPconfig: SIPConfig = $state({
+		kbServerAddress: '',
+		kbWSSPort: 0,
+		kbWSSPath: '',
+		kbDomain: '',
+		kbUserPrefix: ''
+	});
+	setContext('SIPconfig', SIPconfig);
 	setContext('mode', mode);
+
 	let lastPingTime = $state<Date | null>(null);
 	let error = $state(null);
 
 	const PING_INTERVAL_MS = 10000; // 10 seconds
 	const PING_API_ENDPOINT = '/mode';
+	const SIP_API_ENDPOINT = '/sipconfig';
 
 	export const load: LayoutLoad = async ({ url }) => {
 		const { pathname } = url;
@@ -37,11 +46,17 @@
 				 */
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				const response = (await apiFetch(PING_API_ENDPOINT)) as any;
+				const SIPConfig = (await apiFetch(SIP_API_ENDPOINT)) as any;
 
 				lastPingTime = new Date();
-				// TODO: Set emergency status based on the response
 				mode.status = response.mode;
 				mode.isEmergency = response.mode === 2;
+
+				SIPconfig.kbServerAddress = SIPConfig.kbServerAddress;
+				SIPconfig.kbWSSPort = SIPConfig.kbWSSPort;
+				SIPconfig.kbWSSPath = SIPConfig.kbWSSPath;
+				SIPconfig.kbDomain = SIPConfig.kbDomain;
+				SIPconfig.kbUserPrefix = SIPConfig.kbUserPrefix;
 			} catch (error: unknown) {
 				apiStatus = 'error';
 				if (error instanceof Error) {

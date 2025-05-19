@@ -15,9 +15,9 @@ import {
 } from 'sip.js';
 import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
 import { get, readable, writable, type Readable } from 'svelte/store';
-import { assignStream, CallState, type CallServiceState, type KiezboxConfig } from './callUtils';
+import { assignStream, CallState, type CallServiceState } from './callUtils';
 
-export const createCallService = (config: KiezboxConfig) => {
+export const createCallService = (config: SIPConfig) => {
 	let remoteAudioElement: HTMLAudioElement | null = null;
 	let userAgent: UserAgent | null = null;
 	let registerer: Registerer | null = null;
@@ -256,25 +256,30 @@ export const createCallService = (config: KiezboxConfig) => {
 		applySpeakerMute();
 	};
 
-	const createUserAgent = async (): Promise<void> => {
+	const createUserAgent = async (SIPUser: SIPUser): Promise<void> => {
 		if (userAgent && get(_state).callState !== CallState.DISCONNECTED) {
 			return;
 		}
 		clearError();
 
+		console.log(SIPUser, 'SIPUser');
+
 		try {
 			const kbWSS = `wss://${config.kbServerAddress}:${config.kbWSSPort}${config.kbWSSPath}`;
-			const kbURI = `sip:${config.kbSIPUsername}@${config.kbDomain}`;
+			const kbURI = `sip:${SIPUser.username}@${config.kbDomain}`;
 			const uri = UserAgent.makeURI(kbURI);
+
+			console.log(kbWSS, 'kbWSS');
+			console.log(kbURI, 'kbURI');
 			if (!uri) throw new Error(`Failed to create URI from ${kbURI}`);
 
 			userAgent = new UserAgent({
 				uri: uri,
 				transportOptions: { server: kbWSS, connectionTimeout: 100, keepAliveInterval: 300 },
 				logLevel: (PUBLIC_LOG_LEVEL as LogLevel) || 'error',
-				authorizationUsername: config.kbSIPUsername,
-				authorizationPassword: config.kbSIPPassword,
-				displayName: config.kbDisplayName,
+				authorizationUsername: SIPUser.username,
+				authorizationPassword: SIPUser.password,
+				displayName: SIPUser.displayName,
 				delegate: userAgentDelegate
 			});
 			await userAgent.start();
