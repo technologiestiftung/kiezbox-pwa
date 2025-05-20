@@ -51,18 +51,16 @@
 				throw new Error('Remote audio element not defined');
 			}
 
-			console.log('[$effect] Initializing CallService API...');
-			console.log('[$effect] CallService API:', callServiceApi);
-			console.log('[$effect] CallService State:', initialized);
-
 			// If force refresh requested, clean up existing connection
-			if (forceRefresh && callServiceApi && initialized) {
-				console.log('[$effect] Force refresh requested, disconnecting existing service');
+			if (callServiceApi && initialized) {
 				await callServiceApi.disconnect();
+				if (unsubscribeState) {
+					unsubscribeState();
+					unsubscribeState = null;
+				}
+				callServiceApi = null;
 				initialized = false;
 			}
-
-			console.log('[$effect] Initializing CallService API...');
 
 			let session: any;
 			try {
@@ -117,7 +115,6 @@
 	};
 
 	onDestroy(() => {
-		console.log('[onDestroy] Disconnecting CallService API...');
 		if (unsubscribeState) {
 			unsubscribeState();
 			unsubscribeState = null;
@@ -137,9 +134,6 @@
 	};
 
 	const closeCaller = async () => {
-		console.log('[$effect] Closing caller modal');
-		console.log('[$effect] Call dis:', isCloseDisabled());
-
 		if (isCloseDisabled()) return;
 
 		if (
@@ -175,9 +169,28 @@
 	};
 
 	const handleCallAction = async () => {
-		await initialize();
-		if (!callServiceApi) return;
+		// Check if we need to hang up first
+		if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
+			console.log('Ending current call...');
+			if (callServiceApi) {
+				await callServiceApi.hangupOrReject();
+			}
+			return; // Important: Don't continue to call-making code
+		}
 
+		// For all other actions, ensure we have a properly initialized service
+		if (!initialized || !callServiceApi) {
+			await initialize();
+			if (!callServiceApi) return; // Initialize failed
+		}
+
+		// Handle answering incoming call
+		if (callState === CallState.CALL_INCOMING) {
+			await callServiceApi.answerCall();
+			return;
+		}
+
+		// Registration and call handling
 		if (registererState !== RegistererState.Registered) {
 			console.warn('Not registered, attempting to connect...');
 			await callServiceApi.createUserAgent(SIPUser);
@@ -190,16 +203,10 @@
 			}
 		}
 
-		if (callState === CallState.CALL_INCOMING) {
-			await callServiceApi.answerCall();
-		} else if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
-			await callServiceApi.hangupOrReject();
-		} else if (registererState === RegistererState.Registered) {
+		// Make a new call if we're registered
+		if (registererState === RegistererState.Registered) {
 			const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
 			await callServiceApi.makeCall(targetUri);
-		} else {
-			console.warn('Not registered, attempting to connect...');
-			await callServiceApi.createUserAgent(SIPUser);
 		}
 	};
 
@@ -262,7 +269,6 @@
 	};
 
 	const statusText = $derived(status(callState));
-
 	const callButtonText = $derived(buttonText(callState));
 
 	$effect(() => {
@@ -302,11 +308,13 @@
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
 		<div class="EmergencyCall-root relative flex h-full w-full flex-col justify-between">
+			{callState}
 			{#if isEmergency}
 				<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 			{:else}
 				<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 			{/if}
+
 			<CallScreen
 				isInCall={callState === CallState.CALL_ESTABLISHED}
 				activateCall={handleCallAction}

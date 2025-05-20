@@ -87,7 +87,6 @@ export const createCallService = (config: SIPConfig) => {
 				_state.update((s) => ({ ...s, callDuration: Date.now() - callStartTime! }));
 			}
 		}, 1000);
-		console.log('[CallService] Call timer started.');
 	};
 
 	const cleanupSession = (session?: Session | Inviter | null): void => {
@@ -124,39 +123,62 @@ export const createCallService = (config: SIPConfig) => {
 			remoteAudioElement.srcObject = null;
 		}
 	};
-
 	const cleanupUserAgent = async (): Promise<void> => {
-		// Unregister
-		if (registerer && get(_state).registererState === RegistererState.Registered) {
-			try {
-				await registerer.unregister();
-				// Stop UserAgent
-				if (userAgent) {
-					const uaToStop = userAgent;
-					userAgent = null; // Clear ref
-					if (uaToStop?.isConnected()) {
+		try {
+			// First check if we even have an active UserAgent
+			if (!userAgent) {
+				return;
+			}
+
+			// Store reference and set to null immediately to prevent duplicate cleanup
+			const uaToStop = userAgent;
+			userAgent = null;
+
+			// Unregister only if registered
+			if (registerer && get(_state).registererState === RegistererState.Registered) {
+				try {
+					await registerer.unregister();
+					console.log('Unregistered successfully.');
+				} catch (error: unknown) {
+					console.warn('Error during unregister:', error);
+					// Continue with cleanup despite error
+				} finally {
+					registerer = null;
+				}
+			}
+
+			// Stop UserAgent with proper error handling
+			if (uaToStop) {
+				try {
+					console.log('Stopping UserAgent...');
+					if (uaToStop.isConnected()) {
 						await uaToStop.stop();
 					}
+				} catch (error: unknown) {
+					console.warn('Error stopping UserAgent:', error);
+					// Continue with cleanup despite error
 				}
-			} catch (error: unknown) {
-				setError(`Failed to unregister: ${error}`);
-			} finally {
-				registerer = null;
-				// reset state
-				cleanupSession();
-				incomingInvitation = null;
-				_state.set({
-					callState: CallState.DISCONNECTED,
-					registererState: RegistererState.Initial,
-					callerId: null,
-					callDuration: 0,
-					isMicrophoneMuted: false,
-					isSpeakerMuted: false,
-					remoteStream: null,
-					localHTMLAudioElement: null,
-					errorMessage: get(_state).errorMessage // Keep last error
-				});
 			}
+		} catch (error: unknown) {
+			// Global error handler for the entire cleanup process
+			setError(`Failed to cleanup: ${error}`);
+		} finally {
+			// Always reset state regardless of errors
+			registerer = null;
+			cleanupSession();
+			incomingInvitation = null;
+
+			_state.set({
+				callState: CallState.DISCONNECTED,
+				registererState: RegistererState.Initial,
+				callerId: null,
+				callDuration: 0,
+				isMicrophoneMuted: false,
+				isSpeakerMuted: false,
+				remoteStream: null,
+				localHTMLAudioElement: null,
+				errorMessage: get(_state).errorMessage // Keep last error
+			});
 		}
 	};
 
@@ -183,7 +205,7 @@ export const createCallService = (config: SIPConfig) => {
 
 	const userAgentDelegate: UserAgentDelegate = {
 		onConnect: () => {
-			_state.update((s) => ({ ...s, callState: CallState.CONNECTED }));
+			//_state.update((s) => ({ ...s, callState: CallState.CONNECTED }));
 			setError(null); // Clear connection errors
 			register(); // Attempt registration
 		},
@@ -203,7 +225,6 @@ export const createCallService = (config: SIPConfig) => {
 				setError('Call rejected: Already in another call.');
 				return;
 			}
-			console.log('[CallService] Incoming call:', invitation);
 			incomingInvitation = invitation;
 			_state.update((s) => ({
 				...s,
@@ -228,6 +249,7 @@ export const createCallService = (config: SIPConfig) => {
 		session.stateChange.addListener((newState: SessionState) => {
 			if (newState === SessionState.Established) {
 				_state.update((s) => ({ ...s, callState: CallState.CALL_ESTABLISHED }));
+
 				startCallTimer(); // Start call timer on established
 
 				const sessionDescriptionHandler = session.sessionDescriptionHandler;
@@ -246,7 +268,6 @@ export const createCallService = (config: SIPConfig) => {
 				cleanupSession(session);
 			} else if (newState === SessionState.Terminating) {
 				_state.update((s) => ({ ...s, callState: CallState.CALL_TERMINATED }));
-				console.log('[CallService] Session terminating...');
 			}
 		});
 	};
@@ -262,15 +283,11 @@ export const createCallService = (config: SIPConfig) => {
 		}
 		clearError();
 
-		console.log(SIPUser, 'SIPUser');
-
 		try {
 			const kbWSS = `wss://${config.kbServerAddress}:${config.kbWSSPort}${config.kbWSSPath}`;
 			const kbURI = `sip:${SIPUser.username}@${config.kbDomain}`;
 			const uri = UserAgent.makeURI(kbURI);
 
-			console.log(kbWSS, 'kbWSS');
-			console.log(kbURI, 'kbURI');
 			if (!uri) throw new Error(`Failed to create URI from ${kbURI}`);
 
 			userAgent = new UserAgent({
@@ -294,7 +311,7 @@ export const createCallService = (config: SIPConfig) => {
 	const outgoingRequestDelegate: OutgoingRequestDelegate = {
 		onAccept: () => {
 			_state.update((s) => ({ ...s, callState: CallState.CALL_ESTABLISHED }));
-			startCallTimer(); // Start call timer on established
+			//startCallTimer(); // Start call timer on established
 		},
 		onReject: () => {
 			_state.update((s) => ({ ...s, callState: CallState.CALL_REJECTED }));
@@ -307,7 +324,6 @@ export const createCallService = (config: SIPConfig) => {
 		},
 		onTrying: () => {
 			_state.update((s) => ({ ...s, callState: CallState.CALLING }));
-			console.log('[CallService] Call is trying...');
 		}
 	};
 
@@ -335,8 +351,7 @@ export const createCallService = (config: SIPConfig) => {
 			setupSession(inviter);
 			activeSession = inviter;
 			_state.update((s) => ({ ...s, callState: CallState.CALLING }));
-			const inviter1 = await inviter.invite(inviterOptions);
-			console.log('[CallService] Call initiated to', inviter1, _state);
+			await inviter.invite(inviterOptions);
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				setError(`Failed to make call: ${error.message || error}`);
@@ -348,11 +363,6 @@ export const createCallService = (config: SIPConfig) => {
 	};
 
 	const answerCall = async (): Promise<void> => {
-		console.log(
-			'[CallService] Answering call...',
-			`Incoming call from: ${incomingInvitation?.remoteIdentity.displayName || ''}`
-		);
-		console.log('[CallService] Incoming call:', incomingInvitation);
 		if (!incomingInvitation) {
 			setError('No incoming call to answer.');
 			return;
@@ -410,12 +420,6 @@ export const createCallService = (config: SIPConfig) => {
 					await sessionToTerminate.bye();
 				}
 			} catch (error: unknown) {
-				console.log(state);
-				console.log(sessionToTerminate instanceof Inviter, 'inviter');
-				console.log(sessionToTerminate.state, 'state');
-				console.log(sessionToTerminate, 'session');
-				console.log(sessionToTerminate instanceof Session, 'session');
-				console.log(sessionToTerminate instanceof Invitation, 'invitation');
 				if (error instanceof Error) {
 					setError(`Failed to hangup/cancel: ${error.message}`);
 				} else {
