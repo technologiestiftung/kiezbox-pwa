@@ -14,7 +14,8 @@
 		"deploy": "npm run build && dotenv ./deploy.sh"
 	},
 	"optionalDependencies": {
-		"@rollup/rollup-linux-x64-gnu": "*"
+		"@rollup/rollup-linux-x64-gnu": "*",
+		"@tailwindcss/oxide-linux-x64-gnu": "4.1.7"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
