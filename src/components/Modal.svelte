@@ -38,7 +38,7 @@
 		if (e.target === dialog) close();
 	}}
 	class="modal-root [&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
-    fixed inset-0 m-auto h-[calc(100vh-6rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
+    fixed inset-0 m-auto h-[calc(100vh-15rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
 >
 	<div class="bg-purple-light sticky flex h-12 items-center justify-end">
 		<Button
@@ -53,7 +53,7 @@
 	</div>
 	<div
 		bind:this={contentContainer}
-		class="text-body-black top-12 flex h-[calc(100vh-9rem)] w-full flex-col overflow-auto overscroll-contain bg-white px-4 md:h-[42rem]"
+		class="text-body-black top-12 flex h-[calc(100vh-18rem)] w-full flex-col overflow-auto overscroll-contain bg-white px-4 md:h-[42rem]"
 	>
 		{@render children?.()}
 	</div>

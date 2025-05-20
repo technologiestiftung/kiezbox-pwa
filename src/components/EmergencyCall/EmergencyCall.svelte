@@ -20,7 +20,8 @@
 	let SIPUser: SIPUser = $state({
 		username: '',
 		password: '',
-		timestamp: 0
+		timestamp: 0,
+		displayName: ''
 	});
 
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
@@ -71,14 +72,13 @@
 				if (!session) throw new Error('Empty session from POST');
 			}
 
-			const newUser = {
+			SIPUser = {
 				username: SIPConfig.kbUserPrefix + session.extension.toString().padStart(4, '0'),
 				password: session.password,
 				timestamp: session.timestamp,
 				displayName: session.extension
 			};
 
-			SIPUser = newUser;
 			if (!SIPConfig) {
 				throw new Error('Kiezbox server config is not defined');
 			}
@@ -194,7 +194,6 @@
 			}
 		}
 
-		// Make a new call if we're registered
 		if (registererState === RegistererState.Registered) {
 			const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
 			await callServiceApi.makeCall(targetUri);
@@ -297,8 +296,7 @@
 
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
-		<div class="EmergencyCall-root relative flex h-full w-full flex-col justify-between">
-			{callState}
+		<div class="EmergencyCall-root relative flex w-full flex-grow flex-col justify-between">
 			{#if isEmergency}
 				<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 			{:else}

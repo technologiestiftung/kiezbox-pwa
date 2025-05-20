@@ -27,27 +27,22 @@
 
 	let prevIsInCall = $state(isInCall);
 
-	// Setup animation when component transitions from !isInCall to isInCall
 	$effect(() => {
 		if (isInCall && !prevIsInCall) {
-			// Clean up any existing observers/timers
 			visibilityObservers.forEach((observer) => observer.disconnect());
 			startAnimationObserver?.disconnect();
 			if (animationLoopId !== null) clearTimeout(animationLoopId);
 			if (resumeTimerId !== null) clearTimeout(resumeTimerId);
 			if (programmaticScrollTimeout !== null) clearTimeout(programmaticScrollTimeout);
 
-			// Reset animation state
 			animationHasStarted = false;
 			currentBubbleIndex = 0;
 			userInteracted = false;
 
-			// Wait a bit for the DOM to update
 			setTimeout(() => {
 				if (scrollContainerElement && rootElement) {
 					setupVisibilityObservers();
 					setupStartAnimationObserver();
-					// Start animation immediately when transition occurs
 					animationHasStarted = true;
 					scrollToNextBubble();
 				}
@@ -200,8 +195,6 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html $t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-8 w-full space-y-2 px-4">
-			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-			{@html $t('content.emergency_phone.default.offline.text')}
 			{#each { length: BUBBLE_COUNT } as _, i}
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<li>{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
