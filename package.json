@@ -13,6 +13,9 @@
 		"lint": "prettier --check . && eslint .",
 		"deploy": "npm run build && dotenv ./deploy.sh"
 	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "*"
+	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
 		"@eslint/js": "^9.17.0",
