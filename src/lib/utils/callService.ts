@@ -125,6 +125,10 @@ export const createCallService = (config: SIPConfig) => {
 	};
 	const cleanupUserAgent = async (): Promise<void> => {
 		try {
+			_state.update((s) => ({
+				...s,
+				callState: CallState.CALL_TERMINATING
+			}));
 			// First check if we even have an active UserAgent
 			if (!userAgent) {
 				return;
@@ -390,6 +394,10 @@ export const createCallService = (config: SIPConfig) => {
 
 	const hangupOrReject = async (): Promise<void> => {
 		clearError();
+		_state.update((s) => ({
+			...s,
+			callState: CallState.CALL_TERMINATING
+		}));
 		if (incomingInvitation) {
 			try {
 				await incomingInvitation.reject();
@@ -429,6 +437,7 @@ export const createCallService = (config: SIPConfig) => {
 				cleanupSession(sessionToTerminate);
 			}
 		} else {
+			cleanupSession();
 			setError('No active call to hangup or reject.');
 		}
 	};

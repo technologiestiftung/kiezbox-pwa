@@ -15,7 +15,6 @@
 	import Modal from '../Modal.svelte';
 
 	let isModal = $state(false);
-
 	let mode = getContext<Mode>('mode');
 	let SIPConfig = getContext<SIPConfig>('SIPconfig');
 	let SIPUser: SIPUser = $state({
@@ -31,7 +30,6 @@
 
 	let initialized = false;
 
-	// states
 	const callState = $derived(callServiceState?.callState ?? false);
 	const registererState = $derived(callServiceState?.registererState ?? false);
 
@@ -41,7 +39,7 @@
 	const isSpeakerMuted = $derived(callServiceState?.isSpeakerMuted ?? false);
 	const errorMessage = $derived(callServiceState?.errorMessage ?? null);
 
-	const initialize = async (forceRefresh = false) => {
+	const initialize = async () => {
 		try {
 			if (!browser) {
 				throw new Error('Browser not supported');
@@ -51,7 +49,6 @@
 				throw new Error('Remote audio element not defined');
 			}
 
-			// If force refresh requested, clean up existing connection
 			if (callServiceApi && initialized) {
 				await callServiceApi.disconnect();
 				if (unsubscribeState) {
@@ -67,7 +64,6 @@
 				session = (await apiFetch('/session')) as any;
 				if (!session) throw new Error('Empty session from GET');
 			} catch {
-				// fallback to POST
 				session = (await apiFetch('/session', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' }
@@ -81,8 +77,8 @@
 				timestamp: session.timestamp,
 				displayName: session.extension
 			};
+
 			SIPUser = newUser;
-			// Call the factory function
 			if (!SIPConfig) {
 				throw new Error('Kiezbox server config is not defined');
 			}
@@ -99,7 +95,6 @@
 						newState.errorMessage.includes('forbidden'))
 				) {
 					console.warn('[$state] Potential config issue detected:', newState.errorMessage);
-					forceRefresh = true;
 				}
 			});
 
@@ -169,28 +164,24 @@
 	};
 
 	const handleCallAction = async () => {
-		// Check if we need to hang up first
 		if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
-			console.log('Ending current call...');
 			if (callServiceApi) {
 				await callServiceApi.hangupOrReject();
 			}
-			return; // Important: Don't continue to call-making code
+			return;
 		}
-
-		// For all other actions, ensure we have a properly initialized service
+		if (callState === CallState.CALL_TERMINATING) {
+			toast.info('Call is terminating, please wait...');
+			return;
+		}
 		if (!initialized || !callServiceApi) {
 			await initialize();
-			if (!callServiceApi) return; // Initialize failed
+			if (!callServiceApi) return;
 		}
-
-		// Handle answering incoming call
 		if (callState === CallState.CALL_INCOMING) {
 			await callServiceApi.answerCall();
 			return;
 		}
-
-		// Registration and call handling
 		if (registererState !== RegistererState.Registered) {
 			console.warn('Not registered, attempting to connect...');
 			await callServiceApi.createUserAgent(SIPUser);
@@ -288,7 +279,6 @@
 			changeState();
 		}
 	};
-	$inspect(mode, isEmergency);
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
