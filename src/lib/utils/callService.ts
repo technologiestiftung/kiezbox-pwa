@@ -288,7 +288,7 @@ export const createCallService = (config: SIPConfig) => {
 		clearError();
 
 		try {
-			const kbWSS = `wss://${config.kbServerAddress}:${config.kbWSSPort}${config.kbWSSPath}`;
+			const kbWSS = `wss://${config.kbServerAddress}${config.kbWSSPath}`;
 			const kbURI = `sip:${SIPUser.username}@${config.kbDomain}`;
 			const uri = UserAgent.makeURI(kbURI);
 
