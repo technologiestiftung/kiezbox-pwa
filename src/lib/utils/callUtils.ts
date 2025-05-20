@@ -1,17 +1,5 @@
 import type { RegistererState } from 'sip.js';
 
-export interface KiezboxConfig {
-	kbServerAddress: string;
-	kbWSSPort: number;
-	kbWSSPath: string;
-	kbDomain: string;
-	kbSIPUsername: string;
-	kbSIPPassword: string;
-	kbDisplayName: string;
-	createdAt: Date;
-	updatedAt: Date;
-}
-
 export interface CallServiceState {
 	callState: CallState;
 	registererState: RegistererState;

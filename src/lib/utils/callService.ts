@@ -335,7 +335,8 @@ export const createCallService = (config: SIPConfig) => {
 			setupSession(inviter);
 			activeSession = inviter;
 			_state.update((s) => ({ ...s, callState: CallState.CALLING }));
-			await inviter.invite(inviterOptions);
+			const inviter1 = await inviter.invite(inviterOptions);
+			console.log('[CallService] Call initiated to', inviter1, _state);
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				setError(`Failed to make call: ${error.message || error}`);

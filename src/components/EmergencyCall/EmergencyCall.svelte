@@ -8,11 +8,11 @@
 	import { RegistererState } from 'sip.js';
 	import { getContext, onDestroy, setContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
-	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
-	import Dialer from './EmergencyCall/Dialer.svelte';
-	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
-	import Modal from './Modal.svelte';
+	import CallScreen from './CallScreen.svelte';
+	import DemoCallInfo from './DemoCallInfo.svelte';
+	import Dialer from './Dialer.svelte';
+	import EmergencyCallInfo from './EmergencyCallInfo.svelte';
+	import Modal from '../Modal.svelte';
 
 	let isModal = $state(false);
 
@@ -29,7 +29,6 @@
 	let callServiceState = $state<CallServiceState | null>(null);
 	let unsubscribeState: (() => void) | null = null;
 
-	// Non-reactive flag to prevent re-initialization
 	let initialized = false;
 
 	// states
@@ -51,6 +50,10 @@
 			if (!remoteAudio) {
 				throw new Error('Remote audio element not defined');
 			}
+
+			console.log('[$effect] Initializing CallService API...');
+			console.log('[$effect] CallService API:', callServiceApi);
+			console.log('[$effect] CallService State:', initialized);
 
 			// If force refresh requested, clean up existing connection
 			if (forceRefresh && callServiceApi && initialized) {
@@ -81,11 +84,6 @@
 				displayName: session.extension
 			};
 			SIPUser = newUser;
-			console.log('[$effect] session:', session);
-			console.log('[$effect] SIPUser:', SIPUser);
-
-			console.log('[$effect] Kiezbox server config:', SIPUser);
-			console.log('[$effect] SIPConfig:', SIPConfig);
 			// Call the factory function
 			if (!SIPConfig) {
 				throw new Error('Kiezbox server config is not defined');
@@ -178,7 +176,6 @@
 
 	const handleCallAction = async () => {
 		await initialize();
-		console.log(SIPUser, 'SIPUser');
 		if (!callServiceApi) return;
 
 		if (registererState !== RegistererState.Registered) {
