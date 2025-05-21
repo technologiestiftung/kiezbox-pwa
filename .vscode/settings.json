@@ -12,5 +12,11 @@
 		"titleBar.inactiveForeground": "#e7e7e799"
 	},
 	"peacock.color": "#0f49c3",
-	"cSpell.words": ["kiezbox"]
+	"cSpell.words": ["basemap", "kiezbox", "Maplibre", "maplibregl", "maxzoom"],
+	"i18n-ally.localesPaths": ["src/lib/assets/*"],
+	"i18n-ally.pathMatcher": "{locale}.{ext}",
+	"i18n-ally.displayLanguage": "de",
+	"i18n-ally.enabledFrameworks": ["svelte", "general"],
+	"i18n-ally.enabledParsers": ["json"],
+	"i18n-ally.keystyle": "nested"
 }
