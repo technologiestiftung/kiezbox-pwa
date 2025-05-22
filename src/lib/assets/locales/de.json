@@ -42,6 +42,7 @@
 			"online": "Online",
 			"offline": "Offline",
 			"error": "Fehler",
+			"invalid_network": "Ungültiges Netzwerk",
 			"connecting": "Verbinden...",
 			"connected": "Verbunden",
 			"disconnecting": "Trennen...",
@@ -69,7 +70,8 @@
 			"active": "Notruf beenden",
 			"rejected": "Anruf abgelehnt",
 			"incoming": "Eingehender Anruf...",
-			"call": "Notrufdemo starten",
+			"call": "Notruf starten",
+			"callDemo": "Notrufdemo starten",
 			"failed": "Anruf fehlgeschlagen",
 			"calling": "Anruf wird aufgebaut...",
 			"default": {
@@ -131,7 +133,7 @@
 					"links": {
 						"1": {
 							"text": "Vorratskalkulator des Bundes",
-							"href": ""
+							"href": "https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat/vorratskalkulator"
 						}
 					}
 				},
@@ -140,7 +142,8 @@
 					"text": "Planen Sie vor und packen Sie ein Notgepäck mit den wichtigsten Dingen. Ein Rucksack ist besser als ein Koffer, um die Hände im Notfall frei zu haben.",
 					"links": {
 						"1": {
-							"text": "Packliste des BBK"
+							"text": "Packliste des BBK",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html"
 						}
 					}
 				},
@@ -149,10 +152,12 @@
 					"text": "Durch einen sparsamen Umgang mit Wasser und eine gut sortierte Hausapotheke kann gesundheitsfördernde Hygiene und Erste Hilfe selbstständig sichergestellt werden.",
 					"links": {
 						"1": {
-							"text": "Infos zur Hausapotheke des BBK"
+							"text": "Infos zur Hausapotheke des BBK",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hausapotheke/hausapotheke_node.html"
 						},
 						"2": {
-							"text": "Tipps zur Hygiene des BBK"
+							"text": "Tipps zur Hygiene des BBK",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hygiene/hygiene_node.html"
 						}
 					}
 				},
@@ -164,7 +169,8 @@
 					"text": "Die Brandgefahr kann erheblich minimiert werden, indem sich richtig um Kerzen, brennbares Material, Rauchmelder und Löschgeräte gekümmert wird.",
 					"links": {
 						"1": {
-							"text": "Detailinformationen"
+							"text": "Mehr Infos zur Persönlichen Vorsorge",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-vorsorgen_dossier1.html"
 						}
 					}
 				},
@@ -173,7 +179,8 @@
 					"text": "Ersticken Sie wenn möglich as Feuer im Keim. Falls erfolglos: rufen Sie die 112 an! Löschen Sie nur, wenn keine Gefahr besteht oder bringen Sie sich in Sicherheit.",
 					"links": {
 						"1": {
-							"text": "Detailinformationen"
+							"text": "Verhaltensregeln bei Feuer",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-verhalten_dossier2.html"
 						}
 					}
 				},
@@ -193,7 +200,8 @@
 					"text": "Evakuieren Sie von Hilfebedürftige, Kinder und Haustiere. Und Informieren Sie sich über die Hochwasserzentrale der Länder über aktuelle Informationen.",
 					"links": {
 						"1": {
-							"text": "Hochwasserzentrale"
+							"text": "Hochwasserzentrale",
+							"href": "https://www.hochwasserzentralen.de/"
 						}
 					}
 				},
@@ -202,7 +210,8 @@
 					"text": "Der Keller oder die Tiefgarage können zur Lebensgefahr werden. Dabei herrschen im Haus und im Auto unterschiedliche Verhaltensregeln.",
 					"links": {
 						"1": {
-							"text": "Verhaltensregeln"
+							"text": "Verhaltensregeln bei Hochwasser",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hochwasser/_documents/hochwasser-verhalten_dossier2.html?nn=20590"
 						}
 					}
 				},
@@ -214,7 +223,8 @@
 					"text": "Bereiten Sie sich frühzeitig auf Unwetter vor, indem Sie genügen Lebensmittel, Wasser, Dokumententasche und Notfallkoffer bereit halten.",
 					"links": {
 						"1": {
-							"text": "Mehr Infos zur Persönlichen Vorsorge"
+							"text": "Mehr Infos zur Persönlichen Vorsorge",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-vorsorgen_dossier1.html?nn=20592"
 						}
 					}
 				},
@@ -223,7 +233,8 @@
 					"text": "Gegenstände sichern, Fenster schließen, Metall vermeiden: je nach Aufenthaltsort herrschen unterschiedliche Verhaltensregeln. Al goldene Regel gilt jedoch: zu Hause bleiben.",
 					"links": {
 						"1": {
-							"text": "Verhaltensregeln bei Unwetter"
+							"text": "Verhaltensregeln bei Unwetter",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-verhalten_dossier2.html?nn=20592"
 						}
 					}
 				},
@@ -232,7 +243,8 @@
 					"text": "Unwetter können zu Dachschäden, Überflutungen, dem Austritt von Gefahrenstoffen führen und Personen verletzen. Je nach Art des Unwetters sind unterschiedliche Tipps zu beachten",
 					"links": {
 						"1": {
-							"text": "Verhalten nach dem Unwetter"
+							"text": "Verhalten nach dem Unwetter",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-danach_dossier3.html?nn=20592"
 						}
 					}
 				},
@@ -244,7 +256,8 @@
 					"text": "Ein Laie kann in der Regel die Gefährlichkeit von chemischen (C), biologischen (B), radiologischen (R) und nuklearen (N) Gefahrenstoffe nicht erkennen.",
 					"links": {
 						"1": {
-							"text": "Wirkung auf Haut und Körper"
+							"text": "Wirkung auf Haut und Körper",
+							"href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Gefahrstoff-Freisetzung/_documents/gefahrstoff-unterschiede_dossier1.html?nn=20588"
 						}
 					}
 				},

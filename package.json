@@ -10,7 +10,13 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"deploy": "npm run build && dotenv ./deploy.sh"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "*",
+		"@tailwindcss/oxide-linux-x64-gnu": "4.1.7",
+		"lightningcss-linux-x64-gnu": "^1.30.1"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
@@ -21,6 +27,7 @@
 		"@tailwindcss/postcss": "^4.0.14",
 		"bits-ui": "^0.22.0",
 		"clsx": "^2.1.1",
+		"dotenv-cli": "^8.0.0",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
@@ -43,6 +50,7 @@
 	"dependencies": {
 		"@tailwindcss/vite": "^4.0.14",
 		"carbon-icons-svelte": "^13.3.0",
+		"dotenv": "^16.5.0",
 		"maplibre-gl": "^5.2.0",
 		"sip.js": "^0.21.2",
 		"sveltekit-i18n": "^2.4.2",

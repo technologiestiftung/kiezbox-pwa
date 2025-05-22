@@ -1,15 +1,5 @@
 import type { RegistererState } from 'sip.js';
 
-export interface KiezboxConfig {
-	kbServerAddress: string;
-	kbWSSPort: number;
-	kbWSSPath: string;
-	kbDomain: string;
-	kbSIPUsername: string;
-	kbSIPPassword: string;
-	kbDisplayName: string;
-}
-
 export interface CallServiceState {
 	callState: CallState;
 	registererState: RegistererState;
@@ -29,6 +19,7 @@ export enum CallState {
 	CALLING = 'CALLING',
 	CALL_INCOMING = 'CALL_INCOMING',
 	CALL_ESTABLISHED = 'CALL_ESTABLISHED',
+	CALL_TERMINATING = 'CALL_TERMINATING',
 	CALL_TERMINATED = 'CALL_TERMINATED',
 	CALL_FAILED = 'CALL_FAILED',
 	CALL_REJECTED = 'CALL_REJECTED',
@@ -70,3 +61,8 @@ export const assignStream = (
 		});
 	};
 };
+
+export interface Mode {
+	status: number;
+	isEmergency: boolean;
+}
