@@ -1,59 +1,44 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import {
-		PUBLIC_KB_DEMO_TARGET_URI,
-		PUBLIC_KB_DISPLAY_NAME,
-		PUBLIC_KB_DOMAIN,
-		PUBLIC_KB_SERVER_ADDRESS,
-		PUBLIC_KB_SIP_PASSWORD,
-		PUBLIC_KB_SIP_USERNAME,
-		PUBLIC_KB_TARGET_URI,
-		PUBLIC_KB_WSS_PATH,
-		PUBLIC_KB_WSS_PORT
-	} from '$env/static/public';
+	import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
+	import { apiFetch } from '$lib/api';
 	import { t } from '$lib/translations';
 	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type KiezboxConfig } from '$lib/utils/callUtils';
+	import { CallState, type CallServiceState, type Mode } from '$lib/utils/callUtils';
 	import { RegistererState } from 'sip.js';
-	import { onDestroy } from 'svelte';
+	import { getContext, onDestroy, setContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
-	import CallScreen from './EmergencyCall/CallScreen.svelte';
-	import DemoCallInfo from './EmergencyCall/DemoCallInfo.svelte';
-	import Dialer from './EmergencyCall/Dialer.svelte';
-	import EmergencyCallInfo from './EmergencyCall/EmergencyCallInfo.svelte';
-	import Modal from './Modal.svelte';
+	import CallScreen from './CallScreen.svelte';
+	import DemoCallInfo from './DemoCallInfo.svelte';
+	import Dialer from './Dialer.svelte';
+	import EmergencyCallInfo from './EmergencyCallInfo.svelte';
+	import Modal from '../Modal.svelte';
 
-	let isEmergency = $state(true);
 	let isModal = $state(false);
+	let mode = getContext<Mode>('mode');
+	let SIPConfig = getContext<SIPConfig>('SIPconfig');
+	let SIPUser: SIPUser = $state({
+		username: '',
+		password: '',
+		timestamp: 0,
+		displayName: ''
+	});
 
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
-
 	let callServiceApi = $state<CallServiceApi | null>(null);
 	let callServiceState = $state<CallServiceState | null>(null);
 	let unsubscribeState: (() => void) | null = null;
 
-	// Non-reactive flag to prevent re-initialization
 	let initialized = false;
 
-	// states
 	const callState = $derived(callServiceState?.callState ?? false);
 	const registererState = $derived(callServiceState?.registererState ?? false);
 
+	let isEmergency = $derived(mode?.isEmergency);
 	const time = $derived(callServiceState?.callDuration ?? 0);
 	const isMicrophoneMuted = $derived(callServiceState?.isMicrophoneMuted ?? false);
 	const isSpeakerMuted = $derived(callServiceState?.isSpeakerMuted ?? false);
 	const errorMessage = $derived(callServiceState?.errorMessage ?? null);
-
-	// elements
-	const kiezboxConfig: KiezboxConfig = {
-		kbServerAddress: PUBLIC_KB_SERVER_ADDRESS,
-		kbWSSPort: Number(PUBLIC_KB_WSS_PORT),
-		kbWSSPath: PUBLIC_KB_WSS_PATH,
-		kbDomain: PUBLIC_KB_DOMAIN,
-		kbSIPUsername: PUBLIC_KB_SIP_USERNAME,
-		kbSIPPassword: PUBLIC_KB_SIP_PASSWORD,
-		kbDisplayName: PUBLIC_KB_DISPLAY_NAME
-	};
 
 	const initialize = async () => {
 		try {
@@ -66,32 +51,65 @@
 			}
 
 			if (callServiceApi && initialized) {
-				console.log('[$effect] CallService API already initialized');
-				return;
+				await callServiceApi.disconnect();
+				if (unsubscribeState) {
+					unsubscribeState();
+					unsubscribeState = null;
+				}
+				callServiceApi = null;
+				initialized = false;
 			}
 
-			console.log('[$effect] Initializing CallService API...');
-			initialized = true;
+			let session: any;
+			try {
+				session = (await apiFetch('/session')) as any;
+				if (!session) throw new Error('Empty session from GET');
+			} catch {
+				session = (await apiFetch('/session', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' }
+				})) as any;
+				if (!session) throw new Error('Empty session from POST');
+			}
 
-			const serviceApi = createCallService(kiezboxConfig);
-			serviceApi.setAudioElement(remoteAudio); // Pass the audio element
+			SIPUser = {
+				username: SIPConfig.kbUserPrefix + session.extension.toString().padStart(4, '0'),
+				password: session.password,
+				timestamp: session.timestamp,
+				displayName: session.extension
+			};
+
+			if (!SIPConfig) {
+				throw new Error('Kiezbox server config is not defined');
+			}
+
+			const serviceApi = createCallService(SIPConfig);
+			serviceApi.setAudioElement(remoteAudio);
 
 			unsubscribeState = serviceApi.state.subscribe((newState) => {
 				callServiceState = newState;
+				if (
+					newState.errorMessage &&
+					(newState.errorMessage.includes('authentication') ||
+						newState.errorMessage.includes('registration failed') ||
+						newState.errorMessage.includes('forbidden'))
+				) {
+					console.warn('[$state] Potential config issue detected:', newState.errorMessage);
+				}
 			});
 
 			callServiceApi = serviceApi;
+			initialized = true;
 		} catch (error: unknown) {
 			if (error instanceof Error) {
-				toast.error('Failed to initialize CallService API: ' + error.message);
+				toast.error(error.message);
 			} else {
-				toast.error('Failed to initialize CallService API: ' + String(error));
+				toast.error(String(error));
 			}
 		}
 	};
 
 	onDestroy(() => {
-		console.log('[onDestroy] Disconnecting CallService API...');
 		if (unsubscribeState) {
 			unsubscribeState();
 			unsubscribeState = null;
@@ -108,13 +126,9 @@
 
 	const openCaller = async () => {
 		isModal = true;
-		await initialize();
 	};
 
 	const closeCaller = async () => {
-		console.log('[$effect] Closing caller modal');
-		console.log('[$effect] Call dis:', isCloseDisabled());
-
 		if (isCloseDisabled()) return;
 
 		if (
@@ -150,40 +164,39 @@
 	};
 
 	const handleCallAction = async () => {
-		if (!callServiceApi) return;
-
+		if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
+			if (callServiceApi) {
+				await callServiceApi.hangupOrReject();
+			}
+			return;
+		}
+		if (callState === CallState.CALL_TERMINATING) {
+			toast.info('Call is terminating, please wait...');
+			return;
+		}
+		if (!initialized || !callServiceApi) {
+			await initialize();
+			if (!callServiceApi) return;
+		}
+		if (callState === CallState.CALL_INCOMING) {
+			await callServiceApi.answerCall();
+			return;
+		}
 		if (registererState !== RegistererState.Registered) {
 			console.warn('Not registered, attempting to connect...');
-			await callServiceApi.createUserAgent();
+			await callServiceApi.createUserAgent(SIPUser);
 
 			try {
 				await waitForRegistration();
-				console.log('Successfully registered.');
 			} catch (error: unknown) {
-				if (error instanceof Error) {
-					console.error('Registration failed:', error.message);
-				} else {
-					console.error('Registration failed:', error);
-				}
+				toast.error(String(error));
 				return;
 			}
 		}
 
-		console.log('[$effect] Call action triggered');
-		console.log('[$effect] Call state:', callState);
-		console.log('[$effect] Registerer state:', registererState);
-		console.log('[$effect] isEmergency:', isEmergency);
-
-		if (callState === CallState.CALL_INCOMING) {
-			await callServiceApi.answerCall();
-		} else if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
-			await callServiceApi.hangupOrReject();
-		} else if (registererState === RegistererState.Registered) {
+		if (registererState === RegistererState.Registered) {
 			const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
 			await callServiceApi.makeCall(targetUri);
-		} else {
-			console.warn('Not registered, attempting to connect...');
-			await callServiceApi.createUserAgent();
 		}
 	};
 
@@ -196,7 +209,6 @@
 	};
 
 	const changeState = () => {
-		isEmergency = !isEmergency;
 		console.log('Mode changed to:', isEmergency ? 'Emergency' : 'Demo');
 	};
 
@@ -247,13 +259,16 @@
 	};
 
 	const statusText = $derived(status(callState));
-
-	// Determine button text and disabled states based on service state
 	const callButtonText = $derived(buttonText(callState));
 
 	$effect(() => {
 		if (!callState || !initialized) return;
 		toast.success(statusText);
+	});
+
+	$effect(() => {
+		if (!errorMessage) return;
+		toast.error(errorMessage);
 	});
 
 	const handleKeydown = (event: KeyboardEvent) => {
@@ -278,9 +293,10 @@
 	<span class="sr-only">Toggle emergency mode</span>
 </button>
 <Dialer {isEmergency} onClick={openCaller}></Dialer>
+
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
-		<div class="EmergencyCall-root relative flex h-full w-full flex-col justify-between">
+		<div class="EmergencyCall-root relative flex w-full flex-grow flex-col justify-between">
 			{#if isEmergency}
 				<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
 			{:else}

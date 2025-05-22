@@ -1,22 +1,31 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { t } from '$lib/translations';
 	import { CloseOutline } from 'carbon-icons-svelte';
 
 	let { children, isModal, close, disabled } = $props();
+	let dialog = $state<HTMLDialogElement | undefined>(undefined);
+	let contentContainer: HTMLElement | undefined = $state();
+
+	// Track previous modal state to detect changes
+	let prevModalState = $state(isModal);
 
 	$effect(() => {
-		if (isModal) {
-			dialog?.showModal();
-			document.body.style.overflow = 'hidden'; // ⛔ Prevent background scroll
-		} else {
-			dialog?.close();
-			document.body.style.overflow = ''; // ✅ Restore scroll
+		if (!browser) return;
+
+		if (isModal !== prevModalState) {
+			if (isModal) {
+				dialog?.showModal();
+				document.body.style.overflow = 'hidden';
+			} else {
+				dialog?.close();
+				document.body.style.overflow = '';
+			}
+			prevModalState = isModal;
 		}
 	});
-	let dialog: HTMLDialogElement | undefined = $state();
-	let contentContainer: HTMLElement | undefined = $state();
 </script>
 
 <!-- eslint-disable-next-line svelte/valid-compile -->
@@ -29,7 +38,7 @@
 		if (e.target === dialog) close();
 	}}
 	class="modal-root [&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
-    fixed inset-0 m-auto h-[calc(100vh-6rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
+    fixed inset-0 m-auto h-[calc(100vh-15rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
 >
 	<div class="bg-purple-light sticky flex h-12 items-center justify-end">
 		<Button
@@ -44,7 +53,7 @@
 	</div>
 	<div
 		bind:this={contentContainer}
-		class="text-body-black top-12 flex h-[calc(100vh-9rem)] w-full flex-col overflow-auto overscroll-contain bg-white px-4 md:h-[42rem]"
+		class="text-body-black top-12 flex h-[calc(100vh-18rem)] w-full flex-col overflow-auto overscroll-contain bg-white px-4 md:h-[42rem]"
 	>
 		{@render children?.()}
 	</div>

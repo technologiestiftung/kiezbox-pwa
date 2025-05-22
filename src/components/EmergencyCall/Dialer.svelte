@@ -1,7 +1,22 @@
 <script lang="ts">
 	import { t } from '$lib/translations';
+	import { onMount } from 'svelte';
 	import EmergencyCallButton from './EmergencyCallButton.svelte';
 	let { isEmergency, onClick } = $props();
+
+	const observer = new IntersectionObserver(
+		([e]) => e.target.classList.toggle('isSticky', e.intersectionRatio < 1),
+		{ threshold: [1] }
+	);
+
+	onMount(() => {
+		const stickyElm = document.querySelector('.Dialer-button');
+		if (stickyElm) {
+			observer.observe(stickyElm);
+		} else {
+			console.log('Sticky element found and observer attached');
+		}
+	});
 </script>
 
 <div
@@ -22,13 +37,17 @@
 	></div>
 </div>
 
-<div class={`sticky top-0 z-10 flex justify-center`}>
-	<div class="w-full px-6 md:w-[29rem]">
+<div class={`Dialer-button group sticky -top-1 z-10 flex justify-center`}>
+	<div
+		class="w-full px-6 transition-[width] duration-200 ease-out group-[.isSticky]:w-full group-[.isSticky]:p-0 md:w-[29rem]"
+	>
 		<EmergencyCallButton
 			disabled={false}
 			isActive={isEmergency}
 			{onClick}
-			buttonText={isEmergency ? $t('content.emergency_phone.emergency.phone_button') : $t('content.emergency_phone.default.phone_button')}
+			buttonText={isEmergency
+				? $t('content.emergency_phone.emergency.phone_button')
+				: $t('content.emergency_phone.default.phone_button')}
 		/>
 	</div>
 </div>
