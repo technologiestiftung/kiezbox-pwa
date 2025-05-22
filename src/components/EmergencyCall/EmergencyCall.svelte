@@ -102,7 +102,11 @@
 			initialized = true;
 		} catch (error: unknown) {
 			if (error instanceof Error) {
-				toast.error(error.message);
+				if (error.message.includes('API') || error.message.includes('fetch')) {
+					toast.error($t('common.status.invalid_network'));
+				} else {
+					toast.error(error.message);
+				}
 			} else {
 				toast.error(String(error));
 			}

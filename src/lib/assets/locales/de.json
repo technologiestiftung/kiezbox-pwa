@@ -42,6 +42,7 @@
 			"online": "Online",
 			"offline": "Offline",
 			"error": "Fehler",
+			"invalid_network": "Ungültiges Netzwerk",
 			"connecting": "Verbinden...",
 			"connected": "Verbunden",
 			"disconnecting": "Trennen...",
