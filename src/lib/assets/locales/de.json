@@ -74,6 +74,17 @@
 			"callDemo": "Notrufdemo starten",
 			"failed": "Anruf fehlgeschlagen",
 			"calling": "Anruf wird aufgebaut...",
+			"error": {
+				"button": "Done",
+				"title": "Fehler",
+				"messages": {
+					"network": "Sie sind nicht mit dem Kiezbox Notfall WLAN verbunden. Bitte verbinden Sie sich mit dem Netzwerk 'Kiezbox Notfall WLAN' und versuchen Sie es erneut.",
+					"audio": "Ihr Gerät unterstützt keine Audioübertragung. Bitte verwenden Sie ein anderes Gerät oder einen anderen Browser.",
+					"captive-portal": "Sie sind in einem Captive Portal. Bitte kopieren sie den Link, schließen Sie das Captive Portal und versuchen Sie es erneut.",
+					"server": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später erneut.",
+					"unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+				}
+			},
 			"default": {
 				"phone_button": "Zur Notrufdemo",
 				"incoming_call": "Eingehender Anruf",

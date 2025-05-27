@@ -9,7 +9,7 @@ export const apiFetch = async (resource: string, options: RequestInit = {}): Pro
 	const fetchOptions: RequestInit = {
 		...options,
 		headers: {
-			'Content-Type': 'application/json', // Default header for JSON data
+			'Content-Type': 'application/json',
 			...options.headers
 		}
 	};

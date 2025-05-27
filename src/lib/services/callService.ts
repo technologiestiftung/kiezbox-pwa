@@ -1,4 +1,7 @@
 import { PUBLIC_LOG_LEVEL } from '$env/static/public';
+import { CallState } from '$lib/enums';
+import type { CallServiceState } from '$lib/types';
+import { assignStream } from '$lib/utils/callUtils';
 import {
 	Invitation,
 	Inviter,
@@ -11,11 +14,9 @@ import {
 	type InviterInviteOptions,
 	type LogLevel,
 	type UserAgentDelegate
-	// Add these imports for Logger
 } from 'sip.js';
 import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
 import { get, readable, writable, type Readable } from 'svelte/store';
-import { assignStream, CallState, type CallServiceState } from './callUtils';
 
 export const createCallService = (config: SIPConfig) => {
 	let remoteAudioElement: HTMLAudioElement | null = null;
@@ -33,7 +34,6 @@ export const createCallService = (config: SIPConfig) => {
 		callerId: null,
 		isMicrophoneMuted: false,
 		isSpeakerMuted: false,
-
 		callDuration: 0,
 		remoteStream: null,
 		localHTMLAudioElement: null
@@ -254,7 +254,7 @@ export const createCallService = (config: SIPConfig) => {
 			if (newState === SessionState.Established) {
 				_state.update((s) => ({ ...s, callState: CallState.CALL_ESTABLISHED }));
 
-				startCallTimer(); // Start call timer on established
+				startCallTimer();
 
 				const sessionDescriptionHandler = session.sessionDescriptionHandler;
 

@@ -1,105 +1,86 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
 	import { apiFetch } from '$lib/api';
 	import { t } from '$lib/translations';
-	import { createCallService, type CallServiceApi } from '$lib/utils/callService';
-	import { CallState, type CallServiceState, type Mode } from '$lib/utils/callUtils';
 	import { RegistererState } from 'sip.js';
-	import { getContext, onDestroy, setContext } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { toast } from 'svelte-sonner';
 	import CallScreen from './CallScreen.svelte';
 	import DemoCallInfo from './DemoCallInfo.svelte';
 	import Dialer from './Dialer.svelte';
 	import EmergencyCallInfo from './EmergencyCallInfo.svelte';
 	import Modal from '../Modal.svelte';
+	import DialerError from './DialerError.svelte';
+	import {
+		initCallService,
+		cleanupCallService,
+		CallStore,
+		createUserAgent
+	} from '$lib/state/callState.svelte';
+	import { ApiStatus, CallState } from '$lib/enums';
+	import { NetworkStore } from '$lib/state/networkState.svelte';
 
 	let isModal = $state(false);
-	let mode = getContext<Mode>('mode');
-	let SIPConfig = getContext<SIPConfig>('SIPconfig');
-	let SIPUser: SIPUser = $state({
-		username: '',
-		password: '',
-		timestamp: 0,
-		displayName: ''
-	});
 
 	let remoteAudio = $state<HTMLAudioElement | undefined>(undefined);
-	let callServiceApi = $state<CallServiceApi | null>(null);
-	let callServiceState = $state<CallServiceState | null>(null);
-	let unsubscribeState: (() => void) | null = null;
+	let SIPConfig = $state<any | null>(null);
 
-	let initialized = false;
+	// Access the singleton state
+	const callState = $derived(CallStore.state?.callState ?? false);
+	const registererState = $derived(CallStore.state?.registererState ?? false);
 
-	const callState = $derived(callServiceState?.callState ?? false);
-	const registererState = $derived(callServiceState?.registererState ?? false);
+	let user = $state<SIPUser | null>(null);
 
-	let isEmergency = $derived(mode?.isEmergency);
-	const time = $derived(callServiceState?.callDuration ?? 0);
-	const isMicrophoneMuted = $derived(callServiceState?.isMicrophoneMuted ?? false);
-	const isSpeakerMuted = $derived(callServiceState?.isSpeakerMuted ?? false);
-	const errorMessage = $derived(callServiceState?.errorMessage ?? null);
+	// Mode from network state
+	let isEmergency = $derived(false); // Replace with actual emergency state
+
+	// Call state properties
+	const time = $derived(CallStore.state?.callDuration ?? 0);
+	const isMicrophoneMuted = $derived(CallStore.state?.isMicrophoneMuted ?? false);
+	const isSpeakerMuted = $derived(CallStore.state?.isSpeakerMuted ?? false);
+	const errorMessage = $derived(CallStore.state?.errorMessage ?? null);
 
 	const initialize = async () => {
 		try {
-			if (!browser) {
-				throw new Error('Browser not supported');
-			}
-
 			if (!remoteAudio) {
 				throw new Error('Remote audio element not defined');
 			}
 
-			if (callServiceApi && initialized) {
-				await callServiceApi.disconnect();
-				if (unsubscribeState) {
-					unsubscribeState();
-					unsubscribeState = null;
+			// First fetch the SIP config if needed
+			if (!SIPConfig) {
+				try {
+					SIPConfig = await apiFetch('/api/sipconfig');
+					if (!SIPConfig) throw new Error('Empty SIP config');
+				} catch (error) {
+					throw new Error(`Failed to fetch SIP config: ${error}`);
 				}
-				callServiceApi = null;
-				initialized = false;
 			}
 
+			// Fetch session for SIP authentication
 			let session: any;
 			try {
-				session = (await apiFetch('/session')) as any;
+				session = (await apiFetch('/api/session')) as any;
 				if (!session) throw new Error('Empty session from GET');
 			} catch {
-				session = (await apiFetch('/session', {
+				session = (await apiFetch('/api/session', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' }
 				})) as any;
 				if (!session) throw new Error('Empty session from POST');
 			}
 
-			SIPUser = {
+			user = {
 				username: SIPConfig.kbUserPrefix + session.extension.toString().padStart(4, '0'),
 				password: session.password,
 				timestamp: session.timestamp,
 				displayName: session.extension
 			};
 
-			if (!SIPConfig) {
-				throw new Error('Kiezbox server config is not defined');
-			}
+			// Initialize the call service singleton
+			await initCallService(SIPConfig, remoteAudio);
 
-			const serviceApi = createCallService(SIPConfig);
-			serviceApi.setAudioElement(remoteAudio);
-
-			unsubscribeState = serviceApi.state.subscribe((newState) => {
-				callServiceState = newState;
-				if (
-					newState.errorMessage &&
-					(newState.errorMessage.includes('authentication') ||
-						newState.errorMessage.includes('registration failed') ||
-						newState.errorMessage.includes('forbidden'))
-				) {
-					console.warn('[$state] Potential config issue detected:', newState.errorMessage);
-				}
-			});
-
-			callServiceApi = serviceApi;
-			initialized = true;
+			// Create the user agent for SIP communication
+			await createUserAgent(user);
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				if (error.message.includes('API') || error.message.includes('fetch')) {
@@ -113,19 +94,9 @@
 		}
 	};
 
-	onDestroy(() => {
-		if (unsubscribeState) {
-			unsubscribeState();
-			unsubscribeState = null;
-		}
-
-		if (callServiceApi) {
-			callServiceApi.disconnect().finally(() => {
-				callServiceApi = null;
-				callServiceState = null;
-				initialized = false;
-			});
-		}
+	onDestroy(async () => {
+		// Clean up the call service when component is destroyed
+		await cleanupCallService();
 	});
 
 	const openCaller = async () => {
@@ -136,10 +107,10 @@
 		if (isCloseDisabled()) return;
 
 		if (
-			callServiceApi &&
+			CallStore.instance &&
 			(callState === CallState.CALLING || callState === CallState.CALL_ESTABLISHED)
 		) {
-			await callServiceApi.hangupOrReject();
+			await CallStore.instance.hangupOrReject();
 		}
 		isModal = false;
 	};
@@ -169,8 +140,8 @@
 
 	const handleCallAction = async () => {
 		if (callState === CallState.CALL_ESTABLISHED || callState === CallState.CALLING) {
-			if (callServiceApi) {
-				await callServiceApi.hangupOrReject();
+			if (CallStore.instance) {
+				await CallStore.instance.hangupOrReject();
 			}
 			return;
 		}
@@ -178,17 +149,20 @@
 			toast.info('Call is terminating, please wait...');
 			return;
 		}
-		if (!initialized || !callServiceApi) {
+
+		if (!CallStore.instance) {
 			await initialize();
-			if (!callServiceApi) return;
+			if (!CallStore.instance) return;
 		}
+
 		if (callState === CallState.CALL_INCOMING) {
-			await callServiceApi.answerCall();
+			await CallStore.instance.answerCall();
 			return;
 		}
+
 		if (registererState !== RegistererState.Registered) {
 			console.warn('Not registered, attempting to connect...');
-			await callServiceApi.createUserAgent(SIPUser);
+			await createUserAgent(user);
 
 			try {
 				await waitForRegistration();
@@ -200,16 +174,16 @@
 
 		if (registererState === RegistererState.Registered) {
 			const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
-			await callServiceApi.makeCall(targetUri);
+			await CallStore.instance.makeCall(targetUri);
 		}
 	};
 
 	const activateMic = () => {
-		callServiceApi?.toggleMicrophoneMute(); // Use API object
+		CallStore.instance?.toggleMicrophoneMute();
 	};
 
 	const activateSpeaker = () => {
-		callServiceApi?.toggleSpeakerMute(); // Use API object
+		CallStore.instance?.toggleSpeakerMute();
 	};
 
 	const changeState = () => {
@@ -235,6 +209,11 @@
 			default:
 				return $t('common.status.online');
 		}
+	};
+
+	const onDone = () => {
+		NetworkStore.networkServiceInstance?.setMeFree();
+		window.location.reload();
 	};
 
 	const isCloseDisabled = $derived(() => {
@@ -266,7 +245,7 @@
 	const callButtonText = $derived(buttonText(callState));
 
 	$effect(() => {
-		if (!callState || !initialized) return;
+		if (!callState) return;
 		toast.success(statusText);
 	});
 
@@ -296,7 +275,12 @@
 >
 	<span class="sr-only">Toggle emergency mode</span>
 </button>
-<Dialer {isEmergency} onClick={openCaller}></Dialer>
+
+{#if NetworkStore.networkState?.apiStatus !== ApiStatus.AVAILABLE && NetworkStore.networkState?.errorMessage}
+	<DialerError errorMessage={NetworkStore.networkState?.errorMessage} onClick={onDone} />
+{:else}
+	<Dialer {isEmergency} onClick={openCaller}></Dialer>
+{/if}
 
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled()}>
 	{#snippet children()}
