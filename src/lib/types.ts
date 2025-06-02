@@ -34,6 +34,7 @@ export interface NetworkServiceState {
 	lastPingTime: Date | null;
 	apiStatus: ApiStatus;
 	mode: Mode | null;
+	config: SIPConfig | null;
 	coordinates: string[];
 }
 

@@ -1,3 +1,31 @@
+import type { RegistererState } from 'sip.js';
+
+export interface CallServiceState {
+	callState: CallState;
+	registererState: RegistererState;
+	errorMessage: string | null;
+	callerId: string | null;
+	isMicrophoneMuted: boolean;
+	isSpeakerMuted: boolean;
+	callDuration: number;
+	remoteStream: MediaStream | null;
+	localHTMLAudioElement: HTMLAudioElement | null;
+}
+
+export enum CallState {
+	INITIALIZED = 'INITIALIZED',
+	DISCONNECTED = 'DISCONNECTED',
+	CONNECTED = 'CONNECTED',
+	CALLING = 'CALLING',
+	CALL_INCOMING = 'CALL_INCOMING',
+	CALL_ESTABLISHED = 'CALL_ESTABLISHED',
+	CALL_TERMINATING = 'CALL_TERMINATING',
+	CALL_TERMINATED = 'CALL_TERMINATED',
+	CALL_FAILED = 'CALL_FAILED',
+	CALL_REJECTED = 'CALL_REJECTED',
+	CALL_REDIRECTED = 'CALL_REDIRECTED'
+}
+
 export const assignStream = (
 	stream: MediaStream,
 	element: HTMLMediaElement | null,
@@ -33,3 +61,8 @@ export const assignStream = (
 		});
 	};
 };
+
+export interface Mode {
+	status: number;
+	isEmergency: boolean;
+}

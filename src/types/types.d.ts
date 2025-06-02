@@ -12,3 +12,9 @@ type SIPUser = {
 	timestamp: number;
 	displayName?: string;
 };
+
+type SessionResponse = {
+	extension: string | number;
+	password: string;
+	timestamp: number;
+};
