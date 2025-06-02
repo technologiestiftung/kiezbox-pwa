@@ -9,7 +9,7 @@ import { goto } from '$app/navigation';
 
 const PING_API_ENDPOINT = '/api/mode';
 const SIP_API_ENDPOINT = '/api/sipconfig';
-const PING_INTERVAL_MS = 5000; // 10 seconds
+const PING_INTERVAL_MS = 5000;
 
 export const createNetworkService = (config: SIPConfig) => {
 	const _state = writable<NetworkServiceState>({
@@ -21,7 +21,6 @@ export const createNetworkService = (config: SIPConfig) => {
 		coordinates: []
 	});
 
-	// Declare interval ID at instance level
 	let pingIntervalId: ReturnType<typeof setInterval> | null = null;
 
 	const state: Readable<NetworkServiceState> = readable(get(_state), (set) => {
@@ -29,50 +28,46 @@ export const createNetworkService = (config: SIPConfig) => {
 		return () => unsubscribe();
 	});
 
-	// const setError = (message: string | null): void => {
-	// 	_state.update((s) => ({ ...s, errorMessage: message }));
-	// 	if (message) {
-	// 		console.error(`[NetworkService] Error state set: ${message}`);
-	// 	}
-	// };
+	const setError = (message: string | null): void => {
+		_state.update((s) => ({ ...s, errorMessage: message }));
+		if (message) {
+			console.error(`[NetworkService] Error state set: ${message}`);
+		}
+	};
+
 	const isCaptivePortal = async (): Promise<boolean> => {
 		const ua = navigator.userAgent;
 
-		// Heuristic: known captive browser identifiers
 		const isCaptiveShell =
 			/Captive/.test(ua) ||
 			/CaptiveNetworkSupport/.test(ua) ||
 			/MiniBrowser/.test(ua) ||
 			/NetworkDiagnostics/.test(ua) ||
 			/CaptivePortalLogin/.test(ua) ||
-			/\bwv\b/.test(ua); // Android WebView
+			/\bwv\b/.test(ua);
 
 		if (isCaptiveShell) {
 			console.warn('User agent indicates captive shell.');
 			return true;
 		}
 
-		// Secure context is required for camera/mic access
 		if (!window.isSecureContext) {
 			console.warn('Not in secure context. Likely captive portal.');
 			return true;
 		}
 
-		// Try using mediaDevices to confirm access
 		if (navigator.mediaDevices?.getUserMedia) {
 			try {
 				await navigator.mediaDevices.getUserMedia({ audio: true });
 				return false;
-			} catch (err) {
-				console.warn('mediaDevices.getUserMedia failed:', err);
-				// Continue to fallback test
+			} catch (error) {
+				setError(`Media access error: ${error instanceof Error ? error.message : String(error)}`);
 			}
 		} else {
 			console.warn('mediaDevices.getUserMedia not available.');
 			return true;
 		}
 
-		// Fallback: try WebSocket to your backend
 		const sipWsUrl = `wss://${config.kbServerAddress}${config.kbWSSPath}`;
 
 		return new Promise<boolean>((resolve) => {
@@ -80,7 +75,6 @@ export const createNetworkService = (config: SIPConfig) => {
 
 			try {
 				const ws = new WebSocket(sipWsUrl, ['sip']);
-
 				ws.onopen = () => {
 					if (!resolved) {
 						resolved = true;
@@ -109,33 +103,6 @@ export const createNetworkService = (config: SIPConfig) => {
 		});
 	};
 
-	// const supportsAudioRecording = async (): Promise<boolean> => {
-	// 	try {
-	// 		const hasMediaDevices = !!navigator.mediaDevices?.getUserMedia;
-	// 		if (!hasMediaDevices) return false;
-
-	// 		const { state } = await navigator.permissions.query({
-	// 			name: 'microphone' as PermissionName
-	// 		});
-
-	// 		if (state === 'denied') return false;
-
-	// 		try {
-	// 			const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-	// 			stream.getTracks().forEach((track) => track.stop());
-	// 			return true;
-	// 		} catch (error) {
-	// 			console.error('Error accessing microphone:', error);
-
-	// 			return false;
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('Error checking audio recording support:', error);
-
-	// 		return false;
-	// 	}
-	// };
-
 	const fetchMode = async (): Promise<Mode | null> => {
 		try {
 			const response: any = await apiFetch(PING_API_ENDPOINT, {
@@ -152,7 +119,7 @@ export const createNetworkService = (config: SIPConfig) => {
 				isEmergency: response.mode % 2 == 0
 			};
 		} catch (error) {
-			console.error('Error fetching mode:', error);
+			setError(`Failed to fetch mode: ${error instanceof Error ? error.message : String(error)}`);
 			return null;
 		}
 	};
@@ -165,17 +132,11 @@ export const createNetworkService = (config: SIPConfig) => {
 			if (!response) {
 				throw new Error(`Set me free request failed with status: ${response.status}`);
 			}
-			console.log(response);
-			console.log('Set me free response:', response);
-
 			goto('/', {
 				noScroll: true
 			});
 		} catch (error) {
-			console.error('Error setting me free:', error);
-			throw new Error(
-				`Failed to set me free: ${error instanceof Error ? error.message : String(error)}`
-			);
+			setError(`Failed to set me free: ${error instanceof Error ? error.message : String(error)}`);
 		}
 	};
 
@@ -186,24 +147,21 @@ export const createNetworkService = (config: SIPConfig) => {
 				headers: { 'Content-Type': 'application/json' }
 			});
 
-			console.log('SIP config response:', response);
-
 			if (!response) {
 				throw new Error(`SIP config request failed with status: ${response}`);
 			}
 
 			return response;
 		} catch (error) {
-			console.error('Error fetching SIP config:', error);
+			setError(
+				`Failed to fetch SIP config: ${error instanceof Error ? error.message : String(error)}`
+			);
 			return null;
 		}
 	};
 
 	const pingApi = async () => {
-		let currentError: string | null = null;
 		try {
-			// Check for captive portal first
-
 			const mode: Mode | null = await fetchMode();
 			if (!mode) {
 				_state.update((s) => ({
@@ -235,15 +193,6 @@ export const createNetworkService = (config: SIPConfig) => {
 				return;
 			}
 
-			// const hasAudioSupport = await supportsAudioRecording();
-			// if (!hasAudioSupport) {
-			// 	_state.update((s) => ({
-			// 		...s,
-			// 		errorMessage: 'audio'
-			// 	}));
-			// 	return;
-			// }
-
 			const now = new Date();
 			_state.update((s) => ({
 				...s,
@@ -254,33 +203,18 @@ export const createNetworkService = (config: SIPConfig) => {
 				errorMessage: null,
 				mode: mode
 			}));
-		} catch (err: unknown) {
-			if (err instanceof Error) {
-				currentError = err.message;
-				console.error('Error fetching mode:', err);
-			} else {
-				currentError = String(err);
-				console.error('Error fetching mode:', err);
-			}
-
-			_state.update((s) => ({
-				...s,
-				errorMessage: currentError
-			}));
+		} catch (error: unknown) {
+			setError(`Ping API error: ${error instanceof Error ? error.message : String(error)}`);
 		}
 	};
 
 	const startPing = async () => {
-		// Clear any existing interval first to prevent multiple pings
 		if (pingIntervalId !== null) {
 			clearInterval(pingIntervalId);
 			pingIntervalId = null;
 		}
-
-		// Start a new ping cycle
 		await pingApi();
 		pingIntervalId = setInterval(pingApi, PING_INTERVAL_MS);
-
 		return () => {
 			if (pingIntervalId !== null) {
 				clearInterval(pingIntervalId);
@@ -290,13 +224,10 @@ export const createNetworkService = (config: SIPConfig) => {
 	};
 
 	const stopPing = async () => {
-		// Clear the existing interval
 		if (pingIntervalId !== null) {
 			clearInterval(pingIntervalId);
 			pingIntervalId = null;
 		}
-
-		// Update state
 		_state.update((s) => ({ ...s, apiStatus: ApiStatus.UNAVAILABLE, lastPingTime: null }));
 	};
 
