@@ -80,14 +80,19 @@
 	<!-- svelte-ignore event_directive_deprecated -->
 	<div class="flex min-h-14 items-center justify-center" on:click={handleTitleClick}>
 		{#if !$loading}
-			<h2 class="text-purple-dark">{$t('content.precaution_infos.title')}</h2>
+			<h2
+				class="text-purple-dark select-none
+"
+			>
+				{$t('content.precaution_infos.title')}
+			</h2>
 		{/if}
 	</div>
 	<div
 		class="text-purple-dark absolute top-0 right-0 z-99 flex cursor-pointer items-center justify-end p-4"
 	>
 		{#if !$loading}
-			<select bind:value={$locale} class=" cursor-pointer">
+			<select bind:value={$locale} class=" bg-purple-light cursor-pointer px-1">
 				{#each $locales as value}
 					<option {value}>{$t(`common.languages.${value}`)}</option>
 				{/each}

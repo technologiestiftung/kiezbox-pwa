@@ -83,12 +83,12 @@
       "failed": "Anruf fehlgeschlagen",
       "calling": "Anruf wird aufgebaut...",
       "error": {
-        "button": "Refresh",
+        "button": "Aktualisieren",
         "title": "Fehler",
         "messages": {
           "network": "Sie sind nicht mit dem Kiezbox Notfall WLAN verbunden. Bitte verbinden Sie sich mit dem Netzwerk 'Kiezbox Notfall WLAN' und versuchen Sie es erneut.",
           "audio": "Ihr Gerät unterstützt keine Audioübertragung. Bitte verwenden Sie ein anderes Gerät oder einen anderen Browser.",
-          "captive-portal": "Sie sind in einem Captive Portal. Bitte kopieren sie den Link, schließen Sie das Captive Portal und versuchen Sie es erneut.",
+          "captive-portal": "Derzeit befinden Sie sich im Captive-Portal Ihres Netzwerks. Unsere PWA kann in diesem eingebetteten Browser nicht vollständig geladen werden. Bitte kopieren Sie den folgenden Link, tippen Sie auf den „Aktualisieren“-Button und fügen Sie den Link anschließend in einem normalen Browser (z. B. Chrome, Firefox, Safari) ein, um die Anwendung uneingeschränkt zu nutzen.",
           "server": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später erneut.",
           "unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
         },

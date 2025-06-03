@@ -88,7 +88,7 @@
         "messages": {
           "network": "Kiezbox Acil Wi-Fi ağına bağlı değilsiniz. Lütfen 'Kiezbox Notfall WLAN' ağına bağlanın ve tekrar deneyin.",
           "audio": "Cihazınız ses aktarımını desteklemiyor. Lütfen başka bir cihaz veya tarayıcı kullanın.",
-          "captive-portal": "Bir captive portal içindesiniz. Lütfen bağlantıyı kopyalayın, captive portal’ı kapatın ve tekrar deneyin.",
+          "captive-portal": "Şu anda ağınızın esir portalındalar. PWA'mız bu gömülü tarayıcıya tam olarak yüklenemez. Lütfen aşağıdaki bağlantıyı kopyalayın, \"Güncelleme\" düğmesine dokunun ve ardından uygulamayı kısıtlama olmadan kullanmak için bağlantıyı normal bir tarayıcıya (örn. Chrome, Firefox, Safari) ekleyin.",
           "server": "Sunucu şu anda ulaşılamıyor. Lütfen daha sonra tekrar deneyin.",
           "unknown": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin."
         },

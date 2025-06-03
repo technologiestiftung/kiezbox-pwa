@@ -2,7 +2,7 @@
 	import { t } from '$lib/translations';
 	import { onMount } from 'svelte';
 	import EmergencyCallButton from './EmergencyCallButton.svelte';
-	let { isEmergency, onClick } = $props();
+	let { isEmergency, onClick, showDialer } = $props();
 
 	const observer = new IntersectionObserver(
 		([e]) => e.target.classList.toggle('isSticky', e.intersectionRatio < 1),
@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class={`Dialer-root relative grid max-w-[43.75rem] justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
+	class={`Dialer-root relative grid max-w-[43.75rem] justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'} ${showDialer ? 'block' : 'hidden'}`}
 >
 	<div class=" flex justify-center p-6 md:w-[29rem]">
 		<div class="notruf-container flex flex-col items-start">
@@ -33,11 +33,13 @@
 		</div>
 	</div>
 	<div
-		class={`absolute -bottom-14 z-10 flex h-14 w-full justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
+		class={`absolute -bottom-14 z-10 flex h-14 w-full justify-center ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'} ${showDialer ? 'block' : 'hidden'}`}
 	></div>
 </div>
 
-<div class={`Dialer-button group sticky -top-1 z-10 flex justify-center`}>
+<div
+	class={`Dialer-button group sticky -top-1 z-10 flex justify-center ${showDialer ? 'block' : 'hidden'}`}
+>
 	<div
 		class="w-full px-6 transition-[width] duration-200 ease-out group-[.isSticky]:w-full group-[.isSticky]:p-0 md:w-[29rem]"
 	>
@@ -52,5 +54,5 @@
 	</div>
 </div>
 <div
-	class={`h-8 w-full shadow-[inset_0_-4px_6px_-5px_rgba(0,0,0,0.2)] ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'}`}
+	class={`h-8 w-full shadow-[inset_0_-4px_6px_-5px_rgba(0,0,0,0.2)] ${isEmergency ? 'bg-notruf-light' : 'bg-purple-light'} ${showDialer ? 'block' : 'hidden'}`}
 ></div>

@@ -145,9 +145,7 @@
 {#if !showDialer}
 	<DialerError errorMessage={NetworkStore.errorMessage} onClick={onDone} />
 {/if}
-<div class={showDialer ? 'block' : 'hidden'}>
-	<Dialer {isEmergency} onClick={openCaller}></Dialer>
-</div>
+<Dialer {isEmergency} onClick={openCaller} {showDialer}></Dialer>
 
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled}>
 	{#snippet children()}
