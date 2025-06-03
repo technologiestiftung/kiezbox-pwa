@@ -88,7 +88,7 @@
         "messages": {
           "network": "You are not connected to the Kiezbox emergency Wi-Fi. Please connect to the 'Kiezbox Notfall WLAN' network and try again.",
           "audio": "Your device does not support audio transmission. Please use a different device or browser.",
-          "captive-portal": "You are in a captive portal. Please copy the link, close the captive portal, and try again.",
+          "captive-portal": "They are currently in the captive portal of your network. \nOur PWA cannot be fully loaded in this embedded browser. \nPlease copy the following link, tap the \"Update\" button and then insert the link in a normal browser (e.g. Chrome, Firefox, Safari) to use the application without restriction.",
           "server": "The server is currently unavailable. Please try again later.",
           "unknown": "An unknown error occurred. Please try again later."
         },

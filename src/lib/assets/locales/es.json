@@ -88,7 +88,7 @@
         "messages": {
           "network": "No está conectado a la red Wi-Fi de emergencia Kiezbox. Por favor, conéctese a la red 'Kiezbox Notfall WLAN' e inténtelo de nuevo.",
           "audio": "Su dispositivo no admite transmisión de audio. Por favor, use otro dispositivo o navegador.",
-          "captive-portal": "Está en un portal cautivo. Por favor, copie el enlace, cierre el portal cautivo e inténtelo de nuevo.",
+          "captive-portal": "Actualmente se encuentran en el portal cautivo de su red. Nuestro PWA no se puede cargar completamente en este navegador incrustado. Copie el siguiente enlace, toque el botón \"Actualizar\" y luego inserte el enlace en un navegador normal (por ejemplo, Chrome, Firefox, Safari) para usar la aplicación sin restricción.",
           "server": "El servidor no está disponible actualmente. Por favor, inténtelo de nuevo más tarde.",
           "unknown": "Se produjo un error desconocido. Por favor, inténtelo de nuevo más tarde."
         },
