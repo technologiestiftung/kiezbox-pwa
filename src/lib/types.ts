@@ -3,6 +3,7 @@ import type { Component } from 'svelte';
 import type { CallState } from './enums';
 import type { RegistererState } from 'sip.js';
 import { ApiStatus } from './enums';
+import type { LngLatLike } from 'maplibre-gl';
 
 export interface TabItem {
 	title: string;
@@ -14,6 +15,7 @@ export interface TabItem {
 export interface Mode {
 	status: number;
 	isEmergency: boolean;
+	coordinates: LngLatLike;
 }
 
 export interface InfoBoxItem {

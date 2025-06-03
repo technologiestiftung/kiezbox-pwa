@@ -20,7 +20,7 @@ export interface LayerConfig {
 export const BASE_LAYER_CONFIG: LayerConfig[] = [
 	{
 		id: 'osm-local-layer',
-		label: 'OSM Local',
+		label: 'map.legend.layers.osm-local-layer',
 		alt: 'OpenStreetMap Local',
 		type: 'raster',
 		source: 'osmLocal',
@@ -38,7 +38,7 @@ export const BASE_LAYER_CONFIG: LayerConfig[] = [
 export const LAYER_CONFIG: LayerConfig[] = [
 	{
 		id: 'drinking-water-layer',
-		label: 'Trinkwasser',
+		label: 'map.legend.layers.drinking-water-layer',
 		icon: '/icons/drinking-water.svg',
 		alt: 'Trinkwasser Icon',
 		type: 'symbol',
@@ -54,7 +54,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 	},
 	{
 		id: 'water-pumps-layer',
-		label: 'Wasserpumpe',
+		label: 'map.legend.layers.water-pumps-layer',
 		icon: '/icons/water-pump.svg',
 		alt: 'Wasserpumpe Icon',
 		type: 'symbol',
@@ -72,7 +72,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 	},
 	{
 		id: 'toilets-layer',
-		label: 'Öffentliche Toilette',
+		label: 'map.legend.layers.toilets-layer',
 		icon: '/icons/toilet.svg',
 		alt: 'Toiletten Icon',
 		type: 'symbol',
@@ -91,7 +91,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 	},
 	{
 		id: 'defies-layer',
-		label: 'Defibrillatoren',
+		label: 'map.legend.layers.defies-layer',
 		icon: '/icons/defie.svg',
 		alt: 'Defibrillator Icon',
 		type: 'symbol',

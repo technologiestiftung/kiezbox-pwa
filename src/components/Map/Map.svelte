@@ -9,6 +9,8 @@
 	import { onMount } from 'svelte';
 	import Legend from './Legend.svelte';
 	import PopupCard from './PopupCard.svelte';
+	import { apiFetch } from '$lib/api';
+	import { NetworkStore } from '$lib/state/networkState.svelte';
 
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let map: maplibregl.Map;
@@ -16,7 +18,8 @@
 	onMount(() => {
 		if (!mapContainer) return;
 		const baseUrl = window.location.origin;
-
+		const coordinates = NetworkStore.coordinates ?? [13.342502830765682, 52.48863888739753];
+		console.log('Map coordinates:', coordinates);
 		map = new maplibregl.Map({
 			container: mapContainer,
 			style: {
@@ -32,8 +35,8 @@
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},
-			center: [13.404954, 52.520008],
-			zoom: 10,
+			center: coordinates,
+			zoom: 14,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
 		});

@@ -5,11 +5,7 @@
 	import Header from '../components/Header.svelte';
 	import Map from '../components/Map/Map.svelte';
 	import PrecautionGuide from '../components/PrecautionGuide/PrecautionGuide.svelte';
-	import {
-		cleanupNetworkService,
-		initNetworkService,
-		NetworkStore
-	} from '$lib/state/networkState.svelte';
+	import { cleanupNetworkService, initNetworkService } from '$lib/state/networkState.svelte';
 
 	onMount(async () => {
 		await initNetworkService();

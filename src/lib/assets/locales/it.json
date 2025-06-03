@@ -1,0 +1,325 @@
+{
+  "common": {
+    "languages": {
+      "de": "DE",
+      "en": "EN",
+      "fr": "FR",
+      "tr": "TR",
+      "es": "ES",
+      "it": "IT"
+    },
+    "header": {
+      "title": "Portale Informazioni"
+    },
+    "button": {
+      "close": "Chiudi",
+      "mute": "Silenzia",
+      "unmute": "Riattiva audio",
+      "speaker": "Altoparlante"
+    },
+    "footer": {
+      "imprint": {
+        "text": "Note legali",
+        "href": "https://www.technologiestiftung-berlin.de/impressum/"
+      },
+      "privacy": {
+        "text": "Informativa sulla privacy",
+        "href": "https://www.technologiestiftung-berlin.de/datenschutz/"
+      },
+      "initiatve_by": "Un’iniziativa di:",
+      "created_by": "Realizzato da:",
+      "funded_by": "Finanziato da:",
+      "acknowledgement": "Illustrazione immagine chiave: L. Hoff, aufsiemitgebrüll.de",
+      "copyright": {
+        "text": "© 2025 Technologiestiftung Berlin",
+        "href": "https://www.technologiestiftung-berlin.de"
+      }
+    },
+    "modes": {
+      "emergency": {
+        "title": "Chiamata d’emergenza",
+        "description": "Qui puoi effettuare una chiamata d’emergenza."
+      },
+      "demo": {
+        "title": "Demo chiamata d’emergenza",
+        "description": "Qui puoi avviare la demo della chiamata d’emergenza."
+      }
+    },
+    "status": {
+      "calling": "Chiamata in corso...",
+      "online": "Online",
+      "offline": "Offline",
+      "error": "Errore",
+      "invalid_network": "Rete non valida",
+      "connecting": "Connessione...",
+      "connected": "Connesso",
+      "disconnecting": "Disconnessione...",
+      "disconnected": "Disconnesso",
+      "reconnecting": "Riconnessione...",
+      "reconnected": "Riconnesso",
+      "connection_failed": "Connessione fallita",
+      "dialing": "Composizione...",
+      "call_established": "Chiamata attiva",
+      "ending_call": "Terminazione chiamata...",
+      "call_failed": "Chiamata fallita",
+      "call_ended": "Chiamata terminata",
+      "call_timeout": "Timeout chiamata",
+      "call_terminated": "Chiamata interrotta",
+      "call_not_answered": "Chiamata non risposta",
+      "call_rejected": "Chiamata rifiutata",
+      "ready": "Pronto"
+    }
+  },
+  "content": {
+    "emergency_phone": {
+      "title": "Qui per voi anche in una crisi",
+      "text": "Testa qui la nostra chiamata dimostrativa, che funziona anche quando nulla funziona.",
+      "inactive": "Avvia chiamata d’emergenza",
+      "active": "Termina chiamata d’emergenza",
+      "rejected": "Chiamata rifiutata",
+      "incoming": "Chiamata in arrivo...",
+      "call": "Avvia chiamata d’emergenza",
+      "callDemo": "Avvia demo chiamata d’emergenza",
+      "failed": "Chiamata fallita",
+      "calling": "Chiamata in corso...",
+      "error": {
+        "button": "Rinfrescare",
+        "title": "Errore",
+        "messages": {
+          "network": "Non sei connesso alla rete Wi-Fi di emergenza Kiezbox. Per favore connettiti alla rete “Kiezbox Notfall WLAN” e riprova.",
+          "audio": "Il tuo dispositivo non supporta la trasmissione audio. Per favore usa un altro dispositivo o browser.",
+          "captive-portal": "Sei in un captive portal. Per favore copia il link, chiudi il captive portal e riprova.",
+          "server": "Il server non è disponibile in questo momento. Per favore riprova più tardi.",
+          "unknown": "Si è verificato un errore sconosciuto. Per favore riprova più tardi."
+        },
+        "copy_link": "Copia link"
+      },
+      "default": {
+        "phone_button": "Vai alla demo chiamata d’emergenza",
+        "incoming_call": "Chiamata in arrivo",
+        "offline": {
+          "text": "In caso di crisi, puoi inviare qui una chiamata d’emergenza se, ad esempio, non puoi effettuare chiamate a causa di un blackout. Questo verrà automaticamente instradato ai Vigili del Fuoco di Berlino. Con la nostra <strong>chiamata dimostrativa</strong> puoi già esercitarti con le 5 domande che dovresti avere sempre pronte quando parli con i servizi di emergenza."
+        },
+        "online": {
+          "text": "Ora sei connesso alla demo chiamata dei Vigili del Fuoco di Berlino. I vigili del fuoco ti guideranno nella conversazione nel modo seguente:"
+        },
+        "questions": {
+          "1": {
+            "text": "<strong>1. Dove</strong> si trova l’evento?",
+            "description": "Fornisci il luogo dell'evento nel modo più preciso possibile (ad esempio nome del comune o del quartiere, nome della strada, numero civico, ecc.)."
+          },
+          "2": {
+            "text": "<strong>2. Chi</strong> sta chiamando?",
+            "description": "Dichiara il tuo nome, la tua posizione e il tuo numero di telefono per eventuali richieste di chiarimenti!"
+          },
+          "3": {
+            "text": "<strong>3. Cosa</strong> è successo?",
+            "description": "Descrivi brevemente l'evento e ciò che vedi concretamente (cosa è successo? cosa si vede?), ad esempio incidente stradale, caduta, incendio, esplosione, crollo, persona incastrata!"
+          },
+          "4": {
+            "text": "<strong>4. Quanti</strong> sono coinvolti?",
+            "description": "Stima il numero di persone coinvolte, la loro condizione e le ferite! Indica, per i bambini, anche l'età – eventualmente stimata!"
+          },
+          "5": {
+            "text": "<strong>5. Attendi</strong> per eventuali domande!",
+            "description": "Non riattaccare immediatamente; il personale del centro di coordinamento integrato potrebbe aver bisogno di ulteriori informazioni da te!"
+          },
+          "title": "Tieni a mente le 5 domande “W”:"
+        }
+      },
+      "emergency": {
+        "phone_button": "Alla chiamata d’emergenza",
+        "default": {
+          "caller_id": "ID: ",
+          "call_state": "Stato: "
+        },
+        "offline": {
+          "text": "Ora puoi inviare una chiamata d’emergenza ai Vigili del Fuoco di Berlino. Tieni presente che si tratta di una vera chiamata d’emergenza. L’abuso è punibile!"
+        },
+        "connecting": {
+          "text": "Ora sarai connesso ai Vigili del Fuoco di Berlino, ti preghiamo di prestare attenzione alle seguenti domande:"
+        },
+        "online": {
+          "text": "Ora sarai connesso ai Vigili del Fuoco di Berlino, ti preghiamo di prestare attenzione alle seguenti domande:"
+        }
+      },
+      "initializing": "La connessione viene creata ..."
+    },
+    "precaution_infos": {
+      "title": "Prevenzione e Misure",
+      "personal_precautions": {
+        "1": {
+          "title": "Cibo e Bere",
+          "text": "Consigliamo una scorta di cibo di almeno 3 giorni per persona. Inoltre dovresti pianificare almeno 1,5 l di acqua potabile e 0,5 l di acqua al giorno per cucinare e per l’igiene.",
+          "links": {
+            "1": {
+              "text": "Calcolatore scorte del Governo",
+              "href": "https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat/vorratskalkulator"
+            }
+          }
+        },
+        "2": {
+          "title": "Zaino di emergenza",
+          "text": "Pianifica in anticipo e prepara uno zaino di emergenza con le cose più importanti. Uno zaino è meglio di una valigia per tenere le mani libere in caso di emergenza.",
+          "links": {
+            "1": {
+              "text": "Lista di imballaggio del BBK",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Igiene e Medicinali",
+          "text": "Con un uso parsimonioso dell’acqua e una farmacia domestica ben fornita, è possibile garantire autonomamente igiene salutare e primo soccorso.",
+          "links": {
+            "1": {
+              "text": "Info sulla farmacia domestica del BBK",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hausapotheke/hausapotheke_node.html"
+            },
+            "2": {
+              "text": "Consigli di igiene del BBK",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hygiene/hygiene_node.html"
+            }
+          }
+        },
+        "title": "Precauzioni personali"
+      },
+      "fire": {
+        "1": {
+          "title": "Precauzioni per il rischio di incendio",
+          "text": "Il rischio di incendio può essere significativamente ridotto occupandosi correttamente di candele, materiali infiammabili, rilevatori di fumo e estintori.",
+          "links": {
+            "1": {
+              "text": "Maggiori info sulle precauzioni personali",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-vorsorgen_dossier1.html"
+            }
+          }
+        },
+        "2": {
+          "title": "Cosa fare in caso di incendio?",
+          "text": "Se possibile, spegni l’incendio sul nascere. In caso di insuccesso: chiama il 112! Spegni solo se non c’è pericolo o mettiti al sicuro.",
+          "links": {
+            "1": {
+              "text": "Regole di comportamento in caso di incendio",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-verhalten_dossier2.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Dopo l’incendio",
+          "text": "Entra nell’edificio solo se è stato dichiarato libero dai Vigili del Fuoco. Potrebbe esserci rischio di crollo. Dopo il via libera, fai un inventario e fotografa i danni come prova per l’assicurazione."
+        },
+        "title": "Incendio"
+      },
+      "flood": {
+        "1": {
+          "title": "In generale:",
+          "text": "Presta attenzione alle informazioni delle autorità locali di protezione civile e supporta le squadre in loco seguendo le loro istruzioni e stando lontano da aree pericolose o già transennate."
+        },
+        "2": {
+          "title": "Precauzioni per l’alluvione",
+          "text": "Evacua le persone bisognose di aiuto, i bambini e gli animali domestici. E informati tramite il Centro Alluvioni delle regioni per informazioni aggiornate.",
+          "links": {
+            "1": {
+              "text": "Centro Alluvioni",
+              "href": "https://www.hochwasserzentralen.de/"
+            }
+          }
+        },
+        "3": {
+          "title": "Cosa fare in caso di alluvione?",
+          "text": "La cantina o il garage possono diventare pericolosi per la vita. Ci sono regole diverse da seguire in casa e in auto.",
+          "links": {
+            "1": {
+              "text": "Regole di comportamento in caso di alluvione",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hochwasser/_documents/hochwasser-verhalten_dossier2.html?nn=20590"
+            }
+          }
+        },
+        "title": "Alluvione"
+      },
+      "storm": {
+        "1": {
+          "title": "Precauzioni in caso di maltempo",
+          "text": "Preparati per il maltempo in anticipo avendo a disposizione cibo, acqua, borsa per documenti e kit di emergenza.",
+          "links": {
+            "1": {
+              "text": "Maggiori info sulle precauzioni personali",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-vorsorgen_dossier1.html?nn=20592"
+            }
+          }
+        },
+        "2": {
+          "title": "Cosa fare in caso di maltempo?",
+          "text": "Ancorare gli oggetti, chiudere le finestre, evitare il metallo: a seconda del luogo ci sono regole diverse. Ma la regola d’oro è: restare a casa.",
+          "links": {
+            "1": {
+              "text": "Regole di comportamento in caso di maltempo",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-verhalten_dossier2.html?nn=20592"
+            }
+          }
+        },
+        "3": {
+          "title": "Dopo il maltempo",
+          "text": "Il maltempo può causare danni al tetto, inondazioni, fuoriuscita di sostanze pericolose e ferire persone. A seconda del tipo di maltempo, si devono seguire consigli diversi.",
+          "links": {
+            "1": {
+              "text": "Comportamento dopo il maltempo",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-danach_dossier3.html?nn=20592"
+            }
+          }
+        },
+        "title": "Maltempo"
+      },
+      "cbrn": {
+        "1": {
+          "title": "Le diverse sostanze pericolose",
+          "text": "Un profano generalmente non può riconoscere la pericolosità di sostanze chimiche (C), biologiche (B), radiologiche (R) e nucleari (N).",
+          "links": {
+            "1": {
+              "text": "Effetti sulla pelle e sul corpo",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Gefahrstoff-Freisetzung/_documents/gefahrstoff-unterschiede_dossier1.html?nn=20588"
+            }
+          }
+        },
+        "2": {
+          "title": "Comportamento in caso di rilascio di sostanze pericolose",
+          "text": "Contatta il centro antiveleni locale. Antiveleni della Charité Universitätsmedizin Berlin: 030 192 40"
+        },
+        "3": {
+          "title": "Comportamento a casa",
+          "list": {
+            "1": "Rimani all’interno, chiudi finestre e porte",
+            "2": "Spegni ventilatori e sistemi di ventilazione",
+            "3": "Evita il consumo inutile di ossigeno con candele o simili.",
+            "4": "In caso di sostanze radioattive: cerca una stanza nel seminterrato"
+          }
+        },
+        "4": {
+          "title": "Comportamento in auto o all’aperto",
+          "list": {
+            "1": "Muoviti possibilmente perpendicolarmente alla direzione del vento",
+            "2": "Respira possibilmente con un respiratore, almeno con un fazzoletto",
+            "3": "Lava mani, viso e capelli, nonché naso e orecchie con acqua e sapone.",
+            "4": "In caso di sostanze biologiche: disinfetta anche le mani"
+          }
+        },
+        "title": "Sostanze pericolose CBRN"
+      }
+    }
+  },
+  "map": {
+    "legend": {
+      "title": "Legenda",
+      "button_open": "Apri legenda",
+      "button_close": "Chiudi legenda",
+      "layers": {
+        "drinking-water-layer": "Acqua potabile",
+        "water-pumps-layer": "Pompa d’acqua",
+        "toilets-layer": "Toilette pubblica",
+        "defies-layer": "Defibrillatori",
+        "osm-local-layer": "OSM locale"
+      }
+    }
+  }
+}

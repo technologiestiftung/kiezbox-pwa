@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Copy from 'carbon-icons-svelte/lib/Copy.svelte';
 	import { t } from '$lib/translations';
 	let { errorMessage, onClick } = $props();
 
@@ -30,9 +31,17 @@
 				>
 					https://emergency.ds-apps.tsb-berlin.de/
 				</a>
+				<button
+					class="text-body-black dark:text-body-black cursor-pointer hover:underline"
+					onclick={(e) => {
+						copyToClipboard();
+					}}
+				>
+					<Copy />
+				</button>
 			</div>
 			<button
-				class="bg-notruf-rot hover:bg-notruf-rot mt-4 w-full rounded px-4 py-2 text-white dark:text-white"
+				class="bg-notruf-rot hover:bg-notruf-rot mt-4 w-full cursor-pointer rounded px-4 py-2 text-white dark:text-white"
 				onclick={onClick}
 			>
 				{$t('content.emergency_phone.error.button')}

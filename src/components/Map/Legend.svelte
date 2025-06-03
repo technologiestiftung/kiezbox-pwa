@@ -8,6 +8,7 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { layerState } from '$lib/state/layerState.svelte';
+	import { t } from '$lib/translations';
 
 	let isOpen = $state(false);
 
@@ -27,7 +28,7 @@
 				on:click={toggleIsOpen}
 			>
 				<p class="text-purple-dark body-large-bold text-center">
-					{isOpen ? 'Legende schließen' : 'Legende öffnen'}
+					{!isOpen ? $t('map.legend.button_open') : $t('map.legend.button_close')}
 				</p>
 			</AccordionTrigger>
 			<AccordionContent>
@@ -36,7 +37,7 @@
 						<li class="body-large flex items-center justify-between gap-2">
 							<div class="flex items-center gap-4">
 								<img src={layer.icon} alt={layer.alt} />
-								<label for={layer.id}>{layer.label}</label>
+								<label for={layer.id}>{$t(layer.label)}</label>
 							</div>
 							<Checkbox
 								class="cursor-pointer"
