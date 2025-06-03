@@ -1,0 +1,52 @@
+<script lang="ts">
+	import Copy from 'carbon-icons-svelte/lib/Copy.svelte';
+	import { t } from '$lib/translations';
+	let { errorMessage, onClick } = $props();
+
+	function copyToClipboard() {
+		const url = 'https://emergency.ds-apps.tsb-berlin.de/';
+		navigator.clipboard.writeText(url);
+	}
+
+	///
+</script>
+
+<div class={`Dialer-root bg-notruf-light relative grid max-w-[43.75rem] justify-center`}>
+	<div class=" flex justify-center p-6 md:w-[29rem]">
+		<div class="notruf-container flex flex-col items-start gap-2">
+			<span class="body-large-bold text-error">
+				{$t('content.emergency_phone.error.title')}
+			</span>
+			<span class="body-text text-error">
+				{$t('content.emergency_phone.error.messages.' + errorMessage)}
+			</span>
+			<div class="flex items-center gap-4">
+				<a
+					href="https://emergency.ds-apps.tsb-berlin.de/"
+					target="_blank"
+					class="text-body-black dark:text-body-black flex items-center hover:underline"
+					onclick={(e) => {
+						copyToClipboard();
+					}}
+				>
+					https://emergency.ds-apps.tsb-berlin.de/
+				</a>
+				<button
+					class="text-body-black dark:text-body-black cursor-pointer hover:underline"
+					onclick={(e) => {
+						copyToClipboard();
+					}}
+				>
+					<Copy />
+				</button>
+			</div>
+			<button
+				class="bg-notruf-rot hover:bg-notruf-rot mt-4 w-full cursor-pointer rounded px-4 py-2 text-white dark:text-white"
+				onclick={onClick}
+			>
+				{$t('content.emergency_phone.error.button')}
+			</button>
+		</div>
+	</div>
+	<div class={`absolute -bottom-14 z-10 flex h-14 w-full justify-center`}></div>
+</div>

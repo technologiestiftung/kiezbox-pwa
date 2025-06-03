@@ -24,6 +24,7 @@
 	--color-grey-light: var(--grey-light);
 	--color-black: var(var(--black));
 	--color-white: var(--white);
+	--color-error: var(--error);
 	--color-purple-dark: var(--purple-dark);
 	--color-purple-mid: var(--purple-mid);
 	--color-purple-light: var(--purple-light);
@@ -84,6 +85,7 @@
 		--icon-trinkwasser: #5d508b;
 		--icon-defi: #ca021d;
 		--icon-wasserpumpen: #e0ca00;
+		--error: #ff4b4b;
 
 		/* needed for shadcn */
 		--background: var(--color-neutral-50);

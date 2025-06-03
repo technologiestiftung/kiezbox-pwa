@@ -1,0 +1,325 @@
+{
+  "common": {
+    "languages": {
+      "de": "DE",
+      "en": "EN",
+      "fr": "FR",
+      "tr": "TR",
+      "es": "ES",
+      "it": "IT"
+    },
+    "header": {
+      "title": "Bilgi Portalı"
+    },
+    "button": {
+      "close": "Kapat",
+      "mute": "Sessize al",
+      "unmute": "Sesi aç",
+      "speaker": "Hoparlör"
+    },
+    "footer": {
+      "imprint": {
+        "text": "Yasal Bilgiler",
+        "href": "https://www.technologiestiftung-berlin.de/impressum/"
+      },
+      "privacy": {
+        "text": "Gizlilik Politikası",
+        "href": "https://www.technologiestiftung-berlin.de/datenschutz/"
+      },
+      "initiatve_by": "Bir girişim:",
+      "created_by": "Uygulayan:",
+      "funded_by": "Tarafından finanse edildi:",
+      "acknowledgement": "İllüstrasyon Ana Görsel: L. Hoff, aufsiemitgebrüll.de",
+      "copyright": {
+        "text": "© 2025 Technologiestiftung Berlin",
+        "href": "https://www.technologiestiftung-berlin.de"
+      }
+    },
+    "modes": {
+      "emergency": {
+        "title": "Acil Çağrı",
+        "description": "Buradan acil çağrı yapabilirsiniz."
+      },
+      "demo": {
+        "title": "Acil Çağrı Demosu",
+        "description": "Buradan acil çağrı demosunu başlatabilirsiniz."
+      }
+    },
+    "status": {
+      "calling": "Arama hazırlanıyor...",
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı",
+      "error": "Hata",
+      "invalid_network": "Geçersiz ağ",
+      "connecting": "Bağlanılıyor...",
+      "connected": "Bağlandı",
+      "disconnecting": "Bağlantı kesiliyor...",
+      "disconnected": "Bağlantı kesildi",
+      "reconnecting": "Yeniden bağlanılıyor...",
+      "reconnected": "Yeniden bağlandı",
+      "connection_failed": "Bağlantı başarısız oldu",
+      "dialing": "...",
+      "call_established": "Arama aktif",
+      "ending_call": "Arama sonlandırılıyor...",
+      "call_failed": "Arama başarısız oldu",
+      "call_ended": "Arama sona erdi",
+      "call_timeout": "Arama zaman aşımı",
+      "call_terminated": "Arama iptal edildi",
+      "call_not_answered": "Arama yanıtlanmadı",
+      "call_rejected": "Arama reddedildi",
+      "ready": "Hazır"
+    }
+  },
+  "content": {
+    "emergency_phone": {
+      "title": "Krizde de yanınızdayız",
+      "text": "Burada her şey başarısız olsa bile çalışan demo acil çağrımızı test edin.",
+      "inactive": "Acil çağrıyı başlat",
+      "active": "Acil çağrıyı sonlandır",
+      "rejected": "Arama reddedildi",
+      "incoming": "Gelen arama...",
+      "call": "Acil çağrıyı başlat",
+      "callDemo": "Acil çağrı demosunu başlat",
+      "failed": "Arama başarısız oldu",
+      "calling": "Arama hazırlanıyor...",
+      "error": {
+        "button": "Yenilemek",
+        "title": "Hata",
+        "messages": {
+          "network": "Kiezbox Acil Wi-Fi ağına bağlı değilsiniz. Lütfen 'Kiezbox Notfall WLAN' ağına bağlanın ve tekrar deneyin.",
+          "audio": "Cihazınız ses aktarımını desteklemiyor. Lütfen başka bir cihaz veya tarayıcı kullanın.",
+          "captive-portal": "Bir captive portal içindesiniz. Lütfen bağlantıyı kopyalayın, captive portal’ı kapatın ve tekrar deneyin.",
+          "server": "Sunucu şu anda ulaşılamıyor. Lütfen daha sonra tekrar deneyin.",
+          "unknown": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+        },
+        "copy_link": "Kopyala bağlantısı"
+      },
+      "default": {
+        "phone_button": "Demo acil çağrıya git",
+        "incoming_call": "Gelen arama",
+        "offline": {
+          "text": "Bir kriz durumunda, örneğin elektrik kesintisi nedeniyle başka hiçbir çağrı yapamıyorsanız, buradan acil çağrı gönderebilirsiniz. Bu, Berlin İtfaiyesi tarafından otomatik olarak etkinleştirilecektir. <strong>Demo çağrımız</strong> ile acil çağrı sırasında her zaman hazır bulundurmanız gereken 5 W sorularını şimdiden pratik edebilirsiniz."
+        },
+        "online": {
+          "text": "Şimdi Berlin İtfaiyesi’nin demo acil çağrısı ile bağlantıdasınız. İtfaiye sizi konuşma boyunca şu şekilde yönlendirecektir:"
+        },
+        "questions": {
+          "1": {
+            "text": "<strong>1. Olay nerede</strong>?",
+            "description": "Olayın yerini mümkün olduğunca ayrıntılı belirtin (örneğin, belediye veya mahalle adı, sokak adı, ev numarası, vb.)."
+          },
+          "2": {
+            "text": "<strong>2. Kim</strong> arıyor?",
+            "description": "Adınızı, konumunuzu ve geri arama için telefon numaranızı söyleyin!"
+          },
+          "3": {
+            "text": "<strong>3. Ne</strong> oldu?",
+            "description": "Olayı ve tam olarak ne gördüğünüzü kısaca tanımlayın (neler oldu? ne görünüyor?), örneğin trafik kazası, düşme, yangın, patlama, çökme, sıkışmış kişi!"
+          },
+          "4": {
+            "text": "<strong>4. Kaç kişi</strong> etkilenmiş?",
+            "description": "Etkilenen kişi sayısını, durumlarını ve yaralanmaları tahmin edin! Çocuklar için ayrıca — gerekirse tahmini — yaşlarını belirtin!"
+          },
+          "5": {
+            "text": "<strong>5. Geri arama için bekleyin</strong>!",
+            "description": "Hemen kapatmayın; Entegre Komuta Merkezi personeli sizden belki ek bilgi isteyebilir!"
+          },
+          "title": "5 W sorularını unutmayın:"
+        }
+      },
+      "emergency": {
+        "phone_button": "Acil çağrıya git",
+        "default": {
+          "caller_id": "ID: ",
+          "call_state": "Durum: "
+        },
+        "offline": {
+          "text": "Şimdi Berlin İtfaiyesi’ne bir acil çağrı gönderebilirsiniz. Lütfen bunun gerçek bir acil çağrı olduğunu unutmayın. Suistimal cezalandırılır!"
+        },
+        "connecting": {
+          "text": "Şimdi Berlin İtfaiyesi ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"
+        },
+        "online": {
+          "text": "Şimdi Berlin İtfaiyesi ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"
+        }
+      },
+      "initializing": "Bağlantı oluşturuldu ..."
+    },
+    "precaution_infos": {
+      "title": "Önleme ve Önlemler",
+      "personal_precautions": {
+        "1": {
+          "title": "Yemek ve İçmek",
+          "text": "Kişi başı en az 3 günlük yiyecek stoğu öneriyoruz. Ayrıca yemek yapmak ve hijyen için günde en az 1,5 l içme suyu ve 0,5 l su planlamalısınız.",
+          "links": {
+            "1": {
+              "text": "Federal stok hesaplayıcısı",
+              "href": "https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat/vorratskalkulator"
+            }
+          }
+        },
+        "2": {
+          "title": "Acil Çanta",
+          "text": "Önceden plan yapın ve en önemli eşyaları içeren bir acil çanta hazırlayın. Sırt çantası, acil durumda ellerinizi serbest tutmak için bavuldan daha iyidir.",
+          "links": {
+            "1": {
+              "text": "BBK paket listesi",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Hijyen ve İlaçlar",
+          "text": "Su kullanımı konusunda tasarruflu davranarak ve iyi düzenlenmiş bir ev ilaç dolabı ile sağlık destekli hijyen ve ilk yardım kendi başınıza sağlanabilir.",
+          "links": {
+            "1": {
+              "text": "BBK ev ilaç dolabı bilgisi",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hausapotheke/hausapotheke_node.html"
+            },
+            "2": {
+              "text": "BBK hijyen ipuçları",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hygiene/hygiene_node.html"
+            }
+          }
+        },
+        "title": "Kişisel Önlemler"
+      },
+      "fire": {
+        "1": {
+          "title": "Yangın Durumunda Önlemler",
+          "text": "Mumlar, yanıcı malzemeler, duman dedektörleri ve söndürücü cihazlarla doğru şekilde ilgilenerek yangın tehlikesi önemli ölçüde azaltılabilir.",
+          "links": {
+            "1": {
+              "text": "Kişisel Önlemler hakkında daha fazla bilgi",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-vorsorgen_dossier1.html"
+            }
+          }
+        },
+        "2": {
+          "title": "Yangın çıkarsa ne yapmalı?",
+          "text": "Mümkünse yangını başlar başlamaz söndürün. Başarısız olursa: 112’yi arayın! Tehlike yoksa söndürün veya kendinizi güvenliğe taşıyın.",
+          "links": {
+            "1": {
+              "text": "Yangın durumunda davranış kuralları",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-verhalten_dossier2.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Yangından Sonra",
+          "text": "Binaya yalnızca itfaiye izin verdiğinde girin. Çökme riski olabilir. İzin verildikten sonra durum tespiti yapın ve sigorta için kanıt olarak hasarları fotoğraflayın."
+        },
+        "title": "Yangın"
+      },
+      "flood": {
+        "1": {
+          "title": "Genel olarak:",
+          "text": "Yerel afet yönetim yetkililerinin bilgilerine dikkat edin ve talimatlarını uygulayarak, tehlikeli veya zaten kapatılmış alanlardan uzak durarak sahadaki ekipleri destekleyin."
+        },
+        "2": {
+          "title": "Sel için önlemler",
+          "text": "Yardıma muhtaçları, çocukları ve evcil hayvanları tahliye edin. Güncel bilgiler için eyaletlerin sel bilgi merkezlerini takip edin.",
+          "links": {
+            "1": {
+              "text": "Sel Bilgi Merkezi",
+              "href": "https://www.hochwasserzentralen.de/"
+            }
+          }
+        },
+        "3": {
+          "title": "Sel durumunda ne yapmalı?",
+          "text": "Bodrum veya otopark hayatı tehdit edebilir. Evde ve araçta farklı davranış kuralları uygulanır.",
+          "links": {
+            "1": {
+              "text": "Sel durumunda davranış kuralları",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hochwasser/_documents/hochwasser-verhalten_dossier2.html?nn=20590"
+            }
+          }
+        },
+        "title": "Sel"
+      },
+      "storm": {
+        "1": {
+          "title": "Şiddetli Hava Durumuna Karşı Önlemler",
+          "text": "Yeterli yiyecek, su, belge çantası ve acil durum çantanızı hazır bulundurarak şiddetli hava durumuna önceden hazırlanın.",
+          "links": {
+            "1": {
+              "text": "Kişisel Önlemler hakkında daha fazla bilgi",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-vorsorgen_dossier1.html?nn=20592"
+            }
+          }
+        },
+        "2": {
+          "title": "Şiddetli hava durumunda ne yapmalı?",
+          "text": "Eşyaları sabitleyin, pencereleri kapatın, metalden kaçının: bulunduğunuz yere bağlı olarak farklı davranış kuralları geçerlidir. Ancak altın kural: evde kalın.",
+          "links": {
+            "1": {
+              "text": "Şiddetli hava durumunda davranış kuralları",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-verhalten_dossier2.html?nn=20592"
+            }
+          }
+        },
+        "3": {
+          "title": "Şiddetli hava durumundan sonra",
+          "text": "Şiddetli hava durumu çatı hasarlarına, su baskınlarına, tehlikeli maddelerin sızmasına ve kişilerin yaralanmasına yol açabilir. Hava durumunun türüne bağlı olarak farklı önerilere dikkat edilmelidir.",
+          "links": {
+            "1": {
+              "text": "Şiddetli hava durumundan sonra davranış",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-danach_dossier3.html?nn=20592"
+            }
+          }
+        },
+        "title": "Şiddetli Hava Durumu"
+      },
+      "cbrn": {
+        "1": {
+          "title": "Farklı Tehlikeli Maddeler",
+          "text": "Bir acemi genellikle kimyasal (C), biyolojik (B), radyolojik (R) ve nükleer (N) tehlikeli maddelerin tehlikesini fark edemez.",
+          "links": {
+            "1": {
+              "text": "Ten ve vücut üzerindeki etkiler",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Gefahrstoff-Freisetzung/_documents/gefahrstoff-unterschiede_dossier1.html?nn=20588"
+            }
+          }
+        },
+        "2": {
+          "title": "Tehlikeli Madde Salımı Durumunda Davranış",
+          "text": "Yerel Zehir Danışma Merkezi ile iletişime geçin. Charité Üniversite Tıbbı Berlin Zehir Danışma Hattı: 030 192 40"
+        },
+        "3": {
+          "title": "Evde Davranış",
+          "list": {
+            "1": "Binada kalın, pencereleri ve kapıları kapatın",
+            "2": "Fanları ve havalandırmayı kapatın",
+            "3": "Mum veya benzeri ile gereksiz oksijen tüketiminden kaçının",
+            "4": "Radyoaktif maddeler durumunda: bir bodrum odasına geçin"
+          }
+        },
+        "4": {
+          "title": "Araçta veya Açık Alanda Davranış",
+          "list": {
+            "1": "Mümkün olduğunca rüzgar yönüne dik hareket edin",
+            "2": "Mümkünse bir maskeyle, en azından bir mendille soluyun",
+            "3": "Ellerinizi, yüzünüzü ve saçınızı, ayrıca burun ve kulaklarınızı su ve sabunla yıkayın",
+            "4": "Biyolojik maddeler durumunda: ellerinizi ayrıca dezenfekte edin"
+          }
+        },
+        "title": "CBRN Tehlikeli Maddeler"
+      }
+    }
+  },
+  "map": {
+    "legend": {
+      "title": "Lejant",
+      "button_open": "Lejantı aç",
+      "button_close": "Lejantı kapat",
+      "layers": {
+        "drinking-water-layer": "İçme suyu",
+        "water-pumps-layer": "Su pompası",
+        "toilets-layer": "Umumi tuvalet",
+        "defies-layer": "Defibrilatörler",
+        "osm-local-layer": "OSM Yerel"
+      }
+    }
+  }
+}

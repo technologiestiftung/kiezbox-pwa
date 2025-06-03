@@ -19,11 +19,10 @@
 		remoteAudio = $bindable()
 	} = $props();
 
-	const formatMilliseconds = (ms: number): string => {
-		const totalSeconds = Math.floor(ms / 1000);
-		const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-		const seconds = String(totalSeconds % 60).padStart(2, '0');
-		return `${minutes}:${seconds}`;
+	const formatCallDuration = (seconds: number): string => {
+		const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+		const remainingSeconds = String(seconds % 60).padStart(2, '0');
+		return `${minutes}:${remainingSeconds}`;
 	};
 </script>
 
@@ -34,7 +33,7 @@
 
 	{#if isInCall}
 		<div>
-			<span class="call-time">{formatMilliseconds(time)}</span>
+			<span class="call-time">{formatCallDuration(time)}</span>
 		</div>
 		<div class="mb-4 flex w-full justify-around">
 			<Button
@@ -62,11 +61,6 @@
 				{/if}
 				<span>{$t('common.button.speaker')}</span>
 			</Button>
-		</div>
-	{/if}
-	{#if errorMessage}
-		<div class="text-red-500">
-			<span>{$t(errorMessage)}</span>
 		</div>
 	{/if}
 	<EmergencyCallButton

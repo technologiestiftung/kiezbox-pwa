@@ -6,6 +6,7 @@
 	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
 	import CloseOutline from 'carbon-icons-svelte/lib/CloseOutline.svelte';
 	import { onMount } from 'svelte';
+	import { t } from '$lib/translations';
 
 	let cardRef: HTMLDivElement | undefined = $state();
 
@@ -193,7 +194,7 @@
 	<Card.Root class="relative m-2 w-60">
 		<Card.Header>
 			<Card.Title class="flex items-center justify-between">
-				<span>{title}</span>
+				<span>{$t(title)}</span>
 				<button class="text-purple-dark cursor-pointer bg-transparent" onclick={handlePopupClose}>
 					<CloseOutline fill="#5d508b" size={24} />
 				</button>
@@ -217,7 +218,7 @@
 								{/if}
 							</p>
 						{:else}
-							<p>{value}</p>
+							<p>{$t(`${value}`)}</p>
 						{/if}
 					</li>
 				{/each}

@@ -1,0 +1,325 @@
+{
+  "common": {
+    "languages": {
+      "de": "DE",
+      "en": "EN",
+      "fr": "FR",
+      "tr": "TR",
+      "es": "ES",
+      "it": "IT"
+    },
+    "header": {
+      "title": "Info Portal"
+    },
+    "button": {
+      "close": "Close",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "speaker": "Speaker"
+    },
+    "footer": {
+      "imprint": {
+        "text": "Imprint",
+        "href": "https://www.technologiestiftung-berlin.de/impressum/"
+      },
+      "privacy": {
+        "text": "Privacy Policy",
+        "href": "https://www.technologiestiftung-berlin.de/datenschutz/"
+      },
+      "initiatve_by": "An initiative by:",
+      "created_by": "Implemented by:",
+      "funded_by": "Funded by:",
+      "acknowledgement": "Illustration Key Visual: L. Hoff, aufsiemitgebrüll.de",
+      "copyright": {
+        "text": "© 2025 Technologiestiftung Berlin",
+        "href": "https://www.technologiestiftung-berlin.de"
+      }
+    },
+    "modes": {
+      "emergency": {
+        "title": "Emergency Call",
+        "description": "Here you can place an emergency call."
+      },
+      "demo": {
+        "title": "Emergency Call Demo",
+        "description": "Here you can start the emergency call demo."
+      }
+    },
+    "status": {
+      "calling": "Connecting call...",
+      "online": "Online",
+      "offline": "Offline",
+      "error": "Error",
+      "invalid_network": "Invalid network",
+      "connecting": "Connecting...",
+      "connected": "Connected",
+      "disconnecting": "Disconnecting...",
+      "disconnected": "Disconnected",
+      "reconnecting": "Reconnecting...",
+      "reconnected": "Reconnected",
+      "connection_failed": "Connection failed",
+      "dialing": "Dialing...",
+      "call_established": "Call active",
+      "ending_call": "Ending call...",
+      "call_failed": "Call failed",
+      "call_ended": "Call ended",
+      "call_timeout": "Call timeout",
+      "call_terminated": "Call terminated",
+      "call_not_answered": "Call not answered",
+      "call_rejected": "Call rejected",
+      "ready": "Ready"
+    }
+  },
+  "content": {
+    "emergency_phone": {
+      "title": "Here for you even in a crisis",
+      "text": "Test our demo call here, which works even when nothing else works.",
+      "inactive": "Start emergency call",
+      "active": "End emergency call",
+      "rejected": "Call rejected",
+      "incoming": "Incoming call...",
+      "call": "Start emergency call",
+      "callDemo": "Start emergency call demo",
+      "failed": "Call failed",
+      "calling": "Connecting call...",
+      "error": {
+        "button": "Refresh",
+        "title": "Error",
+        "messages": {
+          "network": "You are not connected to the Kiezbox emergency Wi-Fi. Please connect to the 'Kiezbox Notfall WLAN' network and try again.",
+          "audio": "Your device does not support audio transmission. Please use a different device or browser.",
+          "captive-portal": "You are in a captive portal. Please copy the link, close the captive portal, and try again.",
+          "server": "The server is currently unavailable. Please try again later.",
+          "unknown": "An unknown error occurred. Please try again later."
+        },
+        "copy_link": "Copy link"
+      },
+      "default": {
+        "phone_button": "To the emergency call demo",
+        "incoming_call": "Incoming call",
+        "offline": {
+          "text": "In a crisis situation, you can place an emergency call here if, for example, you are unable to make calls due to a power outage. This will automatically connect to the Berlin Fire Department. With our <strong>demo call</strong>, you can practice the 5 W-questions that you should always have ready when speaking with emergency services."
+        },
+        "online": {
+          "text": "You are now connected to the Berlin Fire Department's demo call. The fire department will guide you through the conversation as follows:"
+        },
+        "questions": {
+          "1": {
+            "text": "<strong>1. Where</strong> is the incident?",
+            "description": "Provide the location of the incident as precisely as possible (for example, municipality or district name, street name, house number, etc.)"
+          },
+          "2": {
+            "text": "<strong>2. Who</strong> is calling?",
+            "description": "Give your name, your location, and your phone number for any follow-up questions!"
+          },
+          "3": {
+            "text": "<strong>3. What</strong> happened?",
+            "description": "Briefly describe the incident and what you can specifically see (what happened? what is visible?), for example traffic accident, crash, fire, explosion, collapse, person trapped!"
+          },
+          "4": {
+            "text": "<strong>4. How many</strong> are affected?",
+            "description": "Estimate the number of people affected, their condition, and injuries! For children, also provide the age – if only estimated!"
+          },
+          "5": {
+            "text": "<strong>5. Wait</strong> for follow-up questions!",
+            "description": "Do not hang up immediately; the operators at the integrated control center may need more information from you!"
+          },
+          "title": "Keep in mind the 5 W-questions:"
+        }
+      },
+      "emergency": {
+        "phone_button": "To the emergency call",
+        "default": {
+          "caller_id": "ID: ",
+          "call_state": "Status: "
+        },
+        "offline": {
+          "text": "You can now place a real emergency call to the Berlin Fire Department. Please note that this is a real emergency call. Misuse is punishable by law!"
+        },
+        "connecting": {
+          "text": "You are now being connected to the Berlin Fire Department; please pay attention to the following questions:"
+        },
+        "online": {
+          "text": "You are now being connected to the Berlin Fire Department; please pay attention to the following questions:"
+        }
+      },
+      "initializing": "Connection is created ..."
+    },
+    "precaution_infos": {
+      "title": "Prevention and Measures",
+      "personal_precautions": {
+        "1": {
+          "title": "Food and Drink",
+          "text": "We recommend a supply of food for at least 3 days per person. Additionally, you should plan for at least 1.5 liters of drinking water and 0.5 liters of water per day for cooking and hygiene.",
+          "links": {
+            "1": {
+              "text": "Federal stock calculator",
+              "href": "https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat/vorratskalkulator"
+            }
+          }
+        },
+        "2": {
+          "title": "Emergency Backpack",
+          "text": "Plan ahead and pack an emergency bag with the most important items. A backpack is better than a suitcase to keep your hands free in an emergency.",
+          "links": {
+            "1": {
+              "text": "BBK packing list",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Hygiene and Medications",
+          "text": "By using water sparingly and having a well-stocked home medicine cabinet, health-promoting hygiene and first aid can be ensured independently.",
+          "links": {
+            "1": {
+              "text": "BBK home medicine cabinet information",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hausapotheke/hausapotheke_node.html"
+            },
+            "2": {
+              "text": "BBK hygiene tips",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hygiene/hygiene_node.html"
+            }
+          }
+        },
+        "title": "Personal Precautions"
+      },
+      "fire": {
+        "1": {
+          "title": "Precautions for Fire Incidents",
+          "text": "The risk of fire can be significantly minimized by properly tending to candles, flammable materials, smoke detectors, and firefighting equipment.",
+          "links": {
+            "1": {
+              "text": "More information on personal precautions",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-vorsorgen_dossier1.html"
+            }
+          }
+        },
+        "2": {
+          "title": "What to Do if There Is a Fire?",
+          "text": "If possible, extinguish the fire in its early stages. If unsuccessful: call 112! Only attempt to extinguish if there is no danger, or get to safety.",
+          "links": {
+            "1": {
+              "text": "Behavioral guidelines for fires",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-verhalten_dossier2.html"
+            }
+          }
+        },
+        "3": {
+          "title": "After the Fire",
+          "text": "Only enter the building once it has been cleared by the fire department. There may be a risk of collapse. After clearance, conduct an inventory and photograph any damage as proof for insurance."
+        },
+        "title": "Fire"
+      },
+      "flood": {
+        "1": {
+          "title": "In General:",
+          "text": "Pay attention to information from your local hazard prevention authorities and support the emergency services on-site by following their instructions and staying away from endangered or already cordoned-off areas."
+        },
+        "2": {
+          "title": "Precautions for Flooding",
+          "text": "Evacuate people in need of assistance, children, and pets. And get current information from the flood information center of the federal states.",
+          "links": {
+            "1": {
+              "text": "Flood information center",
+              "href": "https://www.hochwasserzentralen.de/"
+            }
+          }
+        },
+        "3": {
+          "title": "What to Do During Flooding?",
+          "text": "The basement or underground garage can become life-threatening. There are different guidelines to follow inside a house and in a car.",
+          "links": {
+            "1": {
+              "text": "Guidelines for behavior during flooding",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hochwasser/_documents/hochwasser-verhalten_dossier2.html?nn=20590"
+            }
+          }
+        },
+        "title": "Flood"
+      },
+      "storm": {
+        "1": {
+          "title": "Precautions for Severe Weather",
+          "text": "Prepare for severe weather early by having enough food, water, a document bag, and an emergency kit ready.",
+          "links": {
+            "1": {
+              "text": "More information on personal precautions",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-vorsorgen_dossier1.html?nn=20592"
+            }
+          }
+        },
+        "2": {
+          "title": "What to Do During Severe Weather?",
+          "text": "Secure objects, close windows, avoid metal: depending on where you are, different rules apply. But the golden rule is: stay at home.",
+          "links": {
+            "1": {
+              "text": "Behavior guidelines for severe weather",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-verhalten_dossier2.html?nn=20592"
+            }
+          }
+        },
+        "3": {
+          "title": "After Severe Weather",
+          "text": "Severe weather can cause roof damage, flooding, the release of hazardous substances, and injure people. Depending on the type of severe weather, different advice applies.",
+          "links": {
+            "1": {
+              "text": "Behavior after severe weather",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-danach_dossier3.html?nn=20592"
+            }
+          }
+        },
+        "title": "Severe Weather"
+      },
+      "cbrn": {
+        "1": {
+          "title": "The Different Hazardous Substances",
+          "text": "A layperson usually cannot recognize the danger posed by chemical (C), biological (B), radiological (R), and nuclear (N) hazardous substances.",
+          "links": {
+            "1": {
+              "text": "Effects on skin and body",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Gefahrstoff-Freisetzung/_documents/gefahrstoff-unterschiede_dossier1.html?nn=20588"
+            }
+          }
+        },
+        "2": {
+          "title": "Behavior During Hazardous Substance Release",
+          "text": "Contact the local poison control center. Poison control of Charité University Medicine Berlin: 030 192 40"
+        },
+        "3": {
+          "title": "Behavior at Home",
+          "list": {
+            "1": "Stay inside, close windows and doors",
+            "2": "Turn off fans and ventilation systems",
+            "3": "Avoid unnecessary oxygen consumption from candles or similar",
+            "4": "For radioactive substances: seek a basement room"
+          }
+        },
+        "4": {
+          "title": "Behavior in a Car or Outdoors",
+          "list": {
+            "1": "Move, if possible, perpendicular to the wind direction",
+            "2": "Breathe, if possible, through a respirator, or at least through a handkerchief",
+            "3": "Wash your hands, face, and hair, as well as your nose and ears, with water and soap",
+            "4": "For biological substances: additionally disinfect your hands"
+          }
+        },
+        "title": "CBRN Hazardous Substances"
+      }
+    }
+  },
+  "map": {
+    "legend": {
+      "title": "Legend",
+      "button_open": "Open legend",
+      "button_close": "Close legend",
+      "layers": {
+        "drinking-water-layer": "Drinking water",
+        "water-pumps-layer": "Water pump",
+        "toilets-layer": "Public toilet",
+        "defies-layer": "Defibrillators",
+        "osm-local-layer": "OSM Local"
+      }
+    }
+  }
+}
