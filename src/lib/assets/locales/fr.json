@@ -1,0 +1,325 @@
+{
+  "common": {
+    "languages": {
+      "de": "DE",
+      "en": "EN",
+      "fr": "FR",
+      "tr": "TR",
+      "es": "ES",
+      "it": "IT"
+    },
+    "header": {
+      "title": "Portail d'information"
+    },
+    "button": {
+      "close": "Fermer",
+      "mute": "Couper le son",
+      "unmute": "Activer le son",
+      "speaker": "Haut-parleur"
+    },
+    "footer": {
+      "imprint": {
+        "text": "Mentions légales",
+        "href": "https://www.technologiestiftung-berlin.de/impressum/"
+      },
+      "privacy": {
+        "text": "Politique de confidentialité",
+        "href": "https://www.technologiestiftung-berlin.de/datenschutz/"
+      },
+      "initiatve_by": "Une initiative de :",
+      "created_by": "Mise en œuvre par :",
+      "funded_by": "Financé par :",
+      "acknowledgement": "Illustration visuelle clé : L. Hoff, aufsiemitgebrüll.de",
+      "copyright": {
+        "text": "© 2025 Technologiestiftung Berlin",
+        "href": "https://www.technologiestiftung-berlin.de"
+      }
+    },
+    "modes": {
+      "emergency": {
+        "title": "Appel d'urgence",
+        "description": "Ici, vous pouvez passer un appel d'urgence."
+      },
+      "demo": {
+        "title": "Démo d'appel d'urgence",
+        "description": "Ici, vous pouvez démarrer la démo d'appel d'urgence."
+      }
+    },
+    "status": {
+      "calling": "Appel en cours de connexion...",
+      "online": "En ligne",
+      "offline": "Hors ligne",
+      "error": "Erreur",
+      "invalid_network": "Réseau invalide",
+      "connecting": "Connexion...",
+      "connected": "Connecté",
+      "disconnecting": "Déconnexion...",
+      "disconnected": "Déconnecté",
+      "reconnecting": "Reconnexion...",
+      "reconnected": "Reconnecté",
+      "connection_failed": "Connexion échouée",
+      "dialing": "...",
+      "call_established": "Appel actif",
+      "ending_call": "Fin de l'appel...",
+      "call_failed": "Échec de l'appel",
+      "call_ended": "Appel terminé",
+      "call_timeout": "Timeout de l'appel",
+      "call_terminated": "Appel abandonné",
+      "call_not_answered": "Appel non répondu",
+      "call_rejected": "Appel rejeté",
+      "ready": "Prêt"
+    }
+  },
+  "content": {
+    "emergency_phone": {
+      "title": "Ici pour vous même en cas de crise",
+      "text": "Testez ici notre démo d'appel d'urgence, qui fonctionne même lorsque tout le reste échoue.",
+      "inactive": "Démarrer l'appel d'urgence",
+      "active": "Terminer l'appel d'urgence",
+      "rejected": "Appel rejeté",
+      "incoming": "Appel entrant...",
+      "call": "Démarrer l'appel d'urgence",
+      "callDemo": "Démarrer la démo d'appel d'urgence",
+      "failed": "Appel échoué",
+      "calling": "Appel en cours de connexion...",
+      "error": {
+        "button": "Rafraîchir",
+        "title": "Erreur",
+        "messages": {
+          "network": "Vous n'êtes pas connecté au réseau Wi-Fi d'urgence Kiezbox. Veuillez vous connecter au réseau « Kiezbox Notfall WLAN » et réessayer.",
+          "audio": "Votre appareil ne prend pas en charge la transmission audio. Veuillez utiliser un autre appareil ou navigateur.",
+          "captive-portal": "Vous êtes dans un portail captif. Veuillez copier le lien, fermer le portail captif et réessayer.",
+          "server": "Le serveur n'est pas disponible pour le moment. Veuillez réessayer plus tard.",
+          "unknown": "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."
+        },
+        "copy_link": "Copier le lien"
+      },
+      "default": {
+        "phone_button": "Vers la démo d'appel d'urgence",
+        "incoming_call": "Appel entrant",
+        "offline": {
+          "text": "En cas de crise, vous pouvez passer un appel d'urgence ici si, par exemple, une panne de courant vous empêche d'appeler autrement. Celui-ci sera automatiquement relayé à la Brigade des pompiers de Berlin. Avec notre <strong>appel de démonstration</strong>, vous pouvez d'ores et déjà vous exercer aux 5 questions « W » à avoir toujours en tête lors d'un appel d'urgence."
+        },
+        "online": {
+          "text": "Vous êtes maintenant connecté à la démo d'appel d'urgence de la Brigade des pompiers de Berlin. Les pompiers vous guideront dans la conversation de la manière suivante :"
+        },
+        "questions": {
+          "1": {
+            "text": "<strong>1. Où</strong> se situe l'incident ?",
+            "description": "Indiquez le lieu de l'incident aussi précisément que possible (par exemple, commune ou quartier, nom de rue, numéro, etc.)."
+          },
+          "2": {
+            "text": "<strong>2. Qui</strong> appelle ?",
+            "description": "Donnez votre nom, votre emplacement et votre numéro de téléphone pour un éventuel rappel !"
+          },
+          "3": {
+            "text": "<strong>3. Quoi</strong> s'est passé ?",
+            "description": "Décrivez brièvement l'incident et ce que vous voyez précisément (que s'est-il passé ? que voit-on ?), par exemple accident de la route, chute, incendie, explosion, effondrement, personne coincée !"
+          },
+          "4": {
+            "text": "<strong>4. Combien</strong> de personnes sont concernées ?",
+            "description": "Estimez le nombre de personnes concernées, leur situation et leurs blessures ! Pour les enfants, précisez également leur âge — même s'il s'agit d'une estimation !"
+          },
+          "5": {
+            "text": "<strong>5. Attendre</strong> pour un éventuel complément d'information !",
+            "description": "Ne raccrochez pas immédiatement ; Le personnel du centre de commande intégré pourrait avoir besoin d'informations complémentaires !"
+          },
+          "title": "Gardez en tête les 5 questions « W » :"
+        }
+      },
+      "emergency": {
+        "phone_button": "Vers l'appel d'urgence",
+        "default": {
+          "caller_id": "ID : ",
+          "call_state": "Statut : "
+        },
+        "offline": {
+          "text": "Vous pouvez à présent passer un véritable appel d'urgence à la Brigade des pompiers de Berlin. Veuillez noter qu'il s'agit d'un appel d'urgence réel. Tout abus est passible de sanctions !"
+        },
+        "connecting": {
+          "text": "Vous êtes en train d'être connecté à la Brigade des pompiers de Berlin ; veuillez prêter attention aux questions suivantes :"
+        },
+        "online": {
+          "text": "Vous êtes en train d'être connecté à la Brigade des pompiers de Berlin ; veuillez prêter attention aux questions suivantes :"
+        }
+      },
+      "initializing": "La connexion est créée ..."
+    },
+    "precaution_infos": {
+      "title": "Prévention et Mesures",
+      "personal_precautions": {
+        "1": {
+          "title": "Alimentation et Boissons",
+          "text": "Nous recommandons un stock de nourriture pour au moins 3 jours par personne. De plus, vous devriez prévoir au moins 1,5 L d’eau potable et 0,5 L d’eau par jour pour cuisiner et pour l’hygiène.",
+          "links": {
+            "1": {
+              "text": "Calculateur de stock fédéral",
+              "href": "https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat/vorratskalkulator"
+            }
+          }
+        },
+        "2": {
+          "title": "Sac d’urgence",
+          "text": "Planifiez à l’avance et préparez un sac d’urgence avec les objets essentiels. Un sac à dos est préférable à une valise pour garder les mains libres en cas d’urgence.",
+          "links": {
+            "1": {
+              "text": "Liste de colisage du BBK",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Hygiène et Médicaments",
+          "text": "En faisant un usage économe de l’eau et en disposant d’une trousse à pharmacie bien garnie, vous pouvez assurer vous-même une hygiène favorable à la santé et les premiers secours.",
+          "links": {
+            "1": {
+              "text": "Infos sur la trousse à pharmacie du BBK",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hausapotheke/hausapotheke_node.html"
+            },
+            "2": {
+              "text": "Conseils d’hygiène du BBK",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Hygiene/hygiene_node.html"
+            }
+          }
+        },
+        "title": "Précautions personnelles"
+      },
+      "fire": {
+        "1": {
+          "title": "Prévoir en cas d’incendie",
+          "text": "Le risque d’incendie peut être considérablement réduit en veillant correctement aux bougies, aux matériaux inflammables, aux détecteurs de fumée et aux extincteurs.",
+          "links": {
+            "1": {
+              "text": "Plus d’infos sur les précautions personnelles",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-vorsorgen_dossier1.html"
+            }
+          }
+        },
+        "2": {
+          "title": "Que faire en cas d’incendie ?",
+          "text": "Si possible, éteignez l’incendie dès son démarrage. En cas d’échec : appelez le 112 ! Éteignez seulement s’il n’y a pas de danger ou mettez-vous en sécurité.",
+          "links": {
+            "1": {
+              "text": "Consignes de comportement en cas d’incendie",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Feuer/_documents/feuer-verhalten_dossier2.html"
+            }
+          }
+        },
+        "3": {
+          "title": "Après l'incendie",
+          "text": "N’entrez dans le bâtiment que s’il a été autorisé par les pompiers. Un risque d’effondrement peut exister. Après l’autorisation, faites un état des lieux et photographiez les dégâts comme preuve pour l’assurance."
+        },
+        "title": "Feu"
+      },
+      "flood": {
+        "1": {
+          "title": "En général :",
+          "text": "Surveillez les informations de vos autorités locales de gestion des risques et soutenez les équipes sur place en suivant leurs instructions et en évitant les zones à risque ou déjà bouclées."
+        },
+        "2": {
+          "title": "Préparation aux inondations",
+          "text": "Évacuez les personnes vulnérables, les enfants et les animaux de compagnie. Et informez-vous auprès du Centre des inondations des Länder pour des informations à jour.",
+          "links": {
+            "1": {
+              "text": "Centre des inondations",
+              "href": "https://www.hochwasserzentralen.de/"
+            }
+          }
+        },
+        "3": {
+          "title": "Que faire en cas d’inondation ?",
+          "text": "Le sous-sol ou le parking souterrain peuvent devenir mortels. Des consignes différentes s’appliquent dans la maison et dans la voiture.",
+          "links": {
+            "1": {
+              "text": "Consignes de comportement en cas d’inondation",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hochwasser/_documents/hochwasser-verhalten_dossier2.html?nn=20590"
+            }
+          }
+        },
+        "title": "Inondation"
+      },
+      "storm": {
+        "1": {
+          "title": "Préparation aux intempéries",
+          "text": "Préparez-vous tôt aux intempéries en disposant de suffisamment de nourriture, d’eau, d’une pochette à documents et d’une trousse d’urgence.",
+          "links": {
+            "1": {
+              "text": "Plus d’infos sur les précautions personnelles",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-vorsorgen_dossier1.html?nn=20592"
+            }
+          }
+        },
+        "2": {
+          "title": "Que faire en cas d’intempéries ?",
+          "text": "Fixez les objets, fermez les fenêtres, évitez le métal : selon votre lieu, des consignes différentes s’appliquent. Mais la règle d’or : restez chez vous.",
+          "links": {
+            "1": {
+              "text": "Consignes de comportement en cas d’intempéries",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-verhalten_dossier2.html?nn=20592"
+            }
+          }
+        },
+        "3": {
+          "title": "Après l’intempérie",
+          "text": "Les intempéries peuvent causer des dégâts au toit, des inondations, la fuite de substances dangereuses et blesser des personnes. Selon le type d’intempérie, des conseils différents doivent être suivis.",
+          "links": {
+            "1": {
+              "text": "Comportement après l’intempérie",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Unwetter/_documents/unwetter-danach_dossier3.html?nn=20592"
+            }
+          }
+        },
+        "title": "Météo extrême"
+      },
+      "cbrn": {
+        "1": {
+          "title": "Les différentes substances dangereuses",
+          "text": "Un non-spécialiste ne peut généralement pas reconnaître la dangerosité des substances chimiques (C), biologiques (B), radiologiques (R) et nucléaires (N).",
+          "links": {
+            "1": {
+              "text": "Effets sur la peau et le corps",
+              "href": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Gefahrstoff-Freisetzung/_documents/gefahrstoff-unterschiede_dossier1.html?nn=20588"
+            }
+          }
+        },
+        "2": {
+          "title": "Comportement lors d’une libération de substance dangereuse",
+          "text": "Contactez le centre antipoison local. Centre antipoison de la Charité Universitätsmedizin Berlin : 030 192 40"
+        },
+        "3": {
+          "title": "Comportement à la maison",
+          "list": {
+            "1": "Restez à l’intérieur, fermez les fenêtres et les portes",
+            "2": "Coupez les ventilateurs et systèmes de ventilation",
+            "3": "Évitez la consommation inutile d’oxygène à cause des bougies ou similaires",
+            "4": "En cas de radioactifs : rejoignez une pièce de sous-sol"
+          }
+        },
+        "4": {
+          "title": "Comportement en voiture ou en extérieur",
+          "list": {
+            "1": "Déplacez-vous, si possible, perpendiculairement à la direction du vent",
+            "2": "Respirez, si possible, à travers un masque, au moins à travers un mouchoir",
+            "3": "Lavez vos mains, votre visage et vos cheveux, ainsi que votre nez et vos oreilles avec de l’eau et du savon",
+            "4": "En cas de substances biologiques : désinfectez aussi vos mains"
+          }
+        },
+        "title": "Substances dangereuses CBRN"
+      }
+    }
+  },
+  "map": {
+    "legend": {
+      "title": "Légende",
+      "button_open": "Ouvrir la légende",
+      "button_close": "Fermer la légende",
+      "layers": {
+        "drinking-water-layer": "Eau potable",
+        "water-pumps-layer": "Pompe à eau",
+        "toilets-layer": "Toilettes publiques",
+        "defies-layer": "Défibrillateurs",
+        "osm-local-layer": "OSM local"
+      }
+    }
+  }
+}

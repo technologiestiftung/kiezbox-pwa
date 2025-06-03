@@ -3,11 +3,11 @@ import type { Mode } from '$lib/types';
 import { ApiStatus } from '$lib/enums';
 import { goto } from '$app/navigation';
 import type { LngLatLike } from 'maplibre-gl';
+import { PUBLIC_WSS_PATH } from '$env/static/public';
 
 // Constants
 const PING_API_ENDPOINT = '/api/mode';
-const SIP_API_ENDPOINT = '/api/sipconfig';
-const PING_INTERVAL_MS = 5000;
+const PING_INTERVAL_MS = 15000;
 
 let pingIntervalId: ReturnType<typeof setInterval> | null = $state<ReturnType<
 	typeof setInterval
@@ -21,19 +21,20 @@ export const NetworkStore = $state({
 	apiStatus: ApiStatus.UNAVAILABLE,
 	lastPingTime: null as Date | null,
 	mode: null as Mode | null,
-	config: null as SIPConfig | null,
-	coordinates: [0, 0] as LngLatLike,
+	adminMode: false,
+	coordinates: [13.342502830765682, 52.48863888739753] as LngLatLike,
 	initialized: false
 });
 
 const setError = (message: string | null): void => {
+	console.log(message);
 	NetworkStore.errorMessage = message;
 	if (message) {
 		console.error(`[NetworkService] Error state set: ${message}`);
 	}
 };
 
-const isCaptivePortalCheck = async (sipConfig: SIPConfig): Promise<boolean> => {
+const isCaptivePortalCheck = async (): Promise<boolean> => {
 	const ua = navigator.userAgent;
 
 	const isCaptiveShell =
@@ -65,14 +66,15 @@ const isCaptivePortalCheck = async (sipConfig: SIPConfig): Promise<boolean> => {
 		console.warn('mediaDevices.getUserMedia not available.');
 		return true;
 	}
-
-	const sipWsUrl = `wss://${sipConfig.kbServerAddress}${sipConfig.kbWSSPath}`;
+	const isLocalhost = window.location.hostname === 'localhost';
+	const host = isLocalhost ? 'emergency.ds-apps.tsb-berlin.de' : window.location.host;
+	const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;
 
 	return new Promise<boolean>((resolve) => {
 		let resolved = false;
 
 		try {
-			const ws = new WebSocket(sipWsUrl, ['sip']);
+			const ws = new WebSocket(kbWSS, ['sip']);
 			ws.onopen = () => {
 				if (!resolved) {
 					resolved = true;
@@ -118,53 +120,11 @@ const fetchMode = async (): Promise<Mode | null> => {
 
 		return {
 			status: response.mode,
-			isEmergency: response.mode % 2 == 0
+			isEmergency: response.mode % 2 == 0,
+			coordinates: response.coordinates
 		};
 	} catch (error) {
 		setError(`Failed to fetch mode: ${error instanceof Error ? error.message : String(error)}`);
-		return null;
-	}
-};
-
-const fetchCoordinates = async (): Promise<string[] | null> => {
-	try {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const response: any = await apiFetch('/api/coordinates', {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		});
-		if (!response || !Array.isArray(response.coordinates)) {
-			throw new Error(`Invalid coordinates response: ${JSON.stringify(response)}`);
-		}
-		return response.coordinates;
-	} catch (error) {
-		setError(
-			`Failed to fetch coordinates: ${error instanceof Error ? error.message : String(error)}`
-		);
-		return null;
-	}
-};
-
-/**
- * Fetch SIP configuration from the API
- */
-const fetchSipConfig = async (): Promise<SIPConfig | null> => {
-	try {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const response: any = await apiFetch(SIP_API_ENDPOINT, {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		});
-
-		if (!response) {
-			throw new Error(`SIP config request failed with status: ${response}`);
-		}
-
-		return response;
-	} catch (error) {
-		setError(
-			`Failed to fetch SIP config: ${error instanceof Error ? error.message : String(error)}`
-		);
 		return null;
 	}
 };
@@ -195,14 +155,6 @@ export const setMeFree = async (): Promise<void> => {
  */
 const pingApi = async () => {
 	try {
-		const coordinates = await fetchCoordinates();
-		if (coordinates) {
-			NetworkStore.coordinates = [parseFloat(coordinates[0]), parseFloat(coordinates[1])];
-		} else {
-			const coordinates: LngLatLike = [13.411833, 52.500398];
-			NetworkStore.coordinates = coordinates;
-		}
-
 		const mode: Mode | null = await fetchMode();
 		if (!mode) {
 			NetworkStore.apiStatus = ApiStatus.UNAVAILABLE;
@@ -211,14 +163,7 @@ const pingApi = async () => {
 			return;
 		}
 
-		const sipConfig = await fetchSipConfig();
-		if (!sipConfig) {
-			NetworkStore.apiStatus = ApiStatus.UNAVAILABLE;
-			NetworkStore.errorMessage = 'network';
-			return;
-		}
-
-		const captivePortalDetected = await isCaptivePortalCheck(sipConfig);
+		const captivePortalDetected = await isCaptivePortalCheck();
 		if (captivePortalDetected) {
 			NetworkStore.isCaptivePortal = true;
 			NetworkStore.apiStatus = ApiStatus.UNAVAILABLE;
@@ -231,7 +176,8 @@ const pingApi = async () => {
 		NetworkStore.lastPingTime = now;
 		NetworkStore.apiStatus = ApiStatus.AVAILABLE;
 		NetworkStore.errorMessage = null;
-		NetworkStore.config = sipConfig;
+		NetworkStore.coordinates =
+			mode.coordinates ?? ([13.342502830765682, 52.48863888739753] as LngLatLike);
 		NetworkStore.mode = mode;
 	} catch (error: unknown) {
 		setError(`Ping API error: ${error instanceof Error ? error.message : String(error)}`);
@@ -252,7 +198,6 @@ export async function initNetworkService() {
 
 		startPing();
 		NetworkStore.initialized = true;
-		console.log('[NetworkStore] Service initialized globally');
 	} catch (error) {
 		throw new Error(`Failed to initialize network service: ${error}`);
 	}
@@ -297,5 +242,29 @@ export async function cleanupNetworkService() {
 	NetworkStore.apiStatus = ApiStatus.UNAVAILABLE;
 	NetworkStore.lastPingTime = null;
 	NetworkStore.mode = null;
-	NetworkStore.config = null;
+}
+
+export function setAdminMode(isAdmin: boolean) {
+	NetworkStore.adminMode = isAdmin;
+	return NetworkStore.adminMode;
+}
+
+export function toggleMode() {
+	NetworkStore.mode = {
+		status: NetworkStore.mode?.status === 0 ? 1 : 0,
+		isEmergency: !NetworkStore.mode?.isEmergency,
+		coordinates: [13.342502830765682, 52.48863888739753]
+	};
+	console.log(`Toggling mode to: ${NetworkStore.mode.status}`);
+
+	try {
+		const response = apiFetch('/api/admin/setMode', {
+			method: 'POST',
+			body: JSON.stringify({ mode: !NetworkStore.mode?.status }),
+			headers: { 'Content-Type': 'application/json' }
+		});
+		return response;
+	} catch (error) {
+		setError(`Failed to toggle mode: ${error instanceof Error ? error.message : String(error)}`);
+	}
 }

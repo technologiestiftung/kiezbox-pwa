@@ -1,4 +1,4 @@
-import { PUBLIC_LOG_LEVEL } from '$env/static/public';
+import { PUBLIC_LOG_LEVEL, PUBLIC_USER_PREFIX, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
 import { CallState } from '$lib/enums';
 import { assignStream } from '$lib/utils/callUtils';
@@ -16,7 +16,6 @@ import {
 	type LogLevel
 } from 'sip.js';
 import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
-import { NetworkStore } from './networkState.svelte';
 
 // Service-specific variables that don't need to be in the store
 let userAgent: UserAgent | null = $state<UserAgent | null>(null);
@@ -323,7 +322,7 @@ export const fetchSessionAndCreateUser = async (): Promise<SIPUser | null> => {
 		}
 
 		const user: SIPUser = {
-			username: NetworkStore.config!.kbUserPrefix + session.extension.toString().padStart(4, '0'),
+			username: PUBLIC_USER_PREFIX + session.extension.toString().padStart(4, '0'),
 			password: session.password,
 			timestamp: session.timestamp
 		};
@@ -363,7 +362,6 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 	if (!CallStore.initialized) {
 		throw new Error('Call service not initialized');
 	}
-
 	// Store the user
 	CallStore.sipUser = sipUser;
 
@@ -373,12 +371,11 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 	try {
 		// Create the UserAgent if needed
 		if (!userAgent || CallStore.callState === CallState.DISCONNECTED) {
-			const config = NetworkStore.config;
-			if (!config) {
-				throw new Error('Network configuration not available');
-			}
-			const kbWSS = `wss://${config.kbServerAddress}${config.kbWSSPath}`;
-			const kbURI = `sip:${sipUser.username}@${config.kbDomain}`;
+			CallStore.callState = CallState.INITIALIZING;
+			const isLocalhost = window.location.hostname === 'localhost';
+			const host = isLocalhost ? 'emergency.ds-apps.tsb-berlin.de' : window.location.host;
+			const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;
+			const kbURI = `sip:${sipUser.username}@host`;
 			const uri = UserAgent.makeURI(kbURI);
 
 			if (!uri) throw new Error(`Failed to create URI from ${kbURI}`);
@@ -407,6 +404,8 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 			setError(`Failed to connect: ${error.message || error}`);
 			await cleanupUserAgent();
 		}
+	} finally {
+		CallStore.callState = CallState.INITIALIZED;
 	}
 };
 
@@ -622,7 +621,9 @@ export const waitForRegistration = async (timeoutMs = 10000): Promise<void> => {
 export const initializeCallService = async (
 	remoteAudioElement: HTMLAudioElement
 ): Promise<void> => {
+	CallStore.initialized = true;
 	if (!remoteAudioElement) {
+		CallStore.initialized = false;
 		throw new Error('Remote audio element not defined');
 	}
 
@@ -637,6 +638,7 @@ export const initializeCallService = async (
 		await createUserAgent(CallStore.sipUser!);
 	} catch (error) {
 		setError(`Initialization failed: ${error instanceof Error ? error.message : String(error)}`);
+		CallStore.initialized = false;
 		throw error;
 	}
 };
@@ -694,6 +696,7 @@ export const handleCallAction = async (
 		// If not registered, try to register
 		if (CallStore.registererState !== RegistererState.Registered && CallStore.sipUser) {
 			console.warn('[CallStore] Not registered, attempting to connect...');
+
 			await createUserAgent(CallStore.sipUser);
 
 			try {
@@ -747,7 +750,7 @@ export const setCallDuration = (duration: number) => {
  * @param translateFn Optional translation function to use (defaults to returning key)
  * @returns Status message
  */
-export const getCallStatus = (translateFn?: (key: string) => string): string => {
+export const getCallStatus = (translateFn?: (key: string) => string): string | null => {
 	const t = translateFn || ((key: string) => key);
 
 	switch (CallStore.callState) {
@@ -764,9 +767,9 @@ export const getCallStatus = (translateFn?: (key: string) => string): string => 
 		case CallState.CONNECTED:
 			return t('common.status.connected');
 		case CallState.INITIALIZED:
-			return t('common.status.online');
+			return null;
 		default:
-			return t('common.status.online');
+			return null; // No status for other states
 	}
 };
 
@@ -777,7 +780,7 @@ export const getCallStatus = (translateFn?: (key: string) => string): string => 
  * @returns Button text
  */
 export const getCallButtonText = (
-	isEmergency: boolean,
+	isEmergency: boolean | undefined,
 	translateFn?: (key: string) => string
 ): string => {
 	const t = translateFn || ((key: string) => key);
@@ -785,6 +788,8 @@ export const getCallButtonText = (
 	switch (CallStore.callState) {
 		case CallState.CALL_ESTABLISHED:
 			return t('content.emergency_phone.active');
+		case CallState.INITIALIZING:
+			return t('content.emergency_phone.initializing');
 		case CallState.CALLING:
 			return t('content.emergency_phone.calling');
 		case CallState.CALL_FAILED:

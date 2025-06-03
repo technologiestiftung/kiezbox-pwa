@@ -63,11 +63,6 @@
 			</Button>
 		</div>
 	{/if}
-	{#if errorMessage}
-		<div class="text-red-500">
-			<span>{$t(errorMessage)}</span>
-		</div>
-	{/if}
 	<EmergencyCallButton
 		isActive={isEmergency}
 		onClick={activateCall}

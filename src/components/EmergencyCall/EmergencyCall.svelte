@@ -22,7 +22,7 @@
 		isCloseDisabled as getIsCloseDisabled
 	} from '$lib/state/callState.svelte';
 	import { ApiStatus, CallState } from '$lib/enums';
-	import { NetworkStore, setMeFree } from '$lib/state/networkState.svelte';
+	import { NetworkStore, setMeFree, toggleMode } from '$lib/state/networkState.svelte';
 
 	let isModal = $state(false);
 
@@ -31,13 +31,18 @@
 	// Access the singleton state directly
 	const callState = $derived(CallStore.callState ?? CallState.INITIALIZED);
 
-	let isEmergency = $derived(false); // Replace with actual emergency state
+	let isEmergency = $derived(NetworkStore.mode?.isEmergency); // Replace with actual emergency state
 
 	// Call state properties
 	const time = $derived(CallStore.callDuration ?? 0);
 	const isMicrophoneMuted = $derived(CallStore.isMicrophoneMuted ?? false);
 	const isSpeakerMuted = $derived(CallStore.isSpeakerMuted ?? false);
 	const errorMessage = $derived(CallStore.errorMessage ?? null);
+	const showDialer = $derived(
+		NetworkStore?.apiStatus === ApiStatus.AVAILABLE && !NetworkStore?.errorMessage
+	);
+	let debounceTimeout = $state<ReturnType<typeof setTimeout> | null>(null);
+	const isAdmin = $derived(NetworkStore.adminMode ?? false);
 
 	const initialize = async () => {
 		try {
@@ -60,12 +65,18 @@
 	};
 
 	onDestroy(async () => {
-		// Clean up the call service when component is destroyed
 		await cleanupCallService();
 	});
 
 	$effect(() => {
-		// When remoteAudio is set, update the audio element in the store
+		return () => {
+			if (debounceTimeout) {
+				clearTimeout(debounceTimeout);
+			}
+		};
+	});
+
+	$effect(() => {
 		if (remoteAudio) {
 			setAudioElement(remoteAudio);
 		}
@@ -100,12 +111,6 @@
 		toggleSpeakerMute();
 	};
 
-	const changeState = () => {
-		console.log('Mode changed to:', isEmergency ? 'Emergency' : 'Demo');
-	};
-
-	// Using the store's getCallStatus function instead
-
 	const onDone = () => {
 		setMeFree();
 		window.location.reload();
@@ -113,13 +118,11 @@
 
 	const isCloseDisabled = $derived(getIsCloseDisabled());
 
-	// Using the store's getCallButtonText function instead
-
 	const statusText = $derived(getCallStatus($t));
 	const callButtonText = $derived(getCallButtonText(isEmergency, $t));
 
 	$effect(() => {
-		if (!callState) return;
+		if (!callState || !statusText) return;
 		toast.success(statusText);
 	});
 
@@ -128,33 +131,23 @@
 		toast.error(errorMessage);
 	});
 
-	const handleKeydown = (event: KeyboardEvent) => {
-		// Check for Ctrl+Shift+E to toggle emergency mode
-		if (event.ctrlKey && event.shiftKey && event.key === 'E') {
-			event.preventDefault();
-			changeState();
-		}
-	};
+	$inspect(showDialer);
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
-
-<button
-	class="fixed right-0 bottom-0 size-24 cursor-default opacity-0"
-	onclick={() => {
-		changeState();
-		toast.success(isEmergency ? 'Switched to Emergency Mode' : 'Switched to Demo Mode');
-	}}
-	aria-hidden="true"
->
-	<span class="sr-only">Toggle emergency mode</span>
-</button>
-
-<!-- {#if NetworkStore.networkState?.apiStatus !== ApiStatus.AVAILABLE && NetworkStore.networkState?.errorMessage}
-	<DialerError errorMessage={NetworkStore.networkState?.errorMessage} onClick={onDone} />
-{:else} -->
-<Dialer {isEmergency} onClick={openCaller}></Dialer>
-<!-- {/if} -->
+{#if isAdmin}
+	<button
+		onclick={() => toggleMode()}
+		class="EmergencyCall-admin-button text-purple-dark py-2 font-bold"
+	>
+		TOGGLE MODE</button
+	>
+{/if}
+{#if !showDialer}
+	<DialerError errorMessage={NetworkStore.errorMessage} onClick={onDone} />
+{/if}
+<div class={showDialer ? 'block' : 'hidden'}>
+	<Dialer {isEmergency} onClick={openCaller}></Dialer>
+</div>
 
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled}>
 	{#snippet children()}

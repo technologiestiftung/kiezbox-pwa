@@ -18,7 +18,8 @@
 	onMount(() => {
 		if (!mapContainer) return;
 		const baseUrl = window.location.origin;
-
+		const coordinates = NetworkStore.coordinates ?? [13.342502830765682, 52.48863888739753];
+		console.log('Map coordinates:', coordinates);
 		map = new maplibregl.Map({
 			container: mapContainer,
 			style: {
@@ -34,7 +35,7 @@
 				layers: LAYER_STYLE,
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},
-			center: NetworkStore.coordinates ?? [13.411833, 52.500398],
+			center: coordinates,
 			zoom: 14,
 			attributionControl: false,
 			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
