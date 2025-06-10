@@ -1,6 +1,6 @@
 import { apiFetch } from '$lib/api';
 import type { Mode } from '$lib/types';
-import { ApiStatus } from '$lib/enums';
+import { ApiStatus, DeviceType } from '$lib/enums';
 import { goto } from '$app/navigation';
 import type { LngLatLike } from 'maplibre-gl';
 import { PUBLIC_WSS_PATH } from '$env/static/public';
@@ -21,6 +21,7 @@ export const NetworkStore = $state({
 	apiStatus: ApiStatus.UNAVAILABLE,
 	lastPingTime: null as Date | null,
 	mode: null as Mode | null,
+	deviceType: DeviceType.DESKTOP as DeviceType,
 	adminMode: false,
 	coordinates: [13.342502830765682, 52.48863888739753] as LngLatLike,
 	initialized: false
@@ -66,6 +67,7 @@ const isCaptivePortalCheck = async (): Promise<boolean> => {
 		console.warn('mediaDevices.getUserMedia not available.');
 		return true;
 	}
+
 	const isLocalhost = window.location.hostname === 'localhost';
 	const host = isLocalhost ? 'emergency.ds-apps.tsb-berlin.de' : window.location.host;
 	const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;

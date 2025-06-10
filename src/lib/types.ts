@@ -50,3 +50,18 @@ export interface CallServiceState {
 	remoteStream: MediaStream | null;
 	localHTMLAudioElement: HTMLAudioElement | null;
 }
+
+export type State = 'idle' | 'pending' | 'success' | 'error';
+
+export type SIPUser = {
+	username: string;
+	password: string;
+	timestamp: number;
+	displayName?: string;
+};
+
+export type SessionResponse = {
+	extension: string | number;
+	password: string;
+	timestamp: number;
+};

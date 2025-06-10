@@ -1,6 +1,7 @@
 import { PUBLIC_LOG_LEVEL, PUBLIC_USER_PREFIX, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
 import { CallState } from '$lib/enums';
+import type { SessionResponse, SIPUser } from '$lib/types';
 import { assignStream } from '$lib/utils/callUtils';
 import {
 	Invitation,

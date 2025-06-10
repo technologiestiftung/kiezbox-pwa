@@ -86,7 +86,7 @@
         "button": "Rinfrescare",
         "title": "Errore",
         "messages": {
-          "network": "Non sei connesso alla rete Wi-Fi di emergenza Kiezbox. Per favore connettiti alla rete “Kiezbox Notfall WLAN” e riprova.",
+          "network": "Non sei connesso alla WLAN di emergenza Kiezbox e non puoi effettuare chiamate di emergenza. Si prega di connettersi alla rete \\\"Kiezbox Emergency WLAN\\\" e riprovare.",
           "audio": "Il tuo dispositivo non supporta la trasmissione audio. Per favore usa un altro dispositivo o browser.",
           "captive-portal": "Sono attualmente nel portale in cattività della tua rete. Il nostro PWA non può essere completamente caricato in questo browser incorporato. Si prega di copiare il seguente collegamento, toccare il pulsante \"Aggiorna\" e quindi inserire il collegamento in un browser normale (ad esempio Chrome, Firefox, Safari) per utilizzare l'applicazione senza restrizione.",
           "server": "Il server non è disponibile in questo momento. Per favore riprova più tardi.",
@@ -98,7 +98,7 @@
         "phone_button": "Vai alla demo chiamata d’emergenza",
         "incoming_call": "Chiamata in arrivo",
         "offline": {
-          "text": "In caso di crisi, puoi inviare qui una chiamata d’emergenza se, ad esempio, non puoi effettuare chiamate a causa di un blackout. Questo verrà automaticamente instradato ai Vigili del Fuoco di Berlino. Con la nostra <strong>chiamata dimostrativa</strong> puoi già esercitarti con le 5 domande che dovresti avere sempre pronte quando parli con i servizi di emergenza."
+          "text": "In caso di crisi, puoi effettuare una chiamata di emergenza ai vigili del fuoco di Berlino. Con la nostra <strong> demo di chiamata di emergenza </strong> puoi praticare le domande 5W che dovresti sempre avere in conversazione con i servizi di emergenza."
         },
         "online": {
           "text": "Ora sei connesso alla demo chiamata dei Vigili del Fuoco di Berlino. I vigili del fuoco ti guideranno nella conversazione nel modo seguente:"
@@ -134,7 +134,7 @@
           "call_state": "Stato: "
         },
         "offline": {
-          "text": "Ora puoi inviare una chiamata d’emergenza ai Vigili del Fuoco di Berlino. Tieni presente che si tratta di una vera chiamata d’emergenza. L’abuso è punibile!"
+          "text": "Qui puoi inviare una chiamata di emergenza ai vigili del fuoco di Berlino. Si prega di notare che sono una vera chiamata di emergenza. L'abuso è punibile!"
         },
         "connecting": {
           "text": "Ora sarai connesso ai Vigili del Fuoco di Berlino, ti preghiamo di prestare attenzione alle seguenti domande:"

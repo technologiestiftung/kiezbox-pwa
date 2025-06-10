@@ -1,14 +1,19 @@
 <script lang="ts">
 	import Copy from 'carbon-icons-svelte/lib/Copy.svelte';
 	import { t } from '$lib/translations';
+	import { onMount } from 'svelte';
 	let { errorMessage, onClick } = $props();
 
-	function copyToClipboard() {
-		const url = 'https://emergency.ds-apps.tsb-berlin.de/';
-		navigator.clipboard.writeText(url);
-	}
+	let currentUrl = $state('');
 
-	///
+	onMount(() => {
+		// Ensure the URL is updated if the component is mounted after navigation
+		currentUrl = window.location.href;
+	});
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(currentUrl);
+	};
 </script>
 
 <div class={`Dialer-root bg-notruf-light relative grid max-w-[43.75rem] justify-center`}>
@@ -22,14 +27,14 @@
 			</span>
 			<div class="flex items-center gap-4">
 				<a
-					href="https://emergency.ds-apps.tsb-berlin.de/"
+					href={currentUrl}
 					target="_blank"
 					class="text-body-black dark:text-body-black flex items-center hover:underline"
 					onclick={(e) => {
 						copyToClipboard();
 					}}
 				>
-					https://emergency.ds-apps.tsb-berlin.de/
+					{currentUrl}
 				</a>
 				<button
 					class="text-body-black dark:text-body-black cursor-pointer hover:underline"

@@ -20,3 +20,10 @@ export enum CallState {
 	CALL_REJECTED = 'CALL_REJECTED',
 	CALL_REDIRECTED = 'CALL_REDIRECTED'
 }
+
+export enum DeviceType {
+	DESKTOP = 'DESKTOP',
+	IPHONE = 'IPHONE',
+	ANDROID = 'ANDROID',
+	TABLET = 'TABLET'
+}
