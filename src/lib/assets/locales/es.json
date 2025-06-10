@@ -86,7 +86,7 @@
         "button": "Refrescar",
         "title": "Error",
         "messages": {
-          "network": "No está conectado a la red Wi-Fi de emergencia Kiezbox. Por favor, conéctese a la red 'Kiezbox Notfall WLAN' e inténtelo de nuevo.",
+          "network": "No está conectado a la WLAN de emergencia de Kiezbox y no puede hacer llamadas de emergencia. Conéctese a la red 'Kiezbox Emergency WLAN' e intente nuevamente.",
           "audio": "Su dispositivo no admite transmisión de audio. Por favor, use otro dispositivo o navegador.",
           "captive-portal": "Actualmente se encuentran en el portal cautivo de su red. Nuestro PWA no se puede cargar completamente en este navegador incrustado. Copie el siguiente enlace, toque el botón \"Actualizar\" y luego inserte el enlace en un navegador normal (por ejemplo, Chrome, Firefox, Safari) para usar la aplicación sin restricción.",
           "server": "El servidor no está disponible actualmente. Por favor, inténtelo de nuevo más tarde.",
@@ -98,7 +98,7 @@
         "phone_button": "Ir a demostración de llamada de emergencia",
         "incoming_call": "Llamada entrante",
         "offline": {
-          "text": "En caso de crisis, puede enviar una llamada de emergencia aquí si, por ejemplo, un corte de electricidad le impide realizar llamadas. Esto se conectará automáticamente a los Bomberos de Berlín. Con nuestra <strong>llamada de demostración</strong>, puede practicar ya las 5 preguntas 'W' que siempre debe tener listas durante la conversación con emergencias."
+          "text": "En caso de crisis, puede hacer una llamada de emergencia a la Brigada de Bomberos de Berlín. Con nuestra demostración de llamadas de emergencia <strong> </strong> puede practicar las preguntas de 5W que siempre debe tener en conversación con los servicios de emergencia."
         },
         "online": {
           "text": "Ahora está conectado a la demostración de llamada de emergencia de los Bomberos de Berlín. Los bomberos lo guiarán en la conversación de la siguiente manera:"
@@ -134,7 +134,7 @@
           "call_state": "Estado: "
         },
         "offline": {
-          "text": "Ahora puede enviar una llamada de emergencia real a los Bomberos de Berlín. Tenga en cuenta que se trata de una llamada de emergencia real. ¡El uso indebido es punible!"
+          "text": "Aquí puede enviar una llamada de emergencia a la Brigada de Bomberos de Berlín. Tenga en cuenta que soy una verdadera llamada de emergencia. ¡El abuso es punible!"
         },
         "connecting": {
           "text": "Ahora se está conectando a los Bomberos de Berlín; por favor, preste atención a las siguientes preguntas:"

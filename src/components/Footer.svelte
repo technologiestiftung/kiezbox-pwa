@@ -27,7 +27,7 @@
 	</div>
 
 	<div
-		class="flex w-full flex-col items-center justify-between space-y-6 space-x-6 md:flex-row md:space-y-0"
+		class="flex w-full flex-col justify-between space-y-6 space-x-6 md:flex-row md:items-center md:space-y-0"
 	>
 		<div class="hidden flex-col space-y-2.5 md:flex">
 			<span class="body-text-bold text-white"> {$t('common.footer.created_by')} </span>
@@ -42,8 +42,7 @@
 				</figure>
 			</a>
 		</div>
-		<div class="flex flex-col space-y-2.5 text-end md:order-2">
-			<div></div>
+		<div class="flex flex-col space-y-2.5 md:order-2 md:text-end">
 			<a
 				href={$t('common.footer.privacy.href')}
 				class="text-white underline"

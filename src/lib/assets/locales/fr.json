@@ -86,7 +86,7 @@
         "button": "Rafraîchir",
         "title": "Erreur",
         "messages": {
-          "network": "Vous n'êtes pas connecté au réseau Wi-Fi d'urgence Kiezbox. Veuillez vous connecter au réseau « Kiezbox Notfall WLAN » et réessayer.",
+          "network": "Vous n'êtes pas connecté au KiezBox d'urgence WLAN et ne pouvez pas passer d'appels d'urgence. Veuillez vous connecter au réseau «KiezBox Emergency Wlan» et réessayer.",
           "audio": "Votre appareil ne prend pas en charge la transmission audio. Veuillez utiliser un autre appareil ou navigateur.",
           "captive-portal": "Ils sont actuellement dans le portail captif de votre réseau. Notre PWA ne peut pas être entièrement chargé dans ce navigateur intégré. Veuillez copier le lien suivant, appuyez sur le bouton \"Mise à jour\", puis insérez le lien dans un navigateur normal (par exemple Chrome, Firefox, Safari) pour utiliser l'application sans restriction.",
           "server": "Le serveur n'est pas disponible pour le moment. Veuillez réessayer plus tard.",
@@ -98,7 +98,7 @@
         "phone_button": "Vers la démo d'appel d'urgence",
         "incoming_call": "Appel entrant",
         "offline": {
-          "text": "En cas de crise, vous pouvez passer un appel d'urgence ici si, par exemple, une panne de courant vous empêche d'appeler autrement. Celui-ci sera automatiquement relayé à la Brigade des pompiers de Berlin. Avec notre <strong>appel de démonstration</strong>, vous pouvez d'ores et déjà vous exercer aux 5 questions « W » à avoir toujours en tête lors d'un appel d'urgence."
+          "text": "En cas de crise, vous pouvez passer un appel d'urgence à la Brigade de Berlin. Avec notre démo d'appel <strong> d'urgence </strong>, vous pouvez pratiquer les questions 5W que vous devriez toujours avoir en conversation avec les services d'urgence."
         },
         "online": {
           "text": "Vous êtes maintenant connecté à la démo d'appel d'urgence de la Brigade des pompiers de Berlin. Les pompiers vous guideront dans la conversation de la manière suivante :"
@@ -134,7 +134,7 @@
           "call_state": "Statut : "
         },
         "offline": {
-          "text": "Vous pouvez à présent passer un véritable appel d'urgence à la Brigade des pompiers de Berlin. Veuillez noter qu'il s'agit d'un appel d'urgence réel. Tout abus est passible de sanctions !"
+          "text": "Ici, vous pouvez envoyer un appel d'urgence au Berlin Brigade. Veuillez noter que je suis un véritable appel d'urgence. L'abus est passible!"
         },
         "connecting": {
           "text": "Vous êtes en train d'être connecté à la Brigade des pompiers de Berlin ; veuillez prêter attention aux questions suivantes :"

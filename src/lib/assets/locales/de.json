@@ -86,7 +86,7 @@
         "button": "Aktualisieren",
         "title": "Fehler",
         "messages": {
-          "network": "Sie sind nicht mit dem Kiezbox Notfall WLAN verbunden. Bitte verbinden Sie sich mit dem Netzwerk 'Kiezbox Notfall WLAN' und versuchen Sie es erneut.",
+          "network": "Sie sind nicht mit dem Kiezbox Notfall WLAN verbunden und können keine Notrufe absetzen. Bitte verbinden Sie sich mit dem Netzwerk 'Kiezbox Notfall WLAN' und versuchen Sie es erneut.",
           "audio": "Ihr Gerät unterstützt keine Audioübertragung. Bitte verwenden Sie ein anderes Gerät oder einen anderen Browser.",
           "captive-portal": "Derzeit befinden Sie sich im Captive-Portal Ihres Netzwerks. Unsere PWA kann in diesem eingebetteten Browser nicht vollständig geladen werden. Bitte kopieren Sie den folgenden Link, tippen Sie auf den „Aktualisieren“-Button und fügen Sie den Link anschließend in einem normalen Browser (z. B. Chrome, Firefox, Safari) ein, um die Anwendung uneingeschränkt zu nutzen.",
           "server": "Der Server ist derzeit nicht erreichbar. Bitte versuchen Sie es später erneut.",
@@ -98,7 +98,7 @@
         "phone_button": "Zur Notrufdemo",
         "incoming_call": "Eingehender Anruf",
         "offline": {
-          "text": "In einem Krisenfall können Sie hier einen Notruf absenden, wenn Sie bspw. wegen Stromausfall sonst keine Anrufe tätigen können.  Dieses wird dabei automatisch von der Berliner Feuerwehr eingeschalten. Mit unserem <strong>Demoanruf</strong> können Sie schon einmal die 5W-Fragen üben, die sie im Gespräch mit dem Notruf immer parat haben sollten."
+          "text": "In einem Krisenfall können Sie hier einen Notruf an die Berliner Feuerwehr absetzen. Mit unserer <strong>Notrufdemo</strong> können Sie schon einmal die 5W-Fragen üben, die sie im Gespräch mit dem Rettungsdienst immer parat haben sollten."
         },
         "online": {
           "text": "Sie sind nun verbunden mit dem Demonotruf der Berliner Feuerwehr. Die Feuerwehr wird Sie wie folgt durch das Gespräch leiten:"
@@ -134,7 +134,7 @@
           "call_state": "Status: "
         },
         "offline": {
-          "text": "Sie können nun einen Notruf zur Berliner Feuerwehr absenden. Bitte beachten Sie, dass es ich hier um einen echten Notruf handelt. Missbrauch ist strafbar!"
+          "text": "Hier können Sie einen Notruf zur Berliner Feuerwehr absenden. Bitte beachten Sie, dass es ich hier um einen echten Notruf handelt. Missbrauch ist strafbar!"
         },
         "connecting": {
           "text": "Sie werden nun verbunden mit der Berliner Feuerwehr, bitte beachten sie folgende Fragen:"

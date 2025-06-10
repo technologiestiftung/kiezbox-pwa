@@ -86,7 +86,7 @@
         "button": "Yenilemek",
         "title": "Hata",
         "messages": {
-          "network": "Kiezbox Acil Wi-Fi ağına bağlı değilsiniz. Lütfen 'Kiezbox Notfall WLAN' ağına bağlanın ve tekrar deneyin.",
+          "network": "Kiezbox Acil Durum WLAN'a bağlı değilsiniz ve acil çağrı yapamazsınız. Lütfen 'Kiezbox Acil Durum Wlan' ağına bağlanın ve tekrar deneyin.",
           "audio": "Cihazınız ses aktarımını desteklemiyor. Lütfen başka bir cihaz veya tarayıcı kullanın.",
           "captive-portal": "Şu anda ağınızın esir portalındalar. PWA'mız bu gömülü tarayıcıya tam olarak yüklenemez. Lütfen aşağıdaki bağlantıyı kopyalayın, \"Güncelleme\" düğmesine dokunun ve ardından uygulamayı kısıtlama olmadan kullanmak için bağlantıyı normal bir tarayıcıya (örn. Chrome, Firefox, Safari) ekleyin.",
           "server": "Sunucu şu anda ulaşılamıyor. Lütfen daha sonra tekrar deneyin.",
@@ -98,7 +98,7 @@
         "phone_button": "Demo acil çağrıya git",
         "incoming_call": "Gelen arama",
         "offline": {
-          "text": "Bir kriz durumunda, örneğin elektrik kesintisi nedeniyle başka hiçbir çağrı yapamıyorsanız, buradan acil çağrı gönderebilirsiniz. Bu, Berlin İtfaiyesi tarafından otomatik olarak etkinleştirilecektir. <strong>Demo çağrımız</strong> ile acil çağrı sırasında her zaman hazır bulundurmanız gereken 5 W sorularını şimdiden pratik edebilirsiniz."
+          "text": "Bir kriz durumunda, Berlin İtfaiyesi'ne acil bir çağrı yapabilirsiniz. <strong> Acil Çağrı Demo'umuzla </strong> Acil servislerle her zaman konuşmanız gereken 5W sorularını uygulayabilirsiniz."
         },
         "online": {
           "text": "Şimdi Berlin İtfaiyesi’nin demo acil çağrısı ile bağlantıdasınız. İtfaiye sizi konuşma boyunca şu şekilde yönlendirecektir:"
@@ -134,7 +134,7 @@
           "call_state": "Durum: "
         },
         "offline": {
-          "text": "Şimdi Berlin İtfaiyesi’ne bir acil çağrı gönderebilirsiniz. Lütfen bunun gerçek bir acil çağrı olduğunu unutmayın. Suistimal cezalandırılır!"
+          "text": "Burada Berlin İtfaiyesi'ne acil bir çağrı gönderebilirsiniz. Lütfen gerçek bir acil durum çağrısı olduğumu unutmayın. Kötüye kullanım cezalandırılabilir!"
         },
         "connecting": {
           "text": "Şimdi Berlin İtfaiyesi ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"

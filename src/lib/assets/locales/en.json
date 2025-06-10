@@ -86,7 +86,7 @@
         "button": "Refresh",
         "title": "Error",
         "messages": {
-          "network": "You are not connected to the Kiezbox emergency Wi-Fi. Please connect to the 'Kiezbox Notfall WLAN' network and try again.",
+          "network": "You are not connected to the Kiezbox Emergency WLAN and cannot make emergency calls. \nPlease connect to the 'Kiezbox Emergency WLAN' network and try again.",
           "audio": "Your device does not support audio transmission. Please use a different device or browser.",
           "captive-portal": "They are currently in the captive portal of your network. \nOur PWA cannot be fully loaded in this embedded browser. \nPlease copy the following link, tap the \"Update\" button and then insert the link in a normal browser (e.g. Chrome, Firefox, Safari) to use the application without restriction.",
           "server": "The server is currently unavailable. Please try again later.",
@@ -98,7 +98,7 @@
         "phone_button": "To the emergency call demo",
         "incoming_call": "Incoming call",
         "offline": {
-          "text": "In a crisis situation, you can place an emergency call here if, for example, you are unable to make calls due to a power outage. This will automatically connect to the Berlin Fire Department. With our <strong>demo call</strong>, you can practice the 5 W-questions that you should always have ready when speaking with emergency services."
+          "text": "In the event of a crisis, you can make an emergency call to the Berlin fire brigade. \nWith our <strong> emergency call demo </strong> you can practice the 5W questions that you should always have in conversation with the emergency services."
         },
         "online": {
           "text": "You are now connected to the Berlin Fire Department's demo call. The fire department will guide you through the conversation as follows:"
@@ -134,7 +134,7 @@
           "call_state": "Status: "
         },
         "offline": {
-          "text": "You can now place a real emergency call to the Berlin Fire Department. Please note that this is a real emergency call. Misuse is punishable by law!"
+          "text": "Here you can send an emergency call to the Berlin fire brigade. \nPlease note that I am a real emergency call. \nAbuse is punishable!"
         },
         "connecting": {
           "text": "You are now being connected to the Berlin Fire Department; please pay attention to the following questions:"
