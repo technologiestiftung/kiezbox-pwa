@@ -1,13 +1,19 @@
 <script lang="ts">
 	import Copy from 'carbon-icons-svelte/lib/Copy.svelte';
 	import { t } from '$lib/translations';
+	import { onMount } from 'svelte';
 	let { errorMessage, onClick } = $props();
 
-	let currentUrl = window.location.href;
+	let currentUrl = $state('');
 
-	function copyToClipboard() {
+	onMount(() => {
+		// Ensure the URL is updated if the component is mounted after navigation
+		currentUrl = window.location.href;
+	});
+
+	const copyToClipboard = () => {
 		navigator.clipboard.writeText(currentUrl);
-	}
+	};
 </script>
 
 <div class={`Dialer-root bg-notruf-light relative grid max-w-[43.75rem] justify-center`}>

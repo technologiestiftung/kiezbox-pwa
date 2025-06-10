@@ -86,7 +86,7 @@
         "button": "Rafraîchir",
         "title": "Erreur",
         "messages": {
-          "network": "Vous n'êtes pas connecté au KiezBox d'urgence WLAN et ne pouvez pas passer d'appels d'urgence. Veuillez vous connecter au réseau «KiezBox Emergency Wlan» et réessayer.",
+          "network": "\"Vous n'êtes pas connecté au KiezBox d'urgence WLAN et ne pouvez pas passer d'appels d'urgence. Veuillez vous connecter au réseau «KiezBox Emergency Wlan» et réessayer.\"",
           "audio": "Votre appareil ne prend pas en charge la transmission audio. Veuillez utiliser un autre appareil ou navigateur.",
           "captive-portal": "Ils sont actuellement dans le portail captif de votre réseau. Notre PWA ne peut pas être entièrement chargé dans ce navigateur intégré. Veuillez copier le lien suivant, appuyez sur le bouton \"Mise à jour\", puis insérez le lien dans un navigateur normal (par exemple Chrome, Firefox, Safari) pour utiliser l'application sans restriction.",
           "server": "Le serveur n'est pas disponible pour le moment. Veuillez réessayer plus tard.",

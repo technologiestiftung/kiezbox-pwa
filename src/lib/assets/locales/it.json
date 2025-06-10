@@ -86,7 +86,7 @@
         "button": "Rinfrescare",
         "title": "Errore",
         "messages": {
-          "network": "Non sei connesso alla WLAN di emergenza Kiezbox e non puoi effettuare chiamate di emergenza. Si prega di connettersi alla rete \"Kiezbox Emergency WLAN\" e riprovare.",
+          "network": "Non sei connesso alla WLAN di emergenza Kiezbox e non puoi effettuare chiamate di emergenza. Si prega di connettersi alla rete \\\"Kiezbox Emergency WLAN\\\" e riprovare.",
           "audio": "Il tuo dispositivo non supporta la trasmissione audio. Per favore usa un altro dispositivo o browser.",
           "captive-portal": "Sono attualmente nel portale in cattività della tua rete. Il nostro PWA non può essere completamente caricato in questo browser incorporato. Si prega di copiare il seguente collegamento, toccare il pulsante \"Aggiorna\" e quindi inserire il collegamento in un browser normale (ad esempio Chrome, Firefox, Safari) per utilizzare l'applicazione senza restrizione.",
           "server": "Il server non è disponibile in questo momento. Per favore riprova più tardi.",
