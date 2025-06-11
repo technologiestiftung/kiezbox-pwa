@@ -2,13 +2,16 @@
 	import Copy from 'carbon-icons-svelte/lib/Copy.svelte';
 	import { t } from '$lib/translations';
 	import { onMount } from 'svelte';
+	import { PUBLIC_API_URL } from '$env/static/public';
+
 	let { errorMessage, onClick } = $props();
 
 	let currentUrl = $state('');
 
 	onMount(() => {
 		// Ensure the URL is updated if the component is mounted after navigation
-		currentUrl = window.location.href;
+		// currentUrl = window.location.href;
+		currentUrl = PUBLIC_API_URL;
 	});
 
 	const copyToClipboard = () => {
