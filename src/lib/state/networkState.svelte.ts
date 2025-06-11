@@ -121,19 +121,18 @@ const fetchMode = async (): Promise<Mode | null> => {
 			throw new Error(`Invalid mode response: ${JSON.stringify(response)}`);
 		}
 
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const infoResponse: any = await apiFetch(INFO_API_ENDPOINT, {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		});
-		console.log('Info response:', infoResponse);
+		// const infoResponse: any = await apiFetch(INFO_API_ENDPOINT, {
+		// 	method: 'GET',
+		// 	headers: { 'Content-Type': 'application/json' }
+		// });
+		// console.log('Info response:', infoResponse);
 
-		const lngLat: LngLatLike = [infoResponse.lon, infoResponse.lat];
+		// const lngLat: LngLatLike = [infoResponse.lon, infoResponse.lat];
 
 		return {
 			status: response.mode,
 			isEmergency: response.mode % 2 == 0,
-			coordinates: lngLat
+			coordinates: response.coordinates || [13.342502830765682, 52.48863888739753]
 		};
 	} catch (error) {
 		setError(`Failed to fetch mode: ${error instanceof Error ? error.message : String(error)}`);
