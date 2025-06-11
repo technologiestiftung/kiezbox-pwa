@@ -38,7 +38,7 @@
 		if (e.target === dialog) close();
 	}}
 	class="modal-root [&[open]]:animate-zoom [&[open]::backdrop]:animate-fade [&::backdrop]:bg-body-black/85
-    fixed inset-0 m-auto h-[calc(100vh-15rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
+    fixed inset-0 m-auto h-[calc(100vh-13rem)] rounded md:h-[45rem] md:w-[29rem] [&::backdrop]:backdrop-blur-sm"
 >
 	<div class="bg-purple-light sticky flex h-12 items-center justify-end">
 		<Button
