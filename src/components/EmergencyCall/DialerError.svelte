@@ -7,7 +7,6 @@
 	let currentUrl = $state('');
 
 	onMount(() => {
-		// Ensure the URL is updated if the component is mounted after navigation
 		currentUrl = window.location.href;
 	});
 

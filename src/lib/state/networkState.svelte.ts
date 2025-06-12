@@ -7,7 +7,8 @@ import { PUBLIC_WSS_PATH } from '$env/static/public';
 
 // Constants
 const PING_API_ENDPOINT = '/api/mode';
-const INFO_API_ENDPOINT = '/api/info';
+// TODO: Uncomment when the info API is available
+// const INFO_API_ENDPOINT = '/api/info';
 const PING_INTERVAL_MS = 15000;
 
 let pingIntervalId: ReturnType<typeof setInterval> | null = $state<ReturnType<
@@ -121,6 +122,7 @@ const fetchMode = async (): Promise<Mode | null> => {
 			throw new Error(`Invalid mode response: ${JSON.stringify(response)}`);
 		}
 
+		// TODO: Uncomment when info API is available
 		// const infoResponse: any = await apiFetch(INFO_API_ENDPOINT, {
 		// 	method: 'GET',
 		// 	headers: { 'Content-Type': 'application/json' }

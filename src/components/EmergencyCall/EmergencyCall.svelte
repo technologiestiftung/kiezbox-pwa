@@ -96,8 +96,6 @@
 		isModal = false;
 	};
 
-	// Removed waitForRegistration as it's now in the store
-
 	const call = async () => {
 		const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
 		await handleCallAction(targetUri, remoteAudio, (error) => toast.error(error));
