@@ -1,4 +1,4 @@
-import { PUBLIC_LOG_LEVEL, PUBLIC_USER_PREFIX, PUBLIC_WSS_PATH } from '$env/static/public';
+import { PUBLIC_APP_HOSTNAME, PUBLIC_LOG_LEVEL, PUBLIC_USER_PREFIX, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
 import { CallState } from '$lib/enums';
 import type { SessionResponse, SIPUser } from '$lib/types';
@@ -374,7 +374,7 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 		if (!userAgent || CallStore.callState === CallState.DISCONNECTED) {
 			CallStore.callState = CallState.INITIALIZING;
 			const isLocalhost = window.location.hostname === 'localhost';
-			const host = isLocalhost ? 'emergency.ds-apps.tsb-berlin.de' : window.location.host;
+			const host = isLocalhost ? PUBLIC_APP_HOSTNAME : window.location.host;
 			const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;
 			const kbURI = `sip:${sipUser.username}@host`;
 			const uri = UserAgent.makeURI(kbURI);
