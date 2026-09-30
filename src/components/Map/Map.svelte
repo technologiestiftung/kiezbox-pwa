@@ -2,21 +2,26 @@
 	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { SOURCES_CONFIG } from '$lib/config/sources';
+	import { NetworkStore } from '$lib/state/networkState.svelte';
 	import { mapState, poiState } from '$lib/state/state.svelte';
 	import type { GeoJSON } from 'geojson';
-	import maplibregl, { type AddLayerObject, type LngLatLike } from 'maplibre-gl';
+	import type { AddLayerObject, LngLatLike } from 'maplibre-gl';
+	import * as maplibregl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	// maplibre-gl v6 resolves its worker relative to its own module URL, which
+	// Vite neither pre-bundles nor emits — so let Vite bundle the worker itself
+	import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 	import { onMount } from 'svelte';
 	import Legend from './Legend.svelte';
 	import PopupCard from './PopupCard.svelte';
-	import { apiFetch } from '$lib/api';
-	import { NetworkStore } from '$lib/state/networkState.svelte';
 
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let map: maplibregl.Map;
 
 	onMount(() => {
 		if (!mapContainer) return;
+		maplibregl.setWorkerUrl(maplibreWorkerUrl);
+
 		const baseUrl = window.location.origin;
 		const coordinates = NetworkStore.coordinates ?? [13.342502830765682, 52.48863888739753];
 		console.log('Map coordinates:', coordinates);
