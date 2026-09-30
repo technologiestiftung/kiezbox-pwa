@@ -10,7 +10,7 @@
 	import { createPrecautionTabItems } from '$lib/utils/precautionUtils';
 	import { t, loading, locale, locales } from '$lib/translations';
 	import type { TabItem } from '$lib/types'; // Import your type if needed
-	import { NetworkStore, setAdminMode } from '$lib/state/networkState.svelte';
+	import { NetworkStore } from '$lib/state/networkState.svelte';
 
 	function getIcon(slug: string) {
 		const icons = {
@@ -45,7 +45,6 @@
 			}
 			NetworkStore.adminMode = true;
 			clickCount = 0;
-		} else {
 		}
 	};
 
@@ -57,7 +56,6 @@
 		};
 	});
 
-	const noOfClicks = $state(0);
 	const precautionSlugs = ['personal_precautions', 'fire', 'flood', 'storm', 'cbrn'];
 
 	let tabItems = $state<(TabItem & { icon: typeof BaggageClaim | null })[]>([]); // Initialize as reactive state
@@ -77,8 +75,7 @@
 <div class="PrecautionGuide-root bg-purple-light relative flex w-full flex-col">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<!-- svelte-ignore event_directive_deprecated -->
-	<div class="flex min-h-14 items-center justify-center" on:click={handleTitleClick}>
+	<div class="flex min-h-14 items-center justify-center" onclick={handleTitleClick}>
 		{#if !$loading}
 			<h2
 				class="text-purple-dark select-none
@@ -93,7 +90,7 @@
 	>
 		{#if !$loading}
 			<select bind:value={$locale} class=" bg-purple-light cursor-pointer px-1">
-				{#each $locales as value}
+				{#each $locales as value (value)}
 					<option {value}>{$t(`common.languages.${value}`)}</option>
 				{/each}
 			</select>

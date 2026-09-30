@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/translations';
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import SpeechBubble from './SpeechBubble.svelte';
 	let { isInCall } = $props();
 
@@ -25,7 +25,8 @@
 	let isProgrammaticScroll = false;
 	let programmaticScrollTimeout: number | null = null;
 
-	let prevIsInCall = $state(isInCall);
+	// intentionally captures the initial value; the effect below tracks changes
+	let prevIsInCall = $state(untrack(() => isInCall));
 
 	$effect(() => {
 		if (isInCall && !prevIsInCall) {
@@ -195,7 +196,7 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html $t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-8 w-full space-y-2 px-4">
-			{#each { length: BUBBLE_COUNT } as _, i}
+			{#each { length: BUBBLE_COUNT }, i (i)}
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<li>{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
 			{/each}
@@ -213,11 +214,11 @@
 		onscroll={handleScroll}
 		onwheel={handleScroll}
 		ontouchmove={handleScroll}
+		role="region"
 		class="scroll-fade flex h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center gap-10 overflow-y-auto scroll-smooth p-4 pb-32"
 		aria-label="Scrolling question bubbles"
 	>
-		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
-		{#each { length: BUBBLE_COUNT } as _, i}
+		{#each { length: BUBBLE_COUNT }, i (i)}
 			<div
 				bind:this={bubbleElements[i]}
 				class={`flex w-full justify-center ${i == 0 ? 'pt-10' : ''}`}

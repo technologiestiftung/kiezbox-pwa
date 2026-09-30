@@ -15,7 +15,9 @@ function createSourceState() {
 	const baseMap = $state<BaseMap | undefined>(undefined);
 
 	return {
-		baseMap
+		get baseMap() {
+			return baseMap;
+		}
 	};
 }
 

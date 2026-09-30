@@ -4,13 +4,14 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { t } from '$lib/translations';
 	import { CloseOutline } from 'carbon-icons-svelte';
+	import { untrack } from 'svelte';
 
 	let { children, isModal, close, disabled } = $props();
 	let dialog = $state<HTMLDialogElement | undefined>(undefined);
 	let contentContainer: HTMLElement | undefined = $state();
 
 	// Track previous modal state to detect changes
-	let prevModalState = $state(isModal);
+	let prevModalState = $state(untrack(() => isModal));
 
 	$effect(() => {
 		if (!browser) return;
@@ -28,9 +29,6 @@
 	});
 </script>
 
-<!-- eslint-disable-next-line svelte/valid-compile -->
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <dialog
 	bind:this={dialog}
 	onclose={close}
@@ -44,7 +42,7 @@
 		<Button
 			variant="ghost"
 			class="text-body-black justfiy-center flex w-32 cursor-pointer items-center space-x-2"
-			on:click={close}
+			onclick={close}
 			{disabled}
 		>
 			<span class="text-body-black">{$t('common.button.close')}</span>

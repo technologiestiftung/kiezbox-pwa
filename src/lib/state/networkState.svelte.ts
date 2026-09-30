@@ -2,6 +2,7 @@ import { apiFetch } from '$lib/api';
 import type { Mode } from '$lib/types';
 import { ApiStatus, DeviceType } from '$lib/enums';
 import { goto } from '$app/navigation';
+import { resolve } from '$app/paths';
 import type { LngLatLike } from 'maplibre-gl';
 import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
 
@@ -144,7 +145,7 @@ export const setMeFree = async (): Promise<void> => {
 		if (!response) {
 			throw new Error(`Set me free request failed with status: ${response.status}`);
 		}
-		goto('/', {
+		goto(resolve('/'), {
 			noScroll: true
 		});
 	} catch (error) {
@@ -201,7 +202,7 @@ export async function initNetworkService() {
 		startPing();
 		NetworkStore.initialized = true;
 	} catch (error) {
-		throw new Error(`Failed to initialize network service: ${error}`);
+		throw new Error(`Failed to initialize network service: ${error}`, { cause: error });
 	}
 }
 

@@ -7,7 +7,7 @@
 
 <Tabs.Root value={tabItems[0]?.slug || ''} class="w-full justify-center bg-white">
 	<Tabs.List>
-		{#each tabItems as tabItem}
+		{#each tabItems as tabItem (tabItem.slug)}
 			<Tabs.Trigger value={tabItem.slug} class="size-12">
 				{#if tabItem.icon}
 					<tabItem.icon class="size-8" />
@@ -15,12 +15,12 @@
 			</Tabs.Trigger>
 		{/each}
 	</Tabs.List>
-	{#each tabItems as tabItem}
+	{#each tabItems as tabItem (tabItem.slug)}
 		<Tabs.Content value={tabItem.slug}>
 			<div class="flex flex-col px-6 pb-10 md:w-[29rem]">
 				<h3 class="border-purple-mid border-b py-5">{tabItem.title}</h3>
 				<div class="mt-10 space-y-10">
-					{#each tabItem.content as infoBoxItem}
+					{#each tabItem.content as infoBoxItem, i (i)}
 						<InfoBox {infoBoxItem} />
 					{/each}
 				</div>

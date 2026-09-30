@@ -12,8 +12,9 @@
 		class="flex max-h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center scroll-smooth p-4 pb-32"
 	>
 		<ul class="w-full space-y-2 px-4">
-			{#each { length: 5 }, i}
+			{#each { length: 5 }, i (i)}
 				<li>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}
 				</li>
 			{/each}
@@ -27,8 +28,9 @@
 		class="flex max-h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center scroll-smooth p-4 pb-32"
 	>
 		<ul class="w-full space-y-2 px-4">
-			{#each { length: 5 }, i}
+			{#each { length: 5 }, i (i)}
 				<li>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}
 				</li>
 			{/each}

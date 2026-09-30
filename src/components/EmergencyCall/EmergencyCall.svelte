@@ -130,8 +130,6 @@
 		if (!errorMessage) return;
 		toast.error(errorMessage);
 	});
-
-	$inspect(showDialer);
 </script>
 
 {#if isAdmin}
@@ -148,28 +146,25 @@
 <Dialer {isEmergency} onClick={openCaller} {showDialer}></Dialer>
 
 <Modal close={closeCaller} {isModal} disabled={isCloseDisabled}>
-	{#snippet children()}
-		<div class="EmergencyCall-root relative flex w-full flex-grow flex-col justify-between">
-			{#if isEmergency}
-				<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
-			{:else}
-				<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
-			{/if}
+	<div class="EmergencyCall-root relative flex w-full flex-grow flex-col justify-between">
+		{#if isEmergency}
+			<EmergencyCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
+		{:else}
+			<DemoCallInfo isInCall={callState === CallState.CALL_ESTABLISHED} />
+		{/if}
 
-			<CallScreen
-				isInCall={callState === CallState.CALL_ESTABLISHED}
-				activateCall={call}
-				buttonText={callButtonText}
-				{isEmergency}
-				{activateMic}
-				{activateSpeaker}
-				{time}
-				{isMicrophoneMuted}
-				{isSpeakerMuted}
-				canCall={true}
-				{errorMessage}
-				bind:remoteAudio
-			/>
-		</div>
-	{/snippet}
+		<CallScreen
+			isInCall={callState === CallState.CALL_ESTABLISHED}
+			activateCall={call}
+			buttonText={callButtonText}
+			{isEmergency}
+			{activateMic}
+			{activateSpeaker}
+			{time}
+			{isMicrophoneMuted}
+			{isSpeakerMuted}
+			canCall={true}
+			bind:remoteAudio
+		/>
+	</div>
 </Modal>
