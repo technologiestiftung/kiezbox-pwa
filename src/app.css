@@ -9,7 +9,7 @@
 	}
 }
 
-@plugin "tailwindcss-animate";
+@plugin 'tailwindcss-animate';
 
 @theme {
 	/* can be used as classes */
