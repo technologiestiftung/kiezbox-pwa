@@ -47,7 +47,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			visibility: 'visible',
 			'icon-image': 'drinking-water-icon',
 			'icon-size': 0.3
-		},
+		}
 		// getContent: (properties) => ({
 		// 	// Name: properties.bezeichnun
 		// })

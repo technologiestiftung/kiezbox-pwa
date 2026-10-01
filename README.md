@@ -36,9 +36,11 @@ Run the following command to install all necessary packages:
 npm install
 ```
 
-## Selecting a City
+## Cities
 
-The app is built for one city at a time. Everything city-specific lives in `cities/<slug>/`:
+The app build is the same for every city. The city data is not part of it: the app loads it at runtime from `/city/` (on the box: `${DEPLOY_PATH}/city/`, next to the app). App and city data are therefore deployed and updated independently, and the service worker caches them separately, so an app update does not make phones download the map again.
+
+Everything city-specific lives in `cities/<slug>/`:
 
 ```
 cities/<slug>/
@@ -48,7 +50,7 @@ cities/<slug>/
   locales/           # optional overrides of src/lib/assets/locales/<lang>.json (deep-merged)
 ```
 
-Set the city with `PUBLIC_CITY=<slug>` (in `.env` or `.env.<slug>`). Before `dev`, `build` and `check`, `scripts/prepare-city.js` copies the city into `static/pbf-tiles/` and `src/lib/generated/` (both gitignored). Map bounds and center are read from `tiles/metadata.json`. The tile zoom range is taken from the zoom folders actually present in `tiles/`, so a tileset can stop at e.g. z13 to save space: the map overzooms the highest level instead of requesting missing tiles. `mapMaxZoom` (optional, ≥ highest tile zoom) caps how far users can zoom in; `null` keeps the MapLibre default.
+`npm run package:city -- <slug>` validates a city and packages it into `dist/cities/<slug>/` (gitignored), including a generated `city.json`: the runtime config plus a `dataVersion` hash that tells the service worker when the city data changed. It fails if app (`build/`) + city data exceed the 64 MB limit of the box. Map bounds and center are read from `tiles/metadata.json`. The tile zoom range is taken from the zoom folders actually present in `tiles/`, so a tileset can stop at e.g. z13 to save space: the map overzooms the highest level instead of requesting missing tiles. `mapMaxZoom` (optional, ≥ highest tile zoom) caps how far users can zoom in; `null` keeps the MapLibre default.
 
 ### Adding a new city
 
@@ -57,32 +59,42 @@ Set the city with `PUBLIC_CITY=<slug>` (in `.env` or `.env.<slug>`). Before `dev
 3. Export the POIs (e.g. via overpass turbo) as GeoJSON into `poi/`. Empty FeatureCollections are fine.
 4. Fill in `city.config.json` and the locale overrides (local fire brigade, poison control centre).
 5. Create `.env.<slug>` with `PUBLIC_CITY=<slug>` and the box-specific variables (API URL, hostname, SIP targets, deploy target).
-6. Run `CITY=<slug> npm run build:city`. The build fails if it exceeds the 64 MB limit of the box.
+6. Run `npm run package:city -- <slug>` and fix whatever it reports.
 
 ## Running the Project
 
-To start a local development server, use the following command:
+`npm run dev` and `npm run preview` serve `/city/` themselves (`scripts/lib/vite-plugin-city.js`), from `cities/<PUBLIC_CITY>/`, or from `CITY_DIR` if set:
 
 ```bash
-npm run dev
+# development, city data read directly from cities/berlin/ (edits show up on reload)
+PUBLIC_CITY=berlin npm run dev
+
+# production build + a packaged city, i.e. what ends up on the box
+npm run build
+npm run package:city -- berlin
+CITY_DIR=dist/cities/berlin npm run preview
 ```
+
+Switching the city only needs a restart of the dev/preview server, not a new build.
 
 ## Building for Production
 
-To build the project run:
-
 ```bash
 npm run build
-# or for a specific city, using .env.<slug>
+# or with the box-specific variables from .env.<slug>
 CITY=solingen npm run build:city
 ```
 
 ## Usage or Deployment
 
-`deploy.sh` uploads `build/` to the box via scp. It needs `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PATH` and `DEPLOY_PASSWORD` in the environment (never commit real values):
+App and city data are deployed separately via scp. Both need `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PATH` and `DEPLOY_PASSWORD` in the environment (never commit real values):
 
 ```bash
+# app: build/ -> ${DEPLOY_PATH}/ (keeps ${DEPLOY_PATH}/city/)
 CITY=solingen npm run deploy:city
+
+# city data: package cities/solingen/ -> ${DEPLOY_PATH}/city/ (swapped in only after the upload)
+CITY=solingen npm run deploy:city-data
 ```
 
 ## Development

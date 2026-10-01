@@ -1,7 +1,7 @@
 // Validates cities/<slug>/ and packages it as the city data the app loads at runtime from /city/:
 //   dist/cities/<slug>/
 //     city.config.json, locales/, poi/, tiles/   (copied unchanged)
-//     city.json                                  (generated: runtime config, schemaVersion, dataVersion)
+//     city.json                                  (generated manifest, see toManifest())
 // Usage: npm run package:city -- <slug>   (falls back to PUBLIC_CITY)
 import 'dotenv/config';
 import { createHash } from 'node:crypto';
@@ -10,12 +10,13 @@ import { join } from 'node:path';
 import {
 	CityError,
 	LIMIT_MB,
+	MANIFEST_FILE,
 	MB,
-	SCHEMA_VERSION,
 	WARN_MB,
 	listFiles,
 	notIgnored,
 	readCity,
+	toManifest,
 	totalSize
 } from './lib/city.js';
 
@@ -62,8 +63,8 @@ for (const file of files) {
 const dataVersion = hash.digest('hex').slice(0, 16);
 
 writeFileSync(
-	join(outDir, 'city.json'),
-	JSON.stringify({ schemaVersion: SCHEMA_VERSION, dataVersion, ...city }, null, '\t') + '\n'
+	join(outDir, MANIFEST_FILE),
+	JSON.stringify(toManifest(city, files, dataVersion), null, '\t') + '\n'
 );
 
 const format = (/** @type {number} */ bytes) => `${(bytes / MB).toFixed(1)} MB`;
@@ -85,13 +86,26 @@ for (const [zoom, size] of [...tilesPerZoom].sort(([a], [b]) => a - b)) {
 	console.log(`  z${zoom}: ${format(size)}`);
 }
 
-// App and city data share the device's storage; the combined check follows once the app build
-// no longer contains the tiles itself.
-if (total > LIMIT_MB * MB) {
-	fail(`Stadtpaket ist größer als ${LIMIT_MB} MB. Tiles mit niedrigerem maxzoom neu erzeugen.`);
+// App and city data share the device's storage, so check them together if the app is built
+const buildDir = join(root, 'build');
+const appSize = existsSync(buildDir) ? totalSize(buildDir, listFiles(buildDir)) : null;
+const combined = total + (appSize ?? 0);
+if (appSize === null) {
+	console.warn(`\n⚠ build/ fehlt, geprüft wird nur das Stadtpaket. Für App + Stadt: npm run build`);
+} else {
+	console.log(
+		`App (build/): ${format(appSize)}, zusammen ${format(combined)} (Limit ${LIMIT_MB} MB)`
+	);
 }
-if (total > WARN_MB * MB) {
-	console.warn(`\n⚠ Stadtpaket ist größer als ${WARN_MB} MB, nur noch wenig Puffer bis zum Limit.`);
+if (combined > LIMIT_MB * MB) {
+	fail(
+		`App + Stadtpaket sind größer als ${LIMIT_MB} MB. Tiles mit niedrigerem maxzoom neu erzeugen.`
+	);
+}
+if (combined > WARN_MB * MB) {
+	console.warn(
+		`\n⚠ App + Stadtpaket sind größer als ${WARN_MB} MB, nur noch wenig Puffer bis zum Limit.`
+	);
 }
 
 console.log(`\n✔ package-city: ${outDir.replace(`${root}/`, '')} (dataVersion ${dataVersion})`);

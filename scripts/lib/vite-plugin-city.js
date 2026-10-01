@@ -5,7 +5,7 @@
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { basename, extname, resolve, sep } from 'node:path';
 import { loadEnv } from 'vite';
-import { CityError, SCHEMA_VERSION, readCity } from './city.js';
+import { CityError, MANIFEST_FILE, listFiles, readCity, toManifest } from './city.js';
 
 const CONTENT_TYPES = {
 	'.json': 'application/json; charset=utf-8',
@@ -25,10 +25,15 @@ export function cityData() {
 
 		const pathname = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
 
-		if (pathname === '/city.json' && !existsSync(resolve(cityDir, 'city.json'))) {
+		if (pathname === `/${MANIFEST_FILE}` && !existsSync(resolve(cityDir, MANIFEST_FILE))) {
 			try {
 				const city = readCity(cityDir, slug);
-				const body = { schemaVersion: SCHEMA_VERSION, dataVersion: 'dev', ...city };
+				const files = listFiles(cityDir);
+				// Cheap stand-in for package-city's content hash: changes when a file is edited/added
+				const dir = cityDir;
+				const newest = Math.max(...files.map((file) => statSync(resolve(dir, file)).mtimeMs));
+				const dataVersion = `dev-${files.length}-${Math.round(newest)}`;
+				const body = toManifest(city, files, dataVersion);
 				res.setHeader('Content-Type', CONTENT_TYPES['.json']);
 				res.setHeader('Cache-Control', 'no-cache');
 				res.end(JSON.stringify(body));

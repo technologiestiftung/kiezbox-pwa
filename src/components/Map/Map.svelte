@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { CITY } from '$lib/config/city';
+	import { cityUrl, getCity } from '$lib/config/city';
 	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { SOURCES_CONFIG } from '$lib/config/sources';
 	import { NetworkStore } from '$lib/state/networkState.svelte';
 	import { mapState, poiState } from '$lib/state/state.svelte';
-	import type { GeoJSON } from 'geojson';
 	import * as maplibregl from 'maplibre-gl';
 	import type { AddLayerObject, LngLatLike } from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
@@ -29,12 +28,12 @@
 	});
 	onMount(() => {
 		if (!mapContainer) return;
-		const baseUrl = window.location.origin;
+		const city = getCity();
 
 		maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 		// Matches the extent of the city's tiles (cities/<slug>/tiles/metadata.json "bounds")
-		const dataBounds = CITY.bounds;
+		const dataBounds = city.bounds;
 
 		map = new maplibregl.Map({
 			container: mapContainer,
@@ -43,9 +42,9 @@
 				sources: {
 					openmaptiles: {
 						type: 'vector',
-						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
+						tiles: [cityUrl('tiles/{z}/{x}/{y}.pbf')],
 						attribution: '© OpenStreetMap contributors',
-						maxzoom: CITY.maxzoom
+						maxzoom: city.maxzoom
 					}
 				},
 				layers: LAYER_STYLE,
@@ -55,7 +54,7 @@
 			fitBoundsOptions: { padding: 20 },
 			attributionControl: false,
 			maxBounds: dataBounds,
-			...(CITY.mapMaxZoom !== null && { maxZoom: CITY.mapMaxZoom })
+			...(city.mapMaxZoom !== null && { maxZoom: city.mapMaxZoom })
 		});
 
 		const LAYER_IDS = LAYER_CONFIG.map((layer) => layer.id);
@@ -76,7 +75,7 @@
 			SOURCES_CONFIG.forEach((source) => {
 				map.addSource(source.id, {
 					type: source.type,
-					data: source.data as unknown as GeoJSON
+					data: cityUrl(source.data)
 				});
 			});
 

@@ -4,20 +4,19 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"predev": "node scripts/prepare-city.js",
 		"dev": "vite dev",
-		"prebuild": "node scripts/prepare-city.js",
 		"build": "vite build",
 		"postbuild": "node scripts/check-size.js",
 		"preview": "vite preview",
-		"check": "node scripts/prepare-city.js && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "node scripts/prepare-city.js && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"deploy": "npm run build && dotenv ./deploy.sh",
 		"build:city": "dotenv -e .env.$CITY -- npm run build",
 		"package:city": "node scripts/package-city.js",
-		"deploy:city": "dotenv -e .env.$CITY -- sh -c 'npm run build && ./deploy.sh'"
+		"deploy:city": "dotenv -e .env.$CITY -- sh -c 'npm run build && ./deploy.sh'",
+		"deploy:city-data": "dotenv -e .env.$CITY -- sh -c 'node scripts/package-city.js \"$CITY\" && ./deploy-city.sh'"
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "*",

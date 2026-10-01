@@ -11,10 +11,12 @@ set -e  # stop on errors
 # sshpass -e reads the password from $SSHPASS, so it never appears in argv or logs
 export SSHPASS="$DEPLOY_PASSWORD"
 
-echo "🚀 Deleting remote build on ${DEPLOY_HOST}..."
-sshpass -e ssh -o StrictHostKeyChecking=no "${DEPLOY_USER}@${DEPLOY_HOST}" "rm -rf '${DEPLOY_PATH}'"
+# Deploys the app only. The city data in ${DEPLOY_PATH}/city/ (see deploy-city.sh) is kept.
+echo "🚀 Deleting remote build on ${DEPLOY_HOST} (keeping city/)..."
+sshpass -e ssh -o StrictHostKeyChecking=no "${DEPLOY_USER}@${DEPLOY_HOST}" \
+	"mkdir -p '${DEPLOY_PATH}' && find '${DEPLOY_PATH}' -mindepth 1 -maxdepth 1 ! -name city -exec rm -rf {} +"
 
 echo "📦 Uploading new build..."
-sshpass -e scp -r ./build "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
+sshpass -e scp -r ./build/* "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/"
 
 echo "✅ Deployment complete."

@@ -1,8 +1,5 @@
 import i18n from 'sveltekit-i18n';
-import city from './generated/city.json';
-
-// City-specific texts from cities/<slug>/locales/<lang>.json (copied by scripts/prepare-city.js)
-const cityOverrides = import.meta.glob('./generated/locales/*.json', { import: 'default' });
+import { CITY_PATH } from './config/city';
 
 /**
  * @param {Record<string, any>} base
@@ -25,15 +22,30 @@ function deepMerge(base, override) {
 function withCityOverride(locale, loadBase) {
 	return async () => {
 		const base = (await loadBase()).default;
-		const loadOverride = cityOverrides[`./generated/locales/${locale}.json`];
-		if (!loadOverride) return base;
-		return deepMerge(base, /** @type {Record<string, any>} */ (await loadOverride()));
+		const override = await fetchCityOverride(locale);
+		return override ? deepMerge(base, override) : base;
 	};
 }
 
+/**
+ * City-specific texts from /city/locales/<lang>.json. Optional: a city without overrides for
+ * this language (404) or unreachable city data just keeps the base texts.
+ * @param {string} locale
+ * @returns {Promise<Record<string, any> | null>}
+ */
+async function fetchCityOverride(locale) {
+	try {
+		const response = await fetch(`${CITY_PATH}/locales/${locale}.json`);
+		return response.ok ? await response.json() : null;
+	} catch {
+		return null;
+	}
+}
+
+// No initLocale: the root layout calls loadTranslations() with the city's defaultLocale
+// once the city data is loaded.
 /** @type {import('sveltekit-i18n').Config} */
 const config = {
-	initLocale: city.defaultLocale,
 	fallbackLocale: 'de',
 	loaders: [
 		{

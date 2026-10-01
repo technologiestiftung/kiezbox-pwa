@@ -1,4 +1,4 @@
-// Shared by prepare-city.js, package-city.js and the /city/ middleware in vite.config.ts:
+// Shared by package-city.js, check-size.js and the /city/ middleware in vite.config.ts:
 // validates a city folder (cities/<slug>/ layout) and derives the runtime city config from it.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { basename, join, relative } from 'node:path';
@@ -107,6 +107,24 @@ export function readCity(cityDir, slug) {
 		fallbackCoordinates: cityConfig.fallbackCoordinates ?? [center[0], center[1]]
 	};
 }
+
+/** Name of the generated manifest the app loads from /city/ */
+export const MANIFEST_FILE = 'city.json';
+
+/**
+ * The manifest served as /city/city.json: runtime config plus what the service worker needs to
+ * cache the city data (dataVersion to detect changes, files to precache).
+ * @param {import('../../src/lib/types').CityConfig} city
+ * @param {string[]} files paths relative to the city folder
+ * @param {string} dataVersion
+ * @returns {import('../../src/lib/types').CityManifest}
+ */
+export const toManifest = (city, files, dataVersion) => ({
+	schemaVersion: SCHEMA_VERSION,
+	dataVersion,
+	...city,
+	files: files.filter((file) => file !== MANIFEST_FILE)
+});
 
 /**
  * All files below dir (recursively, ignored files skipped) as paths relative to dir, sorted.

@@ -2,7 +2,7 @@ import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
 import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
-import { CITY } from '$lib/config/city';
+import { getCity } from '$lib/config/city';
 import { ApiStatus, DeviceType } from '$lib/enums';
 import type { Mode } from '$lib/types';
 import type { LngLatLike } from 'maplibre-gl';
@@ -133,7 +133,7 @@ const fetchMode = async (): Promise<Mode | null> => {
 		return {
 			status: response.mode,
 			isEmergency: response.mode % 2 == 0,
-			coordinates: response.coordinates || CITY.fallbackCoordinates
+			coordinates: response.coordinates || getCity().fallbackCoordinates
 		};
 	} catch (error) {
 		setError(`Failed to fetch mode: ${error instanceof Error ? error.message : String(error)}`);
@@ -265,7 +265,7 @@ export function toggleMode() {
 	NetworkStore.mode = {
 		status: NetworkStore.mode?.status === 0 ? 1 : 0,
 		isEmergency: !NetworkStore.mode?.isEmergency,
-		coordinates: CITY.fallbackCoordinates
+		coordinates: getCity().fallbackCoordinates
 	};
 	console.log(`Toggling mode to: ${NetworkStore.mode.status}`);
 
