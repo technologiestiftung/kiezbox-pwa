@@ -19,11 +19,11 @@
 	let visibilityObservers: IntersectionObserver[] = [];
 	let startAnimationObserver: IntersectionObserver | null = null;
 	let userInteracted = $state(false);
-	let animationLoopId: number | null = null;
-	let resumeTimerId: number | null = null;
+	let animationLoopId: ReturnType<typeof setTimeout> | null = null;
+	let resumeTimerId: ReturnType<typeof setTimeout> | null = null;
 	let animationHasStarted = $state(false);
 	let isProgrammaticScroll = false;
-	let programmaticScrollTimeout: number | null = null;
+	let programmaticScrollTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	// svelte-ignore state_referenced_locally
 	let prevIsInCall = $state(isInCall);
@@ -58,7 +58,7 @@
 		if (!isInCall) return;
 		if (!scrollContainerElement || !rootElement) return;
 
-		let initialSetupTimer: number | null = null;
+		let initialSetupTimer: ReturnType<typeof setTimeout> | null = null;
 
 		initialSetupTimer = setTimeout(() => {
 			initialSetupTimer = null;

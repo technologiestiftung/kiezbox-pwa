@@ -16,6 +16,7 @@
 		"lint": "prettier --check . && eslint .",
 		"deploy": "npm run build && dotenv ./deploy.sh",
 		"build:city": "dotenv -e .env.$CITY -- npm run build",
+		"package:city": "node scripts/package-city.js",
 		"deploy:city": "dotenv -e .env.$CITY -- sh -c 'npm run build && ./deploy.sh'"
 	},
 	"optionalDependencies": {
@@ -31,6 +32,7 @@
 		"@sveltejs/kit": "^2.70.3",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@tailwindcss/postcss": "^4.3.3",
+		"@types/node": "^24.19.0",
 		"bits-ui": "^2.19.3",
 		"clsx": "^2.1.1",
 		"dotenv-cli": "^8.0.0",
