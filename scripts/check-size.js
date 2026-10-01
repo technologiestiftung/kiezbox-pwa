@@ -1,10 +1,7 @@
 // Fails the build if build/ exceeds the size limit of the Kiezbox device (64 MB).
 import { readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
-
-const LIMIT_MB = 64;
-const WARN_MB = 50;
-const MB = 1024 * 1024;
+import { LIMIT_MB, MB, WARN_MB } from './lib/city.js';
 
 const buildDir = join(import.meta.dirname, '..', 'build');
 
