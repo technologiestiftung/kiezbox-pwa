@@ -98,10 +98,10 @@
 				"phone_button": "Demo acil çağrıya git",
 				"incoming_call": "Gelen arama",
 				"offline": {
-					"text": "Bir kriz durumunda, Berlin İtfaiyesi'ne acil bir çağrı yapabilirsiniz. <strong> Acil Çağrı Demo'umuzla </strong> Acil servislerle her zaman konuşmanız gereken 5W sorularını uygulayabilirsiniz."
+					"text": "Bir kriz durumunda, itfaiyeye acil bir çağrı yapabilirsiniz. <strong> Acil Çağrı Demo'umuzla </strong> Acil servislerle her zaman konuşmanız gereken 5W sorularını uygulayabilirsiniz."
 				},
 				"online": {
-					"text": "Şimdi Berlin İtfaiyesi’nin demo acil çağrısı ile bağlantıdasınız. İtfaiye sizi konuşma boyunca şu şekilde yönlendirecektir:"
+					"text": "Şimdi itfaiyenin demo acil çağrısı ile bağlantıdasınız. İtfaiye sizi konuşma boyunca şu şekilde yönlendirecektir:"
 				},
 				"questions": {
 					"1": {
@@ -134,13 +134,13 @@
 					"call_state": "Durum: "
 				},
 				"offline": {
-					"text": "Burada Berlin İtfaiyesi'ne acil bir çağrı gönderebilirsiniz. Lütfen gerçek bir acil durum çağrısı olduğumu unutmayın. Kötüye kullanım cezalandırılabilir!"
+					"text": "Burada itfaiyeye acil bir çağrı gönderebilirsiniz. Lütfen gerçek bir acil durum çağrısı olduğumu unutmayın. Kötüye kullanım cezalandırılabilir!"
 				},
 				"connecting": {
-					"text": "Şimdi Berlin İtfaiyesi ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"
+					"text": "Şimdi itfaiye ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"
 				},
 				"online": {
-					"text": "Şimdi Berlin İtfaiyesi ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"
+					"text": "Şimdi itfaiye ile bağlantı kuruluyor, lütfen aşağıdaki sorulara dikkat edin:"
 				}
 			},
 			"initializing": "Bağlantı oluşturuldu ..."
@@ -284,7 +284,7 @@
 				},
 				"2": {
 					"title": "Tehlikeli Madde Salımı Durumunda Davranış",
-					"text": "Yerel Zehir Danışma Merkezi ile iletişime geçin. Charité Üniversite Tıbbı Berlin Zehir Danışma Hattı: 030 192 40"
+					"text": "Yerel Zehir Danışma Merkezi ile iletişime geçin."
 				},
 				"3": {
 					"title": "Evde Davranış",

@@ -1,8 +1,8 @@
 // src/lib/config/sources.ts
-import defiesData from '$lib/data/defibrillator.json';
-import drinkingWaterData from '$lib/data/drinking-water.json';
-import toiletsData from '$lib/data/toilets.json';
-import waterPumpsData from '$lib/data/water-pumps.json';
+import defiesData from '$lib/generated/poi/defibrillator.json';
+import drinkingWaterData from '$lib/generated/poi/drinking-water.json';
+import toiletsData from '$lib/generated/poi/toilets.json';
+import waterPumpsData from '$lib/generated/poi/water-pumps.json';
 import type { GeoJSON } from 'geojson';
 
 export interface SourceConfig {

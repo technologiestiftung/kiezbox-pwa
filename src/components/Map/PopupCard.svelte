@@ -10,17 +10,12 @@
 
 	let cardRef: HTMLDivElement | undefined = $state();
 
+	let content = $state({});
 	const activeLayer = $derived(
 		LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null
 	);
-	const content = $derived(
-		activeLayer && poiState.properties
-			? activeLayer.getContent
-				? activeLayer.getContent(poiState.properties)
-				: {}
-			: {}
-	);
 	const title = $derived(activeLayer?.label || 'Details');
+	const hasContent = $derived(Object.keys(content).length > 0);
 	let arrowPosition = $state({ left: '50%', top: '0', transform: 'translateX(-50%)' });
 
 	type ArrowDirection = 'top' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
@@ -142,6 +137,14 @@
 	}
 
 	$effect(() => {
+		if (activeLayer && poiState.properties) {
+			content = activeLayer.getContent ? activeLayer.getContent(poiState.properties) : {};
+		} else {
+			content = {};
+		}
+	});
+
+	$effect(() => {
 		if (cardRef && mapState.popup) {
 			setTimeout(updateArrowDirection, 100);
 			if (mapState.map) {
@@ -193,28 +196,30 @@
 			</Card.Title>
 		</Card.Header>
 
-		<Card.Content>
-			<ul>
-				{#each Object.entries(content) as [key, value] (key)}
-					<li
-						class="flex justify-between gap-2 px-4 py-2"
-						style={`display: ${typeof value === 'boolean' ? 'flex' : 'block'}; flex-direction: ${typeof value === 'boolean' ? 'row' : 'column'}`}
-					>
-						<p class="text-grey-mid font-bold">{key}</p>
-						{#if typeof value === 'boolean'}
-							<p>
-								{#if value}
-									<Checkmark fill="#00AA84" size={24} />
-								{:else}
-									<CloseLarge fill="#E40422" size={24} />
-								{/if}
-							</p>
-						{:else}
-							<p>{$t(`${value}`)}</p>
-						{/if}
-					</li>
-				{/each}
-			</ul>
-		</Card.Content>
+		{#if hasContent}
+			<Card.Content>
+				<ul>
+					{#each Object.entries(content) as [key, value] (key)}
+						<li
+							class="flex justify-between gap-2 px-4 py-2"
+							style={`display: ${typeof value === 'boolean' ? 'flex' : 'block'}; flex-direction: ${typeof value === 'boolean' ? 'row' : 'column'}`}
+						>
+							<p class="text-grey-mid font-bold">{key}</p>
+							{#if typeof value === 'boolean'}
+								<p>
+									{#if value}
+										<Checkmark fill="#00AA84" size={24} />
+									{:else}
+										<CloseLarge fill="#E40422" size={24} />
+									{/if}
+								</p>
+							{:else}
+								<p>{$t(`${value}`)}</p>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</Card.Content>
+		{/if}
 	</Card.Root>
 </div>

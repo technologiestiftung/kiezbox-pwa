@@ -11,14 +11,10 @@ interface BaseMap {
 	data?: GeoJSON;
 }
 
-function createSourceState() {
-	const baseMap = $state<BaseMap | undefined>(undefined);
-
-	return {
-		get baseMap() {
-			return baseMap;
-		}
-	};
+interface SourceState {
+	baseMap: BaseMap | undefined;
 }
 
-export const sourceState = createSourceState();
+export const sourceState = $state<SourceState>({
+	baseMap: undefined
+});

@@ -98,10 +98,10 @@
 				"phone_button": "Vers la démo d'appel d'urgence",
 				"incoming_call": "Appel entrant",
 				"offline": {
-					"text": "En cas de crise, vous pouvez passer un appel d'urgence à la Brigade de Berlin. Avec notre démo d'appel <strong> d'urgence </strong>, vous pouvez pratiquer les questions 5W que vous devriez toujours avoir en conversation avec les services d'urgence."
+					"text": "En cas de crise, vous pouvez passer un appel d'urgence aux pompiers. Avec notre démo d'appel <strong> d'urgence </strong>, vous pouvez pratiquer les questions 5W que vous devriez toujours avoir en conversation avec les services d'urgence."
 				},
 				"online": {
-					"text": "Vous êtes maintenant connecté à la démo d'appel d'urgence de la Brigade des pompiers de Berlin. Les pompiers vous guideront dans la conversation de la manière suivante :"
+					"text": "Vous êtes maintenant connecté à la démo d'appel d'urgence des pompiers. Les pompiers vous guideront dans la conversation de la manière suivante :"
 				},
 				"questions": {
 					"1": {
@@ -134,13 +134,13 @@
 					"call_state": "Statut : "
 				},
 				"offline": {
-					"text": "Ici, vous pouvez envoyer un appel d'urgence au Berlin Brigade. Veuillez noter que je suis un véritable appel d'urgence. L'abus est passible!"
+					"text": "Ici, vous pouvez envoyer un appel d'urgence aux pompiers. Veuillez noter que je suis un véritable appel d'urgence. L'abus est passible!"
 				},
 				"connecting": {
-					"text": "Vous êtes en train d'être connecté à la Brigade des pompiers de Berlin ; veuillez prêter attention aux questions suivantes :"
+					"text": "Vous êtes en train d'être connecté aux pompiers ; veuillez prêter attention aux questions suivantes :"
 				},
 				"online": {
-					"text": "Vous êtes en train d'être connecté à la Brigade des pompiers de Berlin ; veuillez prêter attention aux questions suivantes :"
+					"text": "Vous êtes en train d'être connecté aux pompiers ; veuillez prêter attention aux questions suivantes :"
 				}
 			},
 			"initializing": "La connexion est créée ..."
@@ -284,7 +284,7 @@
 				},
 				"2": {
 					"title": "Comportement lors d’une libération de substance dangereuse",
-					"text": "Contactez le centre antipoison local. Centre antipoison de la Charité Universitätsmedizin Berlin : 030 192 40"
+					"text": "Contactez le centre antipoison local."
 				},
 				"3": {
 					"title": "Comportement à la maison",

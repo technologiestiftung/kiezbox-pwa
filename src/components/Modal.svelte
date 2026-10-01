@@ -4,14 +4,14 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { t } from '$lib/translations';
 	import { CloseOutline } from 'carbon-icons-svelte';
-	import { untrack } from 'svelte';
 
 	let { children, isModal, close, disabled } = $props();
 	let dialog = $state<HTMLDialogElement | undefined>(undefined);
 	let contentContainer: HTMLElement | undefined = $state();
 
 	// Track previous modal state to detect changes
-	let prevModalState = $state(untrack(() => isModal));
+	// svelte-ignore state_referenced_locally
+	let prevModalState = $state(isModal);
 
 	$effect(() => {
 		if (!browser) return;

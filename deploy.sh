@@ -1,12 +1,20 @@
 #!/bin/bash
 
 set -e  # stop on errors
-set -x  # print each command as it's run
 
-echo "🚀 Deleting remote build..."
-sshpass -p "$DEPLOY_PASSWORD" ssh -o StrictHostKeyChecking=no -v root@kiezbox.ts.berlin 'rm -rf /opt/kb-www'
+# Deploy target per city/box, set in .env or .env.<city> (never commit real values)
+: "${DEPLOY_HOST:?DEPLOY_HOST ist nicht gesetzt}"
+: "${DEPLOY_USER:?DEPLOY_USER ist nicht gesetzt}"
+: "${DEPLOY_PATH:?DEPLOY_PATH ist nicht gesetzt}"
+: "${DEPLOY_PASSWORD:?DEPLOY_PASSWORD ist nicht gesetzt}"
+
+# sshpass -e reads the password from $SSHPASS, so it never appears in argv or logs
+export SSHPASS="$DEPLOY_PASSWORD"
+
+echo "🚀 Deleting remote build on ${DEPLOY_HOST}..."
+sshpass -e ssh -o StrictHostKeyChecking=no "${DEPLOY_USER}@${DEPLOY_HOST}" "rm -rf '${DEPLOY_PATH}'"
 
 echo "📦 Uploading new build..."
-sshpass -p "$DEPLOY_PASSWORD" scp -rv ./build root@kiezbox.ts.berlin:/opt/kb-www
+sshpass -e scp -r ./build "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
 
 echo "✅ Deployment complete."

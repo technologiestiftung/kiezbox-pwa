@@ -98,10 +98,10 @@
 				"phone_button": "Ir a demostración de llamada de emergencia",
 				"incoming_call": "Llamada entrante",
 				"offline": {
-					"text": "En cas de crise, vous pouvez passer un appel d'urgence à la Brigade de Berlin. Avec notre démo d'appel <strong> d'urgence </strong>, vous pouvez pratiquer les questions 5W que vous devriez toujours avoir en conversation avec les services d'urgence."
+					"text": "En caso de crisis, aquí puede hacer una llamada de emergencia a los bomberos. Con nuestra <strong>demostración de llamada de emergencia</strong> puede practicar las preguntas de las 5W que siempre debe tener presentes al hablar con los servicios de emergencia."
 				},
 				"online": {
-					"text": "Ahora está conectado a la demostración de llamada de emergencia de los Bomberos de Berlín. Los bomberos lo guiarán en la conversación de la siguiente manera:"
+					"text": "Ahora está conectado a la demostración de llamada de emergencia de los bomberos. Los bomberos lo guiarán en la conversación de la siguiente manera:"
 				},
 				"questions": {
 					"1": {
@@ -134,13 +134,13 @@
 					"call_state": "Estado: "
 				},
 				"offline": {
-					"text": "Aquí puede enviar una llamada de emergencia a la Brigada de Bomberos de Berlín. Tenga en cuenta que esta es una llamada de emergencia. ¡El abuso es punible!"
+					"text": "Aquí puede enviar una llamada de emergencia a los bomberos. Tenga en cuenta que esta es una llamada de emergencia. ¡El abuso es punible!"
 				},
 				"connecting": {
-					"text": "Ahora se está conectando a los Bomberos de Berlín; por favor, preste atención a las siguientes preguntas:"
+					"text": "Ahora se está conectando con los bomberos; por favor, preste atención a las siguientes preguntas:"
 				},
 				"online": {
-					"text": "Ahora se está conectando a los Bomberos de Berlín; por favor, preste atención a las siguientes preguntas:"
+					"text": "Ahora se está conectando con los bomberos; por favor, preste atención a las siguientes preguntas:"
 				}
 			},
 			"initializing": "La conexión se crea ..."
@@ -284,7 +284,7 @@
 				},
 				"2": {
 					"title": "Conducta ante la liberación de una sustancia peligrosa",
-					"text": "Contacte al centro antídoto local. Centro antídoto de Charité Universitätsmedizin Berlin: 030 192 40"
+					"text": "Contacte al centro antídoto local."
 				},
 				"3": {
 					"title": "Conducta en casa",

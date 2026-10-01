@@ -12,6 +12,19 @@ export interface TabItem {
 	content: InfoBoxItem[];
 }
 
+export interface CityConfig {
+	slug: string;
+	name: string;
+	defaultLocale: string;
+	bounds: [number, number, number, number];
+	center: [number, number];
+	minzoom: number;
+	maxzoom: number;
+	/** Highest zoom the map allows; beyond `maxzoom` the tiles are overzoomed. null = MapLibre default */
+	mapMaxZoom: number | null;
+	fallbackCoordinates: [number, number];
+}
+
 export interface Mode {
 	status: number;
 	isEmergency: boolean;

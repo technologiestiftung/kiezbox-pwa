@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/translations';
-	import { onMount, untrack } from 'svelte';
+	import { onMount } from 'svelte';
 	import SpeechBubble from './SpeechBubble.svelte';
 	let { isInCall } = $props();
 
@@ -25,8 +25,8 @@
 	let isProgrammaticScroll = false;
 	let programmaticScrollTimeout: number | null = null;
 
-	// intentionally captures the initial value; the effect below tracks changes
-	let prevIsInCall = $state(untrack(() => isInCall));
+	// svelte-ignore state_referenced_locally
+	let prevIsInCall = $state(isInCall);
 
 	$effect(() => {
 		if (isInCall && !prevIsInCall) {

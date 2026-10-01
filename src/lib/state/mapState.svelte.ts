@@ -1,7 +1,7 @@
-import type { Map as MapLibreMap, Popup } from 'maplibre-gl';
+import type { Map as MaplibreMap, Popup } from 'maplibre-gl';
 
 interface MapState {
-	map: null | MapLibreMap;
+	map: null | MaplibreMap;
 	layers: string[];
 	loaded: boolean;
 	cardRef: HTMLElement | undefined;

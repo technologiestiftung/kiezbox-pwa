@@ -98,10 +98,10 @@
 				"phone_button": "Vai alla demo chiamata d’emergenza",
 				"incoming_call": "Chiamata in arrivo",
 				"offline": {
-					"text": "In caso di crisi, puoi effettuare una chiamata di emergenza ai vigili del fuoco di Berlino. Con la nostra <strong> demo di chiamata di emergenza </strong> puoi praticare le domande 5W che dovresti sempre avere in conversazione con i servizi di emergenza."
+					"text": "In caso di crisi, puoi effettuare una chiamata di emergenza ai vigili del fuoco. Con la nostra <strong> demo di chiamata di emergenza </strong> puoi praticare le domande 5W che dovresti sempre avere in conversazione con i servizi di emergenza."
 				},
 				"online": {
-					"text": "Ora sei connesso alla demo chiamata dei Vigili del Fuoco di Berlino. I vigili del fuoco ti guideranno nella conversazione nel modo seguente:"
+					"text": "Ora sei connesso alla demo chiamata dei Vigili del Fuoco. I vigili del fuoco ti guideranno nella conversazione nel modo seguente:"
 				},
 				"questions": {
 					"1": {
@@ -134,13 +134,13 @@
 					"call_state": "Stato: "
 				},
 				"offline": {
-					"text": "Qui puoi inviare una chiamata di emergenza ai vigili del fuoco di Berlino. Si prega di notare che sono una vera chiamata di emergenza. L'abuso è punibile!"
+					"text": "Qui puoi inviare una chiamata di emergenza ai vigili del fuoco. Si prega di notare che sono una vera chiamata di emergenza. L'abuso è punibile!"
 				},
 				"connecting": {
-					"text": "Ora sarai connesso ai Vigili del Fuoco di Berlino, ti preghiamo di prestare attenzione alle seguenti domande:"
+					"text": "Ora sarai connesso ai Vigili del Fuoco, ti preghiamo di prestare attenzione alle seguenti domande:"
 				},
 				"online": {
-					"text": "Ora sarai connesso ai Vigili del Fuoco di Berlino, ti preghiamo di prestare attenzione alle seguenti domande:"
+					"text": "Ora sarai connesso ai Vigili del Fuoco, ti preghiamo di prestare attenzione alle seguenti domande:"
 				}
 			},
 			"initializing": "La connessione viene creata ..."
@@ -284,7 +284,7 @@
 				},
 				"2": {
 					"title": "Comportamento in caso di rilascio di sostanze pericolose",
-					"text": "Contatta il centro antiveleni locale. Antiveleni della Charité Universitätsmedizin Berlin: 030 192 40"
+					"text": "Contatta il centro antiveleni locale."
 				},
 				"3": {
 					"title": "Comportamento a casa",

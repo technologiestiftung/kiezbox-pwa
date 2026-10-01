@@ -75,7 +75,8 @@
 <div class="PrecautionGuide-root bg-purple-light relative flex w-full flex-col">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="flex min-h-14 items-center justify-center" onclick={handleTitleClick}>
+	<!-- svelte-ignore event_directive_deprecated -->
+	<div class="flex min-h-14 items-center justify-center" on:click={handleTitleClick}>
 		{#if !$loading}
 			<h2
 				class="text-purple-dark select-none

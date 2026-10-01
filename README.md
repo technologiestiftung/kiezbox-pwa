@@ -24,8 +24,8 @@ Ensure you have the following installed on your machine:
 1. **Clone the Repository**
 
 ```bash
-git clone git@github.com:technologiestiftung/kiezbox-pwa.git
-cd kiezbox-pwa
+git clone git@github.com:technologiestiftung/kiezbox-multi-city-pwa.git
+cd kiezbox-multi-city-pwa
 ```
 
 2. **Install Dependencies**
@@ -35,6 +35,29 @@ Run the following command to install all necessary packages:
 ```bash
 npm install
 ```
+
+## Selecting a City
+
+The app is built for one city at a time. Everything city-specific lives in `cities/<slug>/`:
+
+```
+cities/<slug>/
+  city.config.json   # name, default locale, optional fallback coordinates, optional mapMaxZoom
+  tiles/             # vector tiles {z}/{x}/{y}.pbf (uncompressed) + metadata.json
+  poi/               # toilets.json, drinking-water.json, defibrillator.json, water-pumps.json
+  locales/           # optional overrides of src/lib/assets/locales/<lang>.json (deep-merged)
+```
+
+Set the city with `PUBLIC_CITY=<slug>` (in `.env` or `.env.<slug>`). Before `dev`, `build` and `check`, `scripts/prepare-city.js` copies the city into `static/pbf-tiles/` and `src/lib/generated/` (both gitignored). Map bounds and center are read from `tiles/metadata.json`. The tile zoom range is taken from the zoom folders actually present in `tiles/`, so a tileset can stop at e.g. z13 to save space: the map overzooms the highest level instead of requesting missing tiles. `mapMaxZoom` (optional, ≥ highest tile zoom) caps how far users can zoom in; `null` keeps the MapLibre default.
+
+### Adding a new city
+
+1. Copy `cities/_template/` to `cities/<slug>/` (lowercase letters, digits and `-` only).
+2. Put the tiles generated with the vector-tiles-converter, plus their `metadata.json`, into `tiles/`.
+3. Export the POIs (e.g. via overpass turbo) as GeoJSON into `poi/`. Empty FeatureCollections are fine.
+4. Fill in `city.config.json` and the locale overrides (local fire brigade, poison control centre).
+5. Create `.env.<slug>` with `PUBLIC_CITY=<slug>` and the box-specific variables (API URL, hostname, SIP targets, deploy target).
+6. Run `CITY=<slug> npm run build:city`. The build fails if it exceeds the 64 MB limit of the box.
 
 ## Running the Project
 
@@ -50,11 +73,17 @@ To build the project run:
 
 ```bash
 npm run build
+# or for a specific city, using .env.<slug>
+CITY=solingen npm run build:city
 ```
 
 ## Usage or Deployment
 
-tbd...
+`deploy.sh` uploads `build/` to the box via scp. It needs `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PATH` and `DEPLOY_PASSWORD` in the environment (never commit real values):
+
+```bash
+CITY=solingen npm run deploy:city
+```
 
 ## Development
 

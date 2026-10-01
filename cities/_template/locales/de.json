@@ -1,0 +1,18 @@
+{
+	"content": {
+		"emergency_phone": {
+			"emergency": {
+				"offline": {
+					"text": "Hier können Sie einen Notruf an die <Name der Feuerwehr> absenden. Bitte beachten Sie, dass es sich hier um einen echten Notruf handelt. Missbrauch ist strafbar!"
+				}
+			}
+		},
+		"precaution_infos": {
+			"cbrn": {
+				"2": {
+					"text": "Kontaktieren Sie die lokale Giftnotrufzentrale. <Name der Giftnotrufzentrale>: <Telefonnummer>"
+				}
+			}
+		}
+	}
+}

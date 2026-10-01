@@ -48,9 +48,9 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			'icon-image': 'drinking-water-icon',
 			'icon-size': 0.3
 		},
-		getContent: (properties) => ({
-			Name: properties.bezeichnun
-		})
+		// getContent: (properties) => ({
+		// 	// Name: properties.bezeichnun
+		// })
 	},
 	{
 		id: 'water-pumps-layer',
@@ -83,10 +83,10 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			'icon-size': 0.3
 		},
 		getContent: (properties) => ({
-			Kostenfrei: properties.nutzungsentgelt === 0,
-			Barrierefrei: properties.barrierefrei === 'ja',
-			Wickeltisch: properties.wickeltisch === 'ja',
-			Pissoir: properties.kostenfreies_pissoir === 'ja'
+			Kostenfrei: properties.fee === 'no',
+			Barrierefrei: properties.wheelchair === 'yes',
+			Wickeltisch: properties.changing_table === 'yes'
+			// Pissoir: properties.kostenfreies_pissoir === 'ja'
 		})
 	},
 	{
