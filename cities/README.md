@@ -115,17 +115,22 @@ Braucht die Stadt weitere Schlüssel, diese in `locales/<sprache>.json` der Stad
 
 ### 6. Stadtspezifische Texte (`locales/`)
 
-Die App hat neutrale Texte für alle Sprachen. In `locales/<sprache>.json` werden nur die Stellen überschrieben, die für die Stadt anders sind. Die Datei wird mit den Basistexten zusammengeführt, sie muss also nur die geänderten Schlüssel enthalten. Die Vorlage enthält die Stellen, die jede Stadt anpassen muss:
+Die App hat neutrale Texte für alle Sprachen. `locales/<sprache>.json` wird mit diesen Basistexten zusammengeführt, die Werte der Stadt haben Vorrang. Die Vorlage enthält für alle sechs Sprachen eine vollständige Kopie aller Texte, sodass jeder Text pro Stadt angepasst werden kann. Achtung: Was in der Datei der Stadt steht, überdeckt spätere Änderungen an den Basistexten. Diese Stellen muss jede Stadt anpassen:
 
-- `content.emergency_phone.emergency.offline.text`: Name der zuständigen Feuerwehr
+- `content.emergency_phone.default.offline.text`, `content.emergency_phone.default.online.text`: Name der Feuerwehr in der Notrufdemo
+- `content.emergency_phone.emergency.offline.text`, `.connecting.text`, `.online.text`: Name der zuständigen Feuerwehr beim echten Notruf
 - `content.precaution_infos.cbrn.2.text`: zuständige Giftnotrufzentrale mit Telefonnummer
 
-Alle `<Platzhalter>` ersetzen. Fehlt eine Sprache, gelten dort die neutralen Texte. Die Basistexte liegen in `src/lib/assets/locales/` und dürfen keine stadtspezifischen Angaben enthalten.
+Alle `<Platzhalter>` ersetzen und dabei die Grammatik anpassen (z. B. „an die Feuerwehr Köln“, im Türkischen die Endung „Köln İtfaiyesi'ne“). Wer den Feuerwehrnamen nicht nennen möchte, schreibt stattdessen „die Feuerwehr“. Fehlt eine Sprache, gelten dort die neutralen Texte. Die Basistexte liegen in `src/lib/assets/locales/` und dürfen keine stadtspezifischen Angaben enthalten.
 
 ### 7. Prüfen und lokal ansehen
 
 ```bash
 npm run package:city -- <stadt>
+```
+
+```bash
+npm run build && CITY_DIR=dist/cities/<stadt> npm run preview
 ```
 
 Das prüft den Ordner und meldet Probleme verständlich, z. B. fehlende Dateien, falsche Zoomangaben, Tippfehler in `poi-map.json` oder ein zu großes Paket. Anschließend die Stadt lokal ansehen:
