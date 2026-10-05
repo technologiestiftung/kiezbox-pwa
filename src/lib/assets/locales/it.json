@@ -320,6 +320,25 @@
 				"defies-layer": "Defibrillatori",
 				"osm-local-layer": "OSM locale"
 			}
+		},
+		"popup": {
+			"labels": {
+				"free": "Gratuito",
+				"wheelchair": "Accessibile in sedia a rotelle",
+				"changing_table": "Fasciatoio",
+				"status": "Stato",
+				"drinking_water": "Acqua potabile",
+				"check_date": "Controllato il",
+				"opening_hours": "Orari di apertura",
+				"location": "Posizione",
+				"phone": "Telefono",
+				"operator": "Gestore"
+			},
+			"values": {
+				"working": "funzionante",
+				"broken": "guasto",
+				"unknown": "sconosciuto"
+			}
 		}
 	}
 }

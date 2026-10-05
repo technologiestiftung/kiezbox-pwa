@@ -320,6 +320,25 @@
 				"defies-layer": "Defibrilatörler",
 				"osm-local-layer": "OSM Yerel"
 			}
+		},
+		"popup": {
+			"labels": {
+				"free": "Ücretsiz",
+				"wheelchair": "Engelli erişimine uygun",
+				"changing_table": "Bebek bezi değiştirme masası",
+				"status": "Durum",
+				"drinking_water": "İçme suyu",
+				"check_date": "Kontrol tarihi",
+				"opening_hours": "Açılış saatleri",
+				"location": "Konum",
+				"phone": "Telefon",
+				"operator": "İşletmeci"
+			},
+			"values": {
+				"working": "çalışıyor",
+				"broken": "bozuk",
+				"unknown": "bilinmiyor"
+			}
 		}
 	}
 }

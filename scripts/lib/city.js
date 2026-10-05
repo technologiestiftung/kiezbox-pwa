@@ -12,6 +12,8 @@ export const POI_FILES = [
 	'defibrillator.json',
 	'water-pumps.json'
 ];
+/** Optional, describes which properties of the POIs the map popup shows, see readPoiMap() */
+export const POI_MAP_FILE = 'poi/poi-map.json';
 const IGNORED_FILES = ['.DS_Store', 'Thumbs.db'];
 
 /** Storage limit of the Kiezbox device for app + city data */
@@ -104,8 +106,104 @@ export function readCity(cityDir, slug) {
 		minzoom,
 		maxzoom,
 		mapMaxZoom,
-		fallbackCoordinates: cityConfig.fallbackCoordinates ?? [center[0], center[1]]
+		fallbackCoordinates: cityConfig.fallbackCoordinates ?? [center[0], center[1]],
+		poiMap: readPoiMap(cityDir)
 	};
+}
+
+/** Allowed keys per valueToDisplay; the first ones are required */
+const POI_FIELD_KEYS = {
+	boolean: { required: ['label', 'valueToDisplay', 'truthy'], optional: ['falsy', 'alsoTry'] },
+	text: { required: ['label', 'valueToDisplay'], optional: ['fallback', 'alsoTry'] },
+	map: { required: ['label', 'valueToDisplay', 'values'], optional: ['fallback', 'alsoTry'] }
+};
+
+/** @param {unknown} value */
+const isMatchValue = (value) => typeof value === 'string' || typeof value === 'number';
+
+/**
+ * Reads poi/poi-map.json: per POI file (name without .json) and per property of its features, how
+ * the map popup shows it. The data of each city can come from anywhere (OSM, open data portals,
+ * …), so the city folder says what its properties mean, not the app. Missing file = no popup rows.
+ * @param {string} cityDir
+ * @returns {import('../../src/lib/types').PoiMap}
+ */
+function readPoiMap(cityDir) {
+	const file = join(cityDir, POI_MAP_FILE);
+	if (!existsSync(file)) return {};
+
+	/** @param {string} message */
+	const error = (message) => new CityError(`${POI_MAP_FILE}: ${message}`);
+	let poiMap;
+	try {
+		poiMap = JSON.parse(readFileSync(file, 'utf8'));
+	} catch (cause) {
+		throw error(`kein gültiges JSON (${/** @type {Error} */ (cause).message})`);
+	}
+	if (!poiMap || typeof poiMap !== 'object' || Array.isArray(poiMap)) {
+		throw error('muss ein Objekt { "<poi>": { "<property>": { … } } } sein.');
+	}
+
+	const poiNames = POI_FILES.map((name) => name.replace(/\.json$/, ''));
+	for (const [poi, fields] of Object.entries(poiMap)) {
+		if (!poiNames.includes(poi)) {
+			throw error(`unbekannter POI "${poi}", erlaubt: ${poiNames.join(', ')}`);
+		}
+		if (!fields || typeof fields !== 'object' || Array.isArray(fields)) {
+			throw error(`"${poi}" muss ein Objekt { "<property>": { … } } sein.`);
+		}
+		for (const [property, field] of Object.entries(fields)) {
+			const at = `"${poi}" → "${property}"`;
+			const keys =
+				POI_FIELD_KEYS[/** @type {keyof typeof POI_FIELD_KEYS} */ (field?.valueToDisplay)];
+			if (!keys) {
+				throw error(`${at}: "valueToDisplay" muss "boolean", "text" oder "map" sein.`);
+			}
+			const missing = keys.required.filter((key) => field[key] === undefined);
+			if (missing.length > 0) throw error(`${at}: es fehlt ${missing.join(', ')}`);
+			const unknown = Object.keys(field).filter(
+				(key) => !keys.required.includes(key) && !keys.optional.includes(key)
+			);
+			if (unknown.length > 0) {
+				throw error(
+					`${at}: unbekannt bei "${field.valueToDisplay}": ${unknown.join(', ')} (erlaubt: ${[...keys.required, ...keys.optional].join(', ')})`
+				);
+			}
+			if (typeof field.label !== 'string' || field.label === '') {
+				throw error(`${at}: "label" muss ein nicht-leerer String sein.`);
+			}
+			for (const key of ['truthy', 'falsy']) {
+				const value = field[key];
+				if (
+					value !== undefined &&
+					!(isMatchValue(value) || (Array.isArray(value) && value.every(isMatchValue)))
+				) {
+					throw error(`${at}: "${key}" muss ein String, eine Zahl oder eine Liste davon sein.`);
+				}
+			}
+			if (field.fallback !== undefined && typeof field.fallback !== 'string') {
+				throw error(`${at}: "fallback" muss ein String sein.`);
+			}
+			if (
+				field.alsoTry !== undefined &&
+				!(
+					Array.isArray(field.alsoTry) &&
+					field.alsoTry.every((/** @type {unknown} */ key) => typeof key === 'string')
+				)
+			) {
+				throw error(`${at}: "alsoTry" muss eine Liste von Property-Namen sein.`);
+			}
+			if (
+				field.values !== undefined &&
+				(typeof field.values !== 'object' ||
+					Array.isArray(field.values) ||
+					!Object.values(field.values).every((value) => typeof value === 'string'))
+			) {
+				throw error(`${at}: "values" muss ein Objekt { "<Wert in den Daten>": "<Anzeige>" } sein.`);
+			}
+		}
+	}
+	return poiMap;
 }
 
 /** Name of the generated manifest the app loads from /city/ */

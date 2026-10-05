@@ -320,6 +320,25 @@
 				"defies-layer": "Defibrillatoren",
 				"osm-local-layer": "OSM Local"
 			}
+		},
+		"popup": {
+			"labels": {
+				"free": "Kostenfrei",
+				"wheelchair": "Barrierefrei",
+				"changing_table": "Wickeltisch",
+				"status": "Status",
+				"drinking_water": "Trinkwasser",
+				"check_date": "Überprüft am",
+				"opening_hours": "Öffnungszeiten",
+				"location": "Standort",
+				"phone": "Telefon",
+				"operator": "Betreiber"
+			},
+			"values": {
+				"working": "funktioniert",
+				"broken": "kaputt",
+				"unknown": "unbekannt"
+			}
 		}
 	}
 }

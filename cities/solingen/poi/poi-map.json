@@ -1,0 +1,10 @@
+{
+	"toilets": {
+		"fee": { "label": "free", "valueToDisplay": "boolean", "truthy": "no" },
+		"wheelchair": { "label": "wheelchair", "valueToDisplay": "boolean", "truthy": "yes" },
+		"changing_table": { "label": "changing_table", "valueToDisplay": "boolean", "truthy": "yes" }
+	},
+	"water-pumps": {},
+	"defibrillator": {},
+	"drinking-water": {}
+}

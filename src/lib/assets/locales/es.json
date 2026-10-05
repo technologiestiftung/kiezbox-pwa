@@ -320,6 +320,25 @@
 				"defies-layer": "Desfibriladores",
 				"osm-local-layer": "OSM local"
 			}
+		},
+		"popup": {
+			"labels": {
+				"free": "Gratuito",
+				"wheelchair": "Accesible en silla de ruedas",
+				"changing_table": "Cambiador",
+				"status": "Estado",
+				"drinking_water": "Agua potable",
+				"check_date": "Revisado el",
+				"opening_hours": "Horario",
+				"location": "Ubicación",
+				"phone": "Teléfono",
+				"operator": "Operador"
+			},
+			"values": {
+				"working": "funciona",
+				"broken": "averiado",
+				"unknown": "desconocido"
+			}
 		}
 	}
 }

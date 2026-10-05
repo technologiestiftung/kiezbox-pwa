@@ -320,6 +320,25 @@
 				"defies-layer": "Defibrillators",
 				"osm-local-layer": "OSM Local"
 			}
+		},
+		"popup": {
+			"labels": {
+				"free": "Free of charge",
+				"wheelchair": "Wheelchair accessible",
+				"changing_table": "Changing table",
+				"status": "Status",
+				"drinking_water": "Drinking water",
+				"check_date": "Checked on",
+				"opening_hours": "Opening hours",
+				"location": "Location",
+				"phone": "Phone",
+				"operator": "Operator"
+			},
+			"values": {
+				"working": "working",
+				"broken": "broken",
+				"unknown": "unknown"
+			}
 		}
 	}
 }
