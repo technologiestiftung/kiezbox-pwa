@@ -44,7 +44,7 @@ Everything city-specific lives in `cities/<slug>/`:
 
 ```
 cities/<slug>/
-  city.config.json   # name, default locale, optional fallback coordinates, optional mapMaxZoom
+  city.config.json   # name, default locale, optional fallback coordinates, optional mapMaxZoom, mapStyle
   tiles/             # vector tiles {z}/{x}/{y}.pbf (uncompressed) + metadata.json
   poi/               # toilets.json, drinking-water.json, defibrillator.json, water-pumps.json
                      # + optional poi-map.json: which properties the map popup shows

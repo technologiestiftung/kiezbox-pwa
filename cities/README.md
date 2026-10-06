@@ -104,7 +104,8 @@ Braucht die Stadt weitere Schlüssel, diese in `locales/<sprache>.json` der Stad
 	"name": "Köln",
 	"defaultLocale": "de",
 	"fallbackCoordinates": null,
-	"mapMaxZoom": 18
+	"mapMaxZoom": 18,
+	"mapStyle": "positron"
 }
 ```
 
@@ -112,6 +113,7 @@ Braucht die Stadt weitere Schlüssel, diese in `locales/<sprache>.json` der Stad
 - `defaultLocale`: Sprache beim ersten Start: `de`, `en`, `fr`, `it`, `es` oder `tr`.
 - `fallbackCoordinates`: `[längengrad, breitengrad]`, auf die die Karte zentriert, solange die Box keine GPS-Position meldet. `null` bedeutet: Mittelpunkt aus `tiles/metadata.json`.
 - `mapMaxZoom`: wie weit man hineinzoomen kann. Muss mindestens so groß sein wie die höchste vorhandene Kachel-Zoomstufe. `null` bedeutet: Standard von MapLibre.
+- `mapStyle` (optional): Kartenstil, `positron` (hell, Standard) oder `terrain` (Gelände, ohne Relief/Höhenlinien).
 
 ### 6. Stadtspezifische Texte (`locales/`)
 

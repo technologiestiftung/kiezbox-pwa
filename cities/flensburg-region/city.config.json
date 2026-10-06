@@ -2,5 +2,6 @@
 	"name": "Flensburg-Region",
 	"defaultLocale": "de",
 	"fallbackCoordinates": null,
-	"mapMaxZoom": 18
+	"mapMaxZoom": 18,
+	"mapStyle": "terrain"
 }

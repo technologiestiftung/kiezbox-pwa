@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cityUrl, getCity } from '$lib/config/city';
 	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
+	import { LAYER_STYLE_TERRAIN } from '$lib/config/layer-style-terrain';
 	import { LAYER_CONFIG } from '$lib/config/layers';
 	import { SOURCES_CONFIG } from '$lib/config/sources';
 	import { NetworkStore } from '$lib/state/networkState.svelte';
@@ -19,6 +20,8 @@
 	let map: maplibregl.Map;
 
 	let coordinatesSet = $state(false);
+
+	const BASE_STYLES = { positron: LAYER_STYLE, terrain: LAYER_STYLE_TERRAIN };
 
 	$effect(() => {
 		if (map && !coordinatesSet && NetworkStore.coordinates) {
@@ -47,7 +50,7 @@
 						maxzoom: city.maxzoom
 					}
 				},
-				layers: LAYER_STYLE,
+				layers: BASE_STYLES[city.mapStyle ?? 'positron'],
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},
 			bounds: dataBounds,

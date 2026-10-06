@@ -22,6 +22,8 @@ export interface CityConfig {
 	maxzoom: number;
 	/** Highest zoom the map allows; beyond `maxzoom` the tiles are overzoomed. null = MapLibre default */
 	mapMaxZoom: number | null;
+	/** Base map style; missing in city.json packaged before it existed */
+	mapStyle?: 'positron' | 'terrain';
 	fallbackCoordinates: [number, number];
 	/** From poi/poi-map.json of the city, {} if it has none */
 	poiMap: PoiMap;

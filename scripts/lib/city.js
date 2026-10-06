@@ -6,6 +6,9 @@ import { basename, join, relative } from 'node:path';
 /** Bumped whenever the layout of a city package changes in a way the app has to know about */
 export const SCHEMA_VERSION = 1;
 
+/** Must match the keys of BASE_STYLES in src/components/Map/Map.svelte */
+const MAP_STYLES = ['positron', 'terrain'];
+
 export const POI_FILES = [
 	'toilets.json',
 	'drinking-water.json',
@@ -97,6 +100,13 @@ export function readCity(cityDir, slug) {
 		);
 	}
 
+	const mapStyle = cityConfig.mapStyle ?? 'positron';
+	if (!MAP_STYLES.includes(mapStyle)) {
+		throw new CityError(
+			`city.config.json: "mapStyle" muss einer von ${MAP_STYLES.join(', ')} sein.`
+		);
+	}
+
 	return {
 		slug,
 		name: cityConfig.name ?? slug,
@@ -106,6 +116,7 @@ export function readCity(cityDir, slug) {
 		minzoom,
 		maxzoom,
 		mapMaxZoom,
+		mapStyle,
 		fallbackCoordinates: cityConfig.fallbackCoordinates ?? [center[0], center[1]],
 		poiMap: readPoiMap(cityDir)
 	};
