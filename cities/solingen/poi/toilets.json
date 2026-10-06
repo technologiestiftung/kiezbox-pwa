@@ -1,8 +1,8 @@
 {
 	"type": "FeatureCollection",
-	"generator": "overpass-turbo",
+	"generator": "overpass-api",
 	"copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
-	"timestamp": "2026-09-28T13:35:21Z",
+	"timestamp": "2026-07-28T02:16:18Z",
 	"features": [
 		{
 			"type": "Feature",
@@ -308,6 +308,345 @@
 				"coordinates": [7.0686055, 51.1908642]
 			},
 			"id": "node/13972314114"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/131190230",
+				"addr:city": "Solingen",
+				"addr:country": "DE",
+				"addr:postcode": "42659",
+				"addr:street": "Spielbruch",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.105621, 51.1598563]
+			},
+			"id": "way/131190230"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/134018564",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0376613, 51.1706991]
+			},
+			"id": "way/134018564"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/136736133",
+				"amenity": "toilets",
+				"building": "yes",
+				"building:levels": "1",
+				"building:material": "brick",
+				"roof:levels": "0.5",
+				"roof:material": "roof_tiles",
+				"roof:shape": "hipped"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0357768, 51.1848488]
+			},
+			"id": "way/136736133"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/199576346",
+				"access": "private",
+				"amenity": "toilets",
+				"building": "yes",
+				"operator": "Stadtwerke Solingen (nur für Busfahrer)"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0140061, 51.1413258]
+			},
+			"id": "way/199576346"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/279211470",
+				"access": "private",
+				"amenity": "toilets",
+				"building": "yes",
+				"description": "Nur für Busfahrer der SWS, RVK und SR."
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.152425, 51.1456966]
+			},
+			"id": "way/279211470"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/294977199",
+				"access": "yes",
+				"amenity": "toilets",
+				"building": "yes",
+				"fee": "no",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.1364501, 51.162198]
+			},
+			"id": "way/294977199"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/308712581",
+				"amenity": "toilets",
+				"building": "toilets"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.9836541, 51.160843]
+			},
+			"id": "way/308712581"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/310230110",
+				"addr:city": "Solingen",
+				"addr:country": "DE",
+				"addr:housenumber": "17",
+				"addr:postcode": "42651",
+				"addr:street": "Bergstraße",
+				"amenity": "toilets",
+				"building": "yes",
+				"fee": "no",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0815047, 51.1706216]
+			},
+			"id": "way/310230110"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/837053667",
+				"access": "customers",
+				"amenity": "toilets",
+				"building": "yes",
+				"changing_table": "no",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0893487, 51.1657296]
+			},
+			"id": "way/837053667"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/890883076",
+				"access": "yes",
+				"amenity": "toilets",
+				"building": "yes",
+				"building:levels": "1",
+				"toilets:disposal": "flush",
+				"unisex": "yes",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0654457, 51.1857242]
+			},
+			"id": "way/890883076"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/891137259",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0857963, 51.1671332]
+			},
+			"id": "way/891137259"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/896007464",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.9913327, 51.1566375]
+			},
+			"id": "way/896007464"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/910274737",
+				"amenity": "toilets",
+				"building": "yes",
+				"building:levels": "1",
+				"roof:material": "tar_paper",
+				"roof:shape": "flat"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0667056, 51.1944942]
+			},
+			"id": "way/910274737"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/961269295",
+				"amenity": "toilets",
+				"building": "yes",
+				"building:levels": "1",
+				"building:material": "plaster",
+				"roof:material": "tar_paper",
+				"roof:shape": "flat"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0404706, 51.1856944]
+			},
+			"id": "way/961269295"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/964431938",
+				"amenity": "toilets",
+				"building": "yes",
+				"wheelchair": "limited"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0720346, 51.1705879]
+			},
+			"id": "way/964431938"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/968704074",
+				"access": "yes",
+				"amenity": "toilets",
+				"centralkey": "eurokey",
+				"charge": "1 EUR",
+				"check_date": "2026-07-22",
+				"fee": "yes",
+				"indoor": "room",
+				"level": "0",
+				"payment:apple_pay": "yes",
+				"payment:cash": "yes",
+				"payment:coins:change": "yes",
+				"payment:coins:denominations": "0.10 EUR;0.20 EUR;0.50 EUR;1 EUR;2 EUR",
+				"payment:contactless": "yes",
+				"payment:google_pay": "yes",
+				"payment:mastercard_contactless": "yes",
+				"payment:monyx_wallet": "yes",
+				"payment:notes:denominations": "5 EUR;10 EUR",
+				"payment:visa_contactless": "yes",
+				"start_date": "2026-07-01",
+				"toilets:wheelchair:access": "centralkey",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0037963, 51.1609237]
+			},
+			"id": "way/968704074"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/1010794159",
+				"access": "yes",
+				"amenity": "toilets",
+				"building": "yes",
+				"changing_table": "no",
+				"fee": "yes",
+				"toilets:disposal": "flush",
+				"unisex": "yes",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0031676, 51.1611357]
+			},
+			"id": "way/1010794159"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/1078041700",
+				"access": "private",
+				"amenity": "toilets",
+				"building": "yes",
+				"description": "Nur für Busfahrer"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0789696, 51.2148723]
+			},
+			"id": "way/1078041700"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/1432347990",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0637473, 51.197463]
+			},
+			"id": "way/1432347990"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/1447272048",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0862223, 51.1712375]
+			},
+			"id": "way/1447272048"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "way/1448494754",
+				"amenity": "toilets",
+				"building": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.1021618, 51.1746966]
+			},
+			"id": "way/1448494754"
 		}
 	]
 }

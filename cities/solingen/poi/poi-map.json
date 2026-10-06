@@ -5,6 +5,13 @@
 		"changing_table": { "label": "changing_table", "valueToDisplay": "boolean", "truthy": "yes" }
 	},
 	"water-pumps": {},
-	"defibrillator": {},
+	"defibrillator": {
+		"defibrillator:location": {
+			"label": "location",
+			"valueToDisplay": "text",
+			"alsoTry": ["defibrillator:location:de"]
+		},
+		"opening_hours": { "label": "opening_hours", "valueToDisplay": "text" }
+	},
 	"drinking-water": {}
 }

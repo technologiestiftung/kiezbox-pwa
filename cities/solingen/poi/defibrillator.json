@@ -1,7 +1,85 @@
 {
 	"type": "FeatureCollection",
-	"generator": "overpass-turbo",
+	"generator": "overpass-api",
 	"copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
-	"timestamp": "2026-09-28T13:46:36Z",
-	"features": []
+	"timestamp": "2026-07-28T02:16:18Z",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/3328329696",
+				"emergency": "defibrillator",
+				"indoor": "yes",
+				"note": "im UG, WC-Vorraum",
+				"opening_hours": "24/7"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.961929, 51.1573929]
+			},
+			"id": "node/3328329696"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/11253816274",
+				"defibrillator:location": "Rechter Hand vor dem Eingang zum Museumsshop",
+				"emergency": "defibrillator",
+				"indoor": "yes",
+				"level": "0"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.1520909, 51.1377377]
+			},
+			"id": "node/11253816274"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/12496842086",
+				"access": "customers",
+				"emergency": "defibrillator",
+				"indoor": "yes",
+				"level": "0",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0724263, 51.2099393]
+			},
+			"id": "node/12496842086"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/12946973503",
+				"access": "yes",
+				"defibrillator:location": "AED",
+				"emergency": "defibrillator",
+				"indoor": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.997813, 51.1622102]
+			},
+			"id": "node/12946973503"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/14000742601",
+				"access": "yes",
+				"defibrillator:location": "im Hofgarten Haupteingang gegenüber Bushaltestelle rein linker durch  zu den Aufzügen gegen über der Aufzüge an der wand ",
+				"emergency": "defibrillator",
+				"indoor": "yes",
+				"opening_hours": "Mo-Fr 09:00-17:00"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0819291, 51.1714059]
+			},
+			"id": "node/14000742601"
+		}
+	]
 }

@@ -1,7 +1,38 @@
 {
 	"type": "FeatureCollection",
-	"generator": "overpass-turbo",
+	"generator": "overpass-api",
 	"copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
-	"timestamp": "2026-09-28T13:36:19Z",
-	"features": []
+	"timestamp": "2026-07-28T02:16:18Z",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/9222659447",
+				"access": "yes",
+				"man_made": "water_well",
+				"pump": "manual"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0918496, 51.1616302]
+			},
+			"id": "node/9222659447"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/12878326555",
+				"heritage": "8",
+				"heritage:operator": "UntereDenkmalbehörde",
+				"image": "https://de.wikipedia.org/wiki/Datei:Burg,_Eschbachstra%C3%9Fe_113,_Pumpe.jpg",
+				"man_made": "water_well",
+				"pump": "manual"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.1492705, 51.1422583]
+			},
+			"id": "node/12878326555"
+		}
+	]
 }
