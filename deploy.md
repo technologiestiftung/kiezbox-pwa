@@ -93,6 +93,20 @@ In `.env` bzw. `.env.<slug>` (Vorlage: `.env.example`, echte Werte nie committen
 
 **Achtung:** Weil die `PUBLIC_*`-Werte im Build stecken (außer den SIP-Zielen, die `box.json` überschreibt), funktioniert „eine App für alle Boxen“ nur, solange diese Werte auf allen Boxen gleich sind. Sonst braucht jede Box einen eigenen App-Build.
 
+## Online hosten (Netlify)
+
+Eine Netlify-Site pro Stadt, alle aus diesem Repo (z. B. `berlin.<domain>`, `solingen.<domain>`). Die gemeinsame `netlify.toml` baut die App, packt die Stadt und legt sie nach `build/city/` – dieselbe Struktur wie auf der Box, an der App ändert sich nichts.
+
+Pro Site in der Netlify-UI (_Site configuration → Environment variables_):
+
+- `CITY=<slug>` – welche Stadt die Site ausliefert.
+- alle `PUBLIC_*`-Variablen (siehe unten), sonst schlägt der Build fehl.
+
+Weil jede Stadt ihre eigene Origin hat, bekommt sie auch ihren eigenen Service Worker und `city-data`-Cache.
+
+- `box.json` gibt es online nicht. Es gelten die `PUBLIC_KB_*`-Fallbacks.
+- Online gibt es die Geräte-API (`/api/mode`, `/api/session`) nicht. Karte und Infos funktionieren, der Notruf-Button erreicht dort aber nichts.
+
 ## Lokal testen
 
 ```sh
