@@ -16,7 +16,7 @@ Kiezbox Emergency App: a SvelteKit PWA, statically built and deployed onto a Ban
 - `npm run check:watch` — same, in watch mode
 - `npm run format` — write formatting with Prettier
 - `npm run lint` — `prettier --check .` followed by `eslint .`
-- `npm run deploy` / `CITY=<slug> npm run deploy:city` — build, then run `deploy.sh`, which `scp`s `build/` into `DEPLOY_PATH` on the box, keeping `DEPLOY_PATH/city/`. Target comes from `DEPLOY_HOST`/`DEPLOY_USER`/`DEPLOY_PATH`/`DEPLOY_PASSWORD` in `.env` or `.env.<slug>`.
+- `npm run deploy` / `CITY=<slug> npm run deploy:city` — build, then run `deploy.sh`, which `scp`s `build/` into `DEPLOY_PATH` on the box, keeping `DEPLOY_PATH/city/` and `DEPLOY_PATH/box.json`. Target comes from `DEPLOY_HOST`/`DEPLOY_USER`/`DEPLOY_PATH`/`DEPLOY_PASSWORD` in `.env` or `.env.<slug>`.
 - `CITY=<slug> npm run deploy:city-data` — package the city, then `deploy-city.sh` uploads it to `DEPLOY_PATH/city.new/` and swaps it in as `DEPLOY_PATH/city/`.
 - Both deploys are real deploys to a live device — do not run without explicit user instruction.
 - `CITY=<slug> npm run build:city` — build using `.env.<slug>` (box-specific `PUBLIC_*` variables, not city data)
@@ -55,6 +55,6 @@ Package manager is npm (`package-lock.json`). Dependencies are kept current via 
 
 **Shared types:** `src/lib/types.ts` and `src/lib/enums.ts` (e.g. `Mode`, `SIPUser`, `SessionResponse`, `CallState`, `DeviceType`) — reuse these rather than redefining shapes locally.
 
-**Env config:** public env vars via `$env/static/public`: `PUBLIC_API_URL`, `PUBLIC_APP_HOSTNAME`, `PUBLIC_WSS_PATH`, `PUBLIC_USER_PREFIX`, `PUBLIC_LOG_LEVEL`, `PUBLIC_KB_TARGET_URI`, `PUBLIC_KB_DEMO_TARGET_URI`. `PUBLIC_CITY` only selects which `cities/<slug>/` the dev/preview server serves under `/city/` (`CITY_DIR` overrides it); the app code never reads it. All of these must be set (in `.env` or `.env.<slug>`) — without them `npm run check` and `npm run build` fail with missing `$env/static/public` exports.
+**Env config:** public env vars via `$env/static/public`: `PUBLIC_API_URL`, `PUBLIC_APP_HOSTNAME`, `PUBLIC_WSS_PATH`, `PUBLIC_USER_PREFIX`, `PUBLIC_LOG_LEVEL`, `PUBLIC_KB_TARGET_URI`, `PUBLIC_KB_DEMO_TARGET_URI`. The two SIP targets are only fallbacks: box-specific values come at runtime from `/box.json` (`DEPLOY_PATH/box.json`, placed by the image overlay or by hand, template `box.example.json`), loaded by `loadBox()` in `src/lib/config/box.ts` (never rejects) and read via `getBox()`. Every phone on the WLAN can fetch `box.json`, so never put credentials there. `PUBLIC_CITY` only selects which `cities/<slug>/` the dev/preview server serves under `/city/` (`CITY_DIR` overrides it); the app code never reads it. All of these must be set (in `.env` or `.env.<slug>`) — without them `npm run check` and `npm run build` fail with missing `$env/static/public` exports.
 
 **UI primitives:** `src/lib/components/ui/**` are generated shadcn-svelte-style primitives (bits-ui + tailwind-variants) — the eslint config deliberately ignores this directory; don't hand-edit generated primitive internals if a config/variant change would do.

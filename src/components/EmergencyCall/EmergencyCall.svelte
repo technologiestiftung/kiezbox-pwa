@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
+	import { getBox } from '$lib/config/box';
 	import { t } from '$lib/translations';
 	import { onDestroy } from 'svelte';
 	import { toast } from 'svelte-sonner';
@@ -99,7 +99,7 @@
 	// Removed waitForRegistration as it's now in the store
 
 	const call = async () => {
-		const targetUri = `${isEmergency ? PUBLIC_KB_TARGET_URI : PUBLIC_KB_DEMO_TARGET_URI}`;
+		const targetUri = isEmergency ? getBox().targetUri : getBox().demoTargetUri;
 		await handleCallAction(targetUri, remoteAudio, (error) => toast.error(error));
 	};
 
