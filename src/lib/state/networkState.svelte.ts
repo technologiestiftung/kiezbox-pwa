@@ -1,9 +1,11 @@
-import { apiFetch } from '$lib/api';
-import type { Mode } from '$lib/types';
-import { ApiStatus, DeviceType } from '$lib/enums';
 import { goto } from '$app/navigation';
-import type { LngLatLike } from 'maplibre-gl';
+import { resolve } from '$app/paths';
 import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
+import { apiFetch } from '$lib/api';
+import { getCity } from '$lib/config/city';
+import { ApiStatus, DeviceType } from '$lib/enums';
+import type { Mode } from '$lib/types';
+import type { LngLatLike } from 'maplibre-gl';
 
 // Constants
 const PING_API_ENDPOINT = '/api/mode';
@@ -23,7 +25,7 @@ export const NetworkStore = $state({
 	mode: null as Mode | null,
 	deviceType: DeviceType.DESKTOP as DeviceType,
 	adminMode: false,
-	coordinates: [13.342502830765682, 52.48863888739753] as LngLatLike,
+	coordinates: null as LngLatLike | null,
 	initialized: false
 });
 
@@ -120,10 +122,18 @@ const fetchMode = async (): Promise<Mode | null> => {
 			throw new Error(`Invalid mode response: ${JSON.stringify(response)}`);
 		}
 
+		// const infoResponse: any = await apiFetch(INFO_API_ENDPOINT, {
+		// 	method: 'GET',
+		// 	headers: { 'Content-Type': 'application/json' }
+		// });
+		// console.log('Info response:', infoResponse);
+
+		// const lngLat: LngLatLike = [infoResponse.lon, infoResponse.lat];
+
 		return {
 			status: response.mode,
 			isEmergency: response.mode % 2 == 0,
-			coordinates: response.coordinates
+			coordinates: response.coordinates || getCity().fallbackCoordinates
 		};
 	} catch (error) {
 		setError(`Failed to fetch mode: ${error instanceof Error ? error.message : String(error)}`);
@@ -144,7 +154,8 @@ export const setMeFree = async (): Promise<void> => {
 		if (!response) {
 			throw new Error(`Set me free request failed with status: ${response.status}`);
 		}
-		goto('/', {
+
+		goto(resolve('/'), {
 			noScroll: true
 		});
 	} catch (error) {
@@ -178,8 +189,7 @@ const pingApi = async () => {
 		NetworkStore.lastPingTime = now;
 		NetworkStore.apiStatus = ApiStatus.AVAILABLE;
 		NetworkStore.errorMessage = null;
-		NetworkStore.coordinates =
-			mode.coordinates ?? ([13.342502830765682, 52.48863888739753] as LngLatLike);
+		NetworkStore.coordinates = mode.coordinates;
 		NetworkStore.mode = mode;
 	} catch (error: unknown) {
 		setError(`Ping API error: ${error instanceof Error ? error.message : String(error)}`);
@@ -255,7 +265,7 @@ export function toggleMode() {
 	NetworkStore.mode = {
 		status: NetworkStore.mode?.status === 0 ? 1 : 0,
 		isEmergency: !NetworkStore.mode?.isEmergency,
-		coordinates: [13.342502830765682, 52.48863888739753]
+		coordinates: getCity().fallbackCoordinates
 	};
 	console.log(`Toggling mode to: ${NetworkStore.mode.status}`);
 

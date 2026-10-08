@@ -1,6 +1,9 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
+	import { getCity } from '$lib/config/city';
 	import { LAYER_CONFIG } from '$lib/config/layers';
+	import { poiName, popupRows, type PopupRow } from '$lib/config/popup';
+	import { SOURCES_CONFIG } from '$lib/config/sources';
 	import { mapState, poiState } from '$lib/state/state.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
@@ -10,9 +13,18 @@
 
 	let cardRef: HTMLDivElement | undefined = $state();
 
-	let content = $state({});
-	let title = $state('Details');
-	let activeLayer = $state<(typeof LAYER_CONFIG)[number] | null>(null);
+	let content: PopupRow[] = $state([]);
+	const activeLayer = $derived(
+		LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null
+	);
+	const title = $derived(activeLayer?.label || 'Details');
+	const hasContent = $derived(content.length > 0);
+
+	/** Translation if there is one, otherwise the key itself is shown (plain text in poi-map.json) */
+	const translateOr = (prefix: string, key: string) => {
+		const text = $t(`${prefix}.${key}`);
+		return text === `${prefix}.${key}` ? key : text;
+	};
 	let arrowPosition = $state({ left: '50%', top: '0', transform: 'translateX(-50%)' });
 
 	type ArrowDirection = 'top' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
@@ -134,19 +146,9 @@
 	}
 
 	$effect(() => {
-		activeLayer = LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null;
-	});
-
-	$effect(() => {
-		if (activeLayer && poiState.properties) {
-			content = activeLayer.getContent ? activeLayer.getContent(poiState.properties) : {};
-		} else {
-			content = {};
-		}
-	});
-
-	$effect(() => {
-		title = activeLayer?.label || 'Details';
+		const data = SOURCES_CONFIG.find((source) => source.id === activeLayer?.source)?.data;
+		const fields = data ? getCity().poiMap?.[poiName(data)] : undefined;
+		content = fields && poiState.properties ? popupRows(fields, poiState.properties) : [];
 	});
 
 	$effect(() => {
@@ -201,28 +203,30 @@
 			</Card.Title>
 		</Card.Header>
 
-		<Card.Content>
-			<ul>
-				{#each Object.entries(content) as [key, value]}
-					<li
-						class="flex justify-between gap-2 px-4 py-2"
-						style={`display: ${typeof value === 'boolean' ? 'flex' : 'block'}; flex-direction: ${typeof value === 'boolean' ? 'row' : 'column'}`}
-					>
-						<p class="text-grey-mid font-bold">{key}</p>
-						{#if typeof value === 'boolean'}
-							<p>
-								{#if value}
-									<Checkmark fill="#00AA84" size={24} />
-								{:else}
-									<CloseLarge fill="#E40422" size={24} />
-								{/if}
-							</p>
-						{:else}
-							<p>{$t(`${value}`)}</p>
-						{/if}
-					</li>
-				{/each}
-			</ul>
-		</Card.Content>
+		{#if hasContent}
+			<Card.Content>
+				<ul>
+					{#each content as { property, label, value, translateValue } (property)}
+						<li
+							class="flex justify-between gap-2 px-4 py-2"
+							style={`display: ${typeof value === 'boolean' ? 'flex' : 'block'}; flex-direction: ${typeof value === 'boolean' ? 'row' : 'column'}`}
+						>
+							<p class="text-grey-mid font-bold">{translateOr('map.popup.labels', label)}</p>
+							{#if typeof value === 'boolean'}
+								<p>
+									{#if value}
+										<Checkmark fill="#00AA84" size={24} />
+									{:else}
+										<CloseLarge fill="#E40422" size={24} />
+									{/if}
+								</p>
+							{:else}
+								<p>{translateValue ? translateOr('map.popup.values', value) : value}</p>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</Card.Content>
+		{/if}
 	</Card.Root>
 </div>

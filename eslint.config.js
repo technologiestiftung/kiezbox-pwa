@@ -6,15 +6,16 @@ import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import svelteParser from 'svelte-eslint-parser';
 import ts from 'typescript-eslint';
+import svelteConfig from './svelte.config.js';
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 export default ts.config(
 	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs['flat/recommended'],
+	...svelte.configs.recommended,
 	prettier,
-	...svelte.configs['flat/prettier'],
+	...svelte.configs.prettier,
 	{
 		languageOptions: {
 			globals: {
@@ -24,14 +25,23 @@ export default ts.config(
 		}
 	},
 	{
-		files: ['**/*.svelte'],
+		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parser: svelteParser,
 			parserOptions: {
 				parser: ts.parser,
+				extraFileExtensions: ['.svelte'],
+				svelteConfig,
 				ecmaVersion: 'latest',
 				sourceType: 'module'
 			}
+		}
+	},
+	{
+		rules: {
+			// all <a href> in this app point to external URLs (from translations/env),
+			// where resolve() does not apply; goto() is still checked
+			'svelte/no-navigation-without-resolve': ['error', { ignoreLinks: true }]
 		}
 	},
 	{

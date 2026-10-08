@@ -1,0 +1,112 @@
+{
+	"type": "FeatureCollection",
+	"generator": "overpass-turbo",
+	"copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+	"timestamp": "2026-09-28T13:33:20Z",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/1307756230",
+				"amenity": "drinking_water"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0830381, 51.2131176]
+			},
+			"id": "node/1307756230"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/1355984525",
+				"amenity": "drinking_water",
+				"check_date": "2021-10-31",
+				"fountain": "drinking",
+				"source": "estimation"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.1242013, 51.1367548]
+			},
+			"id": "node/1355984525"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/2795614022",
+				"amenity": "drinking_water"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0434036, 51.1784103]
+			},
+			"id": "node/2795614022"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/2795614024",
+				"amenity": "drinking_water"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0442308, 51.1786078]
+			},
+			"id": "node/2795614024"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/2795614027",
+				"amenity": "drinking_water"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0439152, 51.1791578]
+			},
+			"id": "node/2795614027"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/2795614029",
+				"amenity": "drinking_water"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0445491, 51.1798623]
+			},
+			"id": "node/2795614029"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/9883730212",
+				"amenity": "drinking_water"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0824701, 51.2136245]
+			},
+			"id": "node/9883730212"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"@id": "node/11898589184",
+				"access": "yes",
+				"amenity": "drinking_water",
+				"description": "Schräge Säule mit Knopf auf der Hinterseite. Drückt man drauf spudelt oben ein Bogen Wasser im Halbkreis raus, sodass man zur Not auch ohne Flasche draus trinken kann. Man muss nur 1x kurz antippen, dann läuft das Wasser einige Zeit.",
+				"fee": "no",
+				"fountain": "bubbler",
+				"wheelchair": "yes"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0011065, 51.1615282]
+			},
+			"id": "node/11898589184"
+		}
+	]
+}

@@ -13,8 +13,6 @@ export interface LayerConfig {
 	// todo fix any type
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	paint?: Record<string, any>;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	getContent?: (properties: Record<string, any>) => Record<string, string | boolean | null>;
 }
 
 export const BASE_LAYER_CONFIG: LayerConfig[] = [
@@ -47,10 +45,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			visibility: 'visible',
 			'icon-image': 'drinking-water-icon',
 			'icon-size': 0.3
-		},
-		getContent: (properties) => ({
-			Name: properties.bezeichnun
-		})
+		}
 	},
 	{
 		id: 'water-pumps-layer',
@@ -63,12 +58,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			visibility: 'visible',
 			'icon-image': 'water-pump-icon',
 			'icon-size': 0.3
-		},
-		getContent: (properties) => ({
-			Status: properties['pump:status'] === 'ok' ? 'funktioniert' : 'kaputt',
-			Trinkwasser: properties.drinking_water === 'yes',
-			Überprüft_am: properties.check_date
-		})
+		}
 	},
 	{
 		id: 'toilets-layer',
@@ -81,13 +71,7 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			visibility: 'visible',
 			'icon-image': 'toilet-icon',
 			'icon-size': 0.3
-		},
-		getContent: (properties) => ({
-			Kostenfrei: properties.nutzungsentgelt === 0,
-			Barrierefrei: properties.barrierefrei === 'ja',
-			Wickeltisch: properties.wickeltisch === 'ja',
-			Pissoir: properties.kostenfreies_pissoir === 'ja'
-		})
+		}
 	},
 	{
 		id: 'defies-layer',
@@ -100,15 +84,6 @@ export const LAYER_CONFIG: LayerConfig[] = [
 			visibility: 'visible',
 			'icon-image': 'defibrillator-icon',
 			'icon-size': 0.3
-		},
-		getContent: (properties) => ({
-			Öffnungszeiten: properties.opening_hours || 'unbekannt',
-			Standort:
-				properties['defibrillator:location'] ||
-				properties['defibrillator:location:de'] ||
-				'unbekannt',
-			Telefon: properties.phone || properties['contact:phone'] || 'unbekannt',
-			Betreiber: properties.operator || properties['defibrillator:wikipedia'] || 'unbekannt'
-		})
+		}
 	}
 ];

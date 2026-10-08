@@ -1,0 +1,15 @@
+# One Netlify site per city, all from this repo. Per site set CITY=<slug> and all PUBLIC_* variables
+# in the Netlify UI. The city data goes into build/city/, the same place as DEPLOY_PATH/city/ on the box.
+[build]
+  command = "npm run build && npm run package:city -- ${CITY:?CITY not set} && cp -r dist/cities/$CITY build/city"
+  publish = "build"
+
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/city/city.json"
+  [headers.values]
+    Cache-Control = "no-cache"
