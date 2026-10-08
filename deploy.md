@@ -93,7 +93,14 @@ In `.env` bzw. `.env.<slug>` (Vorlage: `.env.example`, echte Werte nie committen
 
 **Achtung:** Weil die `PUBLIC_*`-Werte im Build stecken (außer den SIP-Zielen, die `box.json` überschreibt), funktioniert „eine App für alle Boxen“ nur, solange diese Werte auf allen Boxen gleich sind. Sonst braucht jede Box einen eigenen App-Build.
 
-## Online hosten (Netlify)
+## Online hosten (Netlify / anderer Webserver)
+
+Online-Versionen sind reine Info-Versionen ohne Anrufe: Karte und Infos funktionieren, der Notruf-Bereich zeigt die Fehlermeldung, weil die Geräte-API (`/api/mode`, `/api/session`, `wss`) fehlt. Das ist so gewollt – Anrufe gehen nur über eine Box.
+
+- `box.json` gehört nur auf die Boxen, online weglassen. Die App fällt dann still auf die `PUBLIC_KB_*`-Werte zurück.
+- Die `PUBLIC_*`-Variablen müssen für den Build gesetzt sein, ihre Werte sind online aber egal (Platzhalter reichen).
+
+### Netlify
 
 Eine Netlify-Site pro Stadt, alle aus diesem Repo (z. B. `berlin.<domain>`, `solingen.<domain>`). Die gemeinsame `netlify.toml` baut die App, packt die Stadt und legt sie nach `build/city/` – dieselbe Struktur wie auf der Box, an der App ändert sich nichts.
 
@@ -104,8 +111,13 @@ Pro Site in der Netlify-UI (_Site configuration → Environment variables_):
 
 Weil jede Stadt ihre eigene Origin hat, bekommt sie auch ihren eigenen Service Worker und `city-data`-Cache.
 
-- `box.json` gibt es online nicht. Es gelten die `PUBLIC_KB_*`-Fallbacks.
-- Online gibt es die Geräte-API (`/api/mode`, `/api/session`) nicht. Karte und Infos funktionieren, der Notruf-Button erreicht dort aber nichts.
+### Anderer Webserver
+
+```sh
+npm run build && npm run package:city -- <slug> && cp -r dist/cities/<slug> build/city
+```
+
+Dann `build/` als statische Dateien ausliefern. `/service-worker.js` und `/city/city.json` mit `Cache-Control: no-cache` ausliefern (wie in `netlify.toml`), sonst kommen App- und Daten-Updates nicht an.
 
 ## Lokal testen
 
