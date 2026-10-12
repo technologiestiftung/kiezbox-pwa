@@ -3,3 +3,7 @@ package-lock.json
 pnpm-lock.yaml
 yarn.lock
 /src/lib/components/ui
+# Generated map tiles
+/static/pbf-tiles
+/src/lib/generated
+/cities/*/tiles

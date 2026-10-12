@@ -1,0 +1,282 @@
+{
+	"type": "FeatureCollection",
+	"source": "Stadt Solingen, https://gdi-ows1.solingen.de/geoserver/poi/ogc/features/v1/collections/bp_alle_poi/items, 2026-10-12",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3604",
+			"properties": {
+				"name": "Hofgarten Solingen ( EG)",
+				"address": "Kölner Straße 99, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08245513, 51.1713468]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3630",
+			"properties": {
+				"name": "Bahnhofsmission",
+				"address": "Bahnstraße 5, 42697 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.00380842, 51.16143044]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3649",
+			"properties": {
+				"name": "Malteser Hilfsdienst e.V.",
+				"address": "Löhdorfer Straße 96a, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.02790396, 51.15580962]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3715",
+			"properties": {
+				"name": "Walbusch",
+				"address": "Martinstraße 18, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05095072, 51.17226646]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3758",
+			"properties": {
+				"name": "Tennisabteilung OTV",
+				"address": "Deusberger Straße 1a, 42697 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.01394651, 51.16617713]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3826",
+			"properties": {
+				"name": "Sporthalle Börkhaus-Siebels",
+				"address": "Uhlandstraße 52, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.01459793, 51.14849494]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3933",
+			"properties": {
+				"name": "Schloss Burg",
+				"address": "Schloßplatz 2, 42659 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.1535655, 51.13735414]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3959",
+			"properties": {
+				"name": "SWS",
+				"address": "Beethovenstraße 210, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05120526, 51.17490151]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3977",
+			"properties": {
+				"name": "Agentur für Arbeit",
+				"address": "Kamper Straße 35, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0080726, 51.15944246]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3978",
+			"properties": {
+				"name": "SWS",
+				"address": "Weidenstraße 10, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.06760273, 51.17806138]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4026",
+			"properties": {
+				"name": "Gaststätte Rüdenstein",
+				"address": "Obenrüden 72, 42657 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07215852, 51.12663958]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4061",
+			"properties": {
+				"name": "ZWILLING J.A. Henckels AG",
+				"address": "Lüneschloßstraße 42, 42657 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08254036, 51.1624525]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4066",
+			"properties": {
+				"name": "AOK Geschäftsstelle",
+				"address": "Kölner Straße 49, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08154197, 51.16899058]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4170",
+			"properties": {
+				"name": "TSG Solingen e.V.",
+				"address": "Dingshauser Straße 48, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05731129, 51.17306062]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4207",
+			"properties": {
+				"name": "ZWILLING J.A. Henckels AG",
+				"address": "Grünewalder Straße 14, 42657 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07998284, 51.16270944]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4252",
+			"properties": {
+				"name": "JAGUAR Stahlwarenfabrik GmbH & Co. KG",
+				"address": "Ketzberger Straße 34, 42653 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07826824, 51.1930373]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4277",
+			"properties": {
+				"name": "SWS Kundencenter",
+				"address": "Beethovenstraße 210, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05120526, 51.17490151]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4326",
+			"properties": {
+				"name": "Walbusch",
+				"address": "Martinstraße 41, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.04553955, 51.1694311]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4333",
+			"properties": {
+				"name": "Walbusch",
+				"address": "Ulrichstraße 21, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.04673715, 51.16898902]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4363",
+			"properties": {
+				"name": "Stadtsparkasse Solingen",
+				"address": "Kölner Straße 68, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08298298, 51.16959469]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4401",
+			"properties": {
+				"name": "Ohligser Turnverein 1888 e.V.",
+				"address": "Hubertusstraße 12, 42697 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.9926611, 51.1590002]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4432",
+			"properties": {
+				"name": "Theater-und Konzerthaus (Bühneneingang)",
+				"address": "Konrad-Adenauer-Straße 71, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08083691, 51.178625]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4579",
+			"properties": {
+				"name": "Cinemaxx Solingen GmbH",
+				"address": "Mühlenplatz 1, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08488858, 51.17358679]
+			}
+		}
+	]
+}

@@ -1,39 +1,82 @@
 import i18n from 'sveltekit-i18n';
+import { CITY_PATH } from './config/city';
 
+/**
+ * @param {Record<string, any>} base
+ * @param {Record<string, any>} override
+ * @returns {Record<string, any>}
+ */
+function deepMerge(base, override) {
+	const result = { ...base };
+	for (const [key, value] of Object.entries(override)) {
+		const isObject = value && typeof value === 'object' && !Array.isArray(value);
+		result[key] = isObject && base[key] ? deepMerge(base[key], value) : value;
+	}
+	return result;
+}
+
+/**
+ * @param {string} locale
+ * @param {() => Promise<{ default: Record<string, any> }>} loadBase
+ */
+function withCityOverride(locale, loadBase) {
+	return async () => {
+		const base = (await loadBase()).default;
+		const override = await fetchCityOverride(locale);
+		return override ? deepMerge(base, override) : base;
+	};
+}
+
+/**
+ * City-specific texts from /city/locales/<lang>.json. Optional: a city without overrides for
+ * this language (404) or unreachable city data just keeps the base texts.
+ * @param {string} locale
+ * @returns {Promise<Record<string, any> | null>}
+ */
+async function fetchCityOverride(locale) {
+	try {
+		const response = await fetch(`${CITY_PATH}/locales/${locale}.json`);
+		return response.ok ? await response.json() : null;
+	} catch {
+		return null;
+	}
+}
+
+// No initLocale: the root layout calls loadTranslations() with the city's defaultLocale
+// once the city data is loaded.
 /** @type {import('sveltekit-i18n').Config} */
 const config = {
-	initLocale: 'de',
 	fallbackLocale: 'de',
 	loaders: [
 		{
 			locale: 'de',
 			key: '',
-			loader: async () => (await import('./assets/locales/de.json')).default
+			loader: withCityOverride('de', () => import('./assets/locales/de.json'))
 		},
 		{
 			locale: 'en',
 			key: '',
-			loader: async () => (await import('./assets/locales/en.json')).default
+			loader: withCityOverride('en', () => import('./assets/locales/en.json'))
 		},
 		{
 			locale: 'fr',
 			key: '',
-			loader: async () => (await import('./assets/locales/fr.json')).default
+			loader: withCityOverride('fr', () => import('./assets/locales/fr.json'))
 		},
 		{
 			locale: 'it',
 			key: '',
-			loader: async () => (await import('./assets/locales/it.json')).default
+			loader: withCityOverride('it', () => import('./assets/locales/it.json'))
 		},
 		{
 			locale: 'es',
 			key: '',
-			loader: async () => (await import('./assets/locales/es.json')).default
+			loader: withCityOverride('es', () => import('./assets/locales/es.json'))
 		},
 		{
 			locale: 'tr',
 			key: '',
-			loader: async () => (await import('./assets/locales/tr.json')).default
+			loader: withCityOverride('tr', () => import('./assets/locales/tr.json'))
 		}
 	]
 };

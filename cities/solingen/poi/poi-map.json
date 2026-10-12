@@ -1,0 +1,72 @@
+{
+	"toilets": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"defibrillator": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"police": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"fire-station": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"hospital": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	}
+}

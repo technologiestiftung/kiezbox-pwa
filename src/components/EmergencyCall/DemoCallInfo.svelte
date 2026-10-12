@@ -19,12 +19,13 @@
 	let visibilityObservers: IntersectionObserver[] = [];
 	let startAnimationObserver: IntersectionObserver | null = null;
 	let userInteracted = $state(false);
-	let animationLoopId: number | null = null;
-	let resumeTimerId: number | null = null;
+	let animationLoopId: ReturnType<typeof setTimeout> | null = null;
+	let resumeTimerId: ReturnType<typeof setTimeout> | null = null;
 	let animationHasStarted = $state(false);
 	let isProgrammaticScroll = false;
-	let programmaticScrollTimeout: number | null = null;
+	let programmaticScrollTimeout: ReturnType<typeof setTimeout> | null = null;
 
+	// svelte-ignore state_referenced_locally
 	let prevIsInCall = $state(isInCall);
 
 	$effect(() => {
@@ -57,7 +58,7 @@
 		if (!isInCall) return;
 		if (!scrollContainerElement || !rootElement) return;
 
-		let initialSetupTimer: number | null = null;
+		let initialSetupTimer: ReturnType<typeof setTimeout> | null = null;
 
 		initialSetupTimer = setTimeout(() => {
 			initialSetupTimer = null;
@@ -195,7 +196,7 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html $t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-8 w-full space-y-2 px-4">
-			{#each { length: BUBBLE_COUNT } as _, i}
+			{#each { length: BUBBLE_COUNT }, i (i)}
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<li>{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
 			{/each}
@@ -213,11 +214,11 @@
 		onscroll={handleScroll}
 		onwheel={handleScroll}
 		ontouchmove={handleScroll}
+		role="region"
 		class="scroll-fade flex h-[calc(100vh-30rem)] w-full flex-1 flex-col items-center gap-10 overflow-y-auto scroll-smooth p-4 pb-32"
 		aria-label="Scrolling question bubbles"
 	>
-		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
-		{#each { length: BUBBLE_COUNT } as _, i}
+		{#each { length: BUBBLE_COUNT }, i (i)}
 			<div
 				bind:this={bubbleElements[i]}
 				class={`flex w-full justify-center ${i == 0 ? 'pt-10' : ''}`}

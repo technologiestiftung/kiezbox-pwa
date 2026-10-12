@@ -1,0 +1,222 @@
+{
+	"type": "FeatureCollection",
+	"source": "Stadt Solingen, https://gdi-ows1.solingen.de/geoserver/poi/ogc/features/v1/collections/bp_alle_poi/items, 2026-10-12",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3607",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 3 (Mangenberg)",
+				"address": "Mangenberger Straße 83a, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.0692151, 51.17167614]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3641",
+			"properties": {
+				"name": "Rettungswache V",
+				"address": "Burgstraße 105, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07670454, 51.17460978]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3653",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 2 (Rupelrath)",
+				"address": "Wipperauer Straße 35, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.00294062, 51.13100851]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3720",
+			"properties": {
+				"name": "Feuer- und Rettungswache II",
+				"address": "Brunnenstraße 11, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.01782199, 51.16160652]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3997",
+			"properties": {
+				"name": "Kinderfeuerwehr",
+				"address": "Frankfurter Damm 10, 42719 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05243592, 51.18519504]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4016",
+			"properties": {
+				"name": "Musik- und Versorgungszug",
+				"address": "Frankfurter Damm 10, 42719 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05243592, 51.18519504]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4052",
+			"properties": {
+				"name": "Feuer- und Rettungswache III",
+				"address": "Frankfurter Damm 10, 42719 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05243592, 51.18519504]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4124",
+			"properties": {
+				"name": "Jugendfeuerwehr",
+				"address": "Neuenhofer Straße 11c, 42657 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.06285091, 51.15357141]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4127",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 6 (Gräfrath)",
+				"address": "Brandteich 6, 42653 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07222052, 51.21182924]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4200",
+			"properties": {
+				"name": "Rettungswache VI (ASB)",
+				"address": "Löhdorfer Straße 38, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.03105741, 51.15855663]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4305",
+			"properties": {
+				"name": "Feuer- und Rettungswache I",
+				"address": "Katternberger Straße 44, 42655 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07781627, 51.16648245]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4336",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 5 (Böckerhof)",
+				"address": "Bismarckstraße 99, 42659 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.09366284, 51.1592264]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4352",
+			"properties": {
+				"name": "Freiwillige Feuerwehr (Umweltschutzzug)",
+				"address": "Wupperstraße 52, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.09229093, 51.17217301]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4438",
+			"properties": {
+				"name": "Informations- und Kommunikationseinheit",
+				"address": "Frankfurter Damm 10, 42719 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05243592, 51.18519504]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4475",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 7 (Wald)",
+				"address": "Ernst-Barlach-Straße 19, 42719 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.05181749, 51.18434908]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4535",
+			"properties": {
+				"name": "Rettungswache IV, Standort Städtisches Klinikum",
+				"address": "Gotenstraße 1, 42653 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.06964561, 51.18532646]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4599",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 8 (Burg)",
+				"address": "In der Planke 8, 42659 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.15556837, 51.13862489]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4606",
+			"properties": {
+				"name": "Freiwillige Feuerwehr - Löscheinheit 1 (Merscheid/Ohligs)",
+				"address": "Hildener Straße 43a, 42697 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.98912824, 51.16855828]
+			}
+		}
+	]
+}

@@ -8,7 +8,7 @@
 	<h4 class="InfoBoxItem-title">{infoBoxItem.title}</h4>
 	{#if Array.isArray(infoBoxItem.textBodyOrList)}
 		<ul class="body-text">
-			{#each infoBoxItem.textBodyOrList as item}
+			{#each infoBoxItem.textBodyOrList as item, i (i)}
 				<li class="ml-4 list-disc">{item}</li>
 			{/each}
 		</ul>
@@ -16,7 +16,7 @@
 		<p class="InfoBoxItem-body body-text">{infoBoxItem.textBodyOrList}</p>
 	{/if}
 	<div class="flex flex-col">
-		{#each infoBoxItem.links as link}
+		{#each infoBoxItem.links as link, i (i)}
 			<a
 				class="InfoBoxItem-link body-text text-purple-dark after:content-['_↗']"
 				href={link.href}

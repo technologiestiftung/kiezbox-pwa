@@ -1,0 +1,30 @@
+{
+	"type": "FeatureCollection",
+	"source": "Stadt Solingen, https://gdi-ows1.solingen.de/geoserver/poi/ogc/features/v1/collections/bp_alle_poi/items, 2026-10-12",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4306",
+			"properties": {
+				"name": "Städtisches Klinikum Solingen",
+				"address": "Gotenstraße 1, 42653 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.06971012, 51.18502922]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4522",
+			"properties": {
+				"name": "Krankenhaus Bethanien",
+				"address": "Aufderhöher Straße 169, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.01232854, 51.13805509]
+			}
+		}
+	]
+}
