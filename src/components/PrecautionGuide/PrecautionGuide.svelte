@@ -10,7 +10,7 @@
 	import { createPrecautionTabItems } from '$lib/utils/precautionUtils';
 	import { t, loading, locale, locales } from '$lib/translations';
 	import type { TabItem } from '$lib/types'; // Import your type if needed
-	import { NetworkStore, setAdminMode } from '$lib/state/networkState.svelte';
+	import { NetworkStore } from '$lib/state/networkState.svelte';
 
 	function getIcon(slug: string) {
 		const icons = {
@@ -45,7 +45,6 @@
 			}
 			NetworkStore.adminMode = true;
 			clickCount = 0;
-		} else {
 		}
 	};
 
@@ -57,7 +56,6 @@
 		};
 	});
 
-	const noOfClicks = $state(0);
 	const precautionSlugs = ['personal_precautions', 'fire', 'flood', 'storm', 'cbrn'];
 
 	let tabItems = $state<(TabItem & { icon: typeof BaggageClaim | null })[]>([]); // Initialize as reactive state
@@ -93,7 +91,7 @@
 	>
 		{#if !$loading}
 			<select bind:value={$locale} class=" bg-purple-light cursor-pointer px-1">
-				{#each $locales as value}
+				{#each $locales as value (value)}
 					<option {value}>{$t(`common.languages.${value}`)}</option>
 				{/each}
 			</select>

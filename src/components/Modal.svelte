@@ -10,6 +10,7 @@
 	let contentContainer: HTMLElement | undefined = $state();
 
 	// Track previous modal state to detect changes
+	// svelte-ignore state_referenced_locally
 	let prevModalState = $state(isModal);
 
 	$effect(() => {
@@ -28,9 +29,6 @@
 	});
 </script>
 
-<!-- eslint-disable-next-line svelte/valid-compile -->
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <dialog
 	bind:this={dialog}
 	onclose={close}
@@ -44,7 +42,7 @@
 		<Button
 			variant="ghost"
 			class="text-body-black justfiy-center flex w-32 cursor-pointer items-center space-x-2"
-			on:click={close}
+			onclick={close}
 			{disabled}
 		>
 			<span class="text-body-black">{$t('common.button.close')}</span>

@@ -1,0 +1,51 @@
+{
+	"toilets": {
+		"nutzungsentgelt": { "label": "free", "valueToDisplay": "boolean", "truthy": 0 },
+		"barrierefrei": {
+			"label": "wheelchair",
+			"valueToDisplay": "boolean",
+			"truthy": "ja",
+			"falsy": "nein"
+		},
+		"wickeltisch": {
+			"label": "changing_table",
+			"valueToDisplay": "boolean",
+			"truthy": "ja",
+			"falsy": "nein"
+		}
+	},
+	"water-pumps": {
+		"pump:status": {
+			"label": "status",
+			"valueToDisplay": "map",
+			"values": {
+				"ok": "working",
+				"broken": "broken",
+				"out_of_order": "broken",
+				"locked": "broken",
+				"missing_beam": "broken",
+				"blocked": "broken"
+			},
+			"fallback": "unknown"
+		},
+		"drinking_water": { "label": "drinking_water", "valueToDisplay": "boolean", "truthy": "yes" },
+		"check_date": { "label": "check_date", "valueToDisplay": "text" }
+	},
+	"defibrillator": {
+		"opening_hours": { "label": "opening_hours", "valueToDisplay": "text", "fallback": "unknown" },
+		"defibrillator:location": {
+			"label": "location",
+			"valueToDisplay": "text",
+			"alsoTry": ["defibrillator:location:de"],
+			"fallback": "unknown"
+		},
+		"phone": {
+			"label": "phone",
+			"valueToDisplay": "text",
+			"alsoTry": ["contact:phone"],
+			"fallback": "unknown"
+		},
+		"operator": { "label": "operator", "valueToDisplay": "text", "fallback": "unknown" }
+	},
+	"drinking-water": {}
+}

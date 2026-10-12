@@ -98,10 +98,10 @@
 				"phone_button": "To the emergency call demo",
 				"incoming_call": "Incoming call",
 				"offline": {
-					"text": "In the event of a crisis, you can make an emergency call to the Berlin fire brigade. \nWith our <strong> emergency call demo </strong> you can practice the 5W questions that you should always have in conversation with the emergency services."
+					"text": "In the event of a crisis, you can make an emergency call to the fire brigade. \nWith our <strong> emergency call demo </strong> you can practice the 5W questions that you should always have in conversation with the emergency services."
 				},
 				"online": {
-					"text": "You are now connected to the Berlin Fire Department's demo call. The fire department will guide you through the conversation as follows:"
+					"text": "You are now connected to the fire department's demo call. The fire department will guide you through the conversation as follows:"
 				},
 				"questions": {
 					"1": {
@@ -134,13 +134,13 @@
 					"call_state": "Status: "
 				},
 				"offline": {
-					"text": "Here you can send an emergency call to the Berlin fire brigade. \nPlease note that this is a real emergency call. \nAbuse is punishable!"
+					"text": "Here you can send an emergency call to the fire brigade. \nPlease note that this is a real emergency call. \nAbuse is punishable!"
 				},
 				"connecting": {
-					"text": "You are now being connected to the Berlin Fire Department; please pay attention to the following questions:"
+					"text": "You are now being connected to the fire department; please pay attention to the following questions:"
 				},
 				"online": {
-					"text": "You are now being connected to the Berlin Fire Department; please pay attention to the following questions:"
+					"text": "You are now being connected to the fire department; please pay attention to the following questions:"
 				}
 			},
 			"initializing": "Connection is created ..."
@@ -284,7 +284,7 @@
 				},
 				"2": {
 					"title": "Behavior During Hazardous Substance Release",
-					"text": "Contact the local poison control center. Poison control of Charité University Medicine Berlin: 030 192 40"
+					"text": "Contact the local poison control center."
 				},
 				"3": {
 					"title": "Behavior at Home",
@@ -319,6 +319,25 @@
 				"toilets-layer": "Public toilet",
 				"defies-layer": "Defibrillators",
 				"osm-local-layer": "OSM Local"
+			}
+		},
+		"popup": {
+			"labels": {
+				"free": "Free of charge",
+				"wheelchair": "Wheelchair accessible",
+				"changing_table": "Changing table",
+				"status": "Status",
+				"drinking_water": "Drinking water",
+				"check_date": "Checked on",
+				"opening_hours": "Opening hours",
+				"location": "Location",
+				"phone": "Phone",
+				"operator": "Operator"
+			},
+			"values": {
+				"working": "working",
+				"broken": "broken",
+				"unknown": "unknown"
 			}
 		}
 	}
