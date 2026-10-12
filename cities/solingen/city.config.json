@@ -3,5 +3,14 @@
 	"defaultLocale": "de",
 	"fallbackCoordinates": null,
 	"mapMaxZoom": 18,
-	"mapStyle": "terrain"
+	"mapStyle": "terrain",
+	"pois": [
+		"toilets",
+		"defibrillator",
+		"police",
+		"fire-station",
+		"hospital",
+		"drinking-water",
+		"water-pumps"
+	]
 }

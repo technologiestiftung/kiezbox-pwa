@@ -4,10 +4,11 @@ Die App ist für alle Städte dieselbe. Alles, was eine Stadt ausmacht (Karte, P
 
 ```
 cities/<stadt>/
-  city.config.json     Name, Standardsprache, optional Ersatzkoordinaten und maximale Zoomstufe
+  city.config.json     Name, Standardsprache, optional Ersatzkoordinaten, maximale Zoomstufe, POI-Arten
   tiles/               Kartenkacheln {z}/{x}/{y}.pbf + metadata.json
-  poi/                 toilets.json, drinking-water.json, defibrillator.json, water-pumps.json
+  poi/                 <poi>.json pro POI-Art, z. B. toilets.json
     poi-map.json       optional: was das Popup auf der Karte zu einem POI anzeigt
+  icons/               optional: eigene Icons <poi>.png (Karte) und <poi>.svg (Legende)
   locales/             optional: stadtspezifische Texte (z. B. Feuerwehr, Giftnotruf)
 ```
 
@@ -29,10 +30,12 @@ Die mit dem `vector-tiles-converter` erzeugten Kacheln samt `metadata.json` nach
 
 ### 3. POIs (`poi/`)
 
-Die vier Dateien in `poi/` durch GeoJSON-Daten der Stadt ersetzen (z. B. aus OpenStreetMap per overpass turbo oder aus dem Open-Data-Portal der Stadt). Zu beachten:
+Die Dateien in `poi/` durch GeoJSON-Daten der Stadt ersetzen (z. B. aus OpenStreetMap per overpass turbo oder aus dem Open-Data-Portal der Stadt). Jede POI-Art ist eine Ebene auf der Karte mit eigenem Eintrag in der Legende.
 
-- Die Dateinamen müssen genau so bleiben: `toilets.json`, `drinking-water.json`, `defibrillator.json`, `water-pumps.json`.
-- Alle vier müssen vorhanden sein. Gibt es für eine Art keine Daten, bleibt eine leere FeatureCollection stehen (`{ "type": "FeatureCollection", "features": [] }`).
+- Welche POI-Arten es gibt, steht in `city.config.json` unter `"pois"`, in der Reihenfolge der Legende, z. B. `"pois": ["toilets", "defibrillator", "police"]`. Ohne `"pois"` gelten die Berliner vier: `drinking-water`, `water-pumps`, `toilets`, `defibrillator`.
+- Zu jedem Namen `<poi>` gehört `poi/<poi>.json`. Gibt es für eine Art keine Daten, bleibt eine leere FeatureCollection stehen (`{ "type": "FeatureCollection", "features": [] }`) oder die Art kommt aus `"pois"` raus.
+- **Icons:** `icons/<poi>.png` im Stadtordner ersetzt das Kartensymbol der App, optional `icons/<poi>.svg` das Legenden-Icon (ohne SVG zeigt die Legende das PNG). Für die vier Standard-Arten optional, für jede andere Art ist das PNG Pflicht. Die Größe ist egal, die Karte skaliert alle Icons auf dieselbe Breite. Icons, die höher als breit sind, gelten als Stecknadel und zeigen mit der Spitze auf den Ort.
+- **Legendentext:** Für die vier Standard-Arten bringt die App Texte mit. Für jede andere Art `map.legend.layers.<poi>` in `locales/<sprache>.json` der Stadt eintragen (mindestens in der Standardsprache, sonst meldet `package:city` einen Fehler), z. B. `{ "map": { "legend": { "layers": { "police": "Polizei" } } } }`.
 - Koordinaten in WGS84 (Längengrad, Breitengrad), wie bei GeoJSON üblich.
 - Die Dateien kommen 1:1 auf die Box. Unnötig große Exporte (viele ungenutzte Attribute) kosten Speicher.
 
@@ -40,7 +43,7 @@ Die vier Dateien in `poi/` durch GeoJSON-Daten der Stadt ersetzen (z. B. aus Ope
 
 Klickt man auf der Karte auf einen POI, zeigt ein Popup Details wie „Barrierefrei ✓“ oder „Öffnungszeiten“. Die Daten jeder Stadt kommen aus anderen Quellen und haben andere Attributnamen und Werte: In OSM heißt es `wheelchair: "yes"`, in den Berliner Toilettendaten `barrierefrei: "ja"`. Deshalb steht in `poi-map.json`, welches Attribut was bedeutet. Die App selbst kennt keine Attributnamen.
 
-Erst in die eigenen Daten schauen, welche Attribute und Werte es gibt, dann pro POI-Datei (Name ohne `.json`) und pro Attribut eine Zeile des Popups beschreiben. Die Reihenfolge in der Datei ist die Reihenfolge im Popup.
+Erst in die eigenen Daten schauen, welche Attribute und Werte es gibt, dann pro POI-Art (Name aus `"pois"`) und pro Attribut eine Zeile des Popups beschreiben. Die Reihenfolge in der Datei ist die Reihenfolge im Popup.
 
 ```json
 {
@@ -143,7 +146,7 @@ PUBLIC_CITY=<stadt> npm run dev
 
 Für `dev` müssen die `PUBLIC_*`-Variablen in `.env` gesetzt sein (siehe `.env.example`). Änderungen an den Stadtdaten sind nach einem Neuladen der Seite sichtbar. Für eine andere Stadt muss nur der Dev-Server neu gestartet werden, die App muss nicht neu gebaut werden.
 
-Zum Durchklicken: Karte zentriert richtig, alle vier POI-Arten erscheinen, Popups zeigen sinnvolle Werte (kein durchgehendes ✗, keine „unbekannt“-Wüste), Feuerwehr- und Giftnotruftexte stimmen in allen Sprachen.
+Zum Durchklicken: Karte zentriert richtig, alle POI-Arten erscheinen, Popups zeigen sinnvolle Werte (kein durchgehendes ✗, keine „unbekannt“-Wüste), Feuerwehr- und Giftnotruftexte stimmen in allen Sprachen.
 
 ### 8. Box-Konfiguration (`.env.<stadt>`)
 

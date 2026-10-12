@@ -1,9 +1,8 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import { getCity } from '$lib/config/city';
-	import { LAYER_CONFIG } from '$lib/config/layers';
-	import { poiName, popupRows, type PopupRow } from '$lib/config/popup';
-	import { SOURCES_CONFIG } from '$lib/config/sources';
+	import { poiLayers } from '$lib/config/poi';
+	import { popupRows, type PopupRow } from '$lib/config/popup';
 	import { mapState, poiState } from '$lib/state/state.svelte';
 	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 	import CloseLarge from 'carbon-icons-svelte/lib/CloseLarge.svelte';
@@ -14,8 +13,9 @@
 	let cardRef: HTMLDivElement | undefined = $state();
 
 	let content: PopupRow[] = $state([]);
+	const layers = poiLayers();
 	const activeLayer = $derived(
-		LAYER_CONFIG.find((layer) => layer.id === poiState.layer?.id) || null
+		layers.find((layer) => layer.layerId === poiState.layer?.id) || null
 	);
 	const title = $derived(activeLayer?.label || 'Details');
 	const hasContent = $derived(content.length > 0);
@@ -146,8 +146,7 @@
 	}
 
 	$effect(() => {
-		const data = SOURCES_CONFIG.find((source) => source.id === activeLayer?.source)?.data;
-		const fields = data ? getCity().poiMap?.[poiName(data)] : undefined;
+		const fields = activeLayer ? getCity().poiMap?.[activeLayer.poi] : undefined;
 		content = fields && poiState.properties ? popupRows(fields, poiState.properties) : [];
 	});
 

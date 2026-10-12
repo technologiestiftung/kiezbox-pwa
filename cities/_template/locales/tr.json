@@ -314,11 +314,10 @@
 			"button_open": "Lejantı aç",
 			"button_close": "Lejantı kapat",
 			"layers": {
-				"drinking-water-layer": "İçme suyu",
-				"water-pumps-layer": "Su pompası",
-				"toilets-layer": "Umumi tuvalet",
-				"defies-layer": "Defibrilatörler",
-				"osm-local-layer": "OSM Yerel"
+				"drinking-water": "İçme suyu",
+				"water-pumps": "Su pompası",
+				"toilets": "Umumi tuvalet",
+				"defibrillator": "Defibrilatörler"
 			}
 		},
 		"popup": {

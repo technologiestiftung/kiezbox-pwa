@@ -314,11 +314,10 @@
 			"button_open": "Legende öffnen",
 			"button_close": "Legende schließen",
 			"layers": {
-				"drinking-water-layer": "Trinkwasser",
-				"water-pumps-layer": "Wasserpumpe",
-				"toilets-layer": "Öffentliche Toilette",
-				"defies-layer": "Defibrillatoren",
-				"osm-local-layer": "OSM Local"
+				"drinking-water": "Trinkwasser",
+				"water-pumps": "Wasserpumpe",
+				"toilets": "Öffentliche Toilette",
+				"defibrillator": "Defibrillatoren"
 			}
 		}
 	}

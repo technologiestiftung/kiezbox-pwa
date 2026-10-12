@@ -25,6 +25,8 @@ export interface CityConfig {
 	/** Base map style; missing in city.json packaged before it existed */
 	mapStyle?: 'positron' | 'terrain';
 	fallbackCoordinates: [number, number];
+	/** POI layers in legend order, data in poi/<poi>.json; missing in city.json packaged before it existed */
+	pois?: string[];
 	/** From poi/poi-map.json of the city, {} if it has none */
 	poiMap: PoiMap;
 }

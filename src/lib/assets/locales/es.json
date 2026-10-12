@@ -314,11 +314,10 @@
 			"button_open": "Abrir leyenda",
 			"button_close": "Cerrar leyenda",
 			"layers": {
-				"drinking-water-layer": "Agua potable",
-				"water-pumps-layer": "Bomba de agua",
-				"toilets-layer": "Baño público",
-				"defies-layer": "Desfibriladores",
-				"osm-local-layer": "OSM local"
+				"drinking-water": "Agua potable",
+				"water-pumps": "Bomba de agua",
+				"toilets": "Baño público",
+				"defibrillator": "Desfibriladores"
 			}
 		},
 		"popup": {
@@ -332,7 +331,10 @@
 				"opening_hours": "Horario",
 				"location": "Ubicación",
 				"phone": "Teléfono",
-				"operator": "Operador"
+				"operator": "Operador",
+				"name": "Nombre",
+				"address": "Dirección",
+				"info": "Nota"
 			},
 			"values": {
 				"working": "funciona",

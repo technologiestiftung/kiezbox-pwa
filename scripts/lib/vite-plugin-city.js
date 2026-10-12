@@ -9,7 +9,9 @@ import { CityError, MANIFEST_FILE, listFiles, readCity, toManifest } from './cit
 
 const CONTENT_TYPES = {
 	'.json': 'application/json; charset=utf-8',
-	'.pbf': 'application/x-protobuf'
+	'.pbf': 'application/x-protobuf',
+	'.png': 'image/png',
+	'.svg': 'image/svg+xml'
 };
 
 /** @returns {import('vite').Plugin} */

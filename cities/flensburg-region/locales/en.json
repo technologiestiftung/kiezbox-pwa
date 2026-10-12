@@ -314,11 +314,10 @@
 			"button_open": "Open legend",
 			"button_close": "Close legend",
 			"layers": {
-				"drinking-water-layer": "Drinking water",
-				"water-pumps-layer": "Water pump",
-				"toilets-layer": "Public toilet",
-				"defies-layer": "Defibrillators",
-				"osm-local-layer": "OSM Local"
+				"drinking-water": "Drinking water",
+				"water-pumps": "Water pump",
+				"toilets": "Public toilet",
+				"defibrillator": "Defibrillators"
 			}
 		},
 		"popup": {

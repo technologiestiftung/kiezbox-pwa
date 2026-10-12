@@ -314,11 +314,13 @@
 			"button_open": "Ouvrir la légende",
 			"button_close": "Fermer la légende",
 			"layers": {
-				"drinking-water-layer": "Eau potable",
-				"water-pumps-layer": "Pompe à eau",
-				"toilets-layer": "Toilettes publiques",
-				"defies-layer": "Défibrillateurs",
-				"osm-local-layer": "OSM local"
+				"drinking-water": "Eau potable",
+				"water-pumps": "Pompe à eau",
+				"toilets": "Toilettes publiques",
+				"defibrillator": "Défibrillateurs",
+				"police": "Police",
+				"fire-station": "Caserne de pompiers",
+				"hospital": "Hôpital"
 			}
 		}
 	}

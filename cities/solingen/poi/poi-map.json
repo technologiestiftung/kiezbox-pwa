@@ -1,17 +1,74 @@
 {
 	"toilets": {
-		"fee": { "label": "free", "valueToDisplay": "boolean", "truthy": "no" },
-		"wheelchair": { "label": "wheelchair", "valueToDisplay": "boolean", "truthy": "yes" },
-		"changing_table": { "label": "changing_table", "valueToDisplay": "boolean", "truthy": "yes" }
-	},
-	"water-pumps": {},
-	"defibrillator": {
-		"defibrillator:location": {
-			"label": "location",
-			"valueToDisplay": "text",
-			"alsoTry": ["defibrillator:location:de"]
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
 		},
-		"opening_hours": { "label": "opening_hours", "valueToDisplay": "text" }
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
 	},
-	"drinking-water": {}
+	"defibrillator": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"police": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"fire-station": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"hospital": {
+		"name": {
+			"label": "name",
+			"valueToDisplay": "text"
+		},
+		"address": {
+			"label": "address",
+			"valueToDisplay": "text"
+		},
+		"info": {
+			"label": "info",
+			"valueToDisplay": "text"
+		}
+	},
+	"drinking-water": {},
+	"water-pumps": {}
 }

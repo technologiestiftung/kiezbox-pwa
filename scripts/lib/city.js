@@ -9,12 +9,12 @@ export const SCHEMA_VERSION = 1;
 /** Must match the keys of BASE_STYLES in src/components/Map/Map.svelte */
 const MAP_STYLES = ['positron', 'terrain'];
 
-export const POI_FILES = [
-	'toilets.json',
-	'drinking-water.json',
-	'defibrillator.json',
-	'water-pumps.json'
-];
+/**
+ * POI layers of a city without "pois" in city.config.json. The app ships icons and legend labels
+ * for these (static/icons/<poi>.{png,svg}, map.legend.layers.<poi>); other POIs bring their own.
+ * Must match DEFAULT_POIS in src/lib/config/poi.ts
+ */
+export const DEFAULT_POIS = ['drinking-water', 'water-pumps', 'toilets', 'defibrillator'];
 /** Optional, describes which properties of the POIs the map popup shows, see readPoiMap() */
 export const POI_MAP_FILE = 'poi/poi-map.json';
 const IGNORED_FILES = ['.DS_Store', 'Thumbs.db'];
@@ -45,17 +45,25 @@ export function readCity(cityDir, slug) {
 		throw new CityError(`Stadt "${slug}" nicht gefunden. Erwartet wird der Ordner ${shownDir}.`);
 	}
 
-	const required = [
-		'city.config.json',
-		'tiles/metadata.json',
-		...POI_FILES.map((file) => `poi/${file}`)
-	];
-	const missing = required.filter((file) => !existsSync(join(cityDir, file)));
-	if (missing.length > 0) {
-		throw new CityError(`In ${shownDir} fehlen: ${missing.join(', ')}`);
+	const required = ['city.config.json', 'tiles/metadata.json'];
+	const missingConfig = required.filter((file) => !existsSync(join(cityDir, file)));
+	if (missingConfig.length > 0) {
+		throw new CityError(`In ${shownDir} fehlen: ${missingConfig.join(', ')}`);
 	}
 
 	const cityConfig = JSON.parse(readFileSync(join(cityDir, 'city.config.json'), 'utf8'));
+	const defaultLocale = cityConfig.defaultLocale ?? 'de';
+	const pois = readPois(cityDir, cityConfig.pois ?? DEFAULT_POIS, defaultLocale);
+	const missing = pois
+		.flatMap((poi) => [
+			`poi/${poi}.json`,
+			// The app has icons only for the default POIs, every other one needs its own (.svg optional)
+			...(DEFAULT_POIS.includes(poi) ? [] : [`icons/${poi}.png`])
+		])
+		.filter((file) => !existsSync(join(cityDir, file)));
+	if (missing.length > 0) {
+		throw new CityError(`In ${shownDir} fehlen: ${missing.join(', ')}`);
+	}
 	const metadata = JSON.parse(readFileSync(join(cityDir, 'tiles/metadata.json'), 'utf8'));
 
 	const bounds = String(metadata.bounds ?? '')
@@ -110,7 +118,7 @@ export function readCity(cityDir, slug) {
 	return {
 		slug,
 		name: cityConfig.name ?? slug,
-		defaultLocale: cityConfig.defaultLocale ?? 'de',
+		defaultLocale,
 		bounds: /** @type {[number, number, number, number]} */ (bounds),
 		center: [center[0], center[1]],
 		minzoom,
@@ -118,8 +126,44 @@ export function readCity(cityDir, slug) {
 		mapMaxZoom,
 		mapStyle,
 		fallbackCoordinates: cityConfig.fallbackCoordinates ?? [center[0], center[1]],
-		poiMap: readPoiMap(cityDir)
+		pois,
+		poiMap: readPoiMap(cityDir, pois)
 	};
+}
+
+/**
+ * Checks "pois" of city.config.json: one map layer per entry, data in poi/<poi>.json. POIs the app
+ * has no legend label for need one in the city's locales/<defaultLocale>.json.
+ * @param {string} cityDir
+ * @param {unknown} pois
+ * @param {string} defaultLocale
+ * @returns {string[]}
+ */
+function readPois(cityDir, pois, defaultLocale) {
+	if (
+		!Array.isArray(pois) ||
+		pois.length === 0 ||
+		!pois.every((poi) => typeof poi === 'string' && isValidSlug(poi)) ||
+		new Set(pois).size !== pois.length
+	) {
+		throw new CityError(
+			'city.config.json: "pois" muss eine nicht-leere Liste verschiedener Namen (a-z, 0-9, -) sein.'
+		);
+	}
+	const own = pois.filter((poi) => !DEFAULT_POIS.includes(poi));
+	if (own.length === 0) return pois;
+
+	const localeFile = join(cityDir, 'locales', `${defaultLocale}.json`);
+	const layers = existsSync(localeFile)
+		? (JSON.parse(readFileSync(localeFile, 'utf8'))?.map?.legend?.layers ?? {})
+		: {};
+	const unlabeled = own.filter((poi) => typeof layers[poi] !== 'string');
+	if (unlabeled.length > 0) {
+		throw new CityError(
+			`locales/${defaultLocale}.json: es fehlt map.legend.layers.${unlabeled.join(', map.legend.layers.')}`
+		);
+	}
+	return pois;
 }
 
 /** Allowed keys per valueToDisplay; the first ones are required */
@@ -133,13 +177,14 @@ const POI_FIELD_KEYS = {
 const isMatchValue = (value) => typeof value === 'string' || typeof value === 'number';
 
 /**
- * Reads poi/poi-map.json: per POI file (name without .json) and per property of its features, how
+ * Reads poi/poi-map.json: per POI (see readPois()) and per property of its features, how
  * the map popup shows it. The data of each city can come from anywhere (OSM, open data portals,
  * …), so the city folder says what its properties mean, not the app. Missing file = no popup rows.
  * @param {string} cityDir
+ * @param {string[]} pois
  * @returns {import('../../src/lib/types').PoiMap}
  */
-function readPoiMap(cityDir) {
+function readPoiMap(cityDir, pois) {
 	const file = join(cityDir, POI_MAP_FILE);
 	if (!existsSync(file)) return {};
 
@@ -155,10 +200,9 @@ function readPoiMap(cityDir) {
 		throw error('muss ein Objekt { "<poi>": { "<property>": { … } } } sein.');
 	}
 
-	const poiNames = POI_FILES.map((name) => name.replace(/\.json$/, ''));
 	for (const [poi, fields] of Object.entries(poiMap)) {
-		if (!poiNames.includes(poi)) {
-			throw error(`unbekannter POI "${poi}", erlaubt: ${poiNames.join(', ')}`);
+		if (!pois.includes(poi)) {
+			throw error(`unbekannter POI "${poi}", erlaubt (siehe "pois"): ${pois.join(', ')}`);
 		}
 		if (!fields || typeof fields !== 'object' || Array.isArray(fields)) {
 			throw error(`"${poi}" muss ein Objekt { "<property>": { … } } sein.`);

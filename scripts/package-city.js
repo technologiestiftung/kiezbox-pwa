@@ -1,6 +1,6 @@
 // Validates cities/<slug>/ and packages it as the city data the app loads at runtime from /city/:
 //   dist/cities/<slug>/
-//     city.config.json, locales/, poi/, tiles/   (copied unchanged)
+//     city.config.json, icons/, locales/, poi/, tiles/   (copied unchanged)
 //     city.json                                  (generated manifest, see toManifest())
 // Usage: npm run package:city -- <slug>   (falls back to PUBLIC_CITY)
 import 'dotenv/config';
@@ -45,7 +45,7 @@ try {
 const outDir = join(root, 'dist/cities', slug);
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
-for (const entry of ['city.config.json', 'locales', 'poi', 'tiles']) {
+for (const entry of ['city.config.json', 'icons', 'locales', 'poi', 'tiles']) {
 	if (!existsSync(join(cityDir, entry))) continue;
 	cpSync(join(cityDir, entry), join(outDir, entry), { recursive: true, filter: notIgnored });
 }

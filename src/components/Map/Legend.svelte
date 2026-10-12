@@ -6,11 +6,12 @@
 		AccordionTrigger
 	} from '$lib/components/ui/accordion';
 	import { Checkbox } from '$lib/components/ui/checkbox';
-	import { LAYER_CONFIG } from '$lib/config/layers';
+	import { poiLayers } from '$lib/config/poi';
 	import { layerState } from '$lib/state/layerState.svelte';
 	import { t } from '$lib/translations';
 
 	let isOpen = $state(false);
+	const layers = poiLayers();
 
 	const toggleIsOpen = $derived(() => {
 		isOpen = !isOpen;
@@ -34,17 +35,17 @@
 			</AccordionTrigger>
 			<AccordionContent>
 				<ul class="flex flex-col gap-6 px-6 pt-2">
-					{#each LAYER_CONFIG as layer (layer.id)}
+					{#each layers as layer (layer.layerId)}
 						<li class="body-large flex items-center justify-between gap-2">
 							<div class="flex items-center gap-4">
-								<img src={layer.icon} alt={layer.alt} />
-								<label for={layer.id}>{$t(layer.label)}</label>
+								<img src={layer.legendIcon} alt="" class="size-8 object-contain" />
+								<label for={layer.layerId}>{$t(layer.label)}</label>
 							</div>
 							<Checkbox
 								class="cursor-pointer"
-								id={layer.id}
-								checked={layerState.layerVisibility[layer.id] === 'visible'}
-								onCheckedChange={() => layerState.toggleLayerVisibility(layer.id)}
+								id={layer.layerId}
+								checked={layerState.isVisible(layer.layerId)}
+								onCheckedChange={() => layerState.toggleLayerVisibility(layer.layerId)}
 							/>
 						</li>
 					{/each}

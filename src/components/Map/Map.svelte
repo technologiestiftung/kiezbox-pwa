@@ -2,8 +2,7 @@
 	import { cityUrl, getCity } from '$lib/config/city';
 	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
 	import { LAYER_STYLE_TERRAIN } from '$lib/config/layer-style-terrain';
-	import { LAYER_CONFIG } from '$lib/config/layers';
-	import { SOURCES_CONFIG } from '$lib/config/sources';
+	import { poiLayers } from '$lib/config/poi';
 	import { NetworkStore } from '$lib/state/networkState.svelte';
 	import { mapState, poiState } from '$lib/state/state.svelte';
 	import * as maplibregl from 'maplibre-gl';
@@ -60,36 +59,32 @@
 			...(city.mapMaxZoom !== null && { maxZoom: city.mapMaxZoom })
 		});
 
-		const LAYER_IDS = LAYER_CONFIG.map((layer) => layer.id);
+		const POI_LAYERS = poiLayers();
+		/** px; the app's 96 px icons were shown at icon-size 0.3 */
+		const ICON_WIDTH = 29;
+		const LAYER_IDS = POI_LAYERS.map((layer) => layer.layerId);
 
 		map.on('load', async () => {
-			const iconMappings = {
-				'toilet-icon': '/icons/toilet.png',
-				'water-pump-icon': '/icons/water-pump.png',
-				'drinking-water-icon': '/icons/drinking-water.png',
-				'defibrillator-icon': '/icons/defibrillator.png'
-			};
+			for (const layer of POI_LAYERS) {
+				const { data: icon } = await map.loadImage(layer.mapIcon);
+				map.addImage(layer.poi, icon);
 
-			for (const [iconName, iconPath] of Object.entries(iconMappings)) {
-				const iconImage = await map.loadImage(iconPath);
-				if (iconImage) map.addImage(iconName, iconImage.data);
-			}
-
-			SOURCES_CONFIG.forEach((source) => {
-				map.addSource(source.id, {
-					type: source.type,
-					data: cityUrl(source.data)
-				});
-			});
-
-			LAYER_CONFIG.forEach((layer) => {
+				map.addSource(layer.poi, { type: 'geojson', data: cityUrl(layer.data) });
 				map.addLayer({
-					id: layer.id,
-					type: layer.type,
-					source: layer.source,
-					layout: layer.layout
+					id: layer.layerId,
+					type: 'symbol',
+					source: layer.poi,
+					layout: {
+						visibility: 'visible',
+						'icon-image': layer.poi,
+						// Same width for every icon, whatever size the city's PNGs have
+						'icon-size': ICON_WIDTH / icon.width,
+						// ponytail: taller than wide = map pin pointing down; add a per-city setting if a
+						// city ever ships tall icons that aren't pins
+						'icon-anchor': icon.height > icon.width ? 'bottom' : 'center'
+					}
 				} as AddLayerObject);
-			});
+			}
 
 			if (LAYER_IDS.length > 0) {
 				map.on('mouseenter', LAYER_IDS, () => {

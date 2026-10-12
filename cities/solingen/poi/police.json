@@ -1,0 +1,79 @@
+{
+	"type": "FeatureCollection",
+	"source": "Stadt Solingen, https://gdi-ows1.solingen.de/geoserver/poi/ogc/features/v1/collections/bp_alle_poi/items, 2026-10-12",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3664",
+			"properties": {
+				"name": "Polizeibezirksdienststelle Höhscheid",
+				"address": "Neuenhofer Straße 33, 42657 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.06589157, 51.15426818]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3709",
+			"properties": {
+				"name": "Polizeibezirksdienststelle Gräfrath",
+				"address": "Wuppertaler Straße 29, 42653 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07498972, 51.1935848]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3976",
+			"properties": {
+				"name": "Polizeiinspektion Solingen (Hauptwache)",
+				"address": "Kölner Straße 26, 42651 Solingen",
+				"info": "Hauptwache"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08155265, 51.16779811]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4324",
+			"properties": {
+				"name": "Polizeibezirksdienststelle Wald",
+				"address": "Walder Kirchplatz 11, 42719 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.04204269, 51.18346031]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4607",
+			"properties": {
+				"name": "Polizeibezirksdienststelle Aufderhöhe",
+				"address": "Nußbaumstraße 10, 42699 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.01334137, 51.14130571]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4618",
+			"properties": {
+				"name": "Polizeibezirksdienststelle Ohligs",
+				"address": "Kieler Straße 15, 42697 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.00333353, 51.15962098]
+			}
+		}
+	]
+}

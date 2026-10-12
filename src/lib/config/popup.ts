@@ -62,10 +62,3 @@ export const popupRows = (fields: Record<string, PoiField>, properties: Properti
 	Object.entries(fields)
 		.map(([property, field]) => toRow(property, field, properties))
 		.filter((row) => row !== null);
-
-/** POI name (file name without .json, the key in poi-map.json) of a source's data file */
-export const poiName = (dataPath: string) =>
-	dataPath
-		.split('/')
-		.pop()!
-		.replace(/\.json$/, '');

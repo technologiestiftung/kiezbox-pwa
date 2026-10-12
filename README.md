@@ -44,14 +44,17 @@ Everything city-specific lives in `cities/<slug>/`:
 
 ```
 cities/<slug>/
-  city.config.json   # name, default locale, optional fallback coordinates, optional mapMaxZoom, mapStyle
+  city.config.json   # name, default locale, optional fallback coordinates, mapMaxZoom, mapStyle, pois
   tiles/             # vector tiles {z}/{x}/{y}.pbf (uncompressed) + metadata.json
-  poi/               # toilets.json, drinking-water.json, defibrillator.json, water-pumps.json
+  poi/               # <poi>.json per POI layer listed in "pois"
                      # + optional poi-map.json: which properties the map popup shows
+  icons/             # optional <poi>.png (map) + <poi>.svg (legend), override the app's static/icons/
   locales/           # optional overrides of src/lib/assets/locales/<lang>.json (deep-merged)
 ```
 
 `npm run package:city -- <slug>` validates a city and packages it into `dist/cities/<slug>/` (gitignored), including a generated `city.json`: the runtime config plus a `dataVersion` hash that tells the service worker when the city data changed. It fails if app (`build/`) + city data exceed the 64 MB limit of the box. Map bounds and center are read from `tiles/metadata.json`. The tile zoom range is taken from the zoom folders actually present in `tiles/`, so a tileset can stop at e.g. z13 to save space: the map overzooms the highest level instead of requesting missing tiles. `mapMaxZoom` (optional, ≥ highest tile zoom) caps how far users can zoom in; `null` keeps the MapLibre default.
+
+The POI layers are city data too: `pois` in `city.config.json` lists them in legend order (default: `drinking-water`, `water-pumps`, `toilets`, `defibrillator`, which the app ships icons and labels for). Each `<poi>` needs `poi/<poi>.json`; any other POI also needs `icons/<poi>.png` (`.svg` optional, the legend falls back to the PNG; icons are scaled to the same width, taller-than-wide ones are anchored at the bottom like a pin) and a `map.legend.layers.<poi>` label in the city's locales. `package:city` checks all of this. Solingen's official POIs are refreshed with `node scripts/fetch-solingen-poi.js`.
 
 ### Map popup: `poi/poi-map.json`
 

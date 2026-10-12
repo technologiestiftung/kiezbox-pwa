@@ -314,11 +314,10 @@
 			"button_open": "Apri legenda",
 			"button_close": "Chiudi legenda",
 			"layers": {
-				"drinking-water-layer": "Acqua potabile",
-				"water-pumps-layer": "Pompa d’acqua",
-				"toilets-layer": "Toilette pubblica",
-				"defies-layer": "Defibrillatori",
-				"osm-local-layer": "OSM locale"
+				"drinking-water": "Acqua potabile",
+				"water-pumps": "Pompa d’acqua",
+				"toilets": "Toilette pubblica",
+				"defibrillator": "Defibrillatori"
 			}
 		},
 		"popup": {
@@ -332,7 +331,10 @@
 				"opening_hours": "Orari di apertura",
 				"location": "Posizione",
 				"phone": "Telefono",
-				"operator": "Gestore"
+				"operator": "Gestore",
+				"name": "Nome",
+				"address": "Indirizzo",
+				"info": "Nota"
 			},
 			"values": {
 				"working": "funzionante",
