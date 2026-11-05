@@ -1,7 +1,6 @@
 import {
 	PUBLIC_APP_HOSTNAME,
 	PUBLIC_LOG_LEVEL,
-	PUBLIC_USER_PREFIX,
 	PUBLIC_WSS_PATH
 } from '$env/static/public';
 import { apiFetch } from '$lib/api';
@@ -328,7 +327,8 @@ export const fetchSessionAndCreateUser = async (): Promise<SIPUser | null> => {
 		}
 
 		const user: SIPUser = {
-			username: PUBLIC_USER_PREFIX + session.extension.toString().padStart(4, '0'),
+			// older gateways only return the extension
+			username: session.username ?? 'user' + session.extension.toString().padStart(4, '0'),
 			password: session.password,
 			timestamp: session.timestamp
 		};

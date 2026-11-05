@@ -135,6 +135,8 @@ export type SIPUser = {
 
 export type SessionResponse = {
 	extension: string | number;
+	/** SIP username, from the gateway */
+	username?: string;
 	password: string;
 	timestamp: number;
 };
