@@ -1,9 +1,6 @@
-import {
-	PUBLIC_APP_HOSTNAME,
-	PUBLIC_LOG_LEVEL,
-	PUBLIC_WSS_PATH
-} from '$env/static/public';
+import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
+import { getBox } from '$lib/config/box';
 import { CallState } from '$lib/enums';
 import type { SessionResponse, SIPUser } from '$lib/types';
 import { assignStream } from '$lib/utils/callUtils';
@@ -17,8 +14,7 @@ import {
 	UserAgent,
 	Web,
 	type UserAgentDelegate,
-	type InviterInviteOptions,
-	type LogLevel
+	type InviterInviteOptions
 } from 'sip.js';
 import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
 
@@ -394,7 +390,7 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 					connectionTimeout: 100,
 					keepAliveInterval: 300
 				},
-				logLevel: (PUBLIC_LOG_LEVEL as LogLevel) || 'error',
+				logLevel: getBox().logLevel,
 				authorizationUsername: sipUser.username,
 				authorizationPassword: sipUser.password,
 				displayName: sipUser.displayName,

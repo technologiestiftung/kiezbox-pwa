@@ -2,12 +2,22 @@
 // Box-specific values, read at runtime from /box.json (on the Kiezbox: DEPLOY_PATH/box.json, placed
 // by the image overlay), so one app build fits every box. Readable by every phone on the box's
 // WLAN, so never put credentials there. Without the file the build-time PUBLIC_* values are used.
-import { PUBLIC_KB_DEMO_TARGET_URI, PUBLIC_KB_TARGET_URI } from '$env/static/public';
-import type { BoxConfig } from '$lib/types';
+import {
+	PUBLIC_KB_DEMO_TARGET_URI,
+	PUBLIC_KB_TARGET_URI,
+	PUBLIC_LOG_LEVEL
+} from '$env/static/public';
+import type { BoxConfig, LogLevel } from '$lib/types';
+
+const LOG_LEVELS: readonly LogLevel[] = ['debug', 'log', 'warn', 'error'];
+
+const logLevel = (value: unknown, fallback: LogLevel): LogLevel =>
+	LOG_LEVELS.includes(value as LogLevel) ? (value as LogLevel) : fallback;
 
 let box: BoxConfig = {
 	targetUri: PUBLIC_KB_TARGET_URI,
-	demoTargetUri: PUBLIC_KB_DEMO_TARGET_URI
+	demoTargetUri: PUBLIC_KB_DEMO_TARGET_URI,
+	logLevel: logLevel(PUBLIC_LOG_LEVEL, 'error')
 };
 
 const nonEmpty = (value: unknown, fallback: string) =>
@@ -22,7 +32,8 @@ export async function loadBox(): Promise<BoxConfig> {
 			const data = (await response.json()) as Partial<Record<keyof BoxConfig, unknown>>;
 			box = {
 				targetUri: nonEmpty(data.targetUri, box.targetUri),
-				demoTargetUri: nonEmpty(data.demoTargetUri, box.demoTargetUri)
+				demoTargetUri: nonEmpty(data.demoTargetUri, box.demoTargetUri),
+				logLevel: logLevel(data.logLevel, box.logLevel)
 			};
 		}
 	} catch (error) {

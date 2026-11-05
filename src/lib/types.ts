@@ -83,7 +83,12 @@ export interface BoxConfig {
 	targetUri: string;
 	/** SIP target in demo/normal mode */
 	demoTargetUri: string;
+	/** log level of the SIP client in the browser console */
+	logLevel: LogLevel;
 }
+
+/** log levels of sip.js */
+export type LogLevel = 'debug' | 'log' | 'warn' | 'error';
 
 export interface Mode {
 	status: number;
