@@ -381,7 +381,8 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 			const isLocalhost = window.location.hostname === 'localhost';
 			const host = isLocalhost ? PUBLIC_APP_HOSTNAME : window.location.host;
 			const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;
-			const kbURI = `sip:${sipUser.username}@host`;
+			const domain = isLocalhost ? PUBLIC_APP_HOSTNAME : window.location.hostname;
+			const kbURI = `sip:${sipUser.username}@${domain}`;
 			const uri = UserAgent.makeURI(kbURI);
 
 			if (!uri) throw new Error(`Failed to create URI from ${kbURI}`);
