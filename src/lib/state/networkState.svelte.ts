@@ -60,7 +60,9 @@ const isCaptivePortalCheck = async (): Promise<boolean> => {
 
 	if (navigator.mediaDevices?.getUserMedia) {
 		try {
-			await navigator.mediaDevices.getUserMedia({ audio: true });
+			// only a permission check, release the mic again
+			const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+			stream.getTracks().forEach((track) => track.stop());
 			return false;
 		} catch (error) {
 			setError(`Media access error: ${error instanceof Error ? error.message : String(error)}`);
