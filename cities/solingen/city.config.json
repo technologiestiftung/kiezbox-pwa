@@ -1,0 +1,14 @@
+{
+	"name": "Solingen",
+	"defaultLocale": "de",
+	"fallbackCoordinates": null,
+	"mapMaxZoom": 18,
+	"mapStyle": "terrain",
+	"pois": [
+		"toilets",
+		"defibrillator",
+		"police",
+		"fire-station",
+		"hospital"
+	]
+}

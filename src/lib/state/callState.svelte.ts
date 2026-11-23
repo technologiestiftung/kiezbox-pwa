@@ -1,4 +1,9 @@
-import { PUBLIC_APP_HOSTNAME, PUBLIC_LOG_LEVEL, PUBLIC_USER_PREFIX, PUBLIC_WSS_PATH } from '$env/static/public';
+import {
+	PUBLIC_APP_HOSTNAME,
+	PUBLIC_LOG_LEVEL,
+	PUBLIC_USER_PREFIX,
+	PUBLIC_WSS_PATH
+} from '$env/static/public';
 import { apiFetch } from '$lib/api';
 import { CallState } from '$lib/enums';
 import type { SessionResponse, SIPUser } from '$lib/types';
