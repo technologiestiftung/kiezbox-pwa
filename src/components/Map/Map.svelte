@@ -45,7 +45,11 @@
 					openmaptiles: {
 						type: 'vector',
 						tiles: [cityUrl('tiles/{z}/{x}/{y}.pbf')],
-						attribution: '© OpenStreetMap contributors',
+						// Required by the ODbL (OSM data) and CC-BY (OpenMapTiles schema/style), see
+						// https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
+						attribution:
+							'<a href="https://openmaptiles.org/" target="_blank" rel="noopener">© OpenMapTiles</a> ' +
+							'<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>',
 						maxzoom: city.maxzoom
 					}
 				},
@@ -107,6 +111,8 @@
 		);
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 		map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+		// Always expanded: OSM attribution must be visible without user interaction
+		map.addControl(new maplibregl.AttributionControl({ compact: false }), 'top-left');
 
 		map.on(
 			'click',
