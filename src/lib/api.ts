@@ -1,10 +1,11 @@
-import { PUBLIC_API_URL } from '$env/static/public';
-
-const isCrossOrgin =
-	typeof window !== 'undefined' && window.location.origin !== new URL(PUBLIC_API_URL).origin;
+import { getBox } from '$lib/config/box';
 
 export const apiFetch = async (resource: string, options: RequestInit = {}): Promise<unknown> => {
-	const url = `${PUBLIC_API_URL}${resource}`; // e.g., resource = '/status'
+	// Read per call: the API URL comes from /box.json, which is loaded after this module
+	const { apiUrl } = getBox();
+	const url = `${apiUrl}${resource}`; // e.g., resource = '/status'
+	const isCrossOrgin =
+		typeof window !== 'undefined' && window.location.origin !== new URL(apiUrl).origin;
 
 	const fetchOptions: RequestInit = {
 		...options,

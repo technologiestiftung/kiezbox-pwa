@@ -5,18 +5,30 @@ on:
 
 permissions:
   contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
+      PUBLIC_APP_HOSTNAME: ${{ vars.PUBLIC_APP_HOSTNAME }}
+      PUBLIC_WSS_PATH: ${{ vars.PUBLIC_WSS_PATH }}
+      PUBLIC_USER_PREFIX: ${{ vars.PUBLIC_USER_PREFIX }}
+      PUBLIC_LOG_LEVEL: ${{ vars.PUBLIC_LOG_LEVEL }}
+      PUBLIC_KB_TARGET_URI: ${{ vars.PUBLIC_KB_TARGET_URI }}
+      PUBLIC_KB_DEMO_TARGET_URI: ${{ vars.PUBLIC_KB_DEMO_TARGET_URI }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version-file: ".nvmrc"
+          node-version-file: '.nvmrc'
       - run: npm ci
+      - run: npm run lint
+      - run: npm run check
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

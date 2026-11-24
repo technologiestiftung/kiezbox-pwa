@@ -15,6 +15,7 @@
 		"deploy": "npm run build && dotenv ./deploy.sh",
 		"build:city": "dotenv -e .env.$CITY -- npm run build",
 		"package:city": "node scripts/package-city.js",
+		"package:release": "node scripts/package-release.js",
 		"deploy:city": "dotenv -e .env.$CITY -- sh -c 'npm run build && ./deploy.sh'",
 		"deploy:city-data": "dotenv -e .env.$CITY -- sh -c 'node scripts/package-city.js \"$CITY\" && ./deploy-city.sh'"
 	},
@@ -28,6 +29,7 @@
 		"@eslint/js": "^9.39.5",
 		"@internationalized/date": "^3.12.4",
 		"@semantic-release/changelog": "^7.0.0",
+		"@semantic-release/exec": "^7.1.0",
 		"@semantic-release/git": "^11.0.1",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.70.3",
