@@ -10,7 +10,7 @@
 		"statusBar.foreground": "#e7e7e7",
 		"statusBarItem.hoverBackground": "#185ded",
 		"statusBarItem.remoteBackground": "#f14d82",
-		"statusBarItem.remoteForeground": "#e7e7e7",
+		"statusBarItem.remoteForeground": "#e7e7e7"
 	},
 	"peacock.color": "#0f49c3",
 	"cSpell.words": ["basemap", "kiezbox", "Maplibre", "maplibregl", "maxzoom"],
