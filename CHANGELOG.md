@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/technologiestiftung/kiezbox-pwa/compare/v1.1.0...v1.2.0) (2026-11-25)
+
+
+### Bug Fixes
+
+* only treat the emergency mode as emergency ([bf32827](https://github.com/technologiestiftung/kiezbox-pwa/commit/bf32827cba7ef1cfe11f69a7d15e6c70d3fdd362))
+* register with the host name as SIP domain ([1c83aa0](https://github.com/technologiestiftung/kiezbox-pwa/commit/1c83aa080c71ca132ac874effea8963cba7a9003))
+* release the microphone after the permission check ([8ec6979](https://github.com/technologiestiftung/kiezbox-pwa/commit/8ec6979ef8b7c105bb3daa24f33a4a6a404aac3e))
+
+
+### Features
+
+* read the log level from box.json ([81dcead](https://github.com/technologiestiftung/kiezbox-pwa/commit/81dcead953059f76bedcf89b483045a09d3da969))
+* use the SIP username from the session ([c57aab3](https://github.com/technologiestiftung/kiezbox-pwa/commit/c57aab3c7ce99462cbb10629c21b484d9fccbb72))
+
 # [1.1.0](https://github.com/technologiestiftung/kiezbox-pwa/compare/v1.0.0...v1.1.0) (2026-11-24)
 
 ### Features
