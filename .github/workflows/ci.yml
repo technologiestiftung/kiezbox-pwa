@@ -1,0 +1,43 @@
+name: CI
+on:
+  pull_request:
+    branches: [staging, main]
+  push:
+    branches: [staging]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
+      PUBLIC_APP_HOSTNAME: ${{ vars.PUBLIC_APP_HOSTNAME }}
+      PUBLIC_WSS_PATH: ${{ vars.PUBLIC_WSS_PATH }}
+      PUBLIC_USER_PREFIX: ${{ vars.PUBLIC_USER_PREFIX }}
+      PUBLIC_LOG_LEVEL: ${{ vars.PUBLIC_LOG_LEVEL }}
+      PUBLIC_KB_TARGET_URI: ${{ vars.PUBLIC_KB_TARGET_URI }}
+      PUBLIC_KB_DEMO_TARGET_URI: ${{ vars.PUBLIC_KB_DEMO_TARGET_URI }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run check
+      - run: npm run build
+      # validates every city and checks app + city against the 64 MB device limit
+      - name: Package cities
+        run: |
+          for dir in cities/*/; do
+            slug=$(basename "$dir")
+            [ "$slug" = "_template" ] && continue
+            npm run package:city -- "$slug"
+          done
