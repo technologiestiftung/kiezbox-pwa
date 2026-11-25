@@ -23,7 +23,7 @@ Kiezbox Emergency App: a SvelteKit PWA, statically built and deployed onto a Ban
 - `CITY=<slug> npm run build:city` — build using `.env.<slug>` (box-specific `PUBLIC_*` variables, not city data)
 - `build` finishes with `scripts/check-size.js` (fails if `build/` alone is above 64 MB; app + city is checked by `package:city`).
 
-There is no test suite configured (no vitest/playwright/jest) — don't assume one exists or invent test commands. CI (`.github/workflows/say.yml`) is currently a stub that just echoes a placeholder string on push/PR to `main`; it does not actually run lint/build, so don't treat "CI is green" as a real signal.
+There is no test suite configured (no vitest/playwright/jest) — don't assume one exists or invent test commands. CI (`.github/workflows/ci.yml`) runs on PRs into `staging`/`main` and on pushes to `staging`: `npm ci`, `lint`, `check`, `build`, then `package:city` for every city (incl. the 64 MB app + city size check). "Green" means it builds and type-checks — there are no tests.
 
 Package manager is npm (`package-lock.json`). Dependencies are kept current via Renovate (`renovate.json`).
 
