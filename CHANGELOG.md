@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/technologiestiftung/kiezbox-pwa/compare/v1.2.0...v1.2.1) (2026-11-25)
+
+### Bug Fixes
+
+- overlay dimensions ([36f6581](https://github.com/technologiestiftung/kiezbox-pwa/commit/36f6581046eefb3caa8f6f5e6f91cbab90ebe26f))
+- remove fetch ([630e492](https://github.com/technologiestiftung/kiezbox-pwa/commit/630e492482849486eafbb9f42504b0229a8dcf1d))
+
 # [1.2.0](https://github.com/technologiestiftung/kiezbox-pwa/compare/v1.1.0...v1.2.0) (2026-11-25)
 
 ### Bug Fixes
