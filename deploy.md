@@ -26,12 +26,13 @@ Die App lädt beim Start `/city/city.json` und alles Weitere über `/city/…`.
 Box-spezifische Werte, die die App beim Start aus `/box.json` liest. So braucht nicht jede Box einen eigenen Build:
 
 ```json
-{ "apiUrl": "https://…", "targetUri": "sip:…", "demoTargetUri": "sip:…" }
+{ "apiUrl": "https://…", "targetUri": "sip:…", "demoTargetUri": "sip:…", "logLevel": "error" }
 ```
 
 - `apiUrl`: Basis-URL der Geräte-API dieser Box (`/api/mode`, `/api/session`, …), ohne `/` am Ende. Ist pro Box verschieden.
 - `targetUri`: SIP-Ziel im Notfallmodus, `demoTargetUri`: SIP-Ziel im Demo-/Normalmodus.
-- Fehlt die Datei oder ein Feld, gelten `PUBLIC_API_URL` / `PUBLIC_KB_TARGET_URI` / `PUBLIC_KB_DEMO_TARGET_URI` aus dem Build. Eine ungültige `apiUrl` wird ignoriert.
+- `logLevel`: Log-Level des SIP-Clients in der Browser-Konsole (`debug`, `log`, `warn`, `error`).
+- Fehlt die Datei oder ein Feld, gelten `PUBLIC_API_URL` / `PUBLIC_KB_TARGET_URI` / `PUBLIC_KB_DEMO_TARGET_URI` / `PUBLIC_LOG_LEVEL` aus dem Build. Eine ungültige `apiUrl` wird ignoriert.
 - **Jedes Handy im WLAN kann die Datei abrufen. Keine Passwörter oder Tokens eintragen.**
 - Wird nicht von einem Deploy-Skript erzeugt. Sie kommt über das Image-Overlay oder wird von Hand per `scp` abgelegt. `deploy.sh` lässt sie stehen.
 

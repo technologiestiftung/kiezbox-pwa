@@ -3,7 +3,7 @@ import { resolve } from '$app/paths';
 import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
 import { getCity } from '$lib/config/city';
-import { ApiStatus, DeviceType } from '$lib/enums';
+import { ApiStatus, BoxMode, DeviceType } from '$lib/enums';
 import type { Mode } from '$lib/types';
 import type { LngLatLike } from 'maplibre-gl';
 
@@ -60,7 +60,9 @@ const isCaptivePortalCheck = async (): Promise<boolean> => {
 
 	if (navigator.mediaDevices?.getUserMedia) {
 		try {
-			await navigator.mediaDevices.getUserMedia({ audio: true });
+			// only a permission check, release the mic again
+			const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+			stream.getTracks().forEach((track) => track.stop());
 			return false;
 		} catch (error) {
 			setError(`Media access error: ${error instanceof Error ? error.message : String(error)}`);
@@ -132,7 +134,7 @@ const fetchMode = async (): Promise<Mode | null> => {
 
 		return {
 			status: response.mode,
-			isEmergency: response.mode % 2 == 0,
+			isEmergency: response.mode === BoxMode.EMERGENCY,
 			coordinates: response.coordinates || getCity().fallbackCoordinates
 		};
 	} catch (error) {

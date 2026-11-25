@@ -5,14 +5,21 @@
 import {
 	PUBLIC_API_URL,
 	PUBLIC_KB_DEMO_TARGET_URI,
-	PUBLIC_KB_TARGET_URI
+	PUBLIC_KB_TARGET_URI,
+	PUBLIC_LOG_LEVEL
 } from '$env/static/public';
-import type { BoxConfig } from '$lib/types';
+import type { BoxConfig, LogLevel } from '$lib/types';
+
+const LOG_LEVELS: readonly LogLevel[] = ['debug', 'log', 'warn', 'error'];
+
+const logLevel = (value: unknown, fallback: LogLevel): LogLevel =>
+	LOG_LEVELS.includes(value as LogLevel) ? (value as LogLevel) : fallback;
 
 let box: BoxConfig = {
 	apiUrl: PUBLIC_API_URL,
 	targetUri: PUBLIC_KB_TARGET_URI,
-	demoTargetUri: PUBLIC_KB_DEMO_TARGET_URI
+	demoTargetUri: PUBLIC_KB_DEMO_TARGET_URI,
+	logLevel: logLevel(PUBLIC_LOG_LEVEL, 'error')
 };
 
 const nonEmpty = (value: unknown, fallback: string) =>
@@ -41,7 +48,8 @@ export async function loadBox(): Promise<BoxConfig> {
 			box = {
 				apiUrl: validUrl(data.apiUrl, box.apiUrl),
 				targetUri: nonEmpty(data.targetUri, box.targetUri),
-				demoTargetUri: nonEmpty(data.demoTargetUri, box.demoTargetUri)
+				demoTargetUri: nonEmpty(data.demoTargetUri, box.demoTargetUri),
+				logLevel: logLevel(data.logLevel, box.logLevel)
 			};
 		}
 	} catch (error) {

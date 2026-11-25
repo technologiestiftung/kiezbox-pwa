@@ -27,3 +27,10 @@ export enum DeviceType {
 	ANDROID = 'ANDROID',
 	TABLET = 'TABLET'
 }
+
+/** Mode of the box, as reported by /api/mode (KiezboxMessage.Mode in the protobufs) */
+export enum BoxMode {
+	MAINTENANCE = 0,
+	NORMAL = 1,
+	EMERGENCY = 2
+}
