@@ -79,6 +79,8 @@ export interface CityManifest extends CityConfig {
 
 /** /box.json on the Kiezbox, see src/lib/config/box.ts */
 export interface BoxConfig {
+	/** Base URL of this box's device API (/api/mode, /api/session, …), without trailing slash */
+	apiUrl: string;
 	/** SIP target in emergency mode */
 	targetUri: string;
 	/** SIP target in demo/normal mode */

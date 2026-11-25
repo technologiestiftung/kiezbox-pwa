@@ -26,12 +26,13 @@ Die App lädt beim Start `/city/city.json` und alles Weitere über `/city/…`.
 Box-spezifische Werte, die die App beim Start aus `/box.json` liest. So braucht nicht jede Box einen eigenen Build:
 
 ```json
-{ "targetUri": "sip:…", "demoTargetUri": "sip:…", "logLevel": "error" }
+{ "apiUrl": "https://…", "targetUri": "sip:…", "demoTargetUri": "sip:…", "logLevel": "error" }
 ```
 
+- `apiUrl`: Basis-URL der Geräte-API dieser Box (`/api/mode`, `/api/session`, …), ohne `/` am Ende. Ist pro Box verschieden.
 - `targetUri`: SIP-Ziel im Notfallmodus, `demoTargetUri`: SIP-Ziel im Demo-/Normalmodus.
 - `logLevel`: Log-Level des SIP-Clients in der Browser-Konsole (`debug`, `log`, `warn`, `error`).
-- Fehlt die Datei oder ein Feld, gelten `PUBLIC_KB_TARGET_URI` / `PUBLIC_KB_DEMO_TARGET_URI` / `PUBLIC_LOG_LEVEL` aus dem Build.
+- Fehlt die Datei oder ein Feld, gelten `PUBLIC_API_URL` / `PUBLIC_KB_TARGET_URI` / `PUBLIC_KB_DEMO_TARGET_URI` / `PUBLIC_LOG_LEVEL` aus dem Build. Eine ungültige `apiUrl` wird ignoriert.
 - **Jedes Handy im WLAN kann die Datei abrufen. Keine Passwörter oder Tokens eintragen.**
 - Wird nicht von einem Deploy-Skript erzeugt. Sie kommt über das Image-Overlay oder wird von Hand per `scp` abgelegt. `deploy.sh` lässt sie stehen.
 
@@ -56,6 +57,43 @@ npm run package:city -- <slug>   # cities/<slug>/ → dist/cities/<slug>/
 - Validiert `cities/<slug>/`, kopiert die Daten und erzeugt `city.json` (Konfiguration, `schemaVersion`, `dataVersion`-Hash, Dateiliste).
 - Prüft, dass `build/` + Stadtdaten zusammen unter 64 MB bleiben – also vorher `npm run build` ausführen.
 - Neue Städte starten als Kopie von `cities/_template/`.
+
+## Release-ZIPs
+
+Jedes Release baut **eine ZIP pro Stadt** mit App und Stadtdaten und hängt sie an das GitHub-Release (`kiezbox-<slug>-v<version>.zip`). Entpackt nach `DEPLOY_PATH/` fehlt nur noch `box.json`.
+
+```
+kiezbox-berlin-v1.2.0.zip
+├── index.html, _app/, fonts/, service-worker.js, …   ← build/
+└── city/                                             ← dist/cities/berlin/
+```
+
+**Ablauf:** Push auf `main` → `.github/workflows/release.yml` → `lint` + `check` → semantic-release. Gibt es releaserelevante Commits, wird die Version erhöht, `npm run build && npm run package:release` gebaut und die ZIPs werden ans Release gehängt. Es werden immer alle Städte gebaut (außer `_template`). Ob sich eine Stadt geändert hat, zeigt `dataVersion` in `city/city.json`.
+
+**Commits, die ein Release auslösen:**
+
+| Commit                               | Version |
+| ------------------------------------ | ------- |
+| `fix: …`, `fix(berlin): …`           | Patch   |
+| `data(berlin): neue Tiles`           | Patch   |
+| `feat: …`, `feat(solingen): …`       | Minor   |
+| `feat!: …` / `BREAKING CHANGE:`      | Major   |
+| `chore`, `docs`, `ci`, `refactor`, … | keins   |
+
+Reine Stadtdaten-Änderungen also als `data(<slug>): …` (oder `feat`/`fix`) committen, sonst entsteht kein Release.
+
+**Build-Werte in CI:** Die `PUBLIC_*`-Variablen kommen aus den Repository Variables (_Settings → Secrets and variables → Actions → Variables_). Box-spezifisches (API-URL, SIP-Ziele) gehört in `box.json`.
+
+**Auf die Box bringen:**
+
+```sh
+gh release download v1.2.0 -p 'kiezbox-berlin-*'          # oder von der Release-Seite
+unzip -o kiezbox-berlin-v1.2.0.zip -d <DEPLOY_PATH>        # box.json bleibt liegen
+```
+
+Vorher alte Dateien entfernen, wenn sauber ersetzt werden soll (wie `deploy.sh`: alles außer `box.json` löschen). Sonst bleiben veraltete `_app/`-Dateien liegen. Die stören nicht, belegen aber Platz.
+
+**Lokal bauen:** `npm run build && npm run package:release` → `release/`.
 
 ## Deployen
 
@@ -85,14 +123,14 @@ CITY=<slug> npm run deploy:city-data    # Stadtdaten
 
 In `.env` bzw. `.env.<slug>` (Vorlage: `.env.example`, echte Werte nie committen):
 
-| Variable                                                                                                                            | Zweck                                                                                                                                                                                                      |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_PASSWORD`                                                                      | Deploy-Ziel.                                                                                                                                                                                               |
-| `PUBLIC_API_URL`, `PUBLIC_APP_HOSTNAME`, `PUBLIC_WSS_PATH`, `PUBLIC_LOG_LEVEL`, `PUBLIC_KB_TARGET_URI`, `PUBLIC_KB_DEMO_TARGET_URI` | Werden **beim Build fest in die App geschrieben**. Ohne sie schlagen `build` und `check` fehl. Die beiden `PUBLIC_KB_*`-Ziele und `PUBLIC_LOG_LEVEL` sind nur Fallback, wenn `box.json` sie nicht enthält. |
-| `PUBLIC_CITY`                                                                                                                       | Nur lokal: welche `cities/<slug>/` `dev`/`preview` unter `/city/` ausliefern. Landet nicht im Build.                                                                                                       |
-| `CITY_DIR`                                                                                                                          | Nur lokal: überschreibt `PUBLIC_CITY`, z. B. `dist/cities/berlin`.                                                                                                                                         |
+| Variable                                                                                                                                                  | Zweck                                                                                                                                                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_PASSWORD`                                                                                            | Deploy-Ziel.                                                                                                                                                                                                                                                   |
+| `PUBLIC_API_URL`, `PUBLIC_APP_HOSTNAME`, `PUBLIC_WSS_PATH`, `PUBLIC_USER_PREFIX`, `PUBLIC_LOG_LEVEL`, `PUBLIC_KB_TARGET_URI`, `PUBLIC_KB_DEMO_TARGET_URI` | Werden **beim Build fest in die App geschrieben**. Ohne sie schlagen `build` und `check` fehl. `PUBLIC_API_URL` und die beiden `PUBLIC_KB_*`-Ziele sind nur Fallback, wenn `box.json` sie nicht setzt. `PUBLIC_APP_HOSTNAME` wird nur auf `localhost` gelesen. |
+| `PUBLIC_CITY`                                                                                                                                             | Nur lokal: welche `cities/<slug>/` `dev`/`preview` unter `/city/` ausliefern. Landet nicht im Build.                                                                                                                                                           |
+| `CITY_DIR`                                                                                                                                                | Nur lokal: überschreibt `PUBLIC_CITY`, z. B. `dist/cities/berlin`.                                                                                                                                                                                             |
 
-**Achtung:** Weil die `PUBLIC_*`-Werte im Build stecken (außer den SIP-Zielen, die `box.json` überschreibt), funktioniert „eine App für alle Boxen“ nur, solange diese Werte auf allen Boxen gleich sind. Sonst braucht jede Box einen eigenen App-Build.
+**Achtung:** Weil die `PUBLIC_*`-Werte im Build stecken (außer API-URL und SIP-Zielen, die `box.json` überschreibt), funktioniert „eine App für alle Boxen“ nur, solange die übrigen Werte (`PUBLIC_WSS_PATH`, `PUBLIC_USER_PREFIX`, `PUBLIC_LOG_LEVEL`) auf allen Boxen gleich sind.
 
 ## Online hosten (Netlify / anderer Webserver)
 
