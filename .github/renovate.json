@@ -1,5 +1,22 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>technologiestiftung/renovate-config"],
-	"baseBranches": ["staging"]
+	"extends": ["config:recommended", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
+	"baseBranchPatterns": ["staging"],
+	"timezone": "Europe/Berlin",
+	"schedule": ["before 7am on Monday"],
+	"minimumReleaseAge": "3 days",
+	"packageRules": [
+		{
+			"groupName": "non-major",
+			"matchUpdateTypes": ["patch", "minor"]
+		},
+		{
+			"groupName": "tailwindcss",
+			"matchPackageNames": ["tailwindcss", "@tailwindcss/**"]
+		},
+		{
+			"groupName": "lightningcss",
+			"matchPackageNames": ["lightningcss", "lightningcss-*"]
+		}
+	]
 }
