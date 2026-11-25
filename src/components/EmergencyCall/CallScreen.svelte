@@ -14,7 +14,6 @@
 		activateSpeaker,
 		activateCall,
 		buttonText,
-		errorMessage,
 		time,
 		remoteAudio = $bindable()
 	} = $props();
@@ -39,7 +38,7 @@
 			<Button
 				variant="ghost"
 				class="flex h-auto w-28 cursor-pointer flex-col items-center"
-				on:click={activateMic}
+				onclick={activateMic}
 			>
 				{#if !isMicrophoneMuted}
 					<Microphone class="size-6" />
@@ -52,7 +51,7 @@
 			<Button
 				variant="ghost"
 				class="flex h-auto w-28 cursor-pointer flex-col items-center"
-				on:click={activateSpeaker}
+				onclick={activateSpeaker}
 			>
 				{#if !isSpeakerMuted}
 					<VolumeUp class="size-6" />

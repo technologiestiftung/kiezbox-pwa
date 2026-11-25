@@ -1,9 +1,11 @@
+import type { Map as MaplibreMap, Popup } from 'maplibre-gl';
+
 interface MapState {
-	map: null | maplibregl.Map;
+	map: null | MaplibreMap;
 	layers: string[];
 	loaded: boolean;
 	cardRef: HTMLElement | undefined;
-	popup: maplibregl.Popup | null;
+	popup: Popup | null;
 }
 
 export const mapState = $state<MapState>({
@@ -11,5 +13,5 @@ export const mapState = $state<MapState>({
 	layers: [],
 	loaded: false,
 	cardRef: undefined,
-	popup: null,
+	popup: null
 });

@@ -1,0 +1,117 @@
+{
+	"type": "FeatureCollection",
+	"source": "Stadt Solingen, https://gdi-ows1.solingen.de/geoserver/poi/ogc/features/v1/collections/bp_alle_poi/items, 2026-10-12",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3610",
+			"properties": {
+				"name": "Öffentliche Toilette Bachtor",
+				"address": "Bachtor, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08624911, 51.17124053]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3736",
+			"properties": {
+				"name": "Öffentliche Toilette Graf-Wilhelm-Platz",
+				"address": "Graf-Wilhelm-Platz / Bergstraße, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08153071, 51.17063702]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.3867",
+			"properties": {
+				"name": "Öffentliche Toilette Bahnhof Solingen-Mitte",
+				"address": "Schützenstraße / Bismarckstraße, 42659 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08960621, 51.16565409]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4046",
+			"properties": {
+				"name": "Öffentliche Toilette Müngstener Brückenpark",
+				"address": "Müngstener Brückenpark, 42659 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.13647275, 51.16219651]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4080",
+			"properties": {
+				"name": "Öffentliche Toilette Hofgarten",
+				"address": "Kölner Straße 99, 42651 Solingen",
+				"info": "im Einkaufszentrum Hofgarten"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08207857, 51.17144102]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4194",
+			"properties": {
+				"name": "Öffentliche Toilette Rathaus",
+				"address": "Walter-Scheel-Platz 1, 42651 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.08586436, 51.1767723]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.4280",
+			"properties": {
+				"name": "Öffentliche Toilette Bremsheyplatz",
+				"address": "Bremsheyplatz, 42697 Solingen"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.00319726, 51.16113302]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.5790",
+			"properties": {
+				"name": "Öffentliche Toilette Gräfrath",
+				"address": "Gerberstraße 14, 42653 Solingen",
+				"info": "Mobiltoilette"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [7.07318748, 51.20853764]
+			}
+		},
+		{
+			"type": "Feature",
+			"id": "bp_alle_poi.5791",
+			"properties": {
+				"name": "Öffentliche Toilette Engelsberger Hof",
+				"address": "42697 Solingen",
+				"info": "Mobiltoilette"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [6.97085809, 51.15421558]
+			}
+		}
+	]
+}

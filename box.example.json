@@ -1,0 +1,6 @@
+{
+	"apiUrl": "https://<box-host>",
+	"targetUri": "sip:<emergency-target>@<host>",
+	"demoTargetUri": "sip:<demo-target>@<host>",
+	"logLevel": "error"
+}

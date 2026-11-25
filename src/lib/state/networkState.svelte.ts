@@ -1,13 +1,14 @@
-import { apiFetch } from '$lib/api';
-import type { Mode } from '$lib/types';
-import { ApiStatus, DeviceType } from '$lib/enums';
 import { goto } from '$app/navigation';
+import { resolve } from '$app/paths';
+import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
+import { apiFetch } from '$lib/api';
+import { getCity } from '$lib/config/city';
+import { ApiStatus, BoxMode, DeviceType } from '$lib/enums';
+import type { Mode } from '$lib/types';
 import type { LngLatLike } from 'maplibre-gl';
-import { PUBLIC_WSS_PATH } from '$env/static/public';
 
 // Constants
 const PING_API_ENDPOINT = '/api/mode';
-const INFO_API_ENDPOINT = '/api/info';
 const PING_INTERVAL_MS = 15000;
 
 let pingIntervalId: ReturnType<typeof setInterval> | null = $state<ReturnType<
@@ -59,7 +60,9 @@ const isCaptivePortalCheck = async (): Promise<boolean> => {
 
 	if (navigator.mediaDevices?.getUserMedia) {
 		try {
-			await navigator.mediaDevices.getUserMedia({ audio: true });
+			// only a permission check, release the mic again
+			const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+			stream.getTracks().forEach((track) => track.stop());
 			return false;
 		} catch (error) {
 			setError(`Media access error: ${error instanceof Error ? error.message : String(error)}`);
@@ -70,7 +73,7 @@ const isCaptivePortalCheck = async (): Promise<boolean> => {
 	}
 
 	const isLocalhost = window.location.hostname === 'localhost';
-	const host = isLocalhost ? 'emergency.ds-apps.tsb-berlin.de' : window.location.host;
+	const host = isLocalhost ? PUBLIC_APP_HOSTNAME : window.location.host;
 	const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;
 
 	return new Promise<boolean>((resolve) => {
@@ -131,8 +134,8 @@ const fetchMode = async (): Promise<Mode | null> => {
 
 		return {
 			status: response.mode,
-			isEmergency: response.mode % 2 == 0,
-			coordinates: response.coordinates || [13.342502830765682, 52.48863888739753]
+			isEmergency: response.mode === BoxMode.EMERGENCY,
+			coordinates: response.coordinates || getCity().fallbackCoordinates
 		};
 	} catch (error) {
 		setError(`Failed to fetch mode: ${error instanceof Error ? error.message : String(error)}`);
@@ -154,7 +157,7 @@ export const setMeFree = async (): Promise<void> => {
 			throw new Error(`Set me free request failed with status: ${response.status}`);
 		}
 
-		goto('/', {
+		goto(resolve('/'), {
 			noScroll: true
 		});
 	} catch (error) {
@@ -264,7 +267,7 @@ export function toggleMode() {
 	NetworkStore.mode = {
 		status: NetworkStore.mode?.status === 0 ? 1 : 0,
 		isEmergency: !NetworkStore.mode?.isEmergency,
-		coordinates: [13.342502830765682, 52.48863888739753]
+		coordinates: getCity().fallbackCoordinates
 	};
 	console.log(`Toggling mode to: ${NetworkStore.mode.status}`);
 

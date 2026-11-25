@@ -1,5 +1,6 @@
-import { PUBLIC_LOG_LEVEL, PUBLIC_USER_PREFIX, PUBLIC_WSS_PATH } from '$env/static/public';
+import { PUBLIC_APP_HOSTNAME, PUBLIC_WSS_PATH } from '$env/static/public';
 import { apiFetch } from '$lib/api';
+import { getBox } from '$lib/config/box';
 import { CallState } from '$lib/enums';
 import type { SessionResponse, SIPUser } from '$lib/types';
 import { assignStream } from '$lib/utils/callUtils';
@@ -13,8 +14,7 @@ import {
 	UserAgent,
 	Web,
 	type UserAgentDelegate,
-	type InviterInviteOptions,
-	type LogLevel
+	type InviterInviteOptions
 } from 'sip.js';
 import type { IncomingResponse, OutgoingRequestDelegate } from 'sip.js/lib/core';
 
@@ -323,7 +323,8 @@ export const fetchSessionAndCreateUser = async (): Promise<SIPUser | null> => {
 		}
 
 		const user: SIPUser = {
-			username: PUBLIC_USER_PREFIX + session.extension.toString().padStart(4, '0'),
+			// older gateways only return the extension
+			username: session.username ?? 'user' + session.extension.toString().padStart(4, '0'),
 			password: session.password,
 			timestamp: session.timestamp
 		};
@@ -374,9 +375,10 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 		if (!userAgent || CallStore.callState === CallState.DISCONNECTED) {
 			CallStore.callState = CallState.INITIALIZING;
 			const isLocalhost = window.location.hostname === 'localhost';
-			const host = isLocalhost ? 'emergency.ds-apps.tsb-berlin.de' : window.location.host;
+			const host = isLocalhost ? PUBLIC_APP_HOSTNAME : window.location.host;
 			const kbWSS = `wss://${host}${PUBLIC_WSS_PATH}`;
-			const kbURI = `sip:${sipUser.username}@host`;
+			const domain = isLocalhost ? PUBLIC_APP_HOSTNAME : window.location.hostname;
+			const kbURI = `sip:${sipUser.username}@${domain}`;
 			const uri = UserAgent.makeURI(kbURI);
 
 			if (!uri) throw new Error(`Failed to create URI from ${kbURI}`);
@@ -388,7 +390,7 @@ export const createUserAgent = async (sipUser: SIPUser): Promise<void> => {
 					connectionTimeout: 100,
 					keepAliveInterval: 300
 				},
-				logLevel: (PUBLIC_LOG_LEVEL as LogLevel) || 'error',
+				logLevel: getBox().logLevel,
 				authorizationUsername: sipUser.username,
 				authorizationPassword: sipUser.password,
 				displayName: sipUser.displayName,

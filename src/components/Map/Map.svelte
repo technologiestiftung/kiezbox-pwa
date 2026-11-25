@@ -1,22 +1,26 @@
 <script lang="ts">
+	import { cityUrl, getCity } from '$lib/config/city';
 	import { LAYER_STYLE } from '$lib/config/layer-style-positron';
-	import { LAYER_CONFIG } from '$lib/config/layers';
-	import { SOURCES_CONFIG } from '$lib/config/sources';
+	import { LAYER_STYLE_TERRAIN } from '$lib/config/layer-style-terrain';
+	import { poiLayers } from '$lib/config/poi';
+	import { NetworkStore } from '$lib/state/networkState.svelte';
 	import { mapState, poiState } from '$lib/state/state.svelte';
-	import type { GeoJSON } from 'geojson';
-	import maplibregl, { type AddLayerObject, type LngLatLike } from 'maplibre-gl';
+	import * as maplibregl from 'maplibre-gl';
+	import type { AddLayerObject, LngLatLike } from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	// maplibre-gl v6 resolves its worker relative to its own module URL, which
+	// Vite neither pre-bundles nor emits — so let Vite bundle the worker itself
+	import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 	import { onMount } from 'svelte';
 	import Legend from './Legend.svelte';
 	import PopupCard from './PopupCard.svelte';
-	import { NetworkStore } from '$lib/state/networkState.svelte';
 
 	let mapContainer: HTMLDivElement | undefined = $state();
 	let map: maplibregl.Map;
 
 	let coordinatesSet = $state(false);
 
-	let coordinates = $state(NetworkStore.coordinates ?? [13.342502830765682, 52.48863888739753]);
+	const BASE_STYLES = { positron: LAYER_STYLE, terrain: LAYER_STYLE_TERRAIN };
 
 	$effect(() => {
 		if (map && !coordinatesSet && NetworkStore.coordinates) {
@@ -26,7 +30,12 @@
 	});
 	onMount(() => {
 		if (!mapContainer) return;
-		const baseUrl = window.location.origin;
+		const city = getCity();
+
+		maplibregl.setWorkerUrl(maplibreWorkerUrl);
+
+		// Matches the extent of the city's tiles (cities/<slug>/tiles/metadata.json "bounds")
+		const dataBounds = city.bounds;
 
 		map = new maplibregl.Map({
 			container: mapContainer,
@@ -35,50 +44,47 @@
 				sources: {
 					openmaptiles: {
 						type: 'vector',
-						tiles: [`${baseUrl}/pbf-tiles/{z}/{x}/{y}.pbf`],
+						tiles: [cityUrl('tiles/{z}/{x}/{y}.pbf')],
 						attribution: '© OpenStreetMap contributors',
-						maxzoom: 13
+						maxzoom: city.maxzoom
 					}
 				},
-				layers: LAYER_STYLE,
+				layers: BASE_STYLES[city.mapStyle ?? 'positron'],
 				glyphs: '/fonts/{fontstack}/{range}.pbf?key={key}'
 			},
-			center: coordinates as [number, number],
-			zoom: 14,
+			bounds: dataBounds,
+			fitBoundsOptions: { padding: 20 },
 			attributionControl: false,
-			maxBounds: [13.091992716067702, 52.33488609760638, 13.742786470433, 52.67626223889507]
+			maxBounds: dataBounds,
+			...(city.mapMaxZoom !== null && { maxZoom: city.mapMaxZoom })
 		});
 
-		const LAYER_IDS = LAYER_CONFIG.map((layer) => layer.id);
+		const POI_LAYERS = poiLayers();
+		/** px; the app's 96 px icons were shown at icon-size 0.3 */
+		const ICON_WIDTH = 29;
+		const LAYER_IDS = POI_LAYERS.map((layer) => layer.layerId);
 
 		map.on('load', async () => {
-			const iconMappings = {
-				'toilet-icon': '/icons/toilet.png',
-				'water-pump-icon': '/icons/water-pump.png',
-				'drinking-water-icon': '/icons/drinking-water.png',
-				'defibrillator-icon': '/icons/defibrillator.png'
-			};
+			for (const layer of POI_LAYERS) {
+				const { data: icon } = await map.loadImage(layer.mapIcon);
+				map.addImage(layer.poi, icon);
 
-			for (const [iconName, iconPath] of Object.entries(iconMappings)) {
-				const iconImage = await map.loadImage(iconPath);
-				if (iconImage) map.addImage(iconName, iconImage.data);
-			}
-
-			SOURCES_CONFIG.forEach((source) => {
-				map.addSource(source.id, {
-					type: source.type,
-					data: source.data as unknown as GeoJSON
-				});
-			});
-
-			LAYER_CONFIG.forEach((layer) => {
+				map.addSource(layer.poi, { type: 'geojson', data: cityUrl(layer.data) });
 				map.addLayer({
-					id: layer.id,
-					type: layer.type,
-					source: layer.source,
-					layout: layer.layout
+					id: layer.layerId,
+					type: 'symbol',
+					source: layer.poi,
+					layout: {
+						visibility: 'visible',
+						'icon-image': layer.poi,
+						// Same width for every icon, whatever size the city's PNGs have
+						'icon-size': ICON_WIDTH / icon.width,
+						// ponytail: taller than wide = map pin pointing down; add a per-city setting if a
+						// city ever ships tall icons that aren't pins
+						'icon-anchor': icon.height > icon.width ? 'bottom' : 'center'
+					}
 				} as AddLayerObject);
-			});
+			}
 
 			if (LAYER_IDS.length > 0) {
 				map.on('mouseenter', LAYER_IDS, () => {

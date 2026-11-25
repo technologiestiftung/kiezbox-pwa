@@ -1,0 +1,7 @@
+{
+	"name": "<Stadtname>",
+	"defaultLocale": "de",
+	"fallbackCoordinates": null,
+	"mapMaxZoom": null,
+	"mapStyle": "positron"
+}
