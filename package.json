@@ -70,7 +70,7 @@
 		"tailwindcss-animate": "^1.0.7"
 	},
 	"overrides": {
-		"cookie": "^0.7.2"
+		"cookie": "^2.0.0"
 	},
 	"allowScripts": {
 		"fsevents@2.3.3": true
