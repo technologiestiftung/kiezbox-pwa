@@ -3,20 +3,70 @@
 	"extends": ["config:recommended", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
 	"baseBranchPatterns": ["staging"],
 	"timezone": "Europe/Berlin",
-	"schedule": ["before 7am on Monday"],
+	"schedule": ["before 7am on the first day of the month"],
 	"minimumReleaseAge": "3 days",
+	"prConcurrentLimit": 3,
 	"packageRules": [
 		{
-			"groupName": "non-major",
-			"matchUpdateTypes": ["patch", "minor"]
+			"description": "All patch/minor updates in one PR",
+			"matchUpdateTypes": ["patch", "minor"],
+			"groupName": "non-major"
 		},
 		{
-			"groupName": "tailwindcss",
-			"matchPackageNames": ["tailwindcss", "@tailwindcss/**"]
+			"description": "Majors only after approval in the Dependency Dashboard",
+			"matchUpdateTypes": ["major"],
+			"dependencyDashboardApproval": true
 		},
 		{
-			"groupName": "lightningcss",
-			"matchPackageNames": ["lightningcss", "lightningcss-*"]
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": ["@sveltejs/**", "svelte", "svelte-check", "vite"],
+			"groupName": "sveltekit (major)"
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": [
+				"eslint",
+				"@eslint/**",
+				"typescript-eslint",
+				"eslint-plugin-svelte",
+				"svelte-eslint-parser",
+				"eslint-config-prettier",
+				"globals"
+			],
+			"groupName": "eslint (major)"
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": ["prettier", "prettier-plugin-*"],
+			"groupName": "prettier (major)"
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": [
+				"tailwindcss",
+				"@tailwindcss/**",
+				"tailwind-merge",
+				"tailwind-variants",
+				"tailwindcss-animate",
+				"lightningcss",
+				"lightningcss-*"
+			],
+			"groupName": "tailwind (major)"
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": ["bits-ui", "mode-watcher", "svelte-sonner", "lucide-svelte"],
+			"groupName": "ui components (major)"
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": ["semantic-release", "@semantic-release/**", "@commitlint/**"],
+			"groupName": "release tooling (major)"
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"matchPackageNames": ["typescript", "@types/node"],
+			"groupName": "typescript (major)"
 		}
 	]
 }
