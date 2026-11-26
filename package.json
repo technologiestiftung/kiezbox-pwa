@@ -22,7 +22,7 @@
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "*",
-		"@tailwindcss/oxide-linux-x64-gnu": "4.3.3",
+		"@tailwindcss/oxide-linux-x64-gnu": "4.3.5",
 		"lightningcss-linux-x64-gnu": "^1.30.1"
 	},
 	"devDependencies": {
