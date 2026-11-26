@@ -194,11 +194,11 @@
 {#if !isInCall}
 	<div class="DemoCallInfoInactive-root sticky top-0 z-10 w-full bg-white p-4">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html $t('content.emergency_phone.default.offline.text')}
+		{@html t('content.emergency_phone.default.offline.text')}
 		<ul class="mt-8 w-full space-y-2 px-4">
 			{#each { length: BUBBLE_COUNT }, i (i)}
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-				<li>{@html $t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
+				<li>{@html t(`content.emergency_phone.default.questions.${i + 1}.text`)}</li>
 			{/each}
 		</ul>
 	</div>
@@ -207,7 +207,7 @@
 		bind:this={rootElement}
 		class="DemoCallInfoActive-root sticky top-0 z-10 w-full bg-white p-4"
 	>
-		<div class="">{$t('content.emergency_phone.default.online.text')}</div>
+		<div class="">{t('content.emergency_phone.default.online.text')}</div>
 	</div>
 	<div
 		bind:this={scrollContainerElement}
@@ -226,8 +226,8 @@
 				aria-label={`Question ${i + 1}`}
 			>
 				<SpeechBubble
-					header={$t(`content.emergency_phone.default.questions.${i + 1}.text`)}
-					children={$t(`content.emergency_phone.default.questions.${i + 1}.description`)}
+					header={t(`content.emergency_phone.default.questions.${i + 1}.text`)}
+					children={t(`content.emergency_phone.default.questions.${i + 1}.description`)}
 					isVisible={bubbleVisibility[i]}
 				/>
 			</div>

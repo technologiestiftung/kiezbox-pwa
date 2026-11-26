@@ -8,7 +8,7 @@
 		EventIncident
 	} from 'carbon-icons-svelte';
 	import { createPrecautionTabItems } from '$lib/utils/precautionUtils';
-	import { t, loading, locale, locales } from '$lib/translations';
+	import { i18n, t } from '$lib/translations';
 	import type { TabItem } from '$lib/types'; // Import your type if needed
 	import { NetworkStore } from '$lib/state/networkState.svelte';
 
@@ -61,8 +61,8 @@
 	let tabItems = $state<(TabItem & { icon: typeof BaggageClaim | null })[]>([]); // Initialize as reactive state
 
 	$effect(() => {
-		if (!$loading && $t) {
-			tabItems = createPrecautionTabItems($t, precautionSlugs).map((item) => ({
+		if (!i18n.loading) {
+			tabItems = createPrecautionTabItems(t, precautionSlugs).map((item) => ({
 				...item,
 				icon: getIcon(item.slug) // Add the icon reactively
 			}));
@@ -77,22 +77,22 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<!-- svelte-ignore event_directive_deprecated -->
 	<div class="flex min-h-14 items-center justify-center" on:click={handleTitleClick}>
-		{#if !$loading}
+		{#if !i18n.loading}
 			<h2
 				class="text-purple-dark select-none
 "
 			>
-				{$t('content.precaution_infos.title')}
+				{t('content.precaution_infos.title')}
 			</h2>
 		{/if}
 	</div>
 	<div
 		class="text-purple-dark absolute top-0 right-0 z-99 flex cursor-pointer items-center justify-end p-4"
 	>
-		{#if !$loading}
-			<select bind:value={$locale} class=" bg-purple-light cursor-pointer px-1">
-				{#each $locales as value (value)}
-					<option {value}>{$t(`common.languages.${value}`)}</option>
+		{#if !i18n.loading}
+			<select bind:value={i18n.locale} class=" bg-purple-light cursor-pointer px-1">
+				{#each i18n.locales as value (value)}
+					<option {value}>{t(`common.languages.${value}`)}</option>
 				{/each}
 			</select>
 		{/if}

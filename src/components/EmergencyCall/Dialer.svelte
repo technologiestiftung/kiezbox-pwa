@@ -25,10 +25,10 @@
 	<div class=" flex justify-center p-6 md:w-[29rem]">
 		<div class="notruf-container flex flex-col items-start">
 			<span class="body-large-bold">
-				{$t('content.emergency_phone.title')}
+				{t('content.emergency_phone.title')}
 			</span>
 			<span class="body-text">
-				{$t('content.emergency_phone.text')}
+				{t('content.emergency_phone.text')}
 			</span>
 		</div>
 	</div>
@@ -48,8 +48,8 @@
 			isActive={isEmergency}
 			{onClick}
 			buttonText={isEmergency
-				? $t('content.emergency_phone.emergency.phone_button')
-				: $t('content.emergency_phone.default.phone_button')}
+				? t('content.emergency_phone.emergency.phone_button')
+				: t('content.emergency_phone.default.phone_button')}
 		/>
 	</div>
 </div>
