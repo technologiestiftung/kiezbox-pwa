@@ -213,7 +213,7 @@ export async function initNetworkService() {
 		startPing();
 		NetworkStore.initialized = true;
 	} catch (error) {
-		throw new Error(`Failed to initialize network service: ${error}`);
+		throw new Error(`Failed to initialize network service: ${error}`, { cause: error });
 	}
 }
 
