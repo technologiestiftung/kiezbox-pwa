@@ -20,7 +20,7 @@
 		{
 			"matchUpdateTypes": ["major"],
 			"matchPackageNames": ["@sveltejs/**", "svelte", "svelte-check", "vite"],
-			"groupName": "sveltekit (major)"
+			"groupName": "sveltekit"
 		},
 		{
 			"matchUpdateTypes": ["major"],
@@ -33,12 +33,12 @@
 				"eslint-config-prettier",
 				"globals"
 			],
-			"groupName": "eslint (major)"
+			"groupName": "eslint"
 		},
 		{
 			"matchUpdateTypes": ["major"],
 			"matchPackageNames": ["prettier", "prettier-plugin-*"],
-			"groupName": "prettier (major)"
+			"groupName": "prettier"
 		},
 		{
 			"matchUpdateTypes": ["major"],
@@ -51,22 +51,22 @@
 				"lightningcss",
 				"lightningcss-*"
 			],
-			"groupName": "tailwind (major)"
+			"groupName": "tailwind"
 		},
 		{
 			"matchUpdateTypes": ["major"],
 			"matchPackageNames": ["bits-ui", "mode-watcher", "svelte-sonner", "lucide-svelte"],
-			"groupName": "ui components (major)"
+			"groupName": "ui components"
 		},
 		{
 			"matchUpdateTypes": ["major"],
 			"matchPackageNames": ["semantic-release", "@semantic-release/**", "@commitlint/**"],
-			"groupName": "release tooling (major)"
+			"groupName": "release tooling"
 		},
 		{
 			"matchUpdateTypes": ["major"],
-			"matchPackageNames": ["typescript", "@types/node"],
-			"groupName": "typescript (major)"
+			"matchPackageNames": ["typescript"],
+			"groupName": "typescript"
 		}
 	]
 }
