@@ -8,9 +8,11 @@
 	"prConcurrentLimit": 3,
 	"packageRules": [
 		{
-			"description": "All patch/minor updates in one PR",
+			"description": "All patch/minor updates in one PR, merged into staging automatically once CI is green",
 			"matchUpdateTypes": ["patch", "minor"],
-			"groupName": "non-major"
+			"groupName": "non-major",
+			"automerge": true,
+			"platformAutomerge": false
 		},
 		{
 			"description": "Majors only after approval in the Dependency Dashboard",
