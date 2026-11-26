@@ -20,8 +20,10 @@
 			<a
 				class="InfoBoxItem-link body-text text-purple-dark after:content-['_↗']"
 				href={link.href}
-				target={link.target || '_blank'}>{link.text}</a
+				target={link.target || '_blank'}
 			>
+				{link.text}
+			</a>
 		{/each}
 	</div>
 </div>

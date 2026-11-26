@@ -10,5 +10,5 @@
 	{disabled}
 >
 	<Phone class="size-[1.5rem]" />
-	{buttonText}</Button
->
+	{buttonText}
+</Button>

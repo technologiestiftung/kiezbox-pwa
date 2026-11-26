@@ -137,8 +137,8 @@
 		onclick={() => toggleMode()}
 		class="EmergencyCall-admin-button text-purple-dark py-2 font-bold"
 	>
-		TOGGLE MODE</button
-	>
+		TOGGLE MODE
+	</button>
 {/if}
 {#if !showDialer}
 	<DialerError errorMessage={NetworkStore.errorMessage} onClick={onDone} />
