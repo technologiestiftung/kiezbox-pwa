@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { loadBox } from '$lib/config/box';
 	import { loadCity } from '$lib/config/city';
-	import { loadTranslations } from '$lib/translations';
+	import { i18n } from '$lib/translations';
 	import { onMount } from 'svelte';
 	import '../app.css';
 
@@ -10,7 +10,7 @@
 	// The city data (map, POIs, texts, default language) is loaded from /city/ at runtime,
 	// everything below reads it via getCity(). Box values (getBox()) come from /box.json.
 	const ready = Promise.all([
-		loadCity().then((city) => loadTranslations(city.defaultLocale)),
+		loadCity().then((city) => i18n.loadTranslations(city.defaultLocale)),
 		loadBox()
 	]);
 	ready.catch((error) => console.error(error));

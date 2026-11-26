@@ -16,7 +16,7 @@
 	<div class="mr-4">{@render figure()}</div>
 	<div class="col-span-2 flex h-full flex-col justify-end">
 		<img alt="logo" src={logo} />
-		<h1 class="text-purple-dark">{$t('common.header.title')}</h1>
+		<h1 class="text-purple-dark">{t('common.header.title')}</h1>
 	</div>
 	<div class="ml-4 -scale-x-100">{@render figure()}</div>
 </div>

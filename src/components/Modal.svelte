@@ -45,7 +45,7 @@
 			onclick={close}
 			{disabled}
 		>
-			<span class="text-body-black">{$t('common.button.close')}</span>
+			<span class="text-body-black">{t('common.button.close')}</span>
 			<CloseOutline class="text-body-black size-6" />
 		</Button>
 	</div>

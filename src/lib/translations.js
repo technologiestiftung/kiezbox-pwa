@@ -1,4 +1,4 @@
-import i18n from 'sveltekit-i18n';
+import { I18n } from 'sveltekit-i18n';
 import { CITY_PATH } from './config/city';
 
 /**
@@ -50,35 +50,38 @@ const config = {
 	loaders: [
 		{
 			locale: 'de',
-			key: '',
+			namespace: '',
 			loader: withCityOverride('de', () => import('./assets/locales/de.json'))
 		},
 		{
 			locale: 'en',
-			key: '',
+			namespace: '',
 			loader: withCityOverride('en', () => import('./assets/locales/en.json'))
 		},
 		{
 			locale: 'fr',
-			key: '',
+			namespace: '',
 			loader: withCityOverride('fr', () => import('./assets/locales/fr.json'))
 		},
 		{
 			locale: 'it',
-			key: '',
+			namespace: '',
 			loader: withCityOverride('it', () => import('./assets/locales/it.json'))
 		},
 		{
 			locale: 'es',
-			key: '',
+			namespace: '',
 			loader: withCityOverride('es', () => import('./assets/locales/es.json'))
 		},
 		{
 			locale: 'tr',
-			key: '',
+			namespace: '',
 			loader: withCityOverride('tr', () => import('./assets/locales/tr.json'))
 		}
 	]
 };
 
-export const { t, locale, locales, loading, loadTranslations } = new i18n(config);
+// Keep the instance: locale, locales and loading are reactive properties on it; destructured they
+// would be one-time snapshots. t stays reactive as a function.
+export const i18n = new I18n(config);
+export const { t } = i18n;
