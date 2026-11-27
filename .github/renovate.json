@@ -4,7 +4,7 @@
 	"baseBranchPatterns": ["staging"],
 	"timezone": "Europe/Berlin",
 	"schedule": ["before 7am on the first day of the month"],
-	"minimumReleaseAge": "3 days",
+	"minimumReleaseAge": "14 days",
 	"prConcurrentLimit": 3,
 	"packageRules": [
 		{
