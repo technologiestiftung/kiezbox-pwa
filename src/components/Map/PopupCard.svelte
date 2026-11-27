@@ -112,7 +112,6 @@
 		const isCornerCase = absDx > cardWidth * 0.35 && absDy > cardHeight * 0.35;
 
 		if (isCornerCase) {
-			console.log('Corner case detected early');
 			if (dx > 0 && dy > 0) {
 				arrowDirection = 'topLeft';
 				arrowPosition = { left: '0', top: '0', transform: 'translate(-50%, -50%)' };
