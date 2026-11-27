@@ -8,19 +8,19 @@
 
 <div class="Footer-root bg-tsb-blau flex flex-col items-start justify-center space-y-6 p-6">
 	<div class="flex flex-col space-y-2.5 md:hidden">
-		<span class="body-text-bold text-white"> {$t('common.footer.initiatve_by')}</span>
+		<span class="body-text-bold text-white"> {t('common.footer.initiatve_by')}</span>
 		<figure class="">
 			<img alt="logo" src={logo} />
 		</figure>
 	</div>
 	<div class="flex flex-col space-y-2.5 md:hidden">
-		<span class="body-text-bold text-white"> {$t('common.footer.funded_by')} </span>
+		<span class="body-text-bold text-white"> {t('common.footer.funded_by')} </span>
 		<figure class="">
 			<img alt="logo_sponsor" src={logo_sponsor} />
 		</figure>
 	</div>
 	<div class=" hidden flex-col space-y-2.5 md:flex">
-		<span class="body-text-bold text-white"> {$t('common.footer.funded_by')} </span>
+		<span class="body-text-bold text-white"> {t('common.footer.funded_by')} </span>
 		<figure class="">
 			<img alt="logo_complete" src={logo_complete} />
 		</figure>
@@ -30,9 +30,9 @@
 		class="flex w-full flex-col justify-between space-y-6 space-x-6 md:flex-row md:items-center md:space-y-0"
 	>
 		<div class="hidden flex-col space-y-2.5 md:flex">
-			<span class="body-text-bold text-white"> {$t('common.footer.created_by')} </span>
+			<span class="body-text-bold text-white"> {t('common.footer.created_by')} </span>
 			<a
-				href={$t('common.footer.imprint.href')}
+				href={t('common.footer.imprint.href')}
 				class="text-white underline"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -44,22 +44,22 @@
 		</div>
 		<div class="flex flex-col space-y-2.5 md:order-2 md:text-end">
 			<a
-				href={$t('common.footer.privacy.href')}
+				href={t('common.footer.privacy.href')}
 				class="text-white underline"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				{$t('common.footer.privacy.text')}
+				{t('common.footer.privacy.text')}
 			</a>
 			<a
-				href={$t('common.footer.imprint.href')}
+				href={t('common.footer.imprint.href')}
 				class="text-white underline"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				{$t('common.footer.imprint.text')}
+				{t('common.footer.imprint.text')}
 			</a>
-			<span class="caption text-white"> {$t('common.footer.acknowledgement')}</span>
+			<span class="caption text-white"> {t('common.footer.acknowledgement')}</span>
 		</div>
 	</div>
 </div>

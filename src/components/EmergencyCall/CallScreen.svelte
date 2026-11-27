@@ -42,10 +42,10 @@
 			>
 				{#if !isMicrophoneMuted}
 					<Microphone class="size-6" />
-					<span>{$t('common.button.mute')}</span>
+					<span>{t('common.button.mute')}</span>
 				{:else}
 					<MicrophoneOff class="size-6" />
-					<span>{$t('common.button.unmute')}</span>
+					<span>{t('common.button.unmute')}</span>
 				{/if}
 			</Button>
 			<Button
@@ -58,7 +58,7 @@
 				{:else}
 					<VolumeMute class="size-6" />
 				{/if}
-				<span>{$t('common.button.speaker')}</span>
+				<span>{t('common.button.speaker')}</span>
 			</Button>
 		</div>
 	{/if}

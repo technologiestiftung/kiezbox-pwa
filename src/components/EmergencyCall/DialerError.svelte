@@ -23,10 +23,10 @@
 	<div class=" flex justify-center p-6 md:w-[29rem]">
 		<div class="notruf-container flex flex-col items-start gap-2">
 			<span class="body-large-bold text-error">
-				{$t('content.emergency_phone.error.title')}
+				{t('content.emergency_phone.error.title')}
 			</span>
 			<span class="body-text text-error">
-				{$t('content.emergency_phone.error.messages.' + errorMessage)}
+				{t('content.emergency_phone.error.messages.' + errorMessage)}
 			</span>
 			<div class="flex items-center gap-4">
 				<a
@@ -48,7 +48,7 @@
 				class="bg-notruf-rot hover:bg-notruf-rot mt-4 w-full cursor-pointer rounded px-4 py-2 text-white dark:text-white"
 				onclick={onClick}
 			>
-				{$t('content.emergency_phone.error.button')}
+				{t('content.emergency_phone.error.button')}
 			</button>
 		</div>
 	</div>

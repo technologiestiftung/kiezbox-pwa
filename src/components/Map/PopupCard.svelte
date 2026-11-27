@@ -22,7 +22,7 @@
 
 	/** Translation if there is one, otherwise the key itself is shown (plain text in poi-map.json) */
 	const translateOr = (prefix: string, key: string) => {
-		const text = $t(`${prefix}.${key}`);
+		const text = t(`${prefix}.${key}`);
 		return text === `${prefix}.${key}` ? key : text;
 	};
 	let arrowPosition = $state({ left: '50%', top: '0', transform: 'translateX(-50%)' });
@@ -195,7 +195,7 @@
 	<Card.Root class="relative m-2 w-60">
 		<Card.Header>
 			<Card.Title class="flex items-center justify-between">
-				<span>{$t(title)}</span>
+				<span>{t(title)}</span>
 				<button class="text-purple-dark cursor-pointer bg-transparent" onclick={handlePopupClose}>
 					<CloseOutline fill="#5d508b" size={24} />
 				</button>

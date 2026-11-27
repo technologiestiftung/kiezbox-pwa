@@ -54,7 +54,7 @@
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				if (error.message.includes('API') || error.message.includes('fetch')) {
-					toast.error($t('common.status.invalid_network'));
+					toast.error(t('common.status.invalid_network'));
 				} else {
 					toast.error(error.message);
 				}
@@ -118,8 +118,8 @@
 
 	const isCloseDisabled = $derived(getIsCloseDisabled());
 
-	const statusText = $derived(getCallStatus($t));
-	const callButtonText = $derived(getCallButtonText(isEmergency, $t));
+	const statusText = $derived(getCallStatus(t));
+	const callButtonText = $derived(getCallButtonText(isEmergency, t));
 
 	$effect(() => {
 		if (!callState || !statusText) return;
@@ -137,8 +137,8 @@
 		onclick={() => toggleMode()}
 		class="EmergencyCall-admin-button text-purple-dark py-2 font-bold"
 	>
-		TOGGLE MODE</button
-	>
+		TOGGLE MODE
+	</button>
 {/if}
 {#if !showDialer}
 	<DialerError errorMessage={NetworkStore.errorMessage} onClick={onDone} />

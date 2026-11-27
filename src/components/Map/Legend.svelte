@@ -30,7 +30,7 @@
 				onclick={toggleIsOpen}
 			>
 				<p class="text-purple-dark body-large-bold text-center">
-					{!isOpen ? $t('map.legend.button_open') : $t('map.legend.button_close')}
+					{!isOpen ? t('map.legend.button_open') : t('map.legend.button_close')}
 				</p>
 			</AccordionTrigger>
 			<AccordionContent>
@@ -39,7 +39,7 @@
 						<li class="body-large flex items-center justify-between gap-2">
 							<div class="flex items-center gap-4">
 								<img src={layer.legendIcon} alt="" class="size-8 object-contain" />
-								<label for={layer.layerId}>{$t(layer.label)}</label>
+								<label for={layer.layerId}>{t(layer.label)}</label>
 							</div>
 							<Checkbox
 								class="cursor-pointer"
