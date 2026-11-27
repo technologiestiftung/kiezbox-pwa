@@ -69,6 +69,11 @@
 			"matchUpdateTypes": ["major"],
 			"matchPackageNames": ["typescript"],
 			"groupName": "typescript"
+		},
+		{
+			"description": "typescript-eslint only supports TypeScript <6.1 – lift once it does",
+			"matchPackageNames": ["typescript"],
+			"allowedVersions": "<6.1"
 		}
 	]
 }
